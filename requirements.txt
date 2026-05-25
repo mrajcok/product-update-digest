@@ -1,0 +1,16 @@
+langchain>=0.3,<0.4
+langchain-openai>=0.2,<0.3         # OpenRouter is OpenAI-compatible
+langchain-community>=0.3,<0.4
+chromadb>=0.6,<1.0
+pydantic>=2.11,<3
+pydantic-settings>=2.10,<3
+python-dotenv>=1.1,<2
+httpx>=0.28,<1                     # primary HTTP client (sync + async, HTTP/2)
+beautifulsoup4>=4.13,<5
+lxml>=5.4,<6
+Jinja2>=3.1,<4
+gitpython>=3.1,<4
+playwright>=1.49,<2                # fallback for JS-rendered pages
+pytest>=8,<9
+pytest-mock>=3.14,<4
+respx>=0.22,<1                     # mock httpx in tests

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Updates Feed</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+    h1 { border-bottom: 2px solid #ddd; padding-bottom: .5rem; }
+    nav { margin-bottom: 1.5rem; }
+    nav a { margin-right: 1rem; text-decoration: none; color: #0066cc; }
+    .card { border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+    .meta { font-size: .85rem; color: #666; margin-bottom: .4rem; }
+    .badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .75rem; font-weight: 600; margin-right: .4rem; }
+    .badge-cribl  { background: #e8f0fe; color: #1a56db; }
+    .badge-ocient { background: #fef3c7; color: #92400e; }
+    .tag { display: inline-block; padding: .15rem .4rem; border-radius: 4px; font-size: .75rem; background: #f0f0f0; color: #555; margin-right: .4rem; }
+    .card h2 { margin: .25rem 0 .5rem; font-size: 1.05rem; }
+    .card h2 a { color: #0066cc; text-decoration: none; }
+    .card h2 a:hover { text-decoration: underline; }
+    .summary { font-size: .9rem; line-height: 1.5; color: #444; }
+    footer { margin-top: 2rem; font-size: .8rem; color: #999; border-top: 1px solid #eee; padding-top: .75rem; }
+  </style>
+</head>
+<body>
+  <h1>Product Updates</h1>
+  <nav>
+    <a href="cribl/">Cribl</a>
+    <a href="ocient/">Ocient</a>
+  </nav>
+
+  {% for r in updates %}
+  <div class="card">
+    <div class="meta">
+      <span class="badge badge-{{ r.company }}">{{ r.company | capitalize }}</span>
+      <span class="tag">{{ r.category | replace("_", " ") }}</span>
+      {% if r.published_date %}<span>{{ r.published_date }}</span>{% endif %}
+    </div>
+    <h2><a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.title }}</a></h2>
+    {% if r.summary %}
+    <p class="summary">{{ r.summary }}</p>
+    {% endif %}
+  </div>
+  {% else %}
+  <p>No updates yet.</p>
+  {% endfor %}
+
+  <footer>Generated {{ generated_at }}</footer>
+</body>
+</html>
