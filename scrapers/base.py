@@ -1,14 +1,18 @@
 import logging
 import time
 from abc import ABC, abstractmethod
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
+from typing import Literal
 
 import httpx
 from bs4 import BeautifulSoup
 
+from config import settings
 from storage.db import ArticleDB
 from storage.models import ArticleRecord, ScrapedPage
+
+Category = Literal["blog", "press_release", "product"]
 
 logger = logging.getLogger(__name__)
 
@@ -16,14 +20,25 @@ _RETRY_STATUSES = {429, 500, 502, 503, 504}
 _MIN_CONTENT_CHARS = 200  # below this, httpx response is assumed JS-gated
 
 
+def _is_too_old(published_date: str | None, cutoff: date) -> bool:
+    """Return True if published_date is known and older than cutoff. None = unknown = keep."""
+    if not published_date:
+        return False
+    try:
+        return date.fromisoformat(published_date) < cutoff
+    except ValueError:
+        return False
+
+
 class BaseScraper(ABC):
     company: str
     _use_playwright: bool = False      # set True in subclass to always use Playwright
     _sleep_between_requests: float = 1.0
+    _user_agent: str = "product-update-digest/1.0"
 
     def __init__(self) -> None:
         self.client = httpx.Client(
-            headers={"User-Agent": "product-update-digest/1.0"},
+            headers={"User-Agent": self._user_agent},
             follow_redirects=True,
             timeout=30.0,
         )
@@ -42,11 +57,19 @@ class BaseScraper(ABC):
             )
             return []
 
+        cutoff = (datetime.now(timezone.utc) - timedelta(days=settings.max_article_age_days)).date()
+
         results: list[ScrapedPage] = []
         for url, category in urls:
             try:
                 page = self._process_url(url, category, db)
                 if page is not None:
+                    if _is_too_old(page.published_date, cutoff):
+                        logger.debug(
+                            "%s: skipping article older than %d days (%s) %s",
+                            self.company, settings.max_article_age_days, page.published_date, url,
+                        )
+                        continue
                     results.append(page)
             except Exception:
                 logger.exception("%s: unexpected error processing %s", self.company, url)
@@ -60,11 +83,11 @@ class BaseScraper(ABC):
     # ------------------------------------------------------------------
 
     @abstractmethod
-    def discover_urls(self) -> list[tuple[str, str]]:
+    def discover_urls(self) -> list[tuple[str, Category]]:
         """Return list of (url, category) tuples to scrape."""
 
     @abstractmethod
-    def scrape_page(self, url: str, category: str) -> ScrapedPage | None:
+    def scrape_page(self, url: str, category: Category) -> ScrapedPage | None:
         """Fetch and parse one page into a ScrapedPage. Return None on failure."""
 
     # ------------------------------------------------------------------
@@ -103,7 +126,7 @@ class BaseScraper(ABC):
     # Internal helpers
     # ------------------------------------------------------------------
 
-    def _process_url(self, url: str, category: str, db: ArticleDB) -> ScrapedPage | None:
+    def _process_url(self, url: str, category: Category, db: ArticleDB) -> ScrapedPage | None:
         existing = db.get_by_url(url)
 
         if existing is None:
@@ -126,7 +149,7 @@ class BaseScraper(ABC):
         logger.debug("%s: unchanged (hash), skipping %s", self.company, url)
         return None
 
-    def _safe_scrape(self, url: str, category: str) -> ScrapedPage | None:
+    def _safe_scrape(self, url: str, category: Category) -> ScrapedPage | None:
         """Call scrape_page and catch all exceptions so one failure doesn't abort the run."""
         try:
             return self.scrape_page(url, category)
@@ -178,7 +201,7 @@ class BaseScraper(ABC):
             browser = p.chromium.launch(headless=True)
             try:
                 pw_page = browser.new_page()
-                pw_page.goto(url, wait_until="networkidle", timeout=30_000)
+                pw_page.goto(url, wait_until="load", timeout=30_000)
                 html = pw_page.content()
             finally:
                 browser.close()

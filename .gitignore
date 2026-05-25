@@ -39,3 +39,6 @@ Thumbs.db
 # Playwright
 playwright-report/
 test-results/
+
+# Chroma
+chroma.log

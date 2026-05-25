@@ -1,6 +1,5 @@
 import argparse
 import logging
-import sys
 
 from config import setup_logging, settings
 from publisher.github_pages import GitHubPagesPublisher
@@ -45,7 +44,16 @@ def main() -> None:
         if args.dry_run:
             for scraper in scrapers:
                 pages = scraper.run(db)
-                logger.info("[dry-run] %s: %d new/updated pages found", scraper.company, len(pages))
+                logger.info("[dry-run] %s: %d new/updated page(s) found", scraper.company, len(pages))
+                for i, page in enumerate(pages, 1):
+                    preview = " ".join(page.raw_text.split())[:400]
+                    print(
+                        f"\n[dry-run] [{i}/{len(pages)}] {page.company} | {page.category} | {page.published_date or 'no date'}\n"
+                        f"  Title: {page.title}\n"
+                        f"  URL:   {page.url}\n"
+                        f"  Text ({len(page.raw_text):,} chars): {preview}{'…' if len(page.raw_text) > 400 else ''}"
+                    )
+            print()
             logger.info("[dry-run] Skipping LLM, Chroma, and GitHub push")
             return
 

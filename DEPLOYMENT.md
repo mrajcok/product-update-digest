@@ -124,10 +124,10 @@ sudo systemctl status chroma
 Add to crontab (`crontab -e`):
 
 ```cron
-0 6 * * * cd /home/<user>/product-update-digest && .venv/bin/python main.py >> logs/cron.log 2>&1
+0 12 * * * cd /home/<user>/product-update-digest && .venv/bin/python main.py >> logs/cron.log 2>&1
 ```
 
-This runs daily at 6am UTC. Adjust the hour as needed.
+This runs daily at 7am EST (noon UTC). Adjust as needed.
 
 To verify the pipeline manually before enabling the cron:
 

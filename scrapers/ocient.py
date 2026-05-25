@@ -1,102 +1,90 @@
 import logging
-from datetime import datetime
+from xml.etree import ElementTree as ET
 
 from bs4 import BeautifulSoup
 
-from scrapers.base import BaseScraper
+from scrapers.base import BaseScraper, Category
 from storage.models import ScrapedPage
 
 logger = logging.getLogger(__name__)
 
-# Selectors validated against ocient.com on 2026-05-24.
-# ocient.com is WordPress — content is available in static HTML.
-# Pagination on listing pages uses an AJAX "Load More" button; only the initial
-# page load is scraped here. Enable Playwright (_use_playwright = True) and
-# click the button if deeper coverage is needed in the future.
+# ocient.com is WordPress — static HTML is sufficient for article pages.
+# The blog listing uses an AJAX "Load More" button, so discovery via the
+# listing page only returns the first batch. The WordPress Yoast sitemap index
+# is the authoritative URL source and avoids that limitation entirely.
+#
+# Flywheel (the WordPress host) blocks non-browser User-Agents on sitemap/XML
+# paths, so a realistic browser UA is required (_user_agent override below).
 
-_BLOG_LISTING_URL = "https://ocient.com/blog/"
-_NEWSROOM_LISTING_URL = "https://ocient.com/newsroom/"
+_SITEMAP_INDEX_URL = "https://ocient.com/sitemap_index.xml"
+_BLOG_SITEMAP_URL = "https://ocient.com/blog_post-sitemap.xml"
+_NEWS_SITEMAP_URL = "https://ocient.com/news_release-sitemap.xml"
 
 _PRODUCT_URLS = [
     "https://ocient.com/platform/",
     "https://ocient.com/solutions/",
 ]
 
-# Listing page card selectors
-_BLOG_CARD_SEL = "a.preview-wrapper.blog-wrapper.resource-wrapper"
-_NEWS_CARD_SEL = "a.preview-wrapper.in_the_news-wrapper.resource-wrapper"
-
-# Individual article selectors
 _ARTICLE_CONTENT_SELS = ["article", "div.entry-content", "div.post-content", "main"]
-_DATE_CARD_SEL = "div.preview-card--source-link span"
+
+_SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
 
 class OcientScraper(BaseScraper):
     company = "ocient"
-    _use_playwright = False  # WordPress; static HTML sufficient for initial page load
+    _use_playwright = False
+    _user_agent = (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    )
 
-    def discover_urls(self) -> list[tuple[str, str]]:
-        urls: list[tuple[str, str]] = []
-        urls.extend(self._discover_blog())
-        urls.extend(self._discover_newsroom())
-        urls.extend((url, "product") for url in _PRODUCT_URLS)
+    def discover_urls(self) -> list[tuple[str, Category]]:
+        urls: list[tuple[str, Category]] = []
+        for u in self._urls_from_sitemap(_BLOG_SITEMAP_URL):
+            urls.append((u, "blog"))
+        for u in self._urls_from_sitemap(_NEWS_SITEMAP_URL):
+            urls.append((u, "press_release"))
+        for u in _PRODUCT_URLS:
+            urls.append((u, "product"))
         return urls
 
-    def _discover_blog(self) -> list[tuple[str, str]]:
+    def _urls_from_sitemap(self, sitemap_url: str) -> list[str]:
         try:
-            html = self._fetch_page(_BLOG_LISTING_URL)
+            xml = self._fetch_with_httpx(sitemap_url)
         except Exception:
-            logger.warning("ocient: failed to fetch blog listing")
+            logger.warning("ocient: failed to fetch sitemap %s", sitemap_url, exc_info=True)
             return []
 
-        soup = BeautifulSoup(html, "lxml")
-        found: list[tuple[str, str]] = []
-        for card in soup.select(_BLOG_CARD_SEL):
-            href = card.get("href", "")
-            if not href:
-                continue
-            full_url = f"https://ocient.com{href}" if href.startswith("/") else href
-            found.append((full_url, "blog"))
-
-        logger.info("ocient: discovered %d blog URL(s)", len(found))
-        return found
-
-    def _discover_newsroom(self) -> list[tuple[str, str]]:
-        # "In the News" cards link to external press coverage (third-party articles).
-        # We record the external URL as the canonical reference but only scrape
-        # the metadata visible in the card (title + date) — see scrape_page().
         try:
-            html = self._fetch_page(_NEWSROOM_LISTING_URL)
-        except Exception:
-            logger.warning("ocient: failed to fetch newsroom listing")
+            root = ET.fromstring(xml)
+        except ET.ParseError:
+            logger.warning("ocient: sitemap XML parse error for %s", sitemap_url)
             return []
 
-        soup = BeautifulSoup(html, "lxml")
-        found: list[tuple[str, str]] = []
-        for card in soup.select(_NEWS_CARD_SEL):
-            href = card.get("href", "")
-            if href:
-                found.append((href, "press_release"))
+        ns = {"sm": _SITEMAP_NS}
+        urls = []
+        for url_el in root.findall("sm:url", ns):
+            loc_el = url_el.find("sm:loc", ns)
+            if loc_el is not None and loc_el.text:
+                urls.append(loc_el.text.strip())
 
-        logger.info("ocient: discovered %d newsroom item(s)", len(found))
-        return found
+        logger.info("ocient: discovered %d URL(s) from %s", len(urls), sitemap_url)
+        return urls
 
-    def scrape_page(self, url: str, category: str) -> ScrapedPage | None:
+    def scrape_page(self, url: str, category: Category) -> ScrapedPage | None:
         try:
-            if category == "press_release" and "ocient.com" not in url:
-                return self._scrape_news_card_from_listing(url)
             return self._scrape_article(url, category)
         except Exception:
             logger.warning("ocient: failed to scrape %s", url, exc_info=True)
             return None
 
-    def _scrape_article(self, url: str, category: str) -> ScrapedPage | None:
+    def _scrape_article(self, url: str, category: Category) -> ScrapedPage | None:
         html = self._fetch_page(url)
         soup = BeautifulSoup(html, "lxml")
         title = self._extract_title(soup)
         published_date = self._extract_date(soup)
 
-        # Try progressively broader content containers
         content_html = ""
         for sel in _ARTICLE_CONTENT_SELS:
             tag = soup.select_one(sel)
@@ -104,7 +92,7 @@ class OcientScraper(BaseScraper):
                 content_html = str(tag)
                 break
         if not content_html:
-            content_html = html  # fall back to full page
+            content_html = html
 
         text = self.extract_text(content_html)
         if len(text) < 200:
@@ -117,36 +105,6 @@ class OcientScraper(BaseScraper):
             raw_text=text,
             published_date=published_date,
         )
-
-    def _scrape_news_card_from_listing(self, external_url: str) -> ScrapedPage | None:
-        # For external press links we re-fetch the newsroom listing and find the
-        # matching card rather than attempting to scrape a third-party article.
-        try:
-            html = self._fetch_page(_NEWSROOM_LISTING_URL)
-        except Exception:
-            return None
-
-        soup = BeautifulSoup(html, "lxml")
-        for card in soup.select(_NEWS_CARD_SEL):
-            if card.get("href") != external_url:
-                continue
-            title_tag = card.select_one("div.preview-card--title p")
-            title = title_tag.get_text(strip=True) if title_tag else external_url
-            date_tag = card.select_one(_DATE_CARD_SEL)
-            published_date = self._parse_card_date(date_tag.get_text(strip=True) if date_tag else "")
-            # Use the card title + source as the content to embed
-            source_tag = card.select_one("div.col--source p")
-            source = source_tag.get_text(strip=True) if source_tag else ""
-            raw_text = f"{title}. {source}. Source: {external_url}"
-            return ScrapedPage(
-                url=external_url,
-                company="ocient",
-                category="press_release",
-                title=title,
-                raw_text=raw_text,
-                published_date=published_date,
-            )
-        return None
 
     @staticmethod
     def _extract_title(soup: BeautifulSoup) -> str:
@@ -161,7 +119,6 @@ class OcientScraper(BaseScraper):
 
     @staticmethod
     def _extract_date(soup: BeautifulSoup) -> str | None:
-        # WordPress standard OG meta
         meta = soup.find("meta", property="article:published_time")
         if meta and meta.get("content"):
             return str(meta["content"])[:10]
@@ -169,11 +126,3 @@ class OcientScraper(BaseScraper):
         if time_tag:
             return str(time_tag["datetime"])[:10]
         return None
-
-    @staticmethod
-    def _parse_card_date(text: str) -> str | None:
-        # Newsroom card date format: "May 11, 2026"
-        try:
-            return datetime.strptime(text.strip(), "%B %d, %Y").strftime("%Y-%m-%d")
-        except ValueError:
-            return None

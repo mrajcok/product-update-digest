@@ -1,81 +1,88 @@
 import logging
 import re
+from datetime import date, datetime, timedelta, timezone
+from xml.etree import ElementTree as ET
 from bs4 import BeautifulSoup
 
-from scrapers.base import BaseScraper
+from config import settings
+from scrapers.base import BaseScraper, Category
 from storage.models import ScrapedPage
 
 logger = logging.getLogger(__name__)
 
-# Selectors / patterns validated against cribl.io on 2026-05-24.
-# cribl.io is a Next.js SPA — all content is JS-rendered; Playwright is required.
-
-_BLOG_LISTING_URL = "https://cribl.io/blog/"
-_NEWS_LISTING_URL = "https://cribl.io/newsroom/"
+# cribl.io is a Next.js App Router SPA. The blog/news listing pages render post
+# cards via client-side JS with no <a href> links, so scraping the listing is
+# unreliable. The sitemap is server-generated and is the authoritative URL source.
+_SITEMAP_URL = "https://cribl.io/sitemap.xml"
 
 _PRODUCT_URLS = [
-    "https://cribl.io/stream/",
-    "https://cribl.io/edge/",
-    "https://cribl.io/lake/",
-    "https://cribl.io/search/",
+    "https://cribl.io/products/stream/",
+    "https://cribl.io/products/lake/",
+    "https://cribl.io/products/search/",
 ]
 
-# Only follow links that look like individual article pages (not tag/category pages).
-_BLOG_HREF_RE = re.compile(r"^/blog/[^/]+/$")
-_NEWS_HREF_RE = re.compile(r"^/news/[^/]+/$")
+_BLOG_RE = re.compile(r"^https://cribl\.io/blog/[^/]+/")
+_NEWS_RE = re.compile(r"^https://cribl\.io/news/[^/]+/")
 
-_MAX_LISTING_PAGES = 5  # pagination cap; Cribl uses /blog/page/N/ URL pattern
+_SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
 
 class CriblScraper(BaseScraper):
     company = "cribl"
-    _use_playwright = True  # Next.js SPA; httpx returns a skeleton shell
+    _use_playwright = False  # Next.js App Router — content is SSR'd into initial HTML
 
-    def discover_urls(self) -> list[tuple[str, str]]:
-        urls: list[tuple[str, str]] = []
-        urls.extend(self._discover_listing(_BLOG_LISTING_URL, "blog", _BLOG_HREF_RE))
-        urls.extend(self._discover_listing(_NEWS_LISTING_URL, "press_release", _NEWS_HREF_RE))
-        urls.extend((url, "product") for url in _PRODUCT_URLS)
+    def discover_urls(self) -> list[tuple[str, Category]]:
+        blog_urls, news_urls = self._discover_from_sitemap()
+        urls: list[tuple[str, Category]] = []
+        for u in blog_urls:
+            urls.append((u, "blog"))
+        for u in news_urls:
+            urls.append((u, "press_release"))
+        for u in _PRODUCT_URLS:
+            urls.append((u, "product"))
         return urls
 
-    def _discover_listing(
-        self,
-        base_url: str,
-        category: str,
-        href_re: re.Pattern,
-    ) -> list[tuple[str, str]]:
-        found: list[tuple[str, str]] = []
-        seen: set[str] = set()
+    def _discover_from_sitemap(self) -> tuple[list[str], list[str]]:
+        try:
+            xml = self._fetch_with_httpx(_SITEMAP_URL)
+        except Exception:
+            logger.warning("cribl: failed to fetch sitemap %s", _SITEMAP_URL, exc_info=True)
+            return [], []
 
-        for page_num in range(1, _MAX_LISTING_PAGES + 1):
-            listing_url = base_url if page_num == 1 else f"{base_url}page/{page_num}/"
-            try:
-                html = self._fetch_page(listing_url)
-            except Exception:
-                logger.debug("cribl: listing page not available, stopping: %s", listing_url)
-                break
+        try:
+            root = ET.fromstring(xml)
+        except ET.ParseError:
+            logger.warning("cribl: sitemap XML parse error")
+            return [], []
 
-            soup = BeautifulSoup(html, "lxml")
-            links = soup.find_all("a", href=href_re)
-            if not links:
-                break
+        ns = {"sm": _SITEMAP_NS}
+        cutoff = (datetime.now(timezone.utc) - timedelta(days=settings.max_article_age_days)).date()
+        blog_urls: list[str] = []
+        news_urls: list[str] = []
 
-            new_this_page = 0
-            for a in links:
-                href: str = a["href"]
-                full_url = f"https://cribl.io{href}" if href.startswith("/") else href
-                if full_url not in seen:
-                    seen.add(full_url)
-                    found.append((full_url, category))
-                    new_this_page += 1
+        for url_el in root.findall("sm:url", ns):
+            loc_el = url_el.find("sm:loc", ns)
+            if loc_el is None or not loc_el.text:
+                continue
+            loc = loc_el.text.strip()
 
-            if new_this_page == 0:
-                break  # duplicate page — pagination exhausted
+            lastmod_el = url_el.find("sm:lastmod", ns)
+            if lastmod_el is not None and lastmod_el.text:
+                try:
+                    if date.fromisoformat(lastmod_el.text[:10]) < cutoff:
+                        continue
+                except ValueError:
+                    pass
 
-        logger.info("cribl: discovered %d %s URL(s)", len(found), category)
-        return found
+            if _BLOG_RE.match(loc):
+                blog_urls.append(loc)
+            elif _NEWS_RE.match(loc):
+                news_urls.append(loc)
 
-    def scrape_page(self, url: str, category: str) -> ScrapedPage | None:
+        logger.info("cribl: discovered %d blog(s), %d news URL(s) from sitemap (cutoff %s)", len(blog_urls), len(news_urls), cutoff)
+        return blog_urls, news_urls
+
+    def scrape_page(self, url: str, category: Category) -> ScrapedPage | None:
         try:
             html = self._fetch_page(url)
             soup = BeautifulSoup(html, "lxml")
@@ -98,7 +105,6 @@ class CriblScraper(BaseScraper):
 
     @staticmethod
     def _extract_title(soup: BeautifulSoup) -> str:
-        # OG title is most reliable on Next.js (set server-side)
         og = soup.find("meta", property="og:title")
         if og and og.get("content"):
             return str(og["content"]).strip()
