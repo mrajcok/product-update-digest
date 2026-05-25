@@ -71,9 +71,12 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for full instructions covering:
 
 ## Architecture
 
+![Pipeline diagram](docs/infographic.svg)
+
 ```
 main.py                        # orchestration entry point
 config.py                      # pydantic-settings config
+summarizer.py                  # LangChain summarization chain
 scrapers/
   base.py                      # abstract scraper (dedup loop, Playwright fallback)
   cribl.py                     # Cribl scraper
@@ -82,13 +85,16 @@ storage/
   models.py                    # Pydantic models: ScrapedPage, ArticleRecord, ProductUpdate
   db.py                        # SQLite client (URL tracking, deduplication)
   chroma_client.py             # Chroma client (vector storage, semantic search)
-summarizer.py                  # LangChain summarization chain
 publisher/
   github_pages.py              # Jinja2 HTML rendering + git push to gh-pages
   templates/
     index.html.j2              # top 20 updates across all companies
     company_index.html.j2      # full history for one company, grouped by month
-search.py                      # CLI for querying the Chroma collection
+tools/
+  search.py                    # CLI for querying the Chroma collection
+docs/
+  infographic.svg              # pipeline diagram
+  plan.md                      # implementation plan
 ```
 
 **Storage split**: SQLite handles deduplication and operational metadata; Chroma handles embeddings and semantic search. The two are cross-referenced via a `chroma_id` field (MD5 of the normalized URL).

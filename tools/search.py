@@ -3,9 +3,9 @@
 Interactive semantic search over the product updates Chroma collection.
 
 Usage:
-    .venv/bin/python search.py
-    .venv/bin/python search.py --company cribl
-    .venv/bin/python search.py --results 10
+    .venv/bin/python tools/search.py
+    .venv/bin/python tools/search.py --company cribl
+    .venv/bin/python tools/search.py --results 10
 """
 import argparse
 import sys
