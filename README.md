@@ -71,7 +71,7 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for full instructions covering:
 
 ## Architecture
 
-![Pipeline diagram](docs/infographic.svg)
+![Pipeline diagram](docs/flow-diagram.svg)
 
 ```
 main.py                        # orchestration entry point
