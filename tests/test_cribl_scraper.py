@@ -75,21 +75,32 @@ class TestScrapePageWithFixture:
         assert result is None
 
 
-class TestDiscoverUrls:
-    def test_filters_article_links_from_listing(self, scraper, mocker):
-        html = _load("cribl_listing.html")
-        mocker.patch.object(scraper, "_fetch_page", return_value=html)
-        urls = scraper._discover_listing("https://cribl.io/blog/", "blog", __import__("re").compile(r"^/blog/[^/]+/$"))
-        hrefs = [u for u, _ in urls]
-        assert "https://cribl.io/blog/cribl-stream-4-0-released/" in hrefs
-        assert "https://cribl.io/blog/new-edge-partnership/" in hrefs
-        # /blog/ root and /blog/category/news/ should be excluded
-        assert "https://cribl.io/blog/" not in hrefs
-        assert "https://cribl.io/blog/category/news/" not in hrefs
+class TestDiscoverFromSitemap:
+    _SITEMAP_XML = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://cribl.io/blog/cribl-stream-4-0-released/</loc><lastmod>2026-05-01</lastmod></url>
+  <url><loc>https://cribl.io/blog/cribl-edge/</loc><lastmod>2026-05-01</lastmod></url>
+  <url><loc>https://cribl.io/blog/company-culture/</loc><lastmod>2026-05-01</lastmod></url>
+  <url><loc>https://cribl.io/news/press-release-1/</loc><lastmod>2026-05-01</lastmod></url>
+  <url><loc>https://cribl.io/unrelated/page/</loc><lastmod>2026-05-01</lastmod></url>
+</urlset>"""
+
+    def test_returns_blog_and_news_urls(self, scraper, mocker):
+        mocker.patch.object(scraper, "_fetch_with_httpx", return_value=self._SITEMAP_XML)
+        blog_urls, news_urls = scraper._discover_from_sitemap()
+        assert "https://cribl.io/blog/cribl-stream-4-0-released/" in blog_urls
+        assert "https://cribl.io/news/press-release-1/" in news_urls
+        assert "https://cribl.io/unrelated/page/" not in blog_urls
+        assert "https://cribl.io/unrelated/page/" not in news_urls
 
     def test_no_duplicates_in_results(self, scraper, mocker):
-        html = _load("cribl_listing.html")
-        mocker.patch.object(scraper, "_fetch_page", return_value=html)
-        urls = scraper._discover_listing("https://cribl.io/blog/", "blog", __import__("re").compile(r"^/blog/[^/]+/$"))
-        hrefs = [u for u, _ in urls]
-        assert len(hrefs) == len(set(hrefs))
+        mocker.patch.object(scraper, "_fetch_with_httpx", return_value=self._SITEMAP_XML)
+        blog_urls, news_urls = scraper._discover_from_sitemap()
+        assert len(blog_urls) == len(set(blog_urls))
+        assert len(news_urls) == len(set(news_urls))
+
+    def test_returns_empty_on_fetch_error(self, scraper, mocker):
+        mocker.patch.object(scraper, "_fetch_with_httpx", side_effect=Exception("network error"))
+        blog_urls, news_urls = scraper._discover_from_sitemap()
+        assert blog_urls == []
+        assert news_urls == []

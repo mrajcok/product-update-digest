@@ -47,43 +47,27 @@ class TestExtractDate:
         assert scraper._extract_date(soup) is None
 
 
-class TestParseCardDate:
-    def test_parses_month_day_year(self):
-        assert OcientScraper._parse_card_date("May 11, 2026") == "2026-05-11"
-        assert OcientScraper._parse_card_date("April 10, 2026") == "2026-04-10"
-        assert OcientScraper._parse_card_date("January 1, 2026") == "2026-01-01"
+class TestUrlsFromSitemap:
+    _SITEMAP_XML = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://ocient.com/blog/ocient-new-feature/</loc><lastmod>2026-05-01</lastmod></url>
+  <url><loc>https://ocient.com/blog/employee-spotlight/</loc><lastmod>2026-05-01</lastmod></url>
+  <url><loc>https://ocient.com/news/press-release-1/</loc><lastmod>2026-05-01</lastmod></url>
+</urlset>"""
 
-    def test_returns_none_for_bad_format(self):
-        assert OcientScraper._parse_card_date("not a date") is None
-        assert OcientScraper._parse_card_date("") is None
-
-
-class TestDiscoverBlog:
-    def test_finds_blog_cards(self, scraper, mocker):
-        mocker.patch.object(scraper, "_fetch_page", return_value=_load("ocient_blog_listing.html"))
-        urls = scraper._discover_blog()
-        hrefs = [u for u, _ in urls]
-        assert "https://ocient.com/blog/ocient-announces-new-feature/" in hrefs
-        assert "https://ocient.com/blog/building-the-data-foundation/" in hrefs
-        assert all(cat == "blog" for _, cat in urls)
+    def test_returns_urls_from_sitemap(self, scraper, mocker):
+        mocker.patch.object(scraper, "_fetch_with_httpx", return_value=self._SITEMAP_XML)
+        urls = scraper._urls_from_sitemap("https://ocient.com/blog_post-sitemap.xml")
+        assert "https://ocient.com/blog/ocient-new-feature/" in urls
+        assert "https://ocient.com/blog/employee-spotlight/" in urls
 
     def test_returns_empty_on_fetch_error(self, scraper, mocker):
-        mocker.patch.object(scraper, "_fetch_page", side_effect=Exception("network error"))
-        assert scraper._discover_blog() == []
+        mocker.patch.object(scraper, "_fetch_with_httpx", side_effect=Exception("network error"))
+        assert scraper._urls_from_sitemap("https://ocient.com/blog_post-sitemap.xml") == []
 
-
-class TestDiscoverNewsroom:
-    def test_finds_external_news_links(self, scraper, mocker):
-        mocker.patch.object(scraper, "_fetch_page", return_value=_load("ocient_newsroom.html"))
-        urls = scraper._discover_newsroom()
-        hrefs = [u for u, _ in urls]
-        assert "https://techcrunch.com/2026/05/01/ocient-partnership/" in hrefs
-        assert "https://venturebeat.com/2026/04/10/ocient-ai/" in hrefs
-        assert all(cat == "press_release" for _, cat in urls)
-
-    def test_returns_empty_on_fetch_error(self, scraper, mocker):
-        mocker.patch.object(scraper, "_fetch_page", side_effect=Exception("network error"))
-        assert scraper._discover_newsroom() == []
+    def test_returns_empty_on_xml_parse_error(self, scraper, mocker):
+        mocker.patch.object(scraper, "_fetch_with_httpx", return_value="not xml")
+        assert scraper._urls_from_sitemap("https://ocient.com/blog_post-sitemap.xml") == []
 
 
 class TestScrapeArticle:
@@ -97,15 +81,7 @@ class TestScrapeArticle:
         assert len(page.raw_text) > 50
         assert page.content_hash != ""
 
-    def test_external_press_link_returns_none_when_card_not_found(self, scraper, mocker):
-        mocker.patch.object(scraper, "_fetch_page", return_value=_load("ocient_newsroom.html"))
-        result = scraper.scrape_page("https://unknown.com/article/", "press_release")
+    def test_returns_none_on_fetch_error(self, scraper, mocker):
+        mocker.patch.object(scraper, "_fetch_page", side_effect=Exception("network error"))
+        result = scraper.scrape_page("https://ocient.com/blog/fail/", "blog")
         assert result is None
-
-    def test_external_press_link_extracts_card_metadata(self, scraper, mocker):
-        mocker.patch.object(scraper, "_fetch_page", return_value=_load("ocient_newsroom.html"))
-        page = scraper.scrape_page("https://techcrunch.com/2026/05/01/ocient-partnership/", "press_release")
-        assert page is not None
-        assert page.title == "Ocient Partners with Major Cloud Provider"
-        assert page.published_date == "2026-05-01"
-        assert page.company == "ocient"

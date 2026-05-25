@@ -1,3 +1,4 @@
+import json
 import logging
 import re
 from datetime import date, datetime, timedelta, timezone
@@ -26,20 +27,44 @@ _NEWS_RE = re.compile(r"^https://cribl\.io/news/[^/]+/")
 
 _SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
+# Blog slugs to skip — off-topic for a product-update digest.
+_BLOG_BLOCKLIST = ("cribl-edge", "company-culture")
+
 
 class CriblScraper(BaseScraper):
+    sources = [
+        f"{_SITEMAP_URL} — blog posts and news releases",
+        *_PRODUCT_URLS,
+    ]
+    exclusions = [
+        *[f'blog URLs containing "{b}"' for b in _BLOG_BLOCKLIST],
+        "articles with sitemap lastmod older than MAX_ARTICLE_AGE_DAYS days",
+    ]
+
     company = "cribl"
-    _use_playwright = False  # Next.js App Router — content is SSR'd into initial HTML
+    def __init__(self) -> None:
+        super().__init__()
+        # Populated during _discover_from_sitemap; used as date fallback in scrape_page.
+        self._sitemap_lastmod: dict[str, str] = {}
 
     def discover_urls(self) -> list[tuple[str, Category]]:
         blog_urls, news_urls = self._discover_from_sitemap()
+        seen: set[str] = set()
         urls: list[tuple[str, Category]] = []
         for u in blog_urls:
-            urls.append((u, "blog"))
+            if any(blocked in u for blocked in _BLOG_BLOCKLIST):
+                continue
+            if u not in seen:
+                seen.add(u)
+                urls.append((u, "blog"))
         for u in news_urls:
-            urls.append((u, "press_release"))
+            if u not in seen:
+                seen.add(u)
+                urls.append((u, "press_release"))
         for u in _PRODUCT_URLS:
-            urls.append((u, "product"))
+            if u not in seen:
+                seen.add(u)
+                urls.append((u, "product"))
         return urls
 
     def _discover_from_sitemap(self) -> tuple[list[str], list[str]]:
@@ -68,11 +93,14 @@ class CriblScraper(BaseScraper):
 
             lastmod_el = url_el.find("sm:lastmod", ns)
             if lastmod_el is not None and lastmod_el.text:
+                lastmod_str = lastmod_el.text[:10]
                 try:
-                    if date.fromisoformat(lastmod_el.text[:10]) < cutoff:
+                    if date.fromisoformat(lastmod_str) < cutoff:
                         continue
                 except ValueError:
-                    pass
+                    lastmod_str = ""
+                if lastmod_str:
+                    self._sitemap_lastmod[loc] = lastmod_str
 
             if _BLOG_RE.match(loc):
                 blog_urls.append(loc)
@@ -87,7 +115,7 @@ class CriblScraper(BaseScraper):
             html = self._fetch_page(url)
             soup = BeautifulSoup(html, "lxml")
             title = self._extract_title(soup)
-            published_date = self._extract_date(soup)
+            published_date = self._extract_date(soup) or self._sitemap_lastmod.get(url)
             text = self.extract_text(html)
             if len(text) < 200:
                 logger.warning("cribl: thin content (%d chars) at %s", len(text), url)
@@ -116,10 +144,20 @@ class CriblScraper(BaseScraper):
 
     @staticmethod
     def _extract_date(soup: BeautifulSoup) -> str | None:
+        # JSON-LD is the most reliable source on Next.js App Router pages.
+        for script in soup.find_all("script", type="application/ld+json"):
+            try:
+                data = json.loads(script.string or "")
+                for key in ("datePublished", "dateCreated"):
+                    val = data.get(key)
+                    if val:
+                        return str(val)[:10]
+            except (json.JSONDecodeError, AttributeError):
+                pass
         for prop in ("article:published_time", "og:article:published_time"):
             meta = soup.find("meta", property=prop)
             if meta and meta.get("content"):
-                return str(meta["content"])[:10]  # YYYY-MM-DD
+                return str(meta["content"])[:10]
         time_tag = soup.find("time", attrs={"datetime": True})
         if time_tag:
             return str(time_tag["datetime"])[:10]

@@ -1,8 +1,10 @@
 import logging
+from datetime import date, datetime, timedelta, timezone
 from xml.etree import ElementTree as ET
 
 from bs4 import BeautifulSoup
 
+from config import settings
 from scrapers.base import BaseScraper, Category
 from storage.models import ScrapedPage
 
@@ -16,7 +18,6 @@ logger = logging.getLogger(__name__)
 # Flywheel (the WordPress host) blocks non-browser User-Agents on sitemap/XML
 # paths, so a realistic browser UA is required (_user_agent override below).
 
-_SITEMAP_INDEX_URL = "https://ocient.com/sitemap_index.xml"
 _BLOG_SITEMAP_URL = "https://ocient.com/blog_post-sitemap.xml"
 _NEWS_SITEMAP_URL = "https://ocient.com/news_release-sitemap.xml"
 
@@ -30,9 +31,21 @@ _ARTICLE_CONTENT_SELS = ["article", "div.entry-content", "div.post-content", "ma
 _SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
 
+_BLOG_BLOCKLIST = ("employee-spotlight",)
+
+
 class OcientScraper(BaseScraper):
     company = "ocient"
-    _use_playwright = False
+    sources = [
+        f"{_BLOG_SITEMAP_URL} — blog posts",
+        f"{_NEWS_SITEMAP_URL} — press releases",
+        *_PRODUCT_URLS,
+    ]
+    exclusions = [
+        *[f'blog URLs containing "{b}"' for b in _BLOG_BLOCKLIST],
+        "articles with sitemap lastmod older than MAX_ARTICLE_AGE_DAYS days",
+    ]
+
     _user_agent = (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -40,16 +53,26 @@ class OcientScraper(BaseScraper):
     )
 
     def discover_urls(self) -> list[tuple[str, Category]]:
+        cutoff = (datetime.now(timezone.utc) - timedelta(days=settings.max_article_age_days)).date()
+        seen: set[str] = set()
         urls: list[tuple[str, Category]] = []
-        for u in self._urls_from_sitemap(_BLOG_SITEMAP_URL):
-            urls.append((u, "blog"))
-        for u in self._urls_from_sitemap(_NEWS_SITEMAP_URL):
-            urls.append((u, "press_release"))
+        for u in self._urls_from_sitemap(_BLOG_SITEMAP_URL, cutoff):
+            if any(blocked in u for blocked in _BLOG_BLOCKLIST):
+                continue
+            if u not in seen:
+                seen.add(u)
+                urls.append((u, "blog"))
+        for u in self._urls_from_sitemap(_NEWS_SITEMAP_URL, cutoff):
+            if u not in seen:
+                seen.add(u)
+                urls.append((u, "press_release"))
         for u in _PRODUCT_URLS:
-            urls.append((u, "product"))
+            if u not in seen:
+                seen.add(u)
+                urls.append((u, "product"))
         return urls
 
-    def _urls_from_sitemap(self, sitemap_url: str) -> list[str]:
+    def _urls_from_sitemap(self, sitemap_url: str, cutoff: date | None = None) -> list[str]:
         try:
             xml = self._fetch_with_httpx(sitemap_url)
         except Exception:
@@ -66,10 +89,22 @@ class OcientScraper(BaseScraper):
         urls = []
         for url_el in root.findall("sm:url", ns):
             loc_el = url_el.find("sm:loc", ns)
-            if loc_el is not None and loc_el.text:
-                urls.append(loc_el.text.strip())
+            if loc_el is None or not loc_el.text:
+                continue
+            loc = loc_el.text.strip()
 
-        logger.info("ocient: discovered %d URL(s) from %s", len(urls), sitemap_url)
+            if cutoff is not None:
+                lastmod_el = url_el.find("sm:lastmod", ns)
+                if lastmod_el is not None and lastmod_el.text:
+                    try:
+                        if date.fromisoformat(lastmod_el.text[:10]) < cutoff:
+                            continue
+                    except ValueError:
+                        pass
+
+            urls.append(loc)
+
+        logger.info("ocient: discovered %d URL(s) from %s (cutoff %s)", len(urls), sitemap_url, cutoff)
         return urls
 
     def scrape_page(self, url: str, category: Category) -> ScrapedPage | None:

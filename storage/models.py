@@ -18,8 +18,8 @@ def normalize_url(url: str) -> str:
     return urlunparse((scheme, netloc, path, "", query, ""))
 
 
-def chroma_id_for(url: str) -> str:
-    """Deterministic Chroma document ID derived from the normalized URL."""
+def vec_id_for(url: str) -> str:
+    """Deterministic vector-store document ID derived from the normalized URL."""
     return hashlib.md5(normalize_url(url).encode()).hexdigest()
 
 
@@ -57,7 +57,7 @@ class ArticleRecord(BaseModel):
     last_scraped_at: str   # ISO 8601
     content_hash: str
     published_date: str | None = None
-    chroma_id: str | None = None
+    vec_id: str | None = None
     summary: str = ""
     status: Literal["ok", "error", "skipped"] = "ok"
 
@@ -65,7 +65,7 @@ class ArticleRecord(BaseModel):
     def from_scraped_page(
         cls,
         page: ScrapedPage,
-        chroma_id: str | None = None,
+        vec_id: str | None = None,
         first_scraped_at: str | None = None,
         summary: str = "",
     ) -> "ArticleRecord":
@@ -80,14 +80,14 @@ class ArticleRecord(BaseModel):
             last_scraped_at=now,
             content_hash=page.content_hash,
             published_date=page.published_date,
-            chroma_id=chroma_id,
+            vec_id=vec_id,
             summary=summary,
             status="ok",
         )
 
 
 class ProductUpdate(BaseModel):
-    """Document stored in Chroma — used for vector search and summary retrieval by zeroclaw."""
+    """Document stored in sqlite-vec — used for vector search and summary retrieval."""
 
     url: str
     company: Literal["cribl", "ocient"]

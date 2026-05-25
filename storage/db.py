@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS scraped_articles (
     last_scraped_at   TEXT NOT NULL,
     content_hash      TEXT,
     published_date    TEXT,
-    chroma_id         TEXT,
+    vec_id         TEXT,
     summary           TEXT NOT NULL DEFAULT '',
     status            TEXT NOT NULL DEFAULT 'ok'
 );
@@ -30,18 +30,18 @@ _UPSERT_SQL = """
 INSERT INTO scraped_articles
     (url, normalized_url, company, category, title,
      first_scraped_at, last_scraped_at, content_hash,
-     published_date, chroma_id, summary, status)
+     published_date, vec_id, summary, status)
 VALUES
     (:url, :normalized_url, :company, :category, :title,
      :first_scraped_at, :last_scraped_at, :content_hash,
-     :published_date, :chroma_id, :summary, :status)
+     :published_date, :vec_id, :summary, :status)
 ON CONFLICT(normalized_url) DO UPDATE SET
     url             = excluded.url,
     title           = excluded.title,
     last_scraped_at = excluded.last_scraped_at,
     content_hash    = excluded.content_hash,
     published_date  = excluded.published_date,
-    chroma_id       = excluded.chroma_id,
+    vec_id       = excluded.vec_id,
     summary         = excluded.summary,
     status          = excluded.status
     -- first_scraped_at intentionally preserved on conflict
@@ -59,10 +59,18 @@ def _row_to_record(row: sqlite3.Row) -> ArticleRecord:
         last_scraped_at=row["last_scraped_at"],
         content_hash=row["content_hash"] or "",
         published_date=row["published_date"],
-        chroma_id=row["chroma_id"],
+        vec_id=row["vec_id"],
         summary=row["summary"] or "",
         status=row["status"],
     )
+
+
+def _migrate(conn: sqlite3.Connection) -> None:
+    """One-time column rename: chroma_id → vec_id for databases created before the sqlite-vec migration."""
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(scraped_articles)")}
+    if "chroma_id" in cols and "vec_id" not in cols:
+        conn.execute("ALTER TABLE scraped_articles RENAME COLUMN chroma_id TO vec_id")
+        logger.info("DB migration: renamed column chroma_id → vec_id")
 
 
 class ArticleDB:
@@ -74,6 +82,7 @@ class ArticleDB:
         self._conn = sqlite3.connect(db_path)
         self._conn.row_factory = sqlite3.Row
         self._conn.executescript(_SCHEMA)
+        _migrate(self._conn)
         self._conn.commit()
         logger.info("ArticleDB opened at %r", db_path)
 

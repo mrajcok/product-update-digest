@@ -13,10 +13,7 @@ class Settings(BaseSettings):
     openrouter_api_key: str = "dummy"
     openrouter_summarization_model: str = "anthropic/claude-sonnet-4-5"
     openrouter_embedding_model: str = "openai/text-embedding-3-small"
-
-    chroma_host: str = "localhost"
-    chroma_port: int = 8000
-    chroma_collection_name: str = "product_updates"
+    embedding_dimensions: int = 1536
 
     sqlite_db_path: str = "data/product_updates.db"
 

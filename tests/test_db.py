@@ -4,12 +4,12 @@ import time
 import pytest
 
 from storage.db import ArticleDB
-from storage.models import ArticleRecord, ScrapedPage, chroma_id_for, normalize_url
+from storage.models import ArticleRecord, ScrapedPage, vec_id_for, normalize_url
 
 
 def make_record(url: str, company="cribl", category="blog", raw_text="hello world content here") -> ArticleRecord:
     page = ScrapedPage(url=url, company=company, category=category, title="Test", raw_text=raw_text)
-    return ArticleRecord.from_scraped_page(page, chroma_id=chroma_id_for(url))
+    return ArticleRecord.from_scraped_page(page, vec_id=vec_id_for(url))
 
 
 class TestGetByUrl:
@@ -57,7 +57,7 @@ class TestUpsert:
         updated_page = ScrapedPage(url=url, company="cribl", category="blog", title="Updated Title", raw_text="updated content here now")
         updated_record = ArticleRecord.from_scraped_page(
             updated_page,
-            chroma_id=chroma_id_for(url),
+            vec_id=vec_id_for(url),
             first_scraped_at=original.first_scraped_at,
         )
         db.upsert(updated_record)

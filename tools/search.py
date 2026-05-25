@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Interactive semantic search over the product updates Chroma collection.
+Interactive semantic search over the product updates vector store.
 
 Usage:
     .venv/bin/python tools/search.py
@@ -10,84 +10,29 @@ Usage:
 import argparse
 import sys
 import textwrap
-from typing import cast
 
-import chromadb
-from chromadb.api.types import Embeddable, EmbeddingFunction, IncludeEnum, QueryResult, Where
-from chromadb.utils.embedding_functions.openai_embedding_function import OpenAIEmbeddingFunction
 from dotenv import load_dotenv
 
 load_dotenv()
 
 from config import settings  # noqa: E402 — after load_dotenv
+from storage.vec_client import VecClient  # noqa: E402
 
 COMPANY_COLORS = {"cribl": "\033[94m", "ocient": "\033[93m"}  # blue / yellow
 RESET = "\033[0m"
 BOLD = "\033[1m"
 DIM = "\033[2m"
 
-_INCLUDE: list[IncludeEnum] = [
-    IncludeEnum.documents,
-    IncludeEnum.metadatas,
-    IncludeEnum.distances,
-]
-
-
-def _build_collection() -> chromadb.Collection:
-    ef = cast(
-        EmbeddingFunction[Embeddable],
-        OpenAIEmbeddingFunction(
-            api_key=settings.openrouter_api_key,
-            api_base="https://openrouter.ai/api/v1",
-            model_name=settings.openrouter_embedding_model,
-        ),
-    )
-    client = chromadb.HttpClient(host=settings.chroma_host, port=settings.chroma_port)
-    return client.get_or_create_collection(
-        name=settings.chroma_collection_name,
-        embedding_function=ef,
-    )
-
-
-def _display(results: QueryResult) -> None:
-    docs = results.get("documents") or [[]]
-    metas = results.get("metadatas") or [[]]
-    distances = results.get("distances") or [[]]
-
-    if not docs[0]:
-        print("No results found.")
-        return
-
-    for i, (_, meta, dist) in enumerate(zip(docs[0], metas[0], distances[0]), 1):
-        company = str(meta.get("company", ""))
-        color = COMPANY_COLORS.get(company, "")
-        category = str(meta.get("category", "")).replace("_", " ")
-        date = str(meta.get("published_date") or str(meta.get("scraped_at", ""))[:10])
-        title = str(meta.get("title", "(no title)"))
-        url = str(meta.get("url", ""))
-        summary = str(meta.get("summary", ""))
-        score = 1 - dist  # cosine distance → similarity
-
-        print(f"\n{BOLD}[{i}]{RESET} {color}{company.upper()}{RESET}  {DIM}{category}  {date}  score={score:.2f}{RESET}")
-        print(f"  {BOLD}{title}{RESET}")
-        if summary:
-            wrapped = textwrap.fill(summary, width=90, initial_indent="  ", subsequent_indent="  ")
-            print(wrapped)
-        print(f"  {DIM}{url}{RESET}")
-
 
 def _run(company_filter: str | None, n_results: int) -> None:
     try:
-        collection = _build_collection()
+        vec = VecClient(settings.sqlite_db_path)
     except Exception as e:
-        print(f"Error connecting to Chroma at {settings.chroma_host}:{settings.chroma_port}: {e}")
+        print(f"Error opening vector store at {settings.sqlite_db_path}: {e}")
         sys.exit(1)
 
-    where: Where | None = {"company": {"$eq": company_filter}} if company_filter else None
-
-    print(f"Connected to collection '{settings.chroma_collection_name}' ({collection.count()} documents)")
-    if company_filter:
-        print(f"Filtering to: {company_filter}")
+    total = vec.count(company=company_filter)
+    print(f"Vector store: {total} document(s)" + (f" for {company_filter}" if company_filter else ""))
     print("Type a query and press Enter. Ctrl-C or empty input to exit.\n")
 
     try:
@@ -101,22 +46,33 @@ def _run(company_filter: str | None, n_results: int) -> None:
                 break
 
             try:
-                results = collection.query(
-                    query_texts=[query],
-                    n_results=min(n_results, collection.count() or 1),
-                    where=where,
-                    include=_INCLUDE,
-                )
+                results = vec.search(query, company=company_filter, n_results=n_results)
             except Exception as e:
                 print(f"Query error: {e}")
                 continue
 
-            _display(results)
+            if not results:
+                print("No results found.")
+                continue
+
+            for i, (update, distance) in enumerate(results, 1):
+                color = COMPANY_COLORS.get(update.company, "")
+                category = update.category.replace("_", " ")
+                date = update.published_date or update.scraped_at[:10]
+                score = 1 - distance  # cosine distance → similarity
+                print(f"\n{BOLD}[{i}]{RESET} {color}{update.company.upper()}{RESET}  {DIM}{category}  {date}  score={score:.2f}{RESET}")
+                print(f"  {BOLD}{update.title}{RESET}")
+                if update.summary:
+                    wrapped = textwrap.fill(update.summary, width=90, initial_indent="  ", subsequent_indent="  ")
+                    print(wrapped)
+                print(f"  {DIM}{update.url}{RESET}")
+
             print()
 
     except KeyboardInterrupt:
         pass
 
+    vec.close()
     print("Bye.")
 
 

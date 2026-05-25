@@ -17,7 +17,6 @@ Category = Literal["blog", "press_release", "product"]
 logger = logging.getLogger(__name__)
 
 _RETRY_STATUSES = {429, 500, 502, 503, 504}
-_MIN_CONTENT_CHARS = 200  # below this, httpx response is assumed JS-gated
 
 
 def _is_too_old(published_date: str | None, cutoff: date) -> bool:
@@ -32,7 +31,6 @@ def _is_too_old(published_date: str | None, cutoff: date) -> bool:
 
 class BaseScraper(ABC):
     company: str
-    _use_playwright: bool = False      # set True in subclass to always use Playwright
     _sleep_between_requests: float = 1.0
     _user_agent: str = "product-update-digest/1.0"
 
@@ -158,20 +156,7 @@ class BaseScraper(ABC):
             return None
 
     def _fetch_page(self, url: str) -> str:
-        """
-        Fetch page HTML. Tries httpx first; falls back to Playwright when the
-        response looks JS-gated (thin content) or _use_playwright is forced.
-        """
-        html = self._fetch_with_httpx(url)
-        if not self._use_playwright:
-            text_preview = BeautifulSoup(html, "lxml").get_text(separator=" ", strip=True)
-            if len(text_preview) >= _MIN_CONTENT_CHARS:
-                return html
-            logger.debug(
-                "%s: httpx returned thin content (%d chars), retrying with Playwright: %s",
-                self.company, len(text_preview), url,
-            )
-        return self._fetch_with_playwright(url)
+        return self._fetch_with_httpx(url)
 
     def _fetch_with_httpx(self, url: str) -> str:
         delay = 0.5
@@ -194,18 +179,6 @@ class BaseScraper(ABC):
                     time.sleep(delay)
                     delay *= 2
         raise last_exc
-
-    def _fetch_with_playwright(self, url: str) -> str:
-        from playwright.sync_api import sync_playwright  # lazy — not installed until needed
-        with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
-            try:
-                pw_page = browser.new_page()
-                pw_page.goto(url, wait_until="load", timeout=30_000)
-                html = pw_page.content()
-            finally:
-                browser.close()
-        return html
 
     @staticmethod
     def extract_text(html: str) -> str:

@@ -11,7 +11,7 @@ import sqlite3
 import pytest
 
 from storage.db import ArticleDB
-from storage.models import ScrapedPage, chroma_id_for
+from storage.models import ScrapedPage, vec_id_for
 
 
 # ---------------------------------------------------------------------------

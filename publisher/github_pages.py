@@ -8,7 +8,7 @@ from git import Repo
 from jinja2 import Environment, FileSystemLoader
 
 from storage.db import ArticleDB
-from storage.models import ArticleRecord
+from storage.models import ArticleRecord, ScrapedPage
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ class GitHubPagesPublisher:
             autoescape=True,
         )
 
-    def publish(self) -> None:
+    def publish(self, scraper_infos: list[dict] | None = None) -> None:
         all_records = self._db.get_all()
         ok_records = [r for r in all_records if r.status == "ok" and r.summary]
 
@@ -43,13 +43,38 @@ class GitHubPagesPublisher:
             for c in COMPANIES
         }
 
-        html_files = self._render(top_updates, company_updates)
+        html_files = self._render(top_updates, company_updates, scraper_infos)
         self._push_to_github(html_files)
+
+    def render_dry_run(
+        self,
+        pages: list[ScrapedPage],
+        out_dir: Path,
+        scraper_infos: list[dict] | None = None,
+    ) -> None:
+        """Render index.html locally from scraped pages without pushing to GitHub."""
+        records = [
+            ArticleRecord.from_scraped_page(p, summary="[dry run — summary not generated]")
+            for p in pages
+        ]
+        top_updates = sorted(records, key=_sort_key, reverse=True)[:20]
+        company_updates: dict[str, list[ArticleRecord]] = {
+            c: sorted([r for r in records if r.company == c], key=_sort_key, reverse=True)
+            for c in COMPANIES
+        }
+        html_files = self._render(top_updates, company_updates, scraper_infos)
+        out_dir.mkdir(parents=True, exist_ok=True)
+        for rel_path, content in html_files.items():
+            dest = out_dir / rel_path
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text(content, encoding="utf-8")
+        logger.info("[dry-run] HTML written to %s/index.html", out_dir)
 
     def _render(
         self,
         top_updates: list[ArticleRecord],
         company_updates: dict[str, list[ArticleRecord]],
+        scraper_infos: list[dict] | None = None,
     ) -> dict[str, str]:
         files: dict[str, str] = {}
 
@@ -57,6 +82,7 @@ class GitHubPagesPublisher:
         files["index.html"] = index_tmpl.render(
             updates=top_updates,
             generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+            scraper_infos=scraper_infos or [],
         )
 
         company_tmpl = self._env.get_template("company_index.html.j2")

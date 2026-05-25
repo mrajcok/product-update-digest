@@ -3,7 +3,7 @@ import pytest
 
 from scrapers.base import BaseScraper
 from storage.db import ArticleDB
-from storage.models import ArticleRecord, ScrapedPage, chroma_id_for
+from storage.models import ArticleRecord, ScrapedPage, vec_id_for
 
 
 # ---------------------------------------------------------------------------
@@ -29,7 +29,7 @@ class _FixedScraper(BaseScraper):
 def _seed_db(db: ArticleDB, url: str, raw_text: str) -> ArticleRecord:
     """Insert a record into the DB and return it."""
     page = ScrapedPage(url=url, company="cribl", category="blog", title="Post", raw_text=raw_text)
-    record = ArticleRecord.from_scraped_page(page, chroma_id=chroma_id_for(url))
+    record = ArticleRecord.from_scraped_page(page, vec_id=vec_id_for(url))
     db.upsert(record)
     return record
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product Updates Feed</title>
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; color: #222; }
     h1 { border-bottom: 2px solid #ddd; padding-bottom: .5rem; }
     nav { margin-bottom: 1.5rem; }
     nav a { margin-right: 1rem; text-decoration: none; color: #0066cc; }
@@ -20,6 +20,14 @@
     .card h2 a:hover { text-decoration: underline; }
     .summary { font-size: .9rem; line-height: 1.5; color: #444; }
     footer { margin-top: 2rem; font-size: .8rem; color: #999; border-top: 1px solid #eee; padding-top: .75rem; }
+    .scraper-summary { margin-top: 2.5rem; border-top: 2px solid #ddd; padding-top: 1rem; }
+    .scraper-summary h2 { font-size: 1rem; color: #444; margin-bottom: 1rem; }
+    .scraper-block { margin-bottom: 1.25rem; }
+    .scraper-block h3 { font-size: .9rem; font-weight: 600; color: #222; margin: 0 0 .35rem; text-transform: capitalize; }
+    .scraper-block ul { margin: 0 0 .5rem 1.25rem; padding: 0; font-size: .82rem; color: #555; }
+    .scraper-block li { margin-bottom: .2rem; }
+    .scraper-block .label { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: #888; margin: .4rem 0 .2rem; }
+    .excl { color: #b45309; }
   </style>
 </head>
 <body>
@@ -44,6 +52,25 @@
   {% else %}
   <p>No updates yet.</p>
   {% endfor %}
+
+  {% if scraper_infos %}
+  <section class="scraper-summary">
+    <h2>Coverage</h2>
+    {% for info in scraper_infos %}
+    <div class="scraper-block">
+      <h3>{{ info.company }}</h3>
+      <div class="label">Sources</div>
+      <ul>
+        {% for s in info.sources %}<li>{{ s }}</li>{% endfor %}
+      </ul>
+      <div class="label">Excluded</div>
+      <ul>
+        {% for e in info.exclusions %}<li class="excl">{{ e }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
 
   <footer>Generated {{ generated_at }}</footer>
 </body>
