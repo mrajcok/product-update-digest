@@ -12,8 +12,8 @@
 ## 1. Clone and Set Up
 
 ```bash
-git clone https://github.com/<you>/product-update-digest.git /home/mark/product-update-digest
-cd /home/mark/product-update-digest
+git clone https://github.com/<you>/product-update-digest.git /home/<user>/product-update-digest
+cd /home/<user>/product-update-digest
 make venv
 ```
 
@@ -89,12 +89,12 @@ Description=Chroma Vector DB HTTP Server
 After=network.target
 
 [Service]
-User=mark
-WorkingDirectory=/home/mark/chroma-data
-ExecStart=/home/mark/product-update-digest/.venv/bin/chroma run \
+User=<user>
+WorkingDirectory=/home/<user>/chroma-data
+ExecStart=/home/<user>/product-update-digest/.venv/bin/chroma run \
   --host 127.0.0.1 \
   --port 8000 \
-  --path /home/mark/chroma-data
+  --path /home/<user>/chroma-data
 Restart=on-failure
 RestartSec=5
 
@@ -124,7 +124,7 @@ sudo systemctl status chroma
 Add to crontab (`crontab -e`):
 
 ```cron
-0 6 * * * cd /home/mark/product-update-digest && .venv/bin/python main.py >> logs/cron.log 2>&1
+0 6 * * * cd /home/<user>/product-update-digest && .venv/bin/python main.py >> logs/cron.log 2>&1
 ```
 
 This runs daily at 6am UTC. Adjust the hour as needed.
@@ -132,7 +132,7 @@ This runs daily at 6am UTC. Adjust the hour as needed.
 To verify the pipeline manually before enabling the cron:
 
 ```bash
-cd /home/mark/product-update-digest
+cd /home/<user>/product-update-digest
 .venv/bin/python main.py --dry-run          # scrape only, no LLM or push
 .venv/bin/python main.py --site cribl       # one scraper, full pipeline
 .venv/bin/python main.py                    # full run
@@ -169,7 +169,7 @@ tail -f logs/agent.log
 ## 8. Updating
 
 ```bash
-cd /home/mark/product-update-digest
+cd /home/<user>/product-update-digest
 git pull
 make venv          # reinstall deps if requirements.txt changed
 ```

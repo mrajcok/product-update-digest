@@ -96,7 +96,7 @@ ocient/
 - **VPS**: runs this program typically via cron, Chroma, and zeroclaw — all colocated
 - **Local dev**: WSL2 Ubuntu 22.04 — same services run locally for development
 - **Chroma**: accessed via HTTP client (not in-process); same instance shared by this program and zeroclaw
-- **Cron command**: `cd /home/mark/product-update-digest && .venv/bin/python main.py >> logs/cron.log 2>&1`
+- **Cron command**: `cd /home/<user>/product-update-digest && .venv/bin/python main.py >> logs/cron.log 2>&1`
 
 ## Zeroclaw Integration
 [zeroclaw](https://github.com/zeroclaw-labs/zeroclaw) is an AI personal assistant running on the same VPS. It queries the Chroma collection directly to retrieve relevant product update summaries. When implementing Chroma queries, ensure the collection name and schema are stable and documented so zeroclaw can rely on them.
