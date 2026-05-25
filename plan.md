@@ -467,9 +467,9 @@ Description=Chroma Vector DB HTTP Server
 After=network.target
 
 [Service]
-User=mark
-WorkingDirectory=/home/mark/chroma-data
-ExecStart=/home/mark/.local/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/mark/chroma-data
+User=<user>
+WorkingDirectory=/home/<user>/chroma-data
+ExecStart=/home/<user>/.local/bin/chroma run --host 127.0.0.1 --port 8000 --path /home/<user>/chroma-data
 Restart=on-failure
 RestartSec=5
 
@@ -484,7 +484,7 @@ Security: bound to `127.0.0.1` since both this program and zeroclaw run on the s
 ### Cron Job (VPS)
 
 ```cron
-0 6 * * * cd /home/mark/product-update-digest && .venv/bin/python main.py >> logs/cron.log 2>&1
+0 6 * * * cd /home/<user>/product-update-digest && .venv/bin/python main.py >> logs/cron.log 2>&1
 ```
 
 Create venv (from the project directory):
