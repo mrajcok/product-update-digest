@@ -16,7 +16,7 @@ A daily cron job that scrapes Cribl and Ocient websites for product updates (blo
 
 - **Python version**: 3.13
 - **Venv location**: `.venv/` in the project root (never use system Python)
-- **Setup**: `make venv` (runs `python3.13 -m venv .venv && pip install -r requirements.txt`)
+- **Setup**: `make venv` (runs `uv venv --python 3.13 && uv pip install -r requirements.txt`; install uv first: `curl -LsSf https://astral.sh/uv/install.sh | sh`)
 - **Running tests**: `make test` or `.venv/bin/pytest tests/ -v`
 - **Running the program**: `.venv/bin/python main.py`
 - All imports and tooling assume the venv is active or commands are prefixed with `.venv/bin/`

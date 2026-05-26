@@ -9,7 +9,19 @@
 
 ---
 
-## 1. Clone and Set Up
+## 1. Install uv
+
+[uv](https://docs.astral.sh/uv/) replaces pip/virtualenv and is the only tool needed to manage the Python environment:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Verify: `uv --version`
+
+---
+
+## 2. Clone and Set Up
 
 ```bash
 git clone https://github.com/<you>/product-update-digest.git /home/<user>/product-update-digest
@@ -19,14 +31,13 @@ make venv
 
 `make venv` runs:
 ```bash
-python3.13 -m venv .venv
-.venv/bin/pip install -r requirements.txt
-.venv/bin/playwright install chromium
+uv venv --python 3.13
+uv pip install -r requirements.txt
 ```
 
 ---
 
-## 2. Environment Variables
+## 3. Environment Variables
 
 Copy the example and fill in real values:
 
@@ -39,10 +50,7 @@ nano .env
 OPENROUTER_API_KEY=sk-or-...
 OPENROUTER_SUMMARIZATION_MODEL=anthropic/claude-sonnet-4-5
 OPENROUTER_EMBEDDING_MODEL=openai/text-embedding-3-small
-
-CHROMA_HOST=localhost
-CHROMA_PORT=8000
-CHROMA_COLLECTION_NAME=product_updates
+EMBEDDING_DIMENSIONS=1536
 
 SQLITE_DB_PATH=data/product_updates.db
 
@@ -50,6 +58,7 @@ GITHUB_TOKEN=ghp_...
 GITHUB_REPO=username/product-updates
 GITHUB_PAGES_BRANCH=gh-pages
 
+MAX_ARTICLE_AGE_DAYS=30
 LOG_LEVEL=INFO
 ```
 
@@ -57,7 +66,7 @@ LOG_LEVEL=INFO
 
 ---
 
-## 3. GitHub Pages — First-Time Setup
+## 4. GitHub Pages — First-Time Setup
 
 Create an orphan `gh-pages` branch in your GitHub repo:
 
@@ -74,48 +83,6 @@ rm -rf /tmp/pages-init
 ```
 
 Enable GitHub Pages in the repo settings → Pages → Source: `gh-pages` branch, `/ (root)`.
-
----
-
-## 4. Chroma HTTP Server
-
-Chroma runs as a systemd service bound to localhost (not exposed publicly, since both this agent and zeroclaw run on the same VPS).
-
-Create `/etc/systemd/system/chroma.service`:
-
-```ini
-[Unit]
-Description=Chroma Vector DB HTTP Server
-After=network.target
-
-[Service]
-User=<user>
-WorkingDirectory=/home/<user>/chroma-data
-ExecStart=/home/<user>/product-update-digest/.venv/bin/chroma run \
-  --host 127.0.0.1 \
-  --port 8000 \
-  --path /home/<user>/chroma-data
-Restart=on-failure
-RestartSec=5
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable and start:
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable chroma
-sudo systemctl start chroma
-sudo systemctl status chroma
-```
-
-**Local dev (WSL2)**:
-
-```bash
-.venv/bin/chroma run --host localhost --port 8000 --path ~/chroma-data
-```
 
 ---
 
@@ -140,21 +107,7 @@ cd /home/<user>/product-update-digest
 
 ---
 
-## 6. Zeroclaw Integration
-
-Zeroclaw queries the Chroma collection directly. It expects:
-
-| Field | Value |
-|---|---|
-| Collection name | `product_updates` (set via `CHROMA_COLLECTION_NAME`) |
-| Chroma host | `localhost:8000` |
-| Document fields | `url`, `company`, `category`, `title`, `scraped_at`, `published_date`, `summary`, `source_text` |
-
-The collection name and schema are stable — do not rename fields without updating zeroclaw.
-
----
-
-## 7. Logs
+## 6. Logs
 
 - **stdout**: captured by cron into `logs/cron.log`
 - **Rotating file**: `logs/agent.log` (5 MB max, 3 backups) — written by `setup_logging()`
@@ -166,7 +119,7 @@ tail -f logs/agent.log
 
 ---
 
-## 8. Updating
+## 7. Updating
 
 ```bash
 cd /home/<user>/product-update-digest
@@ -174,4 +127,4 @@ git pull
 make venv          # reinstall deps if requirements.txt changed
 ```
 
-No database migrations needed — `CREATE TABLE IF NOT EXISTS` is idempotent.
+No database migrations needed — `CREATE TABLE IF NOT EXISTS` is idempotent, and `db.py` handles the `chroma_id → vec_id` column rename automatically on first run.

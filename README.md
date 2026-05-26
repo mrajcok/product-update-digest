@@ -13,12 +13,16 @@ A daily cron job that scrapes product updates from Cribl and Ocient (blog posts,
 ## Requirements
 
 - Python 3.13
+- [uv](https://docs.astral.sh/uv/) — fast Python package manager
 - [OpenRouter](https://openrouter.ai) API key
 - GitHub personal access token with `repo` scope (for pushing to GitHub Pages)
 
 ## Setup
 
 ```bash
+# install uv (once per machine)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
 git clone https://github.com/<you>/product-update-digest.git
 cd product-update-digest
 make venv
@@ -26,7 +30,7 @@ cp .env.example .env
 # edit .env with your API keys and config
 ```
 
-`make venv` creates `.venv/` and installs all dependencies (no separate services required).
+`make venv` runs `uv venv --python 3.13 && uv pip install -r requirements.txt`. No separate services required.
 
 ## Configuration
 

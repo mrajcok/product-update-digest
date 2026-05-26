@@ -1,14 +1,11 @@
 .PHONY: venv install test lint clean
 
-PYTHON  := python3.13
-VENV    := .venv
-BIN     := $(VENV)/bin
+VENV := .venv
+BIN  := $(VENV)/bin
 
 venv:
-	$(PYTHON) -m venv $(VENV)
-	$(BIN)/pip install --upgrade pip
-	$(BIN)/pip install -r requirements.txt
-	$(BIN)/playwright install chromium
+	uv venv --python 3.13
+	uv pip install -r requirements.txt
 	@echo "Venv ready. Activate with: source .venv/bin/activate"
 
 install: venv
