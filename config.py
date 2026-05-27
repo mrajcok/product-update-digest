@@ -12,6 +12,7 @@ class Settings(BaseSettings):
 
     openrouter_api_key: str = "dummy"
     openrouter_summarization_model: str = "anthropic/claude-sonnet-4-5"
+    openrouter_dry_run_summarization_model: str = "meta-llama/llama-3.3-70b-instruct:free"
     openrouter_embedding_model: str = "openai/text-embedding-3-small"
     embedding_dimensions: int = 1536
 

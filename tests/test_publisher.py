@@ -75,7 +75,7 @@ class TestRenderIndex:
         )
         assert "index.html" in files
         html = files["index.html"]
-        assert "Product Updates" in html
+        assert "News & Blog Posts" in html
         assert "cribl/" in html
         assert "ocient/" in html
 

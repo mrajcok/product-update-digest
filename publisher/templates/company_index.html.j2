@@ -3,26 +3,86 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{ company | capitalize }} Updates</title>
+  <title>{{ company | capitalize }} News & Blog Posts</title>
+  <script>
+    if (localStorage.getItem('theme') === 'light')
+      document.documentElement.setAttribute('data-theme', 'light');
+  </script>
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #222; }
-    h1 { border-bottom: 2px solid #ddd; padding-bottom: .5rem; }
-    .breadcrumb { font-size: .9rem; margin-bottom: 1.5rem; }
-    .breadcrumb a { color: #0066cc; text-decoration: none; }
-    h2.month { margin: 1.75rem 0 .75rem; font-size: 1rem; color: #555; text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid #eee; padding-bottom: .25rem; }
-    .card { border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: .75rem; }
-    .meta { font-size: .85rem; color: #666; margin-bottom: .4rem; }
-    .tag { display: inline-block; padding: .15rem .4rem; border-radius: 4px; font-size: .75rem; background: #f0f0f0; color: #555; margin-right: .4rem; }
+    :root {
+      --bg:               #111;
+      --surface:          #1e1e1e;
+      --border:           #2e2e2e;
+      --border-subtle:    #252525;
+      --text:             #d4d4d4;
+      --text-2:           #888;
+      --text-3:           #555;
+      --link:             #7ab3f5;
+      --link-hover:       #a0c8ff;
+      --tag-bg:           #2a2a2a;
+      --tag-color:        #888;
+      --month-color:      #666;
+      --track-bg:         #444;
+      --track-active:     #5a8de0;
+      --thumb:            #bbb;
+      --thumb-active:     #fff;
+    }
+    html[data-theme="light"] {
+      --bg:               #fff;
+      --surface:          #fff;
+      --border:           #e0e0e0;
+      --border-subtle:    #eee;
+      --text:             #222;
+      --text-2:           #666;
+      --text-3:           #999;
+      --link:             #0066cc;
+      --link-hover:       #004499;
+      --tag-bg:           #f0f0f0;
+      --tag-color:        #555;
+      --month-color:      #555;
+      --track-bg:         #c8d8f0;
+      --track-active:     #0066cc;
+      --thumb:            #0066cc;
+      --thumb-active:     #fff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: var(--text); background: var(--bg); }
+    h1 { border-bottom: 2px solid var(--border); padding-bottom: .5rem; margin-bottom: .75rem; }
+    .top-bar { display: flex; align-items: center; margin-bottom: 1.5rem; }
+    .breadcrumb { flex: 1; font-size: .9rem; }
+    .breadcrumb a { color: var(--link); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--link-hover); }
+    h2.month { margin: 1.75rem 0 .75rem; font-size: 1rem; color: var(--month-color); text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--border-subtle); padding-bottom: .25rem; }
+    .card { border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: .75rem; background: var(--surface); }
+    .meta { font-size: .85rem; color: var(--text-2); margin-bottom: .4rem; }
+    .tag { display: inline-block; padding: .15rem .4rem; border-radius: 4px; font-size: .75rem; background: var(--tag-bg); color: var(--tag-color); margin-right: .4rem; }
     .card h3 { margin: .2rem 0 .5rem; font-size: 1rem; }
-    .card h3 a { color: #0066cc; text-decoration: none; }
-    .card h3 a:hover { text-decoration: underline; }
-    .summary { font-size: .9rem; line-height: 1.5; color: #444; }
-    footer { margin-top: 2rem; font-size: .8rem; color: #999; border-top: 1px solid #eee; padding-top: .75rem; }
+    .card h3 a { color: var(--link); text-decoration: none; }
+    .card h3 a:hover { color: var(--link-hover); text-decoration: underline; }
+    .summary { font-size: .9rem; line-height: 1.5; color: var(--text-2); }
+    footer { margin-top: 2rem; font-size: .8rem; color: var(--text-3); border-top: 1px solid var(--border-subtle); padding-top: .75rem; }
+
+    /* theme toggle */
+    .theme-toggle { display: flex; align-items: center; gap: .4rem; cursor: pointer; user-select: none; }
+    .theme-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .track { width: 38px; height: 21px; background: var(--track-bg); border-radius: 21px; position: relative; transition: background .2s; flex-shrink: 0; }
+    .track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 15px; height: 15px; border-radius: 50%; background: var(--thumb); transition: transform .2s, background .2s; }
+    .theme-toggle input:checked ~ .track { background: var(--track-active); }
+    .theme-toggle input:checked ~ .track::after { transform: translateX(17px); background: var(--thumb-active); }
+    .toggle-icon { font-size: .9rem; line-height: 1; }
   </style>
 </head>
 <body>
-  <div class="breadcrumb"><a href="../">← All Updates</a></div>
-  <h1>{{ company | capitalize }} Updates</h1>
+  <div class="top-bar">
+    <div class="breadcrumb"><a href="../">← All Updates</a></div>
+    <label class="theme-toggle" title="Toggle light/dark theme">
+      <input type="checkbox" id="theme-chk">
+      <span class="track"></span>
+      <span class="toggle-icon" id="theme-icon">☀</span>
+    </label>
+  </div>
+  <h1>{{ company | capitalize }} News & Blog Posts</h1>
 
   {% for month_label, records in grouped %}
   <h2 class="month">{{ month_label }}</h2>
@@ -43,5 +103,23 @@
   {% endfor %}
 
   <footer>Generated {{ generated_at }}</footer>
+
+  <script>
+    const chk = document.getElementById('theme-chk');
+    const icon = document.getElementById('theme-icon');
+    const saved = localStorage.getItem('theme') || 'dark';
+    if (saved === 'light') { chk.checked = true; icon.textContent = '🌙'; }
+    chk.addEventListener('change', function () {
+      if (this.checked) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        icon.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        icon.textContent = '☀';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
 </body>
 </html>

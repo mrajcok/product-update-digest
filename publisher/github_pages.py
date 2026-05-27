@@ -13,11 +13,19 @@ from storage.models import ArticleRecord, ScrapedPage
 logger = logging.getLogger(__name__)
 
 TEMPLATES_DIR = Path(__file__).parent / "templates"
-COMPANIES = ["cribl", "ocient"]
+COMPANIES = ["ocient", "cribl"]
+
+_COMPANY_ORDER = {c: i for i, c in enumerate(COMPANIES)}
 
 
 def _sort_key(record: ArticleRecord) -> str:
     return record.published_date or record.last_scraped_at or ""
+
+
+def _company_then_date(records: list[ArticleRecord]) -> list[ArticleRecord]:
+    """Sort by company order (COMPANIES list), then newest-first within each company."""
+    by_date = sorted(records, key=_sort_key, reverse=True)
+    return sorted(by_date, key=lambda r: _COMPANY_ORDER.get(r.company, 99))
 
 
 class GitHubPagesPublisher:
@@ -32,7 +40,7 @@ class GitHubPagesPublisher:
         all_records = self._db.get_all()
         ok_records = [r for r in all_records if r.status == "ok" and r.summary]
 
-        top_updates = sorted(ok_records, key=_sort_key, reverse=True)[:20]
+        top_updates = _company_then_date(ok_records)[:20]
 
         company_updates: dict[str, list[ArticleRecord]] = {
             c: sorted(
@@ -51,13 +59,17 @@ class GitHubPagesPublisher:
         pages: list[ScrapedPage],
         out_dir: Path,
         scraper_infos: list[dict] | None = None,
+        summaries: dict[str, str] | None = None,
     ) -> None:
         """Render index.html locally from scraped pages without pushing to GitHub."""
         records = [
-            ArticleRecord.from_scraped_page(p, summary="[dry run — summary not generated]")
+            ArticleRecord.from_scraped_page(
+                p,
+                summary=(summaries or {}).get(p.url, "[summary not generated]"),
+            )
             for p in pages
         ]
-        top_updates = sorted(records, key=_sort_key, reverse=True)[:20]
+        top_updates = _company_then_date(records)[:20]
         company_updates: dict[str, list[ArticleRecord]] = {
             c: sorted([r for r in records if r.company == c], key=_sort_key, reverse=True)
             for c in COMPANIES

@@ -6,7 +6,7 @@ When using any external library (e.g., LangChain, sqlite-vec, openai), use `chub
 ---
 
 ## Project Overview
-A daily cron job that scrapes Cribl and Ocient websites for product updates (blog posts, press releases, partnership announcements, product page changes), summarizes them via an LLM, publishes summaries to GitHub Pages, and stores them in a sqlite-vec vector database for later retrieval.
+A daily cron job that scrapes Cribl and Ocient websites for news and blog posts (blog posts, press releases, partnership announcements, product page changes), summarizes them via an LLM, publishes summaries to GitHub Pages, and stores them in a sqlite-vec vector database for later retrieval.
 
 ## Target Sites & Sections
 - **Cribl** (cribl.io): blog/news, press releases/partnerships, product pages

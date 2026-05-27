@@ -37,8 +37,7 @@ class CriblScraper(BaseScraper):
         *_PRODUCT_URLS,
     ]
     exclusions = [
-        *[f'blog URLs containing "{b}"' for b in _BLOG_BLOCKLIST],
-        "articles with sitemap lastmod older than MAX_ARTICLE_AGE_DAYS days",
+        *[f'blog URLs containing "{b}"' for b in _BLOG_BLOCKLIST]
     ]
 
     company = "cribl"

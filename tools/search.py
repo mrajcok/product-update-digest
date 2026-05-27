@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Interactive semantic search over the product updates vector store.
+Interactive semantic search over the news and blog posts vector store.
 
 Usage:
     .venv/bin/python tools/search.py
@@ -77,7 +77,7 @@ def _run(company_filter: str | None, n_results: int) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Semantic search over product updates")
+    parser = argparse.ArgumentParser(description="Semantic search over news and blog posts")
     parser.add_argument("--company", choices=["cribl", "ocient"], help="Filter to one company")
     parser.add_argument("--results", type=int, default=5, metavar="N", help="Number of results (default: 5)")
     args = parser.parse_args()

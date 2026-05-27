@@ -36,14 +36,18 @@ _BLOG_BLOCKLIST = ("employee-spotlight",)
 
 class OcientScraper(BaseScraper):
     company = "ocient"
+
+    def __init__(self) -> None:
+        super().__init__()
+        self._sitemap_lastmod: dict[str, str] = {}
+
     sources = [
         f"{_BLOG_SITEMAP_URL} — blog posts",
         f"{_NEWS_SITEMAP_URL} — press releases",
         *_PRODUCT_URLS,
     ]
     exclusions = [
-        *[f'blog URLs containing "{b}"' for b in _BLOG_BLOCKLIST],
-        "articles with sitemap lastmod older than MAX_ARTICLE_AGE_DAYS days",
+        *[f'blog URLs containing "{b}"' for b in _BLOG_BLOCKLIST]
     ]
 
     _user_agent = (
@@ -93,14 +97,16 @@ class OcientScraper(BaseScraper):
                 continue
             loc = loc_el.text.strip()
 
-            if cutoff is not None:
-                lastmod_el = url_el.find("sm:lastmod", ns)
-                if lastmod_el is not None and lastmod_el.text:
-                    try:
-                        if date.fromisoformat(lastmod_el.text[:10]) < cutoff:
-                            continue
-                    except ValueError:
-                        pass
+            lastmod_el = url_el.find("sm:lastmod", ns)
+            if lastmod_el is not None and lastmod_el.text:
+                lastmod_str = lastmod_el.text[:10]
+                try:
+                    if cutoff is not None and date.fromisoformat(lastmod_str) < cutoff:
+                        continue
+                except ValueError:
+                    lastmod_str = ""
+                if lastmod_str:
+                    self._sitemap_lastmod[loc] = lastmod_str
 
             urls.append(loc)
 
@@ -118,7 +124,7 @@ class OcientScraper(BaseScraper):
         html = self._fetch_page(url)
         soup = BeautifulSoup(html, "lxml")
         title = self._extract_title(soup)
-        published_date = self._extract_date(soup)
+        published_date = self._extract_date(soup) or self._sitemap_lastmod.get(url)
 
         content_html = ""
         for sel in _ARTICLE_CONTENT_SELS:

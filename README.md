@@ -1,6 +1,6 @@
 # product-update-digest
 
-A daily cron job that scrapes product updates from Cribl and Ocient (blog posts, press releases, product page changes), summarizes them with an LLM via [OpenRouter](https://openrouter.ai), publishes a static feed to GitHub Pages, and stores embeddings in a [sqlite-vec](https://github.com/asg017/sqlite-vec) vector database for retrieval by an AI assistant or the `tools/search.py` CLI.
+A daily cron job that scrapes news and blog posts from Cribl and Ocient (blog posts, press releases, product page changes), summarizes them with an LLM via [OpenRouter](https://openrouter.ai), publishes a static feed to GitHub Pages, and stores embeddings in a [sqlite-vec](https://github.com/asg017/sqlite-vec) vector database for retrieval by an AI assistant or the `tools/search.py` CLI.
 
 ## What it does
 
@@ -53,10 +53,11 @@ All configuration is via environment variables (`.env` file locally, system env 
 ```bash
 .venv/bin/python main.py                   # full run
 .venv/bin/python main.py --dry-run         # scrape only, no LLM calls or publishing
+.venv/bin/python main.py --dry-run --summarize  # scrape + free model summaries
 .venv/bin/python main.py --site cribl      # run one scraper only
 ```
 
-`--dry-run` also writes a local `data/dry-run/index.html` you can open in a browser to preview what was found.
+`--dry-run` writes a local `data/dry-run/index.html` you can open in a browser to preview what was found. Adding `--summarize` calls a free OpenRouter model (`OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL`, default: `meta-llama/llama-3.3-70b-instruct:free`) to populate the summary cards — the only requirement is a valid `OPENROUTER_API_KEY` in your `.env` (no billing needed for free-tier models).
 
 ## Semantic search
 
@@ -128,6 +129,8 @@ The `vec_items` table (and the `vec_embeddings` virtual table alongside it) stor
 Scrapers use the sitemap.xml files for URL discovery rather than scraping listing pages, which avoids JS-rendered pagination and gives reliable `lastmod` dates for pre-filtering old articles. All HTTP fetching uses httpx only — no headless browser needed.
 
 Vector storage uses sqlite-vec (a ~163KB SQLite extension) instead of a separate Chroma server. This eliminates the need for a running HTTP service and reduces the venv from ~500MB to ~260MB by dropping onnxruntime, numpy, kubernetes, and grpcio.
+
+Moving to uv dropped the .venv size to a mere 118 MB.
 
 ## License
 

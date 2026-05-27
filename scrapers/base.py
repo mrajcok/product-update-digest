@@ -45,7 +45,7 @@ class BaseScraper(ABC):
     # Public entry point
     # ------------------------------------------------------------------
 
-    def run(self, db: ArticleDB) -> list[ScrapedPage]:
+    def run(self, db: ArticleDB, limit: int | None = None) -> list[ScrapedPage]:
         """Discover URLs, deduplicate via SQLite, return pages needing summarization."""
         urls = self.discover_urls()
         if not urls:
@@ -59,6 +59,8 @@ class BaseScraper(ABC):
 
         results: list[ScrapedPage] = []
         for url, category in urls:
+            if limit is not None and len(results) >= limit:
+                break
             try:
                 page = self._process_url(url, category, db)
                 if page is not None:

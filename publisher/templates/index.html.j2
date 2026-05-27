@@ -3,38 +3,104 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Product Updates Feed</title>
+  <title>Ocient & Cribl News & Blog Posts</title>
+  <script>
+    if (localStorage.getItem('theme') === 'light')
+      document.documentElement.setAttribute('data-theme', 'light');
+  </script>
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; color: #222; }
-    h1 { border-bottom: 2px solid #ddd; padding-bottom: .5rem; }
-    nav { margin-bottom: 1.5rem; }
-    nav a { margin-right: 1rem; text-decoration: none; color: #0066cc; }
-    .card { border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
-    .meta { font-size: .85rem; color: #666; margin-bottom: .4rem; }
+    :root {
+      --bg:               #111;
+      --surface:          #1e1e1e;
+      --border:           #2e2e2e;
+      --border-subtle:    #252525;
+      --text:             #d4d4d4;
+      --text-2:           #888;
+      --text-3:           #555;
+      --link:             #7ab3f5;
+      --link-hover:       #a0c8ff;
+      --tag-bg:           #2a2a2a;
+      --tag-color:        #888;
+      --badge-cribl-bg:   #1b3558;
+      --badge-cribl-fg:   #7ab3f5;
+      --badge-ocient-bg:  #3a2200;
+      --badge-ocient-fg:  #f0a030;
+      --track-bg:         #444;
+      --track-active:     #5a8de0;
+      --thumb:            #bbb;
+      --thumb-active:     #fff;
+    }
+    html[data-theme="light"] {
+      --bg:               #fff;
+      --surface:          #fff;
+      --border:           #e0e0e0;
+      --border-subtle:    #eee;
+      --text:             #222;
+      --text-2:           #666;
+      --text-3:           #999;
+      --link:             #0066cc;
+      --link-hover:       #004499;
+      --tag-bg:           #f0f0f0;
+      --tag-color:        #555;
+      --badge-cribl-bg:   #e8f0fe;
+      --badge-cribl-fg:   #1a56db;
+      --badge-ocient-bg:  #fef3c7;
+      --badge-ocient-fg:  #92400e;
+      --track-bg:         #c8d8f0;
+      --track-active:     #0066cc;
+      --thumb:            #0066cc;
+      --thumb-active:     #fff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; color: var(--text); background: var(--bg); }
+    h1 { border-bottom: 2px solid var(--border); padding-bottom: .5rem; margin-bottom: 1rem; }
+    nav { display: flex; align-items: center; margin-bottom: 1.5rem; }
+    nav .links { display: flex; gap: 1rem; flex: 1; }
+    nav a { text-decoration: none; color: var(--link); }
+    nav a:hover { color: var(--link-hover); }
+    .card { border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: 1rem; background: var(--surface); }
+    .meta { font-size: .85rem; color: var(--text-2); margin-bottom: .4rem; }
     .badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .75rem; font-weight: 600; margin-right: .4rem; }
-    .badge-cribl  { background: #e8f0fe; color: #1a56db; }
-    .badge-ocient { background: #fef3c7; color: #92400e; }
-    .tag { display: inline-block; padding: .15rem .4rem; border-radius: 4px; font-size: .75rem; background: #f0f0f0; color: #555; margin-right: .4rem; }
+    .badge-cribl  { background: var(--badge-cribl-bg);  color: var(--badge-cribl-fg); }
+    .badge-ocient { background: var(--badge-ocient-bg); color: var(--badge-ocient-fg); }
+    .tag { display: inline-block; padding: .15rem .4rem; border-radius: 4px; font-size: .75rem; background: var(--tag-bg); color: var(--tag-color); margin-right: .4rem; }
     .card h2 { margin: .25rem 0 .5rem; font-size: 1.05rem; }
-    .card h2 a { color: #0066cc; text-decoration: none; }
-    .card h2 a:hover { text-decoration: underline; }
-    .summary { font-size: .9rem; line-height: 1.5; color: #444; }
-    footer { margin-top: 2rem; font-size: .8rem; color: #999; border-top: 1px solid #eee; padding-top: .75rem; }
-    .scraper-summary { margin-top: 2.5rem; border-top: 2px solid #ddd; padding-top: 1rem; }
-    .scraper-summary h2 { font-size: 1rem; color: #444; margin-bottom: 1rem; }
+    .card h2 a { color: var(--link); text-decoration: none; }
+    .card h2 a:hover { color: var(--link-hover); text-decoration: underline; }
+    .summary { font-size: .9rem; line-height: 1.5; color: var(--text-2); }
+    footer { margin-top: 2rem; font-size: .8rem; color: var(--text-3); border-top: 1px solid var(--border-subtle); padding-top: .75rem; }
+    .scraper-summary { margin-top: 2.5rem; border-top: 2px solid var(--border); padding-top: 1rem; }
+    .scraper-summary h2 { font-size: 1rem; color: var(--text-2); margin-bottom: 1rem; }
     .scraper-block { margin-bottom: 1.25rem; }
-    .scraper-block h3 { font-size: .9rem; font-weight: 600; color: #222; margin: 0 0 .35rem; text-transform: capitalize; }
-    .scraper-block ul { margin: 0 0 .5rem 1.25rem; padding: 0; font-size: .82rem; color: #555; }
+    .scraper-block h3 { font-size: .9rem; font-weight: 600; color: var(--text); margin: 0 0 .35rem; text-transform: capitalize; }
+    .scraper-block ul { margin: 0 0 .5rem 1.25rem; padding: 0; font-size: .82rem; color: var(--text-2); }
     .scraper-block li { margin-bottom: .2rem; }
-    .scraper-block .label { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: #888; margin: .4rem 0 .2rem; }
-    .excl { color: #b45309; }
+    .scraper-block .label { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--text-3); margin: .4rem 0 .2rem; }
+
+
+    /* theme toggle */
+    .theme-toggle { display: flex; align-items: center; gap: .4rem; cursor: pointer; user-select: none; }
+    .theme-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .track { width: 38px; height: 21px; background: var(--track-bg); border-radius: 21px; position: relative; transition: background .2s; flex-shrink: 0; }
+    .track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 15px; height: 15px; border-radius: 50%; background: var(--thumb); transition: transform .2s, background .2s; }
+    .theme-toggle input:checked ~ .track { background: var(--track-active); }
+    .theme-toggle input:checked ~ .track::after { transform: translateX(17px); background: var(--thumb-active); }
+    .toggle-icon { font-size: .9rem; line-height: 1; }
   </style>
 </head>
 <body>
-  <h1>Product Updates</h1>
+  <h1>Ocient & Cribl News & Blog Posts</h1>
   <nav>
-    <a href="cribl/">Cribl</a>
-    <a href="ocient/">Ocient</a>
+    <div class="links">
+      <a href="ocient/">Ocient</a>
+      <a href="cribl/">Cribl</a>
+    </div>
+    <label class="theme-toggle" title="Toggle light/dark theme">
+      <input type="checkbox" id="theme-chk">
+      <span class="track"></span>
+      <span class="toggle-icon" id="theme-icon">☀</span>
+    </label>
   </nav>
 
   {% for r in updates %}
@@ -73,5 +139,23 @@
   {% endif %}
 
   <footer>Generated {{ generated_at }}</footer>
+
+  <script>
+    const chk = document.getElementById('theme-chk');
+    const icon = document.getElementById('theme-icon');
+    const saved = localStorage.getItem('theme') || 'dark';
+    if (saved === 'light') { chk.checked = true; icon.textContent = '🌙'; }
+    chk.addEventListener('change', function () {
+      if (this.checked) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        icon.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        icon.textContent = '☀';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
 </body>
 </html>
