@@ -30,8 +30,8 @@ _PROMPT = ChatPromptTemplate.from_messages([
         "system",
         "You are a product intelligence analyst tracking two data-infrastructure "
         "companies (Cribl and Ocient) for a team of software engineers and architects. "
-        "Write summaries that help a busy reader decide in seconds whether the item "
-        "is relevant to them. Output only the summary text in markdown, without any commentary or explanation. "
+        "Write summaries that help a reader decide whether the item is relevant to them. "
+        "Output only the summary text in markdown, without any commentary or explanation. "
         "If the content is too long to summarize effectively, produce a concise summary of the most "
         "important details and include a note that the original content should be consulted for more information. ",
     ),

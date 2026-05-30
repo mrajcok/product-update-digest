@@ -45,7 +45,7 @@ class BaseScraper(ABC):
     # Public entry point
     # ------------------------------------------------------------------
 
-    def run(self, db: ArticleDB, limit: int | None = None) -> list[ScrapedPage]:
+    def run(self, db: ArticleDB, limit: int | None = None, category: str | None = None) -> list[ScrapedPage]:
         """Discover URLs, deduplicate via SQLite, return pages needing summarization."""
         urls = self.discover_urls()
         if not urls:
@@ -58,11 +58,13 @@ class BaseScraper(ABC):
         cutoff = (datetime.now(timezone.utc) - timedelta(days=settings.max_article_age_days)).date()
 
         results: list[ScrapedPage] = []
-        for url, category in urls:
+        for url, url_category in urls:
+            if category and url_category != category:
+                continue
             if limit is not None and len(results) >= limit:
                 break
             try:
-                page = self._process_url(url, category, db)
+                page = self._process_url(url, url_category, db)
                 if page is not None:
                     if _is_too_old(page.published_date, cutoff):
                         logger.debug(

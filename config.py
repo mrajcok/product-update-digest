@@ -29,6 +29,7 @@ class Settings(BaseSettings):
 
     log_level: str = "INFO"
     max_article_age_days: int = 30
+    index_page_limit: int = 10
 
 
 settings = Settings()  # type: ignore[call-arg]

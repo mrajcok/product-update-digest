@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ocient & Cribl News & Blog Posts</title>
+  <title>Cribl & Ocient News & Blog Posts</title>
   <script>
     if (localStorage.getItem('theme') === 'light')
       document.documentElement.setAttribute('data-theme', 'light');
@@ -55,21 +55,21 @@
     *, *::before, *::after { box-sizing: border-box; }
     body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; color: var(--text); background: var(--bg); }
     h1 { border-bottom: 2px solid var(--border); padding-bottom: .5rem; margin-bottom: 1rem; }
-    nav { display: flex; align-items: center; margin-bottom: 1.5rem; }
-    nav .links { display: flex; gap: 1rem; flex: 1; }
-    nav a { text-decoration: none; color: var(--link); }
-    nav a:hover { color: var(--link-hover); }
+    .top-bar { display: flex; align-items: center; margin-bottom: 1.5rem; }
+    .index-hint { flex: 1; font-size: .95rem; color: var(--text-2); margin: 0; }
+    .index-hint a { color: var(--link); text-decoration: none; }
+    .index-hint a:hover { color: var(--link-hover); }
     .card { border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: 1rem; background: var(--surface); }
     .meta { font-size: .85rem; color: var(--text-2); margin-bottom: .4rem; }
-    .badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .75rem; font-weight: 600; margin-right: .4rem; }
+    .badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .75rem; font-weight: 600; margin-right: .4rem; text-decoration: none; }
+    .badge:hover { opacity: .85; }
     .badge-cribl  { background: var(--badge-cribl-bg);  color: var(--badge-cribl-fg); }
     .badge-ocient { background: var(--badge-ocient-bg); color: var(--badge-ocient-fg); }
-    .tag { display: inline-block; padding: .15rem .4rem; border-radius: 4px; font-size: .75rem; background: var(--tag-bg); color: var(--tag-color); margin-right: .4rem; }
     .card h2 { margin: .25rem 0 .5rem; font-size: 1.05rem; }
     .card h2 a { color: var(--link); text-decoration: none; }
     .card h2 a:hover { color: var(--link-hover); text-decoration: underline; }
     .summary { font-size: .9rem; line-height: 1.5; color: var(--text-2); }
-    footer { margin-top: 2rem; font-size: .8rem; color: var(--text-3); border-top: 1px solid var(--border-subtle); padding-top: .75rem; }
+    .generated-at { font-size: .82rem; color: var(--text-3); margin: -.5rem 0 1.5rem; }
     .scraper-summary { margin-top: 2.5rem; border-top: 2px solid var(--border); padding-top: 1rem; }
     .scraper-summary h2 { font-size: 1rem; color: var(--text-2); margin-bottom: 1rem; }
     .scraper-block { margin-bottom: 1.25rem; }
@@ -90,25 +90,23 @@
   </style>
 </head>
 <body>
-  <h1>Ocient & Cribl News & Blog Posts</h1>
-  <nav>
-    <div class="links">
-      <a href="ocient/">Ocient</a>
-      <a href="cribl/">Cribl</a>
-    </div>
+  <h1>Cribl & Ocient News & Blog Posts</h1>
+  <p class="generated-at">Generated {{ generated_at }}</p>
+  <div class="top-bar">
+    <p class="index-hint">Showing the {{ index_page_limit }} most recent updates — see <a href="cribl/">Cribl</a> and <a href="ocient/">Ocient</a> for full history.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
       <input type="checkbox" id="theme-chk">
       <span class="track"></span>
       <span class="toggle-icon" id="theme-icon">☀</span>
     </label>
-  </nav>
+  </div>
 
   {% for r in updates %}
   <div class="card">
     <div class="meta">
-      <span class="badge badge-{{ r.company }}">{{ r.company | capitalize }}</span>
-      <span class="tag">{{ r.category | replace("_", " ") }}</span>
-      {% if r.published_date %}<span>{{ r.published_date }}</span>{% endif %}
+      <a href="{{ r.company }}/" class="badge badge-{{ r.company }}">{{ r.company | capitalize }}</a>
+      <span>{{ r.category | replace("_", " ") }}</span>
+      {% if r.published_date %}<span> · {{ r.published_date }}</span>{% endif %}
     </div>
     <h2><a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.title }}</a></h2>
     {% if r.summary %}
@@ -137,8 +135,6 @@
     {% endfor %}
   </section>
   {% endif %}
-
-  <footer>Generated {{ generated_at }}</footer>
 
   <script>
     const chk = document.getElementById('theme-chk');

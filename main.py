@@ -128,9 +128,9 @@ def _scraper_infos(scrapers: list) -> list[dict]:
     return [{"company": s.company, "sources": s.sources, "exclusions": s.exclusions} for s in scrapers]
 
 
-def _scrape_and_cache(scraper, db: ArticleDB, limit: int) -> list[ScrapedPage]:
+def _scrape_and_cache(scraper, db: ArticleDB, limit: int, category: str | None = None) -> list[ScrapedPage]:
     """Run scraper, persist each page to DB and article_text cache, return pages."""
-    pages = scraper.run(db, limit=limit)
+    pages = scraper.run(db, limit=limit, category=category)
     for page in pages:
         nurl = normalize_url(page.url)
         db.save_text(nurl, page.raw_text)
@@ -145,7 +145,7 @@ def _run_scrape(args: argparse.Namespace, db: ArticleDB) -> None:
     scrapers = _build_scrapers(args.site)
     all_pages: list[ScrapedPage] = []
     for scraper in scrapers:
-        pages = _scrape_and_cache(scraper, db, limit=args.limit)
+        pages = _scrape_and_cache(scraper, db, limit=args.limit, category=args.category)
         logger.info("[stage:scrape] %s: %d page(s) scraped", scraper.company, len(pages))
         for i, page in enumerate(pages, 1):
             preview = " ".join(page.raw_text.split())[:400]
@@ -183,7 +183,7 @@ def _run_summarize(args: argparse.Namespace, db: ArticleDB) -> None:
     records: list[ArticleRecord] = []
 
     for scraper in scrapers:
-        cached = db.latest_article_with_text(scraper.company)
+        cached = db.latest_article_with_text(scraper.company, category=args.category)
         if cached:
             raw_text = db.get_text(cached.normalized_url) or ""
             page = ScrapedPage(
@@ -197,7 +197,7 @@ def _run_summarize(args: argparse.Namespace, db: ArticleDB) -> None:
             logger.info("[stage:summarize] %s: using cached article %s", scraper.company, cached.url)
         else:
             logger.info("[stage:summarize] %s: no cached article — scraping %d", scraper.company, args.limit)
-            pages = _scrape_and_cache(scraper, db, limit=args.limit)
+            pages = _scrape_and_cache(scraper, db, limit=args.limit, category=args.category)
             if not pages:
                 logger.warning("[stage:summarize] %s: no pages found", scraper.company)
                 continue
@@ -226,9 +226,9 @@ def _run_vector(args: argparse.Namespace, db: ArticleDB) -> None:
 
     # Ensure each requested company has at least one cached article
     for scraper in scrapers:
-        if not db.latest_article_with_text(scraper.company):
+        if not db.latest_article_with_text(scraper.company, category=args.category):
             logger.info("[stage:vector] %s: no cached text — scraping %d", scraper.company, args.limit)
-            _scrape_and_cache(scraper, db, limit=args.limit)
+            _scrape_and_cache(scraper, db, limit=args.limit, category=args.category)
 
     # Rebuild vector store from all cached articles
     vec = VecClient()
@@ -237,7 +237,7 @@ def _run_vector(args: argparse.Namespace, db: ArticleDB) -> None:
     vec._conn.commit()
     logger.info("[stage:vector] cleared existing vector store")
 
-    all_records = db.get_all(company=args.site)
+    all_records = db.get_all(company=args.site, category=args.category)
     upserted = 0
     for record in all_records:
         raw_text = db.get_text(record.normalized_url)
@@ -264,15 +264,15 @@ def _run_vector(args: argparse.Namespace, db: ArticleDB) -> None:
     publisher.render_vector_preview(all_updates, _DRY_RUN_DIR)
 
 
-def _run_publish(args: argparse.Namespace, db: ArticleDB) -> None:
-    if not _DRY_RUN_DIR.exists() or not any(_DRY_RUN_DIR.rglob("*.html")):
-        logger.error(
-            "No rendered HTML found in %s. Run --stage summarize (or scrape/vector) first.",
-            _DRY_RUN_DIR,
-        )
-        sys.exit(1)
+def _run_render(args: argparse.Namespace, db: ArticleDB) -> None:
     publisher = GitHubPagesPublisher(db)
-    publisher.publish_from_dir(_DRY_RUN_DIR)
+    publisher.render_from_db(_DRY_RUN_DIR, _scraper_infos(_build_scrapers(args.site)))
+    logger.info("[stage:render] HTML written to %s — review, then run --stage publish", _DRY_RUN_DIR)
+
+
+def _run_publish(args: argparse.Namespace, db: ArticleDB) -> None:
+    publisher = GitHubPagesPublisher(db)
+    publisher.publish(_scraper_infos(_build_scrapers(args.site)))
 
 
 def _run_full_pipeline(args: argparse.Namespace, db: ArticleDB) -> None:
@@ -328,13 +328,14 @@ def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Scrape news and blog posts and publish to GitHub Pages")
     parser.add_argument(
         "--stage",
-        choices=["scrape", "summarize", "vector", "publish"],
+        choices=["scrape", "summarize", "vector", "render", "publish"],
         help=(
-            "Test one pipeline stage: "
+            "Run one pipeline stage: "
             "scrape (fetch + cache, render preview), "
-            "summarize (LLM summary from cache, render index), "
-            "vector (rebuild vec store from cache, render full-text listing), "
-            "publish (push data/dry-run/ HTML to GitHub Pages)"
+            "summarize (LLM summary from cache, render preview), "
+            "vector (rebuild vec store from cache, render preview), "
+            "render (render full site from DB to data/dry-run/ for review), "
+            "publish (rebuild full site from DB and push to GitHub Pages)"
         ),
     )
     parser.add_argument(
@@ -348,6 +349,11 @@ def _parse_args() -> argparse.Namespace:
         default=1,
         metavar="N",
         help="Max articles per company when scraping in stage mode (default: 1)",
+    )
+    parser.add_argument(
+        "--category",
+        choices=["blog", "press_release", "product"],
+        help="Filter to one article category (default: all)",
     )
     return parser.parse_args()
 
@@ -365,6 +371,8 @@ def main() -> None:
             _run_summarize(args, db)
         elif args.stage == "vector":
             _run_vector(args, db)
+        elif args.stage == "render":
+            _run_render(args, db)
         elif args.stage == "publish":
             _run_publish(args, db)
         else:

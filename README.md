@@ -47,6 +47,9 @@ All configuration is via environment variables (`.env` file locally, system env 
 | `GITHUB_REPO` | Target GitHub repo for Pages (e.g., `username/product-updates`) |
 | `GITHUB_PAGES_BRANCH` | Branch to publish to (default: `gh-pages`) |
 | `MAX_ARTICLE_AGE_DAYS` | How far back to index articles (default: `30`) |
+| `OLLAMA_BASE_URL` | Local Ollama server URL (e.g. `http://localhost:11434/v1`); when set, takes precedence over OpenRouter for summarization |
+| `OLLAMA_SUMMARIZATION_MODEL` | Ollama model for full-pipeline summarization (e.g. `gemma3:4b`) |
+| `OLLAMA_DRY_RUN_SUMMARIZATION_MODEL` | Ollama model for `--stage summarize`; defaults to `OLLAMA_SUMMARIZATION_MODEL` |
 
 ## Usage
 
@@ -66,14 +69,27 @@ Run one stage at a time with `--stage <name>`:
 | scrape | `uv run digest --stage scrape` | Fetches pages, caches text in SQLite, writes `data/dry-run/` scrape preview |
 | summarize | `uv run digest --stage summarize` | Calls LLM on cached articles, writes summary preview (uses `OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL`) |
 | vector | `uv run digest --stage vector` | Rebuilds sqlite-vec store from cached articles, writes full-text listing preview |
-| publish | `uv run digest --stage publish` | Pushes `data/dry-run/` HTML to GitHub Pages (requires prior stage output) |
+| render | `uv run digest --stage render` | Renders the full site from the DB to `data/dry-run/` for local review |
+| publish | `uv run digest --stage publish` | Rebuilds the full site from DB and pushes to GitHub Pages |
 
-`--stage summarize` uses `OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL` (default: `meta-llama/llama-3.3-70b-instruct:free`) — free-tier models require a valid `OPENROUTER_API_KEY` but no billing.
+The `scrape`, `summarize`, and `vector` stages write **preview** HTML to `data/dry-run/` showing only the articles processed in that run — they are not suitable for publishing directly. Use `--stage render` to generate a full preview of the site as it would appear on GitHub Pages, then `--stage publish` to push it. `--stage render` is also useful as a recovery tool if the published pages ever get into a bad state.
 
-Use `--limit N` (default: 1) to control how many articles per company are scraped in stage mode:
+`--stage summarize` uses `OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL` (set in `.env`, e.g. `google/gemma-4-26b-a4b-it:free`) — free-tier models require a valid `OPENROUTER_API_KEY` but no billing. Alternatively, set `OLLAMA_BASE_URL` to use a local model instead.
+
+Use `--limit N` (default: 1) to control how many articles per company are scraped in stage mode.
+
+Use `--category` to filter by article type — useful for checking whether summaries look right for each category:
+
+| Value | Description |
+|---|---|
+| `blog` | Blog posts |
+| `press_release` | Press releases |
+| `product` | Product page changes |
 
 ```bash
 uv run digest --stage scrape --limit 5 --site ocient
+uv run digest --stage summarize --category press_release
+uv run digest --stage summarize --category blog --site cribl
 ```
 
 ## Semantic search
@@ -90,7 +106,7 @@ uv run python tools/search.py --results 10
 make test
 ```
 
-59 tests, no external services required (SQLite uses in-memory DB; HTTP calls are mocked).
+82 tests, no external services required (SQLite uses in-memory DB; HTTP calls are mocked).
 
 ## Deployment
 
@@ -115,7 +131,7 @@ storage/
 publisher/
   github_pages.py              # Jinja2 HTML rendering + git push to gh-pages
   templates/
-    index.html.j2              # top 20 updates across all companies
+    index.html.j2              # top N updates across all companies (INDEX_PAGE_LIMIT)
     company_index.html.j2      # full history for one company, grouped by month
 tools/
   search.py                    # CLI for semantic search over the vector store

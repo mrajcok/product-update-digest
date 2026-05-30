@@ -2,6 +2,7 @@ import logging
 import shutil
 import tempfile
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 from git import Repo
@@ -17,17 +18,8 @@ logger = logging.getLogger(__name__)
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 COMPANIES = ["ocient", "cribl"]
 
-_COMPANY_ORDER = {c: i for i, c in enumerate(COMPANIES)}
-
-
 def _sort_key(record: ArticleRecord) -> str:
     return record.published_date or record.last_scraped_at or ""
-
-
-def _company_then_date(records: list[ArticleRecord]) -> list[ArticleRecord]:
-    """Sort by company order (COMPANIES list), then newest-first within each company."""
-    by_date = sorted(records, key=_sort_key, reverse=True)
-    return sorted(by_date, key=lambda r: _COMPANY_ORDER.get(r.company, 99))
 
 
 class GitHubPagesPublisher:
@@ -43,7 +35,8 @@ class GitHubPagesPublisher:
         all_records = self._db.get_all()
         ok_records = [r for r in all_records if r.status == "ok" and r.summary]
 
-        top_updates = _company_then_date(ok_records)[:20]
+        from config import settings
+        top_updates = sorted(ok_records, key=_sort_key, reverse=True)[:settings.index_page_limit]
 
         company_updates: dict[str, list[ArticleRecord]] = {
             c: sorted(
@@ -57,18 +50,19 @@ class GitHubPagesPublisher:
         html_files = self._render(top_updates, company_updates, scraper_infos)
         self._push_to_github(html_files)
 
-    def publish_from_dir(self, in_dir: Path) -> None:
-        """Push HTML files from in_dir to GitHub Pages without re-rendering."""
-        html_files: dict[str, str] = {}
-        for path in in_dir.rglob("*.html"):
-            rel = str(path.relative_to(in_dir))
-            html_files[rel] = path.read_text(encoding="utf-8")
-        if not html_files:
-            raise FileNotFoundError(
-                f"No rendered HTML found in {in_dir}. "
-                "Run --stage summarize (or scrape/vector) first."
-            )
-        self._push_to_github(html_files)
+    def render_from_db(self, out_dir: Path, scraper_infos: list[dict] | None = None) -> None:
+        """Render all pages from the full DB state to out_dir (no push)."""
+        from config import settings
+        all_records = self._db.get_all()
+        ok_records = [r for r in all_records if r.status == "ok" and r.summary]
+        top_updates = sorted(ok_records, key=_sort_key, reverse=True)[:settings.index_page_limit]
+        company_updates: dict[str, list[ArticleRecord]] = {
+            c: sorted([r for r in ok_records if r.company == c], key=_sort_key, reverse=True)
+            for c in COMPANIES
+        }
+        html_files = self._render(top_updates, company_updates, scraper_infos)
+        self._write_to_dir(html_files, out_dir)
+        logger.info("Rendered %d record(s) from DB to %s", len(ok_records), out_dir)
 
     def render_scrape_preview(
         self,
@@ -77,11 +71,12 @@ class GitHubPagesPublisher:
         scraper_infos: list[dict] | None = None,
     ) -> None:
         """Render scraped-page preview (no summaries) to out_dir."""
+        from config import settings
         records = [
             ArticleRecord.from_scraped_page(p, summary="[summary not generated]")
             for p in pages
         ]
-        top_updates = _company_then_date(records)[:20]
+        top_updates = sorted(records, key=_sort_key, reverse=True)[:settings.index_page_limit]
         company_updates: dict[str, list[ArticleRecord]] = {
             c: sorted([r for r in records if r.company == c], key=_sort_key, reverse=True)
             for c in COMPANIES
@@ -97,7 +92,8 @@ class GitHubPagesPublisher:
         scraper_infos: list[dict] | None = None,
     ) -> None:
         """Render index using production templates from already-summarized DB records."""
-        top_updates = _company_then_date(records)[:20]
+        from config import settings
+        top_updates = sorted(records, key=_sort_key, reverse=True)[:settings.index_page_limit]
         company_updates: dict[str, list[ArticleRecord]] = {
             c: sorted([r for r in records if r.company == c], key=_sort_key, reverse=True)
             for c in COMPANIES
@@ -115,7 +111,7 @@ class GitHubPagesPublisher:
         tmpl = self._env.get_template("vector_preview.html.j2")
         html = tmpl.render(
             updates=updates,
-            generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+            generated_at=datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d %I:%M %p %Z"),
         )
         self._write_to_dir({"index.html": html}, out_dir)
         logger.info("[stage:vector] HTML written to %s/index.html", out_dir)
@@ -129,9 +125,11 @@ class GitHubPagesPublisher:
         files: dict[str, str] = {}
 
         index_tmpl = self._env.get_template("index.html.j2")
+        from config import settings
         files["index.html"] = index_tmpl.render(
             updates=top_updates,
-            generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+            index_page_limit=settings.index_page_limit,
+            generated_at=datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d %I:%M %p %Z"),
             scraper_infos=scraper_infos or [],
         )
 
@@ -141,7 +139,7 @@ class GitHubPagesPublisher:
             files[f"{company}/index.html"] = company_tmpl.render(
                 company=company,
                 grouped=grouped,
-                generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+                generated_at=datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d %I:%M %p %Z"),
             )
 
         return files

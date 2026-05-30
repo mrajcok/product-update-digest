@@ -126,28 +126,36 @@ class ArticleDB:
         self._conn.execute("DELETE FROM article_text WHERE normalized_url = ?", (normalized_url,))
         self._conn.commit()
 
-    def latest_article_with_text(self, company: str) -> ArticleRecord | None:
+    def latest_article_with_text(self, company: str, category: str | None = None) -> ArticleRecord | None:
         """Return the most recently published article for company that has cached raw_text."""
+        clause = "WHERE sa.company = ?"
+        params: list = [company]
+        if category:
+            clause += " AND sa.category = ?"
+            params.append(category)
         row = self._conn.execute(
-            """SELECT sa.* FROM scraped_articles sa
+            f"""SELECT sa.* FROM scraped_articles sa
                JOIN article_text at ON at.normalized_url = sa.normalized_url
-               WHERE sa.company = ?
+               {clause}
                ORDER BY COALESCE(sa.published_date, sa.last_scraped_at) DESC
                LIMIT 1""",
-            (company,),
+            params,
         ).fetchone()
         return _row_to_record(row) if row else None
 
-    def get_all(self, company: str | None = None) -> list[ArticleRecord]:
+    def get_all(self, company: str | None = None, category: str | None = None) -> list[ArticleRecord]:
+        clauses, params = [], []
         if company:
-            rows = self._conn.execute(
-                "SELECT * FROM scraped_articles WHERE company = ? ORDER BY last_scraped_at DESC",
-                (company,),
-            ).fetchall()
-        else:
-            rows = self._conn.execute(
-                "SELECT * FROM scraped_articles ORDER BY last_scraped_at DESC"
-            ).fetchall()
+            clauses.append("company = ?")
+            params.append(company)
+        if category:
+            clauses.append("category = ?")
+            params.append(category)
+        where = ("WHERE " + " AND ".join(clauses)) if clauses else ""
+        rows = self._conn.execute(
+            f"SELECT * FROM scraped_articles {where} ORDER BY last_scraped_at DESC",
+            params,
+        ).fetchall()
         return [_row_to_record(r) for r in rows]
 
     def close(self) -> None:
