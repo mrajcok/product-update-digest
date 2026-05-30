@@ -16,8 +16,8 @@ build/
 # Logs
 logs/*.log
 
-# SQLite database
-data/*.db
+# Runtime data (database, dry-run output)
+data/
 
 # Testing
 .pytest_cache/
