@@ -11,10 +11,11 @@ class Settings(BaseSettings):
     )
 
     openrouter_api_key: str = "dummy"
-    openrouter_summarization_model: str = "anthropic/claude-sonnet-4-5"
+    openrouter_summarization_model: str = "google/gemma-3-27b-it"
     openrouter_dry_run_summarization_model: str = "dummy"
-    openrouter_embedding_model: str = "openai/text-embedding-3-small"
-    embedding_dimensions: int = 1536
+    openrouter_embedding_model: str = "qwen/qwen3-embedding-8b"
+    # qwen3-embedding-8b produces 4096-dim vectors; update this if you switch models
+    embedding_dimensions: int = 4096
 
     # Ollama local server (overrides OpenRouter for summarization when set)
     ollama_base_url: str = ""

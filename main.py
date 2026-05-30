@@ -18,6 +18,7 @@ from summarizer import Summarizer
 logger = logging.getLogger(__name__)
 
 _DRY_RUN_DIR = Path("data/dry-run")
+_VEC_TEST_DB  = _DRY_RUN_DIR / "vec_test.db"
 
 
 # ---------------------------------------------------------------------------
@@ -230,16 +231,14 @@ def _run_vector(args: argparse.Namespace, db: ArticleDB) -> None:
             logger.info("[stage:vector] %s: no cached text — scraping %d", scraper.company, args.limit)
             _scrape_and_cache(scraper, db, limit=args.limit, category=args.category)
 
-    # Rebuild vector store from all cached articles
-    vec = VecClient()
-    vec._conn.execute("DELETE FROM vec_items")
-    vec._conn.execute("DELETE FROM vec_embeddings")
-    vec._conn.commit()
-    logger.info("[stage:vector] cleared existing vector store")
+    # Write to a temp store — never touch the production vector store
+    _DRY_RUN_DIR.mkdir(parents=True, exist_ok=True)
+    _VEC_TEST_DB.unlink(missing_ok=True)
+    vec = VecClient(str(_VEC_TEST_DB))
 
-    all_records = db.get_all(company=args.site, category=args.category)
+    records = db.get_all(company=args.site, category=args.category)
     upserted = 0
-    for record in all_records:
+    for record in records:
         raw_text = db.get_text(record.normalized_url)
         if not raw_text:
             continue
@@ -252,14 +251,17 @@ def _run_vector(args: argparse.Namespace, db: ArticleDB) -> None:
             published_date=record.published_date,
         )
         update = ProductUpdate.from_scraped_page(page, summary=record.summary)
-        vid = vec_id_for(record.url)
-        vec.upsert(update, vid)
+        vec.upsert(update, vec_id_for(record.url))
         upserted += 1
 
     vec.close()
-    logger.info("[stage:vector] indexed %d document(s) — run: python tools/search.py", upserted)
+    logger.info(
+        "[stage:vector] indexed %d document(s) in temp store %s — "
+        "search with: uv run python tools/search.py --temp",
+        upserted, _VEC_TEST_DB,
+    )
 
-    all_updates = VecClient().get_all(company=args.site)
+    all_updates = VecClient(str(_VEC_TEST_DB)).get_all(company=args.site)
     publisher = GitHubPagesPublisher(db)
     publisher.render_vector_preview(all_updates, _DRY_RUN_DIR)
 

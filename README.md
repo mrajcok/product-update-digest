@@ -6,7 +6,7 @@ A daily cron job that scrapes news and blog posts from Cribl and Ocient (blog po
 
 1. **Scrapes** Cribl and Ocient websites for new or changed content
 2. **Deduplicates** using SQLite — skips unchanged content via URL tracking and SHA-256 content hashing
-3. **Summarizes** each new item using a configurable LLM (default: `anthropic/claude-sonnet-4-5` via OpenRouter)
+3. **Summarizes** each new item using a configurable LLM (default: `google/gemma-3-27b-it` via OpenRouter)
 4. **Stores** summaries and vector embeddings in sqlite-vec for semantic search
 5. **Publishes** a static HTML digest to GitHub Pages
 
@@ -39,9 +39,9 @@ All configuration is via environment variables (`.env` file locally, system env 
 | Variable | Description |
 |---|---|
 | `OPENROUTER_API_KEY` | OpenRouter API key |
-| `OPENROUTER_SUMMARIZATION_MODEL` | LLM for summaries (default: `anthropic/claude-sonnet-4-5`) |
-| `OPENROUTER_EMBEDDING_MODEL` | Embedding model (default: `openai/text-embedding-3-small`) |
-| `EMBEDDING_DIMENSIONS` | Vector dimensions matching the embedding model (default: `1536`) |
+| `OPENROUTER_SUMMARIZATION_MODEL` | LLM for summaries (default: `google/gemma-3-27b-it`) |
+| `OPENROUTER_EMBEDDING_MODEL` | Embedding model (default: `qwen/qwen3-embedding-8b`) |
+| `EMBEDDING_DIMENSIONS` | Vector dimensions matching the embedding model (default: `4096`) |
 | `SQLITE_DB_PATH` | Path to SQLite database (default: `data/product_updates.db`) |
 | `GITHUB_TOKEN` | GitHub PAT for pushing to gh-pages |
 | `GITHUB_REPO` | Target GitHub repo for Pages (e.g., `username/product-updates`) |
@@ -50,6 +50,34 @@ All configuration is via environment variables (`.env` file locally, system env 
 | `OLLAMA_BASE_URL` | Local Ollama server URL (e.g. `http://localhost:11434/v1`); when set, takes precedence over OpenRouter for summarization |
 | `OLLAMA_SUMMARIZATION_MODEL` | Ollama model for full-pipeline summarization (e.g. `gemma3:4b`) |
 | `OLLAMA_DRY_RUN_SUMMARIZATION_MODEL` | Ollama model for `--stage summarize`; defaults to `OLLAMA_SUMMARIZATION_MODEL` |
+
+### Model recommendations
+As of 2026-06, evaluated by Claude Sonnet 4.6.
+
+**Summarization** (`OPENROUTER_SUMMARIZATION_MODEL` / `OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL`):
+
+| Model | Input | Output | Notes |
+|---|---|---|---|
+| `google/gemma-4-26b-a4b-it:free` | free | free | Rate-limited; good for dry-run testing |
+| `google/gemma-3-12b-it` | $0.04/M | $0.13/M | Budget pick; solid quality |
+| `google/gemma-3-27b-it` | $0.08/M | $0.16/M | **Best bang-for-buck; default** |
+| `deepseek/deepseek-v4-flash` | $0.10/M | $0.20/M | Fast; 1M context window |
+| `deepseek/deepseek-v3.2` | $0.25/M | $0.38/M | Higher quality step-up |
+| `anthropic/claude-haiku-4-5` | ~$1/M | ~$5/M | Reference point; 6–30× pricier than Gemma |
+
+**Expected cost with `google/gemma-3-27b-it`:** a typical article (2,000 token input, 300 token output) costs roughly $0.0002. At 5 new articles per day that's ~$0.001/day or **under $0.04/month**. A full corpus re-summarization of 300 articles costs about $0.06 total.
+
+**Embeddings** (`OPENROUTER_EMBEDDING_MODEL` / `EMBEDDING_DIMENSIONS`):
+
+| Model | Price | Dimensions | Notes |
+|---|---|---|---|
+| `qwen/qwen3-embedding-8b` | $0.01/M | 4096 | **#1 MTEB multilingual leaderboard; default** |
+| `openai/text-embedding-3-small` | $0.02/M | 1536 | Well-tested; former default |
+| `openai/text-embedding-3-large` | $0.13/M | 3072 | OpenAI's best; diminishing returns here |
+
+**Expected cost with `qwen/qwen3-embedding-8b`:** embedding a corpus of 300 articles (~450K tokens total) costs less than $0.01. Ongoing daily cost rounds to zero.
+
+> **Note:** switching embedding models requires re-embedding your entire vector store since vector dimensions must be consistent. Drop the `vec_items` and `vec_embeddings` tables and re-run the full pipeline.
 
 ## Usage
 
@@ -68,7 +96,7 @@ Run one stage at a time with `--stage <name>`:
 |---|---|---|
 | scrape | `uv run digest --stage scrape` | Fetches pages, caches text in SQLite, writes `data/dry-run/` scrape preview |
 | summarize | `uv run digest --stage summarize` | Calls LLM on cached articles, writes summary preview (uses `OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL`) |
-| vector | `uv run digest --stage vector` | Rebuilds sqlite-vec store from cached articles, writes full-text listing preview |
+| vector | `uv run digest --stage vector` | Embeds a small sample into a temp store (`data/dry-run/vec_test.db`), writes full-text listing preview |
 | render | `uv run digest --stage render` | Renders the full site from the DB to `data/dry-run/` for local review |
 | publish | `uv run digest --stage publish` | Rebuilds the full site from DB and pushes to GitHub Pages |
 
@@ -95,9 +123,11 @@ uv run digest --stage summarize --category blog --site cribl
 ## Semantic search
 
 ```bash
-uv run python tools/search.py
+uv run python tools/search.py                        # search production store
 uv run python tools/search.py --company cribl
 uv run python tools/search.py --results 10
+uv run python tools/search.py --temp                 # search --stage vector dry-run store
+uv run python tools/search.py --temp --company cribl
 ```
 
 ## Running tests
