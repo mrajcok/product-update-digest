@@ -1,5 +1,6 @@
 import logging
 import sqlite3
+from datetime import datetime, timezone
 from pathlib import Path
 
 from storage.models import ArticleRecord, normalize_url
@@ -24,6 +25,12 @@ CREATE TABLE IF NOT EXISTS scraped_articles (
 );
 CREATE INDEX IF NOT EXISTS idx_company       ON scraped_articles(company);
 CREATE INDEX IF NOT EXISTS idx_last_scraped  ON scraped_articles(last_scraped_at);
+CREATE TABLE IF NOT EXISTS article_text (
+    normalized_url  TEXT PRIMARY KEY,
+    raw_text        TEXT NOT NULL,
+    fetched_at      TEXT NOT NULL,
+    FOREIGN KEY (normalized_url) REFERENCES scraped_articles(normalized_url) ON DELETE CASCADE
+);
 """
 
 _UPSERT_SQL = """
@@ -98,6 +105,38 @@ class ArticleDB:
         self._conn.execute(_UPSERT_SQL, record.model_dump())
         self._conn.commit()
         logger.debug("DB upsert: url=%s status=%s", record.url, record.status)
+
+    def save_text(self, normalized_url: str, raw_text: str) -> None:
+        fetched_at = datetime.now(timezone.utc).isoformat()
+        self._conn.execute(
+            """INSERT INTO article_text (normalized_url, raw_text, fetched_at)
+               VALUES (?, ?, ?)
+               ON CONFLICT(normalized_url) DO UPDATE SET raw_text = excluded.raw_text, fetched_at = excluded.fetched_at""",
+            (normalized_url, raw_text, fetched_at),
+        )
+        self._conn.commit()
+
+    def get_text(self, normalized_url: str) -> str | None:
+        row = self._conn.execute(
+            "SELECT raw_text FROM article_text WHERE normalized_url = ?", (normalized_url,)
+        ).fetchone()
+        return row["raw_text"] if row else None
+
+    def delete_text(self, normalized_url: str) -> None:
+        self._conn.execute("DELETE FROM article_text WHERE normalized_url = ?", (normalized_url,))
+        self._conn.commit()
+
+    def latest_article_with_text(self, company: str) -> ArticleRecord | None:
+        """Return the most recently published article for company that has cached raw_text."""
+        row = self._conn.execute(
+            """SELECT sa.* FROM scraped_articles sa
+               JOIN article_text at ON at.normalized_url = sa.normalized_url
+               WHERE sa.company = ?
+               ORDER BY COALESCE(sa.published_date, sa.last_scraped_at) DESC
+               LIMIT 1""",
+            (company,),
+        ).fetchone()
+        return _row_to_record(row) if row else None
 
     def get_all(self, company: str | None = None) -> list[ArticleRecord]:
         if company:

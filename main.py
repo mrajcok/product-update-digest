@@ -11,11 +11,43 @@ from publisher.github_pages import GitHubPagesPublisher
 from scrapers.cribl import CriblScraper
 from scrapers.ocient import OcientScraper
 from storage.db import ArticleDB
-from storage.models import ArticleRecord, ProductUpdate, vec_id_for
+from storage.models import ArticleRecord, ProductUpdate, ScrapedPage, normalize_url, vec_id_for
 from storage.vec_client import VecClient
 from summarizer import Summarizer
 
 logger = logging.getLogger(__name__)
+
+_DRY_RUN_DIR = Path("data/dry-run")
+
+
+# ---------------------------------------------------------------------------
+# Model availability checks
+# ---------------------------------------------------------------------------
+
+def _assert_ollama_available(model: str) -> None:
+    """Exit with a clear error if Ollama is not reachable or the model is not available."""
+    base_url = settings.ollama_base_url.rstrip("/")
+    try:
+        resp = httpx.get(f"{base_url}/models", timeout=5.0)
+    except Exception as exc:
+        logger.error(
+            "Cannot reach Ollama at %s: %s\n"
+            "Ensure Ollama is running (ollama serve) on port 11434 by default.",
+            base_url, exc,
+        )
+        sys.exit(1)
+
+    if not resp.is_success:
+        logger.error("Ollama server at %s returned HTTP %d.", base_url, resp.status_code)
+        sys.exit(1)
+
+    available = [m["id"] for m in resp.json().get("data", [])]
+    if available and model not in available:
+        logger.error(
+            "Model %r not found in Ollama.\nAvailable model(s): %s\nRun: ollama pull %s",
+            model, ", ".join(available), model,
+        )
+        sys.exit(1)
 
 
 def _assert_model_available(model_id: str) -> None:
@@ -39,7 +71,6 @@ def _assert_model_available(model_id: str) -> None:
     if resp.status_code == 200:
         return
 
-    # Fetch the curated suggestion list only on failure
     _FREE_PREFIXES = ("google/", "meta-llama/", "mistralai/")
     suggestions: list[str] = []
     try:
@@ -69,22 +100,254 @@ def _assert_model_available(model_id: str) -> None:
     sys.exit(1)
 
 
+def _make_summarizer(dry_run: bool) -> Summarizer:
+    if settings.ollama_base_url:
+        model = (
+            settings.ollama_dry_run_summarization_model or settings.ollama_summarization_model
+            if dry_run
+            else settings.ollama_summarization_model
+        )
+        return Summarizer(model=model, base_url=settings.ollama_base_url, api_key="ollama")
+    return Summarizer(model=settings.openrouter_dry_run_summarization_model if dry_run else None)
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def _build_scrapers(site: str | None) -> list:
+    scrapers = []
+    if site in (None, "ocient"):
+        scrapers.append(OcientScraper())
+    if site in (None, "cribl"):
+        scrapers.append(CriblScraper())
+    return scrapers
+
+
+def _scraper_infos(scrapers: list) -> list[dict]:
+    return [{"company": s.company, "sources": s.sources, "exclusions": s.exclusions} for s in scrapers]
+
+
+def _scrape_and_cache(scraper, db: ArticleDB, limit: int) -> list[ScrapedPage]:
+    """Run scraper, persist each page to DB and article_text cache, return pages."""
+    pages = scraper.run(db, limit=limit)
+    for page in pages:
+        nurl = normalize_url(page.url)
+        db.save_text(nurl, page.raw_text)
+    return pages
+
+
+# ---------------------------------------------------------------------------
+# Stage runners
+# ---------------------------------------------------------------------------
+
+def _run_scrape(args: argparse.Namespace, db: ArticleDB) -> None:
+    scrapers = _build_scrapers(args.site)
+    all_pages: list[ScrapedPage] = []
+    for scraper in scrapers:
+        pages = _scrape_and_cache(scraper, db, limit=args.limit)
+        logger.info("[stage:scrape] %s: %d page(s) scraped", scraper.company, len(pages))
+        for i, page in enumerate(pages, 1):
+            preview = " ".join(page.raw_text.split())[:400]
+            if page.published_date:
+                try:
+                    age_days = (date.today() - date.fromisoformat(page.published_date)).days
+                    age_str = f"{age_days}d ago"
+                except ValueError:
+                    age_str = "unknown age"
+            else:
+                age_str = "unknown age"
+            logger.info(
+                "[stage:scrape] [%d/%d] %s | %s | %s | %s\n  Title: %s\n  URL:   %s\n  Text (%s chars): %s%s",
+                i, len(pages), page.company, page.category,
+                page.published_date or "no date", age_str,
+                page.title, page.url,
+                f"{len(page.raw_text):,}",
+                preview, "…" if len(page.raw_text) > 400 else "",
+            )
+        all_pages.extend(pages)
+
+    publisher = GitHubPagesPublisher(db)
+    publisher.render_scrape_preview(all_pages, _DRY_RUN_DIR, _scraper_infos(scrapers))
+
+
+def _run_summarize(args: argparse.Namespace, db: ArticleDB) -> None:
+    if settings.ollama_base_url:
+        model = settings.ollama_dry_run_summarization_model or settings.ollama_summarization_model
+        _assert_ollama_available(model)
+    else:
+        _assert_model_available(settings.openrouter_dry_run_summarization_model)
+
+    scrapers = _build_scrapers(args.site)
+    summarizer = _make_summarizer(dry_run=True)
+    records: list[ArticleRecord] = []
+
+    for scraper in scrapers:
+        cached = db.latest_article_with_text(scraper.company)
+        if cached:
+            raw_text = db.get_text(cached.normalized_url) or ""
+            page = ScrapedPage(
+                url=cached.url,
+                company=cached.company,
+                category=cached.category,
+                title=cached.title,
+                raw_text=raw_text,
+                published_date=cached.published_date,
+            )
+            logger.info("[stage:summarize] %s: using cached article %s", scraper.company, cached.url)
+        else:
+            logger.info("[stage:summarize] %s: no cached article — scraping %d", scraper.company, args.limit)
+            pages = _scrape_and_cache(scraper, db, limit=args.limit)
+            if not pages:
+                logger.warning("[stage:summarize] %s: no pages found", scraper.company)
+                continue
+            page = pages[0]
+
+        logger.info("[stage:summarize] summarizing %s", page.url)
+        summary = summarizer.summarize(page)
+
+        # Persist summary back to DB
+        existing = db.get_by_url(page.url)
+        record = ArticleRecord.from_scraped_page(
+            page,
+            vec_id=existing.vec_id if existing else None,
+            first_scraped_at=existing.first_scraped_at if existing else None,
+            summary=summary,
+        )
+        db.upsert(record)
+        records.append(record)
+
+    publisher = GitHubPagesPublisher(db)
+    publisher.render_summary_preview(records, _DRY_RUN_DIR, _scraper_infos(scrapers))
+
+
+def _run_vector(args: argparse.Namespace, db: ArticleDB) -> None:
+    scrapers = _build_scrapers(args.site)
+
+    # Ensure each requested company has at least one cached article
+    for scraper in scrapers:
+        if not db.latest_article_with_text(scraper.company):
+            logger.info("[stage:vector] %s: no cached text — scraping %d", scraper.company, args.limit)
+            _scrape_and_cache(scraper, db, limit=args.limit)
+
+    # Rebuild vector store from all cached articles
+    vec = VecClient()
+    vec._conn.execute("DELETE FROM vec_items")
+    vec._conn.execute("DELETE FROM vec_embeddings")
+    vec._conn.commit()
+    logger.info("[stage:vector] cleared existing vector store")
+
+    all_records = db.get_all(company=args.site)
+    upserted = 0
+    for record in all_records:
+        raw_text = db.get_text(record.normalized_url)
+        if not raw_text:
+            continue
+        page = ScrapedPage(
+            url=record.url,
+            company=record.company,
+            category=record.category,
+            title=record.title,
+            raw_text=raw_text,
+            published_date=record.published_date,
+        )
+        update = ProductUpdate.from_scraped_page(page, summary=record.summary)
+        vid = vec_id_for(record.url)
+        vec.upsert(update, vid)
+        upserted += 1
+
+    vec.close()
+    logger.info("[stage:vector] indexed %d document(s) — run: python tools/search.py", upserted)
+
+    all_updates = VecClient().get_all(company=args.site)
+    publisher = GitHubPagesPublisher(db)
+    publisher.render_vector_preview(all_updates, _DRY_RUN_DIR)
+
+
+def _run_publish(args: argparse.Namespace, db: ArticleDB) -> None:
+    if not _DRY_RUN_DIR.exists() or not any(_DRY_RUN_DIR.rglob("*.html")):
+        logger.error(
+            "No rendered HTML found in %s. Run --stage summarize (or scrape/vector) first.",
+            _DRY_RUN_DIR,
+        )
+        sys.exit(1)
+    publisher = GitHubPagesPublisher(db)
+    publisher.publish_from_dir(_DRY_RUN_DIR)
+
+
+def _run_full_pipeline(args: argparse.Namespace, db: ArticleDB) -> None:
+    if settings.ollama_base_url:
+        _assert_ollama_available(settings.ollama_summarization_model)
+    else:
+        _assert_model_available(settings.openrouter_summarization_model)
+
+    scrapers = _build_scrapers(args.site)
+    summarizer = _make_summarizer(dry_run=False)
+    vec = VecClient()
+    publisher = GitHubPagesPublisher(db)
+    new_updates: list[ProductUpdate] = []
+
+    for scraper in scrapers:
+        pages = scraper.run(db)
+        logger.info("%s: %d new/updated pages", scraper.company, len(pages))
+
+        for page in pages:
+            # Persist raw text for future staged runs
+            db.save_text(normalize_url(page.url), page.raw_text)
+
+            summary = summarizer.summarize(page)
+            vid = vec_id_for(page.url)
+
+            update = ProductUpdate.from_scraped_page(page, summary)
+            vec.upsert(update, vid)
+
+            existing = db.get_by_url(page.url)
+            first_scraped_at = existing.first_scraped_at if existing else None
+            record = ArticleRecord.from_scraped_page(
+                page,
+                vec_id=vid,
+                first_scraped_at=first_scraped_at,
+                summary=summary,
+            )
+            db.upsert(record)
+            new_updates.append(update)
+            logger.debug("Processed %s", page.url)
+
+    if new_updates:
+        logger.info("Publishing %d updates to GitHub Pages", len(new_updates))
+        publisher.publish(_scraper_infos(scrapers))
+    else:
+        logger.info("No new updates — skipping publish")
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Scrape news and blog posts and publish to GitHub Pages")
     parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Scrape only — skip vector store writes and GitHub push (add --summarize to also call the LLM)",
-    )
-    parser.add_argument(
-        "--summarize",
-        action="store_true",
-        help="With --dry-run: call the free LLM model to generate summaries (requires a valid OPENROUTER_API_KEY)",
+        "--stage",
+        choices=["scrape", "summarize", "vector", "publish"],
+        help=(
+            "Test one pipeline stage: "
+            "scrape (fetch + cache, render preview), "
+            "summarize (LLM summary from cache, render index), "
+            "vector (rebuild vec store from cache, render full-text listing), "
+            "publish (push data/dry-run/ HTML to GitHub Pages)"
+        ),
     )
     parser.add_argument(
         "--site",
         choices=["cribl", "ocient"],
         help="Run only one scraper (default: both)",
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=1,
+        metavar="N",
+        help="Max articles per company when scraping in stage mode (default: 1)",
     )
     return parser.parse_args()
 
@@ -93,100 +356,19 @@ def main() -> None:
     args = _parse_args()
     setup_logging()
 
-    logger.info("Starting product-update-digest (dry_run=%s, site=%s)", args.dry_run, args.site)
-
-    if args.dry_run and args.summarize:
-        _assert_model_available(settings.openrouter_dry_run_summarization_model)
-    elif not args.dry_run:
-        _assert_model_available(settings.openrouter_summarization_model)
+    logger.info("Starting product-update-digest (stage=%s, site=%s)", args.stage, args.site)
 
     with ArticleDB(settings.sqlite_db_path) as db:
-        scrapers = []
-        if args.site in (None, "ocient"):
-            scrapers.append(OcientScraper())
-        if args.site in (None, "cribl"):
-            scrapers.append(CriblScraper())
-
-        if args.dry_run:
-            all_pages = []
-            for scraper in scrapers:
-                pages = scraper.run(db, limit=2)
-                logger.info("[dry-run] %s: %d new/updated page(s) found", scraper.company, len(pages))
-                for i, page in enumerate(pages, 1):
-                    preview = " ".join(page.raw_text.split())[:400]
-                    if page.published_date:
-                        try:
-                            age_days = (date.today() - date.fromisoformat(page.published_date)).days
-                            age_str = f"{age_days}d ago"
-                        except ValueError:
-                            age_str = "unknown age"
-                    else:
-                        age_str = "unknown age"
-                    logger.info(
-                        "[dry-run] [%d/%d] %s | %s | %s | %s\n  Title: %s\n  URL:   %s\n  Text (%s chars): %s%s",
-                        i, len(pages), page.company, page.category,
-                        page.published_date or "no date", age_str,
-                        page.title, page.url,
-                        f"{len(page.raw_text):,}",
-                        preview, "…" if len(page.raw_text) > 400 else "",
-                    )
-                all_pages.extend(pages)
-
-            summaries: dict[str, str] = {}
-            if args.summarize:
-                summarizer = Summarizer(model=settings.openrouter_dry_run_summarization_model)
-                for page in all_pages:
-                    logger.info("[dry-run] summarizing %s", page.url)
-                    summaries[page.url] = summarizer.summarize(page)
-            else:
-                logger.info("[dry-run] skipping summarization (use --summarize to enable)")
-
-            scraper_infos = [
-                {"company": s.company, "sources": s.sources, "exclusions": s.exclusions}
-                for s in scrapers
-            ]
-            publisher = GitHubPagesPublisher(db)
-            publisher.render_dry_run(all_pages, Path("data/dry-run"), scraper_infos, summaries)
-            logger.info("[dry-run] Skipping vector store writes and GitHub push")
-            return
-
-        summarizer = Summarizer()
-        vec = VecClient()
-        publisher = GitHubPagesPublisher(db)
-        new_updates: list[ProductUpdate] = []
-
-        for scraper in scrapers:
-            pages = scraper.run(db)
-            logger.info("%s: %d new/updated pages", scraper.company, len(pages))
-
-            for page in pages:
-                summary = summarizer.summarize(page)
-                vid = vec_id_for(page.url)
-
-                update = ProductUpdate.from_scraped_page(page, summary)
-                vec.upsert(update, vid)
-
-                existing = db.get_by_url(page.url)
-                first_scraped_at = existing.first_scraped_at if existing else None
-                record = ArticleRecord.from_scraped_page(
-                    page,
-                    vec_id=vid,
-                    first_scraped_at=first_scraped_at,
-                    summary=summary,
-                )
-                db.upsert(record)
-                new_updates.append(update)
-                logger.debug("Processed %s", page.url)
-
-        if new_updates:
-            logger.info("Publishing %d updates to GitHub Pages", len(new_updates))
-            scraper_infos = [
-                {"company": s.company, "sources": s.sources, "exclusions": s.exclusions}
-                for s in scrapers
-            ]
-            publisher.publish(scraper_infos)
+        if args.stage == "scrape":
+            _run_scrape(args, db)
+        elif args.stage == "summarize":
+            _run_summarize(args, db)
+        elif args.stage == "vector":
+            _run_vector(args, db)
+        elif args.stage == "publish":
+            _run_publish(args, db)
         else:
-            logger.info("No new updates — skipping publish")
+            _run_full_pipeline(args, db)
 
 
 if __name__ == "__main__":

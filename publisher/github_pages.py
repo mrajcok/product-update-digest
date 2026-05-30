@@ -5,10 +5,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from git import Repo
+import markdown as md
 from jinja2 import Environment, FileSystemLoader
+from markupsafe import Markup
 
 from storage.db import ArticleDB
-from storage.models import ArticleRecord, ScrapedPage
+from storage.models import ArticleRecord, ProductUpdate, ScrapedPage
 
 logger = logging.getLogger(__name__)
 
@@ -35,6 +37,7 @@ class GitHubPagesPublisher:
             loader=FileSystemLoader(str(TEMPLATES_DIR)),
             autoescape=True,
         )
+        self._env.filters["markdown"] = lambda text: Markup(md.markdown(text or ""))
 
     def publish(self, scraper_infos: list[dict] | None = None) -> None:
         all_records = self._db.get_all()
@@ -54,19 +57,28 @@ class GitHubPagesPublisher:
         html_files = self._render(top_updates, company_updates, scraper_infos)
         self._push_to_github(html_files)
 
-    def render_dry_run(
+    def publish_from_dir(self, in_dir: Path) -> None:
+        """Push HTML files from in_dir to GitHub Pages without re-rendering."""
+        html_files: dict[str, str] = {}
+        for path in in_dir.rglob("*.html"):
+            rel = str(path.relative_to(in_dir))
+            html_files[rel] = path.read_text(encoding="utf-8")
+        if not html_files:
+            raise FileNotFoundError(
+                f"No rendered HTML found in {in_dir}. "
+                "Run --stage summarize (or scrape/vector) first."
+            )
+        self._push_to_github(html_files)
+
+    def render_scrape_preview(
         self,
         pages: list[ScrapedPage],
         out_dir: Path,
         scraper_infos: list[dict] | None = None,
-        summaries: dict[str, str] | None = None,
     ) -> None:
-        """Render index.html locally from scraped pages without pushing to GitHub."""
+        """Render scraped-page preview (no summaries) to out_dir."""
         records = [
-            ArticleRecord.from_scraped_page(
-                p,
-                summary=(summaries or {}).get(p.url, "[summary not generated]"),
-            )
+            ArticleRecord.from_scraped_page(p, summary="[summary not generated]")
             for p in pages
         ]
         top_updates = _company_then_date(records)[:20]
@@ -75,12 +87,38 @@ class GitHubPagesPublisher:
             for c in COMPANIES
         }
         html_files = self._render(top_updates, company_updates, scraper_infos)
-        out_dir.mkdir(parents=True, exist_ok=True)
-        for rel_path, content in html_files.items():
-            dest = out_dir / rel_path
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            dest.write_text(content, encoding="utf-8")
-        logger.info("[dry-run] HTML written to %s/index.html", out_dir)
+        self._write_to_dir(html_files, out_dir)
+        logger.info("[stage:scrape] HTML written to %s/index.html", out_dir)
+
+    def render_summary_preview(
+        self,
+        records: list[ArticleRecord],
+        out_dir: Path,
+        scraper_infos: list[dict] | None = None,
+    ) -> None:
+        """Render index using production templates from already-summarized DB records."""
+        top_updates = _company_then_date(records)[:20]
+        company_updates: dict[str, list[ArticleRecord]] = {
+            c: sorted([r for r in records if r.company == c], key=_sort_key, reverse=True)
+            for c in COMPANIES
+        }
+        html_files = self._render(top_updates, company_updates, scraper_infos)
+        self._write_to_dir(html_files, out_dir)
+        logger.info("[stage:summarize] HTML written to %s/index.html", out_dir)
+
+    def render_vector_preview(
+        self,
+        updates: list[ProductUpdate],
+        out_dir: Path,
+    ) -> None:
+        """Render a full-text listing of all vector-indexed documents to out_dir."""
+        tmpl = self._env.get_template("vector_preview.html.j2")
+        html = tmpl.render(
+            updates=updates,
+            generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+        )
+        self._write_to_dir({"index.html": html}, out_dir)
+        logger.info("[stage:vector] HTML written to %s/index.html", out_dir)
 
     def _render(
         self,
@@ -107,6 +145,13 @@ class GitHubPagesPublisher:
             )
 
         return files
+
+    def _write_to_dir(self, html_files: dict[str, str], out_dir: Path) -> None:
+        out_dir.mkdir(parents=True, exist_ok=True)
+        for rel_path, content in html_files.items():
+            dest = out_dir / rel_path
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text(content, encoding="utf-8")
 
     def _push_to_github(self, html_files: dict[str, str]) -> None:
         from config import settings  # deferred to avoid module-level Settings() at import time

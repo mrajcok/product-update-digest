@@ -25,12 +25,12 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 git clone https://github.com/<you>/product-update-digest.git
 cd product-update-digest
-make venv
+make sync
 cp .env.example .env
 # edit .env with your API keys and config
 ```
 
-`make venv` runs `uv venv --python 3.13 && uv pip install -r requirements.txt`. No separate services required.
+`make sync` runs `uv sync --extra dev`, which creates the venv and installs all dependencies. No separate services required.
 
 ## Configuration
 
@@ -51,20 +51,37 @@ All configuration is via environment variables (`.env` file locally, system env 
 ## Usage
 
 ```bash
-.venv/bin/python main.py                   # full run
-.venv/bin/python main.py --dry-run         # scrape only, no LLM calls or publishing
-.venv/bin/python main.py --dry-run --summarize  # scrape + free model summaries
-.venv/bin/python main.py --site cribl      # run one scraper only
+uv run digest                   # full pipeline: scrape → summarize → vector → publish
+uv run digest --site cribl      # run only the Cribl scraper (default: both)
 ```
 
-`--dry-run` writes a local `data/dry-run/index.html` you can open in a browser to preview what was found. Adding `--summarize` calls a free OpenRouter model (`OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL`, default: `meta-llama/llama-3.3-70b-instruct:free`) to populate the summary cards — the only requirement is a valid `OPENROUTER_API_KEY` in your `.env` (no billing needed for free-tier models).
+All stage commands write preview HTML to `data/dry-run/` for local review before publishing.
+
+### Pipeline stages (for development / testing)
+
+Run one stage at a time with `--stage <name>`:
+
+| Stage | Command | What it does |
+|---|---|---|
+| scrape | `uv run digest --stage scrape` | Fetches pages, caches text in SQLite, writes `data/dry-run/` scrape preview |
+| summarize | `uv run digest --stage summarize` | Calls LLM on cached articles, writes summary preview (uses `OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL`) |
+| vector | `uv run digest --stage vector` | Rebuilds sqlite-vec store from cached articles, writes full-text listing preview |
+| publish | `uv run digest --stage publish` | Pushes `data/dry-run/` HTML to GitHub Pages (requires prior stage output) |
+
+`--stage summarize` uses `OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL` (default: `meta-llama/llama-3.3-70b-instruct:free`) — free-tier models require a valid `OPENROUTER_API_KEY` but no billing.
+
+Use `--limit N` (default: 1) to control how many articles per company are scraped in stage mode:
+
+```bash
+uv run digest --stage scrape --limit 5 --site ocient
+```
 
 ## Semantic search
 
 ```bash
-.venv/bin/python tools/search.py
-.venv/bin/python tools/search.py --company cribl
-.venv/bin/python tools/search.py --results 10
+uv run python tools/search.py
+uv run python tools/search.py --company cribl
+uv run python tools/search.py --results 10
 ```
 
 ## Running tests

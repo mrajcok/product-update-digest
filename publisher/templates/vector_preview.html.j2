@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vector Store Preview</title>
+  <script>
+    if (localStorage.getItem('theme') === 'light')
+      document.documentElement.setAttribute('data-theme', 'light');
+  </script>
+  <style>
+    :root {
+      --bg:               #111;
+      --surface:          #1e1e1e;
+      --border:           #2e2e2e;
+      --border-subtle:    #252525;
+      --text:             #d4d4d4;
+      --text-2:           #888;
+      --text-3:           #555;
+      --link:             #7ab3f5;
+      --link-hover:       #a0c8ff;
+      --tag-bg:           #2a2a2a;
+      --tag-color:        #888;
+      --badge-cribl-bg:   #1b3558;
+      --badge-cribl-fg:   #7ab3f5;
+      --badge-ocient-bg:  #3a2200;
+      --badge-ocient-fg:  #f0a030;
+      --pre-bg:           #161616;
+      --track-bg:         #444;
+      --track-active:     #5a8de0;
+      --thumb:            #bbb;
+      --thumb-active:     #fff;
+    }
+    html[data-theme="light"] {
+      --bg:               #fff;
+      --surface:          #fff;
+      --border:           #e0e0e0;
+      --border-subtle:    #eee;
+      --text:             #222;
+      --text-2:           #666;
+      --text-3:           #999;
+      --link:             #0066cc;
+      --link-hover:       #004499;
+      --tag-bg:           #f0f0f0;
+      --tag-color:        #555;
+      --badge-cribl-bg:   #e8f0fe;
+      --badge-cribl-fg:   #1a56db;
+      --badge-ocient-bg:  #fef3c7;
+      --badge-ocient-fg:  #92400e;
+      --pre-bg:           #f5f5f5;
+      --track-bg:         #c8d8f0;
+      --track-active:     #0066cc;
+      --thumb:            #0066cc;
+      --thumb-active:     #fff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; color: var(--text); background: var(--bg); }
+    h1 { border-bottom: 2px solid var(--border); padding-bottom: .5rem; margin-bottom: .5rem; }
+    .subtitle { font-size: .9rem; color: var(--text-2); margin-bottom: 1.5rem; }
+    nav { display: flex; align-items: center; margin-bottom: 1.5rem; }
+    nav .info { flex: 1; font-size: .9rem; color: var(--text-2); }
+    .card { border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: 1rem; background: var(--surface); }
+    .meta { font-size: .85rem; color: var(--text-2); margin-bottom: .4rem; }
+    .badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .75rem; font-weight: 600; margin-right: .4rem; }
+    .badge-cribl  { background: var(--badge-cribl-bg);  color: var(--badge-cribl-fg); }
+    .badge-ocient { background: var(--badge-ocient-bg); color: var(--badge-ocient-fg); }
+    .tag { display: inline-block; padding: .15rem .4rem; border-radius: 4px; font-size: .75rem; background: var(--tag-bg); color: var(--tag-color); margin-right: .4rem; }
+    .card h2 { margin: .25rem 0 .5rem; font-size: 1.05rem; }
+    .card h2 a { color: var(--link); text-decoration: none; }
+    .card h2 a:hover { color: var(--link-hover); text-decoration: underline; }
+    .raw-text-toggle { font-size: .8rem; color: var(--link); cursor: pointer; background: none; border: none; padding: 0; margin-bottom: .5rem; }
+    .raw-text-toggle:hover { color: var(--link-hover); text-decoration: underline; }
+    pre.raw-text { background: var(--pre-bg); border: 1px solid var(--border-subtle); border-radius: 4px; padding: .75rem 1rem; font-size: .78rem; line-height: 1.5; white-space: pre-wrap; word-break: break-word; max-height: 300px; overflow-y: auto; color: var(--text-2); margin: 0; }
+    footer { margin-top: 2rem; font-size: .8rem; color: var(--text-3); border-top: 1px solid var(--border-subtle); padding-top: .75rem; }
+
+    /* theme toggle */
+    .theme-toggle { display: flex; align-items: center; gap: .4rem; cursor: pointer; user-select: none; }
+    .theme-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .track { width: 38px; height: 21px; background: var(--track-bg); border-radius: 21px; position: relative; transition: background .2s; flex-shrink: 0; }
+    .track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 15px; height: 15px; border-radius: 50%; background: var(--thumb); transition: transform .2s, background .2s; }
+    .theme-toggle input:checked ~ .track { background: var(--track-active); }
+    .theme-toggle input:checked ~ .track::after { transform: translateX(17px); background: var(--thumb-active); }
+    .toggle-icon { font-size: .9rem; line-height: 1; }
+  </style>
+</head>
+<body>
+  <h1>Vector Store Preview</h1>
+  <nav>
+    <div class="info">{{ updates | length }} document(s) indexed &mdash; run <code>python tools/search.py</code> to query</div>
+    <label class="theme-toggle" title="Toggle light/dark theme">
+      <input type="checkbox" id="theme-chk">
+      <span class="track"></span>
+      <span class="toggle-icon" id="theme-icon">☀</span>
+    </label>
+  </nav>
+
+  {% for u in updates %}
+  <div class="card">
+    <div class="meta">
+      <span class="badge badge-{{ u.company }}">{{ u.company | capitalize }}</span>
+      <span class="tag">{{ u.category | replace("_", " ") }}</span>
+      {% if u.published_date %}<span>{{ u.published_date }}</span>{% endif %}
+    </div>
+    <h2><a href="{{ u.url }}" target="_blank" rel="noopener">{{ u.title }}</a></h2>
+    <button class="raw-text-toggle" onclick="toggleRaw(this)">Show raw text ({{ u.source_text | length }} chars embedded)</button>
+    <pre class="raw-text" style="display:none">{{ u.source_text }}</pre>
+  </div>
+  {% else %}
+  <p>No documents in vector store.</p>
+  {% endfor %}
+
+  <footer>Generated {{ generated_at }}</footer>
+
+  <script>
+    function toggleRaw(btn) {
+      const pre = btn.nextElementSibling;
+      const hidden = pre.style.display === 'none';
+      pre.style.display = hidden ? 'block' : 'none';
+      btn.textContent = btn.textContent.replace(hidden ? 'Show' : 'Hide', hidden ? 'Hide' : 'Show');
+    }
+
+    const chk = document.getElementById('theme-chk');
+    const icon = document.getElementById('theme-icon');
+    const saved = localStorage.getItem('theme') || 'dark';
+    if (saved === 'light') { chk.checked = true; icon.textContent = '🌙'; }
+    chk.addEventListener('change', function () {
+      if (this.checked) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        icon.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        icon.textContent = '☀';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>
