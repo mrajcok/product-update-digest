@@ -31,7 +31,9 @@ _PROMPT = ChatPromptTemplate.from_messages([
         "You are a product intelligence analyst tracking two data-infrastructure "
         "companies (Cribl and Ocient) for a team of software engineers and architects. "
         "Write summaries that help a busy reader decide in seconds whether the item "
-        "is relevant to them.",
+        "is relevant to them. Output only the summary text in markdown, without any commentary or explanation. "
+        "If the content is too long to summarize effectively, produce a concise summary of the most "
+        "important details and include a note that the original content should be consulted for more information. ",
     ),
     (
         "human",
@@ -59,13 +61,13 @@ def _length_guidance(char_count: int) -> str:
 
 
 class Summarizer:
-    """LangChain chain that summarizes a ScrapedPage via OpenRouter."""
+    """LangChain chain that summarizes a ScrapedPage via OpenRouter or a local LM Studio server."""
 
-    def __init__(self, model: str | None = None) -> None:
+    def __init__(self, model: str | None = None, base_url: str | None = None, api_key: str | None = None) -> None:
         llm = ChatOpenAI(
             model=model or settings.openrouter_summarization_model,
-            api_key=SecretStr(settings.openrouter_api_key),
-            base_url="https://openrouter.ai/api/v1",
+            api_key=SecretStr(api_key or settings.openrouter_api_key),
+            base_url=base_url or "https://openrouter.ai/api/v1",
         )
         self._chain = _PROMPT | llm | StrOutputParser()
 

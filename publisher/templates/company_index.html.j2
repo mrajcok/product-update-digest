@@ -94,7 +94,7 @@
     </div>
     <h3><a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.title }}</a></h3>
     {% if r.summary %}
-    <p class="summary">{{ r.summary }}</p>
+    <div class="summary">{{ r.summary | markdown }}</div>
     {% endif %}
   </div>
   {% endfor %}

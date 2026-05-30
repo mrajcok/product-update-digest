@@ -12,9 +12,14 @@ class Settings(BaseSettings):
 
     openrouter_api_key: str = "dummy"
     openrouter_summarization_model: str = "anthropic/claude-sonnet-4-5"
-    openrouter_dry_run_summarization_model: str = "meta-llama/llama-3.3-70b-instruct:free"
+    openrouter_dry_run_summarization_model: str = "dummy"
     openrouter_embedding_model: str = "openai/text-embedding-3-small"
     embedding_dimensions: int = 1536
+
+    # Ollama local server (overrides OpenRouter for summarization when set)
+    ollama_base_url: str = ""
+    ollama_summarization_model: str = ""
+    ollama_dry_run_summarization_model: str = ""  # falls back to ollama_summarization_model
 
     sqlite_db_path: str = "data/product_updates.db"
 
