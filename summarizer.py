@@ -4,14 +4,14 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from pydantic import SecretStr
+from tenacity import Retrying, before_sleep_log, stop_after_attempt, wait_exponential
 
 from config import settings
 from storage.models import ScrapedPage
 
 logger = logging.getLogger(__name__)
 
-_CONTENT_CHAR_LIMIT = 6000  # token-budget guard before sending to LLM
-_FALLBACK_CHARS = 300       # chars of raw_text used when LLM call fails
+_CONTENT_CHAR_LIMIT = 15000  # token-budget guard before sending to LLM
 
 _CATEGORY_INSTRUCTIONS: dict[str, str] = {
     "blog": "Focus on the technical insight or capability being introduced.",
@@ -73,22 +73,23 @@ class Summarizer:
 
     def summarize(self, page: ScrapedPage) -> str:
         content = page.raw_text[:_CONTENT_CHAR_LIMIT]
-        try:
-            return self._chain.invoke({
-                "company": page.company,
-                "category": page.category,
-                "title": page.title,
-                "content": content,
-                "length_guidance": _length_guidance(len(page.raw_text)),
-                "category_instruction": _CATEGORY_INSTRUCTIONS.get(
-                    page.category,
-                    "Focus on what changed or was announced and why it matters.",
-                ),
-            })
-        except Exception:
-            logger.error(
-                "summarizer: LLM call failed for %s — using truncated raw text as fallback",
-                page.url,
-                exc_info=True,
-            )
-            return page.raw_text[:_FALLBACK_CHARS]
+        inputs = {
+            "company": page.company,
+            "category": page.category,
+            "title": page.title,
+            "content": content,
+            "length_guidance": _length_guidance(len(page.raw_text)),
+            "category_instruction": _CATEGORY_INSTRUCTIONS.get(
+                page.category,
+                "Focus on what changed or was announced and why it matters.",
+            ),
+        }
+        for attempt in Retrying(
+            stop=stop_after_attempt(settings.max_api_retries),
+            wait=wait_exponential(multiplier=1, min=2, max=30),
+            before_sleep=before_sleep_log(logger, logging.WARNING),
+            reraise=True,
+        ):
+            with attempt:
+                return self._chain.invoke(inputs)
+        raise AssertionError("unreachable: tenacity reraise=True always raises on exhaustion")

@@ -50,19 +50,25 @@ class GitHubPagesPublisher:
         html_files = self._render(top_updates, company_updates, scraper_infos)
         self._push_to_github(html_files)
 
-    def render_from_db(self, out_dir: Path, scraper_infos: list[dict] | None = None) -> None:
-        """Render all pages from the full DB state to out_dir (no push)."""
+    def render_from_db(self, out_dir: Path, scraper_infos: list[dict] | None = None, limit: int | None = None) -> None:
+        """Render pages from DB to out_dir (no push). limit caps articles per company on company pages."""
         from config import settings
         all_records = self._db.get_all()
         ok_records = [r for r in all_records if r.status == "ok" and r.summary]
-        top_updates = sorted(ok_records, key=_sort_key, reverse=True)[:settings.index_page_limit]
         company_updates: dict[str, list[ArticleRecord]] = {
-            c: sorted([r for r in ok_records if r.company == c], key=_sort_key, reverse=True)
+            c: sorted([r for r in ok_records if r.company == c], key=_sort_key, reverse=True)[:limit]
             for c in COMPANIES
         }
+        all_limited = [r for records in company_updates.values() for r in records]
+        top_updates = sorted(all_limited, key=_sort_key, reverse=True)[:settings.index_page_limit]
         html_files = self._render(top_updates, company_updates, scraper_infos)
         self._write_to_dir(html_files, out_dir)
-        logger.info("Rendered %d record(s) from DB to %s", len(ok_records), out_dir)
+        rendered = sum(len(v) for v in company_updates.values())
+        logger.info(
+            "Rendered %d/%d record(s) from DB to %s%s",
+            rendered, len(ok_records), out_dir,
+            f" (limit={limit} per company)" if limit else "",
+        )
 
     def render_scrape_preview(
         self,

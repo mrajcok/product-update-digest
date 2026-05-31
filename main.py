@@ -1,6 +1,7 @@
 import argparse
 import logging
 import sys
+import time
 from datetime import date
 from pathlib import Path
 
@@ -72,44 +73,33 @@ def _assert_model_available(model_id: str) -> None:
     if resp.status_code == 200:
         return
 
-    _FREE_PREFIXES = ("google/", "meta-llama/", "mistralai/")
-    suggestions: list[str] = []
+    env_var = "OPENROUTER_STAGE_SUMMARIZATION_MODEL" if ":free" in model_id else "OPENROUTER_SUMMARIZATION_MODEL"
     try:
-        models_resp = httpx.get(
-            "https://openrouter.ai/api/v1/models",
-            headers={"Authorization": f"Bearer {settings.openrouter_api_key}"},
-            timeout=10.0,
-        )
-        if models_resp.is_success:
-            suggestions = sorted(
-                m["id"] for m in models_resp.json().get("data", [])
-                if m["id"].endswith(":free") and m["id"].startswith(_FREE_PREFIXES)
-            )
+        error_detail = resp.json()
     except Exception:
-        pass
-
-    env_var = "OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL" if ":free" in model_id else "OPENROUTER_SUMMARIZATION_MODEL"
+        error_detail = resp.text
     logger.error(
         "Model %r is not available on OpenRouter (status %d).\n"
-        "Update %s in your .env.\n"
-        "Available free models (Google / Meta / Mistral):\n  %s",
+        "OpenRouter response: %s\n"
+        "Update %s in your .env.",
         model_id,
         resp.status_code,
+        error_detail,
         env_var,
-        "\n  ".join(suggestions) if suggestions else "(none found)",
     )
     sys.exit(1)
 
 
-def _make_summarizer(dry_run: bool) -> Summarizer:
+def _make_summarizer(stage: bool) -> Summarizer:
     if settings.ollama_base_url:
         model = (
-            settings.ollama_dry_run_summarization_model or settings.ollama_summarization_model
-            if dry_run
+            settings.ollama_stage_summarization_model or settings.ollama_summarization_model
+            if stage
             else settings.ollama_summarization_model
         )
         return Summarizer(model=model, base_url=settings.ollama_base_url, api_key="ollama")
-    return Summarizer(model=settings.openrouter_dry_run_summarization_model if dry_run else None)
+    stage_model = settings.openrouter_stage_summarization_model or settings.openrouter_summarization_model
+    return Summarizer(model=stage_model if stage else None)
 
 
 # ---------------------------------------------------------------------------
@@ -130,11 +120,17 @@ def _scraper_infos(scrapers: list) -> list[dict]:
 
 
 def _scrape_and_cache(scraper, db: ArticleDB, limit: int, category: str | None = None) -> list[ScrapedPage]:
-    """Run scraper, persist each page to DB and article_text cache, return pages."""
+    """Run scraper, persist each page to scraped_articles + article_text cache, return pages."""
     pages = scraper.run(db, limit=limit, category=category)
     for page in pages:
-        nurl = normalize_url(page.url)
-        db.save_text(nurl, page.raw_text)
+        existing = db.get_by_url(page.url)
+        record = ArticleRecord.from_scraped_page(
+            page,
+            vec_id=existing.vec_id if existing else None,
+            first_scraped_at=existing.first_scraped_at if existing else None,
+        )
+        db.upsert(record)
+        db.save_text(normalize_url(page.url), page.raw_text)
     return pages
 
 
@@ -143,10 +139,11 @@ def _scrape_and_cache(scraper, db: ArticleDB, limit: int, category: str | None =
 # ---------------------------------------------------------------------------
 
 def _run_scrape(args: argparse.Namespace, db: ArticleDB) -> None:
+    limit = args.limit or 1
     scrapers = _build_scrapers(args.site)
     all_pages: list[ScrapedPage] = []
     for scraper in scrapers:
-        pages = _scrape_and_cache(scraper, db, limit=args.limit, category=args.category)
+        pages = _scrape_and_cache(scraper, db, limit=limit, category=args.category)
         logger.info("[stage:scrape] %s: %d page(s) scraped", scraper.company, len(pages))
         for i, page in enumerate(pages, 1):
             preview = " ".join(page.raw_text.split())[:400]
@@ -174,49 +171,56 @@ def _run_scrape(args: argparse.Namespace, db: ArticleDB) -> None:
 
 def _run_summarize(args: argparse.Namespace, db: ArticleDB) -> None:
     if settings.ollama_base_url:
-        model = settings.ollama_dry_run_summarization_model or settings.ollama_summarization_model
+        model = settings.ollama_stage_summarization_model or settings.ollama_summarization_model
+        backend = f"ollama ({model})"
         _assert_ollama_available(model)
     else:
-        _assert_model_available(settings.openrouter_dry_run_summarization_model)
+        model = settings.openrouter_stage_summarization_model or settings.openrouter_summarization_model
+        backend = f"openrouter ({model})"
+        _assert_model_available(model)
 
+    limit = args.limit or 1
     scrapers = _build_scrapers(args.site)
-    summarizer = _make_summarizer(dry_run=True)
+    summarizer = _make_summarizer(stage=True)
     records: list[ArticleRecord] = []
 
     for scraper in scrapers:
-        cached = db.latest_article_with_text(scraper.company, category=args.category)
+        cached = db.articles_with_text(scraper.company, category=args.category, limit=limit)
         if cached:
-            raw_text = db.get_text(cached.normalized_url) or ""
-            page = ScrapedPage(
-                url=cached.url,
-                company=cached.company,
-                category=cached.category,
-                title=cached.title,
-                raw_text=raw_text,
-                published_date=cached.published_date,
-            )
-            logger.info("[stage:summarize] %s: using cached article %s", scraper.company, cached.url)
+            pages = [
+                ScrapedPage(
+                    url=a.url, company=a.company, category=a.category,
+                    title=a.title, raw_text=db.get_text(a.normalized_url) or "",
+                    published_date=a.published_date,
+                )
+                for a in cached
+            ]
+            logger.info("[stage:summarize] %s: using %d cached article(s)", scraper.company, len(pages))
         else:
-            logger.info("[stage:summarize] %s: no cached article — scraping %d", scraper.company, args.limit)
-            pages = _scrape_and_cache(scraper, db, limit=args.limit, category=args.category)
+            logger.info("[stage:summarize] %s: no cached articles — scraping %d", scraper.company, limit)
+            pages = _scrape_and_cache(scraper, db, limit=limit, category=args.category)
             if not pages:
                 logger.warning("[stage:summarize] %s: no pages found", scraper.company)
                 continue
-            page = pages[0]
 
-        logger.info("[stage:summarize] summarizing %s", page.url)
-        summary = summarizer.summarize(page)
+        for i, page in enumerate(pages, 1):
+            logger.info("[stage:summarize] [%d/%d] summarizing %s via %s", i, len(pages), page.url, backend)
+            t0 = time.monotonic()
+            summary = summarizer.summarize(page)
+            logger.info(
+                "[stage:summarize] [%d/%d] done in %.1fs — input %d chars, output %d chars",
+                i, len(pages), time.monotonic() - t0, len(page.raw_text), len(summary),
+            )
 
-        # Persist summary back to DB
-        existing = db.get_by_url(page.url)
-        record = ArticleRecord.from_scraped_page(
-            page,
-            vec_id=existing.vec_id if existing else None,
-            first_scraped_at=existing.first_scraped_at if existing else None,
-            summary=summary,
-        )
-        db.upsert(record)
-        records.append(record)
+            existing = db.get_by_url(page.url)
+            record = ArticleRecord.from_scraped_page(
+                page,
+                vec_id=existing.vec_id if existing else None,
+                first_scraped_at=existing.first_scraped_at if existing else None,
+                summary=summary,
+            )
+            db.upsert(record)
+            records.append(record)
 
     publisher = GitHubPagesPublisher(db)
     publisher.render_summary_preview(records, _DRY_RUN_DIR, _scraper_infos(scrapers))
@@ -228,20 +232,22 @@ def _run_vector(args: argparse.Namespace, db: ArticleDB) -> None:
     # Ensure each requested company has at least one cached article
     for scraper in scrapers:
         if not db.latest_article_with_text(scraper.company, category=args.category):
-            logger.info("[stage:vector] %s: no cached text — scraping %d", scraper.company, args.limit)
-            _scrape_and_cache(scraper, db, limit=args.limit, category=args.category)
+            fallback_limit = args.limit or 1
+            logger.info("[stage:vector] %s: no cached text — scraping %d", scraper.company, fallback_limit)
+            _scrape_and_cache(scraper, db, limit=fallback_limit, category=args.category)
 
     # Write to a temp store — never touch the production vector store
     _DRY_RUN_DIR.mkdir(parents=True, exist_ok=True)
     _VEC_TEST_DB.unlink(missing_ok=True)
     vec = VecClient(str(_VEC_TEST_DB))
 
-    records = db.get_all(company=args.site, category=args.category)
+    records = [
+        r for scraper in scrapers
+        for r in db.articles_with_text(scraper.company, category=args.category, limit=args.limit)
+    ]
     upserted = 0
     for record in records:
-        raw_text = db.get_text(record.normalized_url)
-        if not raw_text:
-            continue
+        raw_text = db.get_text(record.normalized_url) or ""
         page = ScrapedPage(
             url=record.url,
             company=record.company,
@@ -268,8 +274,8 @@ def _run_vector(args: argparse.Namespace, db: ArticleDB) -> None:
 
 def _run_render(args: argparse.Namespace, db: ArticleDB) -> None:
     publisher = GitHubPagesPublisher(db)
-    publisher.render_from_db(_DRY_RUN_DIR, _scraper_infos(_build_scrapers(args.site)))
-    logger.info("[stage:render] HTML written to %s — review, then run --stage publish", _DRY_RUN_DIR)
+    publisher.render_from_db(_DRY_RUN_DIR, _scraper_infos(_build_scrapers(args.site)), limit=args.limit)
+    logger.info("[stage:render] HTML written to %s — review, then run --publish", _DRY_RUN_DIR)
 
 
 def _run_publish(args: argparse.Namespace, db: ArticleDB) -> None:
@@ -284,7 +290,7 @@ def _run_full_pipeline(args: argparse.Namespace, db: ArticleDB) -> None:
         _assert_model_available(settings.openrouter_summarization_model)
 
     scrapers = _build_scrapers(args.site)
-    summarizer = _make_summarizer(dry_run=False)
+    summarizer = _make_summarizer(stage=False)
     vec = VecClient()
     publisher = GitHubPagesPublisher(db)
     new_updates: list[ProductUpdate] = []
@@ -330,15 +336,19 @@ def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Scrape news and blog posts and publish to GitHub Pages")
     parser.add_argument(
         "--stage",
-        choices=["scrape", "summarize", "vector", "render", "publish"],
+        choices=["scrape", "summarize", "vector", "render"],
         help=(
             "Run one pipeline stage: "
             "scrape (fetch + cache, render preview), "
             "summarize (LLM summary from cache, render preview), "
-            "vector (rebuild vec store from cache, render preview), "
-            "render (render full site from DB to data/dry-run/ for review), "
-            "publish (rebuild full site from DB and push to GitHub Pages)"
+            "vector (embed sample into temp store, render preview), "
+            "render (render full site from DB to data/dry-run/ for review)"
         ),
+    )
+    parser.add_argument(
+        "--publish",
+        action="store_true",
+        help="Rebuild full site from DB and push to GitHub Pages",
     )
     parser.add_argument(
         "--site",
@@ -348,9 +358,9 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--limit",
         type=int,
-        default=1,
+        default=None,
         metavar="N",
-        help="Max articles per company when scraping in stage mode (default: 1)",
+        help="Max articles per company (default: 1 for scrape/summarize, all for vector/render)",
     )
     parser.add_argument(
         "--category",
@@ -367,7 +377,9 @@ def main() -> None:
     logger.info("Starting product-update-digest (stage=%s, site=%s)", args.stage, args.site)
 
     with ArticleDB(settings.sqlite_db_path) as db:
-        if args.stage == "scrape":
+        if args.publish:
+            _run_publish(args, db)
+        elif args.stage == "scrape":
             _run_scrape(args, db)
         elif args.stage == "summarize":
             _run_summarize(args, db)
@@ -375,8 +387,6 @@ def main() -> None:
             _run_vector(args, db)
         elif args.stage == "render":
             _run_render(args, db)
-        elif args.stage == "publish":
-            _run_publish(args, db)
         else:
             _run_full_pipeline(args, db)
 

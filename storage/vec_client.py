@@ -1,9 +1,11 @@
 import logging
 import sqlite3
+import time
 from pathlib import Path
 
 import sqlite_vec
 from openai import OpenAI
+from tenacity import Retrying, before_sleep_log, stop_after_attempt, wait_exponential
 
 from config import settings
 from storage.models import ProductUpdate
@@ -59,11 +61,25 @@ class VecClient:
         logger.info("VecClient opened at %r", path)
 
     def _embed(self, text: str) -> list[float]:
-        resp = self._openai.embeddings.create(
-            input=text,
-            model=settings.openrouter_embedding_model,
-        )
-        return resp.data[0].embedding
+        t0 = time.monotonic()
+        for attempt in Retrying(
+            stop=stop_after_attempt(settings.max_api_retries),
+            wait=wait_exponential(multiplier=1, min=2, max=30),
+            before_sleep=before_sleep_log(logger, logging.WARNING),
+            reraise=True,
+        ):
+            with attempt:
+                resp = self._openai.embeddings.create(
+                    input=text,
+                    model=settings.openrouter_embedding_model,
+                )
+                embedding = resp.data[0].embedding
+                logger.info(
+                    "embed done in %.1fs — input %d chars, output %d dims, model %s",
+                    time.monotonic() - t0, len(text), len(embedding), settings.openrouter_embedding_model,
+                )
+                return embedding
+        raise AssertionError("unreachable: tenacity reraise=True always raises on exhaustion")
 
     def upsert(self, update: ProductUpdate, vec_id: str) -> None:
         # vec0 virtual tables don't support ON CONFLICT, so delete + insert.

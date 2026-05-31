@@ -128,20 +128,26 @@ class ArticleDB:
 
     def latest_article_with_text(self, company: str, category: str | None = None) -> ArticleRecord | None:
         """Return the most recently published article for company that has cached raw_text."""
+        results = self.articles_with_text(company, category=category, limit=1)
+        return results[0] if results else None
+
+    def articles_with_text(self, company: str, category: str | None = None, limit: int = 1) -> list[ArticleRecord]:
+        """Return up to limit recently published articles for company that have cached raw_text."""
         clause = "WHERE sa.company = ?"
         params: list = [company]
         if category:
             clause += " AND sa.category = ?"
             params.append(category)
-        row = self._conn.execute(
+        params.append(limit)
+        rows = self._conn.execute(
             f"""SELECT sa.* FROM scraped_articles sa
                JOIN article_text at ON at.normalized_url = sa.normalized_url
                {clause}
                ORDER BY COALESCE(sa.published_date, sa.last_scraped_at) DESC
-               LIMIT 1""",
+               LIMIT ?""",
             params,
-        ).fetchone()
-        return _row_to_record(row) if row else None
+        ).fetchall()
+        return [_row_to_record(r) for r in rows]
 
     def get_all(self, company: str | None = None, category: str | None = None) -> list[ArticleRecord]:
         clauses, params = [], []

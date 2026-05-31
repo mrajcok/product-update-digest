@@ -7,7 +7,7 @@ A daily cron job that scrapes news and blog posts from Cribl and Ocient (blog po
 1. **Scrapes** Cribl and Ocient websites for new or changed content
 2. **Deduplicates** using SQLite — skips unchanged content via URL tracking and SHA-256 content hashing
 3. **Summarizes** each new item using a configurable LLM (default: `google/gemma-3-27b-it` via OpenRouter)
-4. **Stores** summaries and vector embeddings in sqlite-vec for semantic search
+4. **Stores** summaries and vector embeddings in sqlite-vec for semantic search (default: `qwen/qwen3-embedding-8b` via OpenRouter)
 5. **Publishes** a static HTML digest to GitHub Pages
 
 ## Requirements
@@ -40,6 +40,7 @@ All configuration is via environment variables (`.env` file locally, system env 
 |---|---|
 | `OPENROUTER_API_KEY` | OpenRouter API key |
 | `OPENROUTER_SUMMARIZATION_MODEL` | LLM for summaries (default: `google/gemma-3-27b-it`) |
+| `OPENROUTER_STAGE_SUMMARIZATION_MODEL` | LLM for `--stage summarize` (defaults to `OPENROUTER_SUMMARIZATION_MODEL`) |
 | `OPENROUTER_EMBEDDING_MODEL` | Embedding model (default: `qwen/qwen3-embedding-8b`) |
 | `EMBEDDING_DIMENSIONS` | Vector dimensions matching the embedding model (default: `4096`) |
 | `SQLITE_DB_PATH` | Path to SQLite database (default: `data/product_updates.db`) |
@@ -47,18 +48,19 @@ All configuration is via environment variables (`.env` file locally, system env 
 | `GITHUB_REPO` | Target GitHub repo for Pages (e.g., `username/product-updates`) |
 | `GITHUB_PAGES_BRANCH` | Branch to publish to (default: `gh-pages`) |
 | `MAX_ARTICLE_AGE_DAYS` | How far back to index articles (default: `30`) |
+| `MAX_API_RETRIES` | Max retry attempts for LLM/embedding API calls (default: `5`) |
 | `OLLAMA_BASE_URL` | Local Ollama server URL (e.g. `http://localhost:11434/v1`); when set, takes precedence over OpenRouter for summarization |
 | `OLLAMA_SUMMARIZATION_MODEL` | Ollama model for full-pipeline summarization (e.g. `gemma3:4b`) |
-| `OLLAMA_DRY_RUN_SUMMARIZATION_MODEL` | Ollama model for `--stage summarize`; defaults to `OLLAMA_SUMMARIZATION_MODEL` |
+| `OLLAMA_STAGE_SUMMARIZATION_MODEL` | Ollama model for `--stage summarize`; defaults to `OLLAMA_SUMMARIZATION_MODEL` |
 
 ### Model recommendations
-As of 2026-06, evaluated by Claude Sonnet 4.6.
+As of 2026-05-30, evaluated by Claude Sonnet 4.6.
 
-**Summarization** (`OPENROUTER_SUMMARIZATION_MODEL` / `OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL`):
+**Summarization** (`OPENROUTER_SUMMARIZATION_MODEL` / `OPENROUTER_STAGE_SUMMARIZATION_MODEL`):
 
 | Model | Input | Output | Notes |
 |---|---|---|---|
-| `google/gemma-4-26b-a4b-it:free` | free | free | Rate-limited; good for dry-run testing |
+| `google/gemma-4-26b-a4b-it:free` | free | free | Rate-limited; good for `--stage summarize` testing |
 | `google/gemma-3-12b-it` | $0.04/M | $0.13/M | Budget pick; solid quality |
 | `google/gemma-3-27b-it` | $0.08/M | $0.16/M | **Best bang-for-buck; default** |
 | `deepseek/deepseek-v4-flash` | $0.10/M | $0.20/M | Fast; 1M context window |
@@ -84,6 +86,7 @@ As of 2026-06, evaluated by Claude Sonnet 4.6.
 ```bash
 uv run digest                   # full pipeline: scrape → summarize → vector → publish
 uv run digest --site cribl      # run only the Cribl scraper (default: both)
+uv run digest --publish         # rebuild full site from DB and push to GitHub Pages
 ```
 
 All stage commands write preview HTML to `data/dry-run/` for local review before publishing.
@@ -95,16 +98,15 @@ Run one stage at a time with `--stage <name>`:
 | Stage | Command | What it does |
 |---|---|---|
 | scrape | `uv run digest --stage scrape` | Fetches pages, caches text in SQLite, writes `data/dry-run/` scrape preview |
-| summarize | `uv run digest --stage summarize` | Calls LLM on cached articles, writes summary preview (uses `OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL`) |
-| vector | `uv run digest --stage vector` | Embeds a small sample into a temp store (`data/dry-run/vec_test.db`), writes full-text listing preview |
+| summarize | `uv run digest --stage summarize` | Calls LLM on cached articles, writes summary preview to `data/dry-run/` |
+| vector | `uv run digest --stage vector` | Embeds cached articles into a temp store (`data/dry-run/vec_test.db`), writes full-text listing preview |
 | render | `uv run digest --stage render` | Renders the full site from the DB to `data/dry-run/` for local review |
-| publish | `uv run digest --stage publish` | Rebuilds the full site from DB and pushes to GitHub Pages |
 
-The `scrape`, `summarize`, and `vector` stages write **preview** HTML to `data/dry-run/` showing only the articles processed in that run — they are not suitable for publishing directly. Use `--stage render` to generate a full preview of the site as it would appear on GitHub Pages, then `--stage publish` to push it. `--stage render` is also useful as a recovery tool if the published pages ever get into a bad state.
+The `scrape`, `summarize`, and `vector` stages write **preview** HTML to `data/dry-run/` showing only the articles processed in that run — they are not suitable for publishing directly. Use `--stage render` to generate a full preview of the site as it would appear on GitHub Pages, then `--publish` to push it. `--stage render` is also useful as a recovery tool if the published pages ever get into a bad state.
 
-`--stage summarize` uses `OPENROUTER_DRY_RUN_SUMMARIZATION_MODEL` (set in `.env`, e.g. `google/gemma-4-26b-a4b-it:free`) — free-tier models require a valid `OPENROUTER_API_KEY` but no billing. Alternatively, set `OLLAMA_BASE_URL` to use a local model instead.
+`--stage summarize` uses `OPENROUTER_STAGE_SUMMARIZATION_MODEL` (falls back to `OPENROUTER_SUMMARIZATION_MODEL` if unset). Set it to a free-tier model (e.g. `google/gemma-4-26b-a4b-it:free`) to avoid charges during testing. Alternatively, set `OLLAMA_BASE_URL` to use a local model instead.
 
-Use `--limit N` (default: 1) to control how many articles per company are scraped in stage mode.
+Use `--limit N` to control how many articles per company are processed. Defaults to 1 for `scrape` and `summarize`; all cached articles for `vector` and `render`.
 
 Use `--category` to filter by article type — useful for checking whether summaries look right for each category:
 

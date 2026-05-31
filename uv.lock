@@ -596,6 +596,7 @@ dependencies = [
     { name = "pydantic-settings" },
     { name = "python-dotenv" },
     { name = "sqlite-vec" },
+    { name = "tenacity" },
 ]
 
 [package.optional-dependencies]
@@ -623,6 +624,7 @@ requires-dist = [
     { name = "python-dotenv", specifier = ">=1.1,<2" },
     { name = "respx", marker = "extra == 'dev'", specifier = ">=0.22,<1" },
     { name = "sqlite-vec", specifier = ">=0.1.9,<0.2" },
+    { name = "tenacity", specifier = ">=9.0,<10" },
 ]
 provides-extras = ["dev"]
 
