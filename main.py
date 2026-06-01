@@ -246,7 +246,12 @@ def _run_vector(args: argparse.Namespace, db: ArticleDB) -> None:
         for r in db.articles_with_text(scraper.company, category=args.category, limit=args.limit)
     ]
     upserted = 0
-    for record in records:
+    total = len(records)
+    for i, record in enumerate(records, 1):
+        logger.info(
+            "[stage:vector] [%d/%d] embedding %s | %s via %s",
+            i, total, record.company, record.title, settings.openrouter_embedding_model,
+        )
         raw_text = db.get_text(record.normalized_url) or ""
         page = ScrapedPage(
             url=record.url,
@@ -257,7 +262,10 @@ def _run_vector(args: argparse.Namespace, db: ArticleDB) -> None:
             published_date=record.published_date,
         )
         update = ProductUpdate.from_scraped_page(page, summary=record.summary)
-        vec.upsert(update, vec_id_for(record.url))
+        vid = vec_id_for(record.url)
+        vec.upsert(update, vid)
+        n_chunks = vec.upsert_chunks(update, vid)
+        logger.info("[stage:vector] [%d/%d] → %d chunk(s) embedded", i, total, n_chunks)
         upserted += 1
 
     vec.close()
@@ -308,6 +316,7 @@ def _run_full_pipeline(args: argparse.Namespace, db: ArticleDB) -> None:
 
             update = ProductUpdate.from_scraped_page(page, summary)
             vec.upsert(update, vid)
+            vec.upsert_chunks(update, vid)
 
             existing = db.get_by_url(page.url)
             first_scraped_at = existing.first_scraped_at if existing else None

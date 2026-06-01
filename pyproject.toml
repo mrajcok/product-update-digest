@@ -17,6 +17,7 @@ dependencies = [
     "Markdown>=3.7,<4",                   # convert LLM markdown output to HTML in templates
     "gitpython>=3.1,<4",
     "tenacity>=9.0,<10",
+    "rich>=15.0.0",
 ]
 
 [project.optional-dependencies]

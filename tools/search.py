@@ -7,10 +7,11 @@ Usage:
     uv run python tools/search.py --company cribl
     uv run python tools/search.py --results 10
     uv run python tools/search.py --temp        # search the --stage vector dry-run store
+    uv run python tools/search.py --discord     # print Discord-formatted output instead
 """
 import argparse
+import re
 import sys
-import textwrap
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -18,17 +19,74 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from config import settings  # noqa: E402 — after load_dotenv
+from storage.models import ProductUpdate  # noqa: E402
 from storage.vec_client import VecClient  # noqa: E402
 
 _VEC_TEST_DB = Path("data/dry-run/vec_test.db")
 
-COMPANY_COLORS = {"cribl": "\033[94m", "ocient": "\033[93m"}  # blue / yellow
-RESET = "\033[0m"
-BOLD = "\033[1m"
-DIM = "\033[2m"
+
+# ---------------------------------------------------------------------------
+# Discord formatter
+# ---------------------------------------------------------------------------
+
+def _strip_md_headers(text: str) -> str:
+    """Convert ## headings to bold; leave everything else intact."""
+    def _replace(m: re.Match) -> str:
+        heading = m.group(1).strip()
+        return f"**{heading}**" if heading else ""
+    return re.sub(r"^#{1,6}\s*(.*)", _replace, text, flags=re.MULTILINE)
 
 
-def _run(company_filter: str | None, n_results: int, use_temp: bool) -> None:
+def format_results_for_discord(results: list[tuple[ProductUpdate, float]]) -> str:
+    """Format search results as Discord markdown (importable for a Discord bot)."""
+    parts = []
+    for i, (update, distance) in enumerate(results, 1):
+        category = update.category.replace("_", " ")
+        date = update.published_date or update.scraped_at[:10]
+        score = 1 - distance
+        header = f"**[{i}] {update.company.upper()}** • {category} • {date} • score={score:.2f}"
+        title = f"**{update.title}**"
+        summary = _strip_md_headers(update.summary) if update.summary else ""
+        parts.append(f"{header}\n{title}\n{summary}\n{update.url}")
+    return "\n\n---\n\n".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Terminal renderer (rich)
+# ---------------------------------------------------------------------------
+
+def _print_results_rich(results: list[tuple[ProductUpdate, float]]) -> None:
+    from rich.console import Console
+    from rich.markdown import Markdown
+    from rich.rule import Rule
+
+    console = Console()
+    COMPANY_COLORS = {"cribl": "bright_blue", "ocient": "bright_yellow"}
+
+    for i, (update, distance) in enumerate(results, 1):
+        color = COMPANY_COLORS.get(update.company, "white")
+        category = update.category.replace("_", " ")
+        date = update.published_date or update.scraped_at[:10]
+        score = 1 - distance
+
+        console.print()
+        console.print(
+            f"[bold][{i}][/bold] [{color}]{update.company.upper()}[/{color}]"
+            f"  [dim]{category}  {date}  score={score:.2f}[/dim]"
+        )
+        console.print(f"[bold]{update.title}[/bold]")
+        if update.summary:
+            console.print(Markdown(update.summary))
+        console.print(f"[dim]{update.url}[/dim]")
+
+    console.print(Rule(style="dim"))
+
+
+# ---------------------------------------------------------------------------
+# Main loop
+# ---------------------------------------------------------------------------
+
+def _run(company_filter: str | None, n_results: int, use_temp: bool, discord_mode: bool) -> None:
     if use_temp:
         db_path = str(_VEC_TEST_DB)
         if not _VEC_TEST_DB.exists():
@@ -68,19 +126,10 @@ def _run(company_filter: str | None, n_results: int, use_temp: bool) -> None:
                 print("No results found.")
                 continue
 
-            for i, (update, distance) in enumerate(results, 1):
-                color = COMPANY_COLORS.get(update.company, "")
-                category = update.category.replace("_", " ")
-                date = update.published_date or update.scraped_at[:10]
-                score = 1 - distance  # cosine distance → similarity
-                print(f"\n{BOLD}[{i}]{RESET} {color}{update.company.upper()}{RESET}  {DIM}{category}  {date}  score={score:.2f}{RESET}")
-                print(f"  {BOLD}{update.title}{RESET}")
-                if update.summary:
-                    wrapped = textwrap.fill(update.summary, width=90, initial_indent="  ", subsequent_indent="  ")
-                    print(wrapped)
-                print(f"  {DIM}{update.url}{RESET}")
-
-            print()
+            if discord_mode:
+                print(format_results_for_discord(results))
+            else:
+                _print_results_rich(results)
 
     except KeyboardInterrupt:
         pass
@@ -94,8 +143,9 @@ def main() -> None:
     parser.add_argument("--company", choices=["cribl", "ocient"], help="Filter to one company")
     parser.add_argument("--results", type=int, default=5, metavar="N", help="Number of results (default: 5)")
     parser.add_argument("--temp", action="store_true", help="Search the --stage vector dry-run store instead of production")
+    parser.add_argument("--discord", action="store_true", help="Print Discord-formatted output (for testing bot output)")
     args = parser.parse_args()
-    _run(company_filter=args.company, n_results=args.results, use_temp=args.temp)
+    _run(company_filter=args.company, n_results=args.results, use_temp=args.temp, discord_mode=args.discord)
 
 
 if __name__ == "__main__":

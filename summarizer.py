@@ -11,8 +11,6 @@ from storage.models import ScrapedPage
 
 logger = logging.getLogger(__name__)
 
-_CONTENT_CHAR_LIMIT = 15000  # token-budget guard before sending to LLM
-
 _CATEGORY_INSTRUCTIONS: dict[str, str] = {
     "blog": "Focus on the technical insight or capability being introduced.",
     "press_release": (
@@ -72,7 +70,7 @@ class Summarizer:
         self._chain = _PROMPT | llm | StrOutputParser()
 
     def summarize(self, page: ScrapedPage) -> str:
-        content = page.raw_text[:_CONTENT_CHAR_LIMIT]
+        content = page.raw_text[:settings.summarizer_content_chars]
         inputs = {
             "company": page.company,
             "category": page.category,

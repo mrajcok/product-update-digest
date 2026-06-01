@@ -7,7 +7,7 @@ A daily cron job that scrapes news and blog posts from Cribl and Ocient (blog po
 1. **Scrapes** Cribl and Ocient websites for new or changed content
 2. **Deduplicates** using SQLite — skips unchanged content via URL tracking and SHA-256 content hashing
 3. **Summarizes** each new item using a configurable LLM (default: `google/gemma-3-27b-it` via OpenRouter)
-4. **Stores** summaries and vector embeddings in sqlite-vec for semantic search (default: `qwen/qwen3-embedding-8b` via OpenRouter)
+4. **Stores** summaries and two types of embeddings in sqlite-vec: whole-document vectors for semantic search, and overlapping chunks for RAG (default: `qwen/qwen3-embedding-8b` via OpenRouter)
 5. **Publishes** a static HTML digest to GitHub Pages
 
 ## Requirements
@@ -41,17 +41,24 @@ All configuration is via environment variables (`.env` file locally, system env 
 | `OPENROUTER_API_KEY` | OpenRouter API key |
 | `OPENROUTER_SUMMARIZATION_MODEL` | LLM for summaries (default: `google/gemma-3-27b-it`) |
 | `OPENROUTER_STAGE_SUMMARIZATION_MODEL` | LLM for `--stage summarize` (defaults to `OPENROUTER_SUMMARIZATION_MODEL`) |
+| `OPENROUTER_RAG_MODEL` | LLM for RAG Q&A in `tools/rag.py` (defaults to `OPENROUTER_SUMMARIZATION_MODEL`) |
 | `OPENROUTER_EMBEDDING_MODEL` | Embedding model (default: `qwen/qwen3-embedding-8b`) |
 | `EMBEDDING_DIMENSIONS` | Vector dimensions matching the embedding model (default: `4096`) |
+| `MAX_SOURCE_TEXT_CHARS` | Chars of raw text fed to the whole-doc embedding model (default: `15000`) |
+| `SUMMARIZER_CONTENT_CHARS` | Chars of raw text sent to the summarization LLM (default: `15000`) |
+| `SEARCH_SCORE_THRESHOLD` | Minimum cosine similarity (0–1) to return a search or RAG result (default: `0.10`) |
+| `RAG_CHUNK_SIZE_CHARS` | Characters per RAG chunk (default: `2000`) |
+| `RAG_CHUNK_OVERLAP_CHARS` | Overlap between consecutive chunks (default: `200`) |
 | `SQLITE_DB_PATH` | Path to SQLite database (default: `data/product_updates.db`) |
 | `GITHUB_TOKEN` | GitHub PAT for pushing to gh-pages |
 | `GITHUB_REPO` | Target GitHub repo for Pages (e.g., `username/product-updates`) |
 | `GITHUB_PAGES_BRANCH` | Branch to publish to (default: `gh-pages`) |
 | `MAX_ARTICLE_AGE_DAYS` | How far back to index articles (default: `30`) |
 | `MAX_API_RETRIES` | Max retry attempts for LLM/embedding API calls (default: `5`) |
-| `OLLAMA_BASE_URL` | Local Ollama server URL (e.g. `http://localhost:11434/v1`); when set, takes precedence over OpenRouter for summarization |
+| `OLLAMA_BASE_URL` | Local Ollama server URL (e.g. `http://localhost:11434/v1`); when set, takes precedence over OpenRouter for summarization and RAG |
 | `OLLAMA_SUMMARIZATION_MODEL` | Ollama model for full-pipeline summarization (e.g. `gemma3:4b`) |
 | `OLLAMA_STAGE_SUMMARIZATION_MODEL` | Ollama model for `--stage summarize`; defaults to `OLLAMA_SUMMARIZATION_MODEL` |
+| `OLLAMA_RAG_MODEL` | Ollama model for RAG Q&A; defaults to `OLLAMA_SUMMARIZATION_MODEL` |
 
 ### Model recommendations
 As of 2026-05-30, evaluated by Claude Sonnet 4.6.
@@ -99,7 +106,7 @@ Run one stage at a time with `--stage <name>`:
 |---|---|---|
 | scrape | `uv run digest --stage scrape` | Fetches pages, caches text in SQLite, writes `data/dry-run/` scrape preview |
 | summarize | `uv run digest --stage summarize` | Calls LLM on cached articles, writes summary preview to `data/dry-run/` |
-| vector | `uv run digest --stage vector` | Embeds cached articles into a temp store (`data/dry-run/vec_test.db`), writes full-text listing preview |
+| vector | `uv run digest --stage vector` | Embeds cached articles (whole-doc + chunks) into a temp store (`data/dry-run/vec_test.db`), writes full-text listing preview |
 | render | `uv run digest --stage render` | Renders the full site from the DB to `data/dry-run/` for local review |
 
 The `scrape`, `summarize`, and `vector` stages write **preview** HTML to `data/dry-run/` showing only the articles processed in that run — they are not suitable for publishing directly. Use `--stage render` to generate a full preview of the site as it would appear on GitHub Pages, then `--publish` to push it. `--stage render` is also useful as a recovery tool if the published pages ever get into a bad state.
@@ -130,7 +137,23 @@ uv run python tools/search.py --company cribl
 uv run python tools/search.py --results 10
 uv run python tools/search.py --temp                 # search --stage vector dry-run store
 uv run python tools/search.py --temp --company cribl
+uv run python tools/search.py --discord              # preview Discord-formatted output
 ```
+
+Returns whole-document results ranked by cosine similarity, displaying LLM-generated summaries. Results below `SEARCH_SCORE_THRESHOLD` are suppressed. The `--discord` flag renders results as Discord markdown (converts `##` headings to bold, preserves `**bold**` and bullet lists). The `format_results_for_discord()` function in `tools/search.py` is importable for use in a bot directly.
+
+## RAG (question answering)
+
+```bash
+uv run python tools/rag.py                           # Q&A against production store
+uv run python tools/rag.py --company cribl
+uv run python tools/rag.py --results 6               # chunks to retrieve (default: 5)
+uv run python tools/rag.py --temp                    # use --stage vector dry-run store
+uv run python tools/rag.py --show-chunks             # print retrieved chunks before the answer
+uv run python tools/rag.py --discord                 # format answer as Discord markdown
+```
+
+Retrieves the most relevant article *chunks* (not whole documents) for the question, then passes them to the RAG LLM to produce a grounded answer with numbered citations. The `--discord` flag formats the answer and source list for posting in Discord. `format_results_for_discord()` in `tools/search.py` and the RAG answer text are both importable for a Discord bot.
 
 ## Running tests
 
@@ -166,7 +189,8 @@ publisher/
     index.html.j2              # top N updates across all companies (INDEX_PAGE_LIMIT)
     company_index.html.j2      # full history for one company, grouped by month
 tools/
-  search.py                    # CLI for semantic search over the vector store
+  search.py                    # CLI for semantic search (whole-doc vectors, returns summaries)
+  rag.py                       # CLI for RAG Q&A (chunk retrieval → LLM answer with citations)
 docs/
   plan.md                      # implementation plan
 ```
@@ -175,7 +199,9 @@ docs/
 
 ## Vector store schema
 
-The `vec_items` table (and the `vec_embeddings` virtual table alongside it) stores the following, also used by the `tools/search.py` CLI and any external consumers:
+Each article produces two types of embeddings written during the vector stage:
+
+**Whole-document** (`vec_items` + `vec_embeddings`) — used by `tools/search.py` for semantic search:
 
 | Field | Type | Notes |
 |---|---|---|
@@ -187,7 +213,20 @@ The `vec_items` table (and the `vec_embeddings` virtual table alongside it) stor
 | `scraped_at` | string | ISO 8601 |
 | `published_date` | string | ISO 8601, nullable |
 | `summary` | string | LLM-generated summary |
-| `source_text` | string | truncated raw article text (what gets embedded) |
+| `source_text` | string | truncated raw article text (up to `MAX_SOURCE_TEXT_CHARS`) |
+
+**Chunks** (`vec_chunk_items` + `vec_chunk_embeddings`) — used by `tools/rag.py` for passage-level retrieval:
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | string | `{article_id}_c{n}` |
+| `article_id` | string | references `vec_items.id` |
+| `url` | string | canonical article URL |
+| `company` / `category` / `title` / `published_date` | string | copied from parent article |
+| `chunk_index` | integer | position within the article |
+| `chunk_text` | string | the chunk content (`RAG_CHUNK_SIZE_CHARS` with `RAG_CHUNK_OVERLAP_CHARS` overlap) |
+
+Chunk embeddings are generated in a single batched API call per article. A 15,000-char article with 2,000-char chunks and 200-char overlap produces ~8 chunks.
 
 ## Design Notes
 
@@ -195,7 +234,7 @@ Scrapers use the sitemap.xml files for URL discovery rather than scraping listin
 
 Vector storage uses sqlite-vec (a ~163KB SQLite extension) instead of a separate Chroma server. This eliminates the need for a running HTTP service and reduces the venv from ~500MB to ~260MB by dropping onnxruntime, numpy, kubernetes, and grpcio.
 
-Moving to uv dropped the .venv size to a mere 118 MB.
+Semantic search (`tools/search.py`) uses whole-document vectors and returns LLM summaries — fast and good for "what's new" queries. RAG (`tools/rag.py`) uses chunk-level vectors to retrieve specific passages, then synthesizes a grounded answer via an LLM — better for specific questions like "Does Cribl support HIPAA?". Both suppress results below `SEARCH_SCORE_THRESHOLD` (default 0.10).
 
 ## License
 

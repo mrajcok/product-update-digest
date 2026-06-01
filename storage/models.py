@@ -5,8 +5,7 @@ from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 from pydantic import BaseModel, model_validator
 
-MAX_SOURCE_TEXT_CHARS = 8000
-
+from config import settings
 
 def normalize_url(url: str) -> str:
     """Normalize a URL for consistent deduplication across minor variations."""
@@ -96,7 +95,7 @@ class ProductUpdate(BaseModel):
     scraped_at: str       # ISO 8601 string (Chroma metadata must be str/int/float/bool)
     published_date: str | None = None
     summary: str
-    source_text: str      # truncated to MAX_SOURCE_TEXT_CHARS; this is what gets embedded
+    source_text: str      # truncated to settings.max_source_text_chars; this is what gets embedded
 
     @classmethod
     def from_scraped_page(cls, page: ScrapedPage, summary: str) -> "ProductUpdate":
@@ -108,5 +107,5 @@ class ProductUpdate(BaseModel):
             scraped_at=page.scraped_at.isoformat(),
             published_date=page.published_date,
             summary=summary,
-            source_text=page.raw_text[:MAX_SOURCE_TEXT_CHARS],
+            source_text=page.raw_text[:settings.max_source_text_chars],
         )

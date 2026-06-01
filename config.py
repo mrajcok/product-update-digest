@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     openrouter_api_key: str = "dummy"
     openrouter_summarization_model: str = "google/gemma-3-27b-it"
     openrouter_stage_summarization_model: str = ""  # falls back to openrouter_summarization_model
+    openrouter_rag_model: str = ""                  # falls back to openrouter_summarization_model
     openrouter_embedding_model: str = "qwen/qwen3-embedding-8b"
     # qwen3-embedding-8b produces 4096-dim vectors; update this if you switch models
     embedding_dimensions: int = 4096
@@ -21,6 +22,7 @@ class Settings(BaseSettings):
     ollama_base_url: str = ""
     ollama_summarization_model: str = ""
     ollama_stage_summarization_model: str = ""  # falls back to ollama_summarization_model
+    ollama_rag_model: str = ""                  # falls back to ollama_summarization_model
 
     sqlite_db_path: str = "data/product_updates.db"
 
@@ -32,6 +34,11 @@ class Settings(BaseSettings):
     max_article_age_days: int = 30
     index_page_limit: int = 10
     max_api_retries: int = 5
+    summarizer_content_chars: int
+    max_source_text_chars: int
+    search_score_threshold: float = 0.10
+    rag_chunk_size_chars: int = 2000
+    rag_chunk_overlap_chars: int = 200
 
 
 settings = Settings()  # type: ignore[call-arg]
