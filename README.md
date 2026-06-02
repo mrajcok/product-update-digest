@@ -174,7 +174,8 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for full instructions covering GitHub Pages f
 ```
 main.py                        # orchestration entry point
 config.py                      # pydantic-settings config
-summarizer.py                  # LangChain summarization chain
+summarizer/
+  __init__.py                  # LangChain summarization chain
 scrapers/
   base.py                      # abstract scraper (dedup loop, retry logic)
   cribl.py                     # Cribl scraper (sitemap-based discovery)

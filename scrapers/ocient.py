@@ -21,10 +21,7 @@ logger = logging.getLogger(__name__)
 _BLOG_SITEMAP_URL = "https://ocient.com/blog_post-sitemap.xml"
 _NEWS_SITEMAP_URL = "https://ocient.com/news_release-sitemap.xml"
 
-_PRODUCT_URLS = [
-    "https://ocient.com/platform/",
-    "https://ocient.com/solutions/",
-]
+_PRODUCT_URLS: list[str] = []
 
 _ARTICLE_CONTENT_SELS = ["article", "div.entry-content", "div.post-content", "main"]
 
