@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cribl & Ocient News & Blog Posts</title>
+  <title>Cribl News & Blog Posts</title>
   <script>
     if (localStorage.getItem('theme') === 'light')
       document.documentElement.setAttribute('data-theme', 'light');
@@ -19,12 +19,7 @@
       --text-3:           #555;
       --link:             #7ab3f5;
       --link-hover:       #a0c8ff;
-      --tag-bg:           #2a2a2a;
-      --tag-color:        #888;
-      --badge-cribl-bg:   #1b3558;
-      --badge-cribl-fg:   #7ab3f5;
-      --badge-ocient-bg:  #3a2200;
-      --badge-ocient-fg:  #f0a030;
+      --month-color:      #666;
       --track-bg:         #444;
       --track-active:     #5a8de0;
       --thumb:            #bbb;
@@ -40,12 +35,7 @@
       --text-3:           #999;
       --link:             #0066cc;
       --link-hover:       #004499;
-      --tag-bg:           #f0f0f0;
-      --tag-color:        #555;
-      --badge-cribl-bg:   #e8f0fe;
-      --badge-cribl-fg:   #1a56db;
-      --badge-ocient-bg:  #fef3c7;
-      --badge-ocient-fg:  #92400e;
+      --month-color:      #555;
       --track-bg:         #c8d8f0;
       --track-active:     #0066cc;
       --thumb:            #0066cc;
@@ -53,31 +43,20 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; color: var(--text); background: var(--bg); }
-    h1 { border-bottom: 2px solid var(--border); padding-bottom: .5rem; margin-bottom: 1rem; }
+    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: var(--text); background: var(--bg); }
+    h1 { border-bottom: 2px solid var(--border); padding-bottom: .5rem; margin-bottom: .75rem; }
     .top-bar { display: flex; align-items: center; margin-bottom: 1.5rem; }
-    .index-hint { flex: 1; font-size: .95rem; color: var(--text-2); margin: 0; }
-    .index-hint a { color: var(--link); text-decoration: none; }
-    .index-hint a:hover { color: var(--link-hover); }
-    .card { border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: 1rem; background: var(--surface); }
+    .breadcrumb { flex: 1; font-size: .9rem; }
+    .breadcrumb a { color: var(--link); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--link-hover); }
+    h2.month { margin: 1.75rem 0 .75rem; font-size: 1rem; color: var(--month-color); text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--border-subtle); padding-bottom: .25rem; }
+    .card { border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: .75rem; background: var(--surface); }
     .meta { font-size: .85rem; color: var(--text-2); margin-bottom: .4rem; }
-    .badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .75rem; font-weight: 600; margin-right: .4rem; text-decoration: none; }
-    .badge:hover { opacity: .85; }
-    .badge-cribl  { background: var(--badge-cribl-bg);  color: var(--badge-cribl-fg); }
-    .badge-ocient { background: var(--badge-ocient-bg); color: var(--badge-ocient-fg); }
-    .card h2 { margin: .25rem 0 .5rem; font-size: 1.05rem; }
-    .card h2 a { color: var(--link); text-decoration: none; }
-    .card h2 a:hover { color: var(--link-hover); text-decoration: underline; }
+    .card h3 { margin: .2rem 0 .5rem; font-size: 1rem; }
+    .card h3 a { color: var(--link); text-decoration: none; }
+    .card h3 a:hover { color: var(--link-hover); text-decoration: underline; }
     .summary { font-size: .9rem; line-height: 1.5; color: var(--text-2); }
     .generated-at { font-size: .82rem; color: var(--text-3); margin: -.5rem 0 1.5rem; }
-    .scraper-summary { margin-top: 2.5rem; border-top: 2px solid var(--border); padding-top: 1rem; }
-    .scraper-summary h2 { font-size: 1rem; color: var(--text-2); margin-bottom: 1rem; }
-    .scraper-block { margin-bottom: 1.25rem; }
-    .scraper-block h3 { font-size: .9rem; font-weight: 600; color: var(--text); margin: 0 0 .35rem; text-transform: capitalize; }
-    .scraper-block ul { margin: 0 0 .5rem 1.25rem; padding: 0; font-size: .82rem; color: var(--text-2); }
-    .scraper-block li { margin-bottom: .2rem; }
-    .scraper-block .label { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--text-3); margin: .4rem 0 .2rem; }
-
 
     /* theme toggle */
     .theme-toggle { display: flex; align-items: center; gap: .4rem; cursor: pointer; user-select: none; }
@@ -90,25 +69,26 @@
   </style>
 </head>
 <body>
-  <h1>Cribl & Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-01 09:53 PM EDT</p>
   <div class="top-bar">
-    <p class="index-hint">Showing the 10 most recent updates — see <a href="cribl/">Cribl</a> and <a href="ocient/">Ocient</a> for full history.</p>
+    <div class="breadcrumb"><a href="../">← All Updates</a></div>
     <label class="theme-toggle" title="Toggle light/dark theme">
       <input type="checkbox" id="theme-chk">
       <span class="track"></span>
       <span class="toggle-icon" id="theme-icon">☀</span>
     </label>
   </div>
+  <h1>Cribl News & Blog Posts</h1>
+  <p class="generated-at">Generated 2026-06-01 09:53 PM EDT</p>
 
+  
+  <h2 class="month">June 2026</h2>
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>product</span>
       
     </div>
-    <h2><a href="https://cribl.io/products/search/" target="_blank" rel="noopener">Cribl Search - Faster Log Investigations Without SIEM Costs or Complexity | Cribl</a></h2>
+    <h3><a href="https://cribl.io/products/search/" target="_blank" rel="noopener">Cribl Search - Faster Log Investigations Without SIEM Costs or Complexity | Cribl</a></h3>
     
     <div class="summary"><h2>Cribl Search: AI-Powered Log Investigation</h2>
 <p>Cribl Search offers faster log investigations without the costs and complexity of a SIEM, leveraging AI to accelerate workflows and reduce manual toil.</p>
@@ -123,11 +103,10 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>product</span>
       
     </div>
-    <h2><a href="https://cribl.io/products/lake/" target="_blank" rel="noopener">Cribl Lake - Your Scalable Cloud Data Lake Solution | Cribl</a></h2>
+    <h3><a href="https://cribl.io/products/lake/" target="_blank" rel="noopener">Cribl Lake - Your Scalable Cloud Data Lake Solution | Cribl</a></h3>
     
     <div class="summary"><p>Cribl Lake provides a scalable cloud data lake solution designed for telemetry data, emphasizing ease of use and cost reduction.</p>
 <ul>
@@ -141,11 +120,10 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>product</span>
       
     </div>
-    <h2><a href="https://cribl.io/products/stream/" target="_blank" rel="noopener">Cribl Stream - Simplify Data Collection, Control, &amp; Routing | Cribl</a></h2>
+    <h3><a href="https://cribl.io/products/stream/" target="_blank" rel="noopener">Cribl Stream - Simplify Data Collection, Control, &amp; Routing | Cribl</a></h3>
     
     <div class="summary"><h2>Cribl Stream: Data Pipeline Simplification</h2>
 <p>Cribl Stream is an observability pipeline designed to simplify the collection, reduction, enrichment, and routing of telemetry data from any source to any tool, aiming to reduce costs and complexity. </p>
@@ -158,31 +136,15 @@
     
   </div>
   
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-06-02</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/graph-analytics-at-scale-without-spark-bottlenecks/" target="_blank" rel="noopener">Graph analytics at scale without Spark bottlenecks</a></h2>
-    
-    <div class="summary"><p>OcientAIQ™ introduces OCGraph, a library for running large-scale graph algorithms directly within the platform, avoiding Spark bottlenecks.</p>
-<ul>
-<li>OCGraph is available in Java (via the Ocient JDBC driver – <code>com.ocient:ocient-jdbc4</code>) and Python (<code>pip install ocient-graph</code>) with identical APIs.</li>
-<li>Graphs are represented as two relational tables: a vertices table (with an <code>id</code> column) and an edges table (with <code>srcid</code> and <code>destid</code> columns). This allows leveraging existing Ocient table features like indexing and joining.</li>
-<li>The library currently supports algorithms including Connected Components, PageRank, Triangle Count, Weighted Shortest Paths, and Label Propagation, offering similar functionality to GraphX/GraphFrames but with a simplified API.</li>
-<li>Benchmarking against GraphFrames/GraphX on the LDBC Graphalytics twitter_mpi dataset (52.6M vertices, 1.96B edges) showed OCGraph running algorithms 7x to 17x faster, and successfully completing Triangle Count where Spark failed.</li>
-</ul></div>
-    
-  </div>
+  
+  <h2 class="month">May 2026</h2>
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
       <span> · 2026-05-29</span>
     </div>
-    <h2><a href="https://cribl.io/blog/smarter-data-pipelines-for-modern-healthcare/" target="_blank" rel="noopener">Smarter data pipelines for modern healthcare | Cribl</a></h2>
+    <h3><a href="https://cribl.io/blog/smarter-data-pipelines-for-modern-healthcare/" target="_blank" rel="noopener">Smarter data pipelines for modern healthcare | Cribl</a></h3>
     
     <div class="summary"><h2>Smarter Data Pipelines for Modern Healthcare</h2>
 <p>Cribl products provide increased control over telemetry data, enabling healthcare organizations to improve data quality, security, and cost-effectiveness.</p>
@@ -197,11 +159,10 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
       <span> · 2026-05-28</span>
     </div>
-    <h2><a href="https://cribl.io/blog/data-lake-vs-data-warehouse-what-is-the-difference/" target="_blank" rel="noopener">Data Lake vs. Data Warehouse: What is the Difference | Cribl</a></h2>
+    <h3><a href="https://cribl.io/blog/data-lake-vs-data-warehouse-what-is-the-difference/" target="_blank" rel="noopener">Data Lake vs. Data Warehouse: What is the Difference | Cribl</a></h3>
     
     <div class="summary"><h2>Data Lake vs. Data Warehouse: What is the Difference?</h2>
 <p>This article discusses the evolving landscape of data storage and processing, particularly in the context of AI and machine learning. It highlights that the choice isn't simply between data lakes and data warehouses, but building a comprehensive data architecture that emphasizes data quality, governance, and pipeline control.</p>
@@ -216,11 +177,10 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
       <span> · 2026-05-28</span>
     </div>
-    <h2><a href="https://cribl.io/blog/from-m2131-to-m2614-a-more-practical-path-to-federal-logging-and-visibility/" target="_blank" rel="noopener">From M-21-31 to M-26-14: A more practical path to federal logging and visibility | Cribl</a></h2>
+    <h3><a href="https://cribl.io/blog/from-m2131-to-m2614-a-more-practical-path-to-federal-logging-and-visibility/" target="_blank" rel="noopener">From M-21-31 to M-26-14: A more practical path to federal logging and visibility | Cribl</a></h3>
     
     <div class="summary"><p>Cribl supports the move from OMB Memorandum M-21-31 to M-26-14, which prioritizes a risk-based, tiered approach to federal logging and visibility.</p>
 <ul>
@@ -234,11 +194,10 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
       <span> · 2026-05-27</span>
     </div>
-    <h2><a href="https://cribl.io/blog/combining-logging-metrics-and-monitoring/" target="_blank" rel="noopener">Mastering the Art of Combining Logging, Metrics and Monitoring | Cribl</a></h2>
+    <h3><a href="https://cribl.io/blog/combining-logging-metrics-and-monitoring/" target="_blank" rel="noopener">Mastering the Art of Combining Logging, Metrics and Monitoring | Cribl</a></h3>
     
     <div class="summary"><p>Cribl enables combining logs and metrics by treating them as connected signals, allowing teams to quickly move from metric-based alerts to relevant log data for root cause analysis and reduce storage/indexing costs.</p>
 <ul>
@@ -250,72 +209,6 @@
     
   </div>
   
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-05-14</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/ocient-joins-the-gsma-advancing-the-future-of-data-driven-telecom/" target="_blank" rel="noopener">Ocient Joins the GSMA: Advancing the future of data-driven telecom</a></h2>
-    
-    <div class="summary"><p>Ocient has joined the GSMA to better serve the telecommunications industry with its data and AI solutions.</p>
-<ul>
-<li>OcientAIQ™ platform is designed to unify and analyze high-volume, high-velocity data for Communication Service Providers (CSPs).</li>
-<li>The platform focuses on enabling real-time network analytics, anomaly detection, and cross-domain data correlation.</li>
-<li>Ocient aims to help CSPs transition from AI experimentation to production-ready AI and automation.</li>
-<li>GSMA membership will facilitate collaboration with industry leaders and contribution to emerging standards in AI, data architecture, and automation within the telecom sector.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-05-14</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/canadas-telecom-rules-are-changing/" target="_blank" rel="noopener">Canada&#39;s telecom rules are changing - quietly, but fundamentally</a></h2>
-    
-    <div class="summary"><p>Ocient highlights a shift in Canadian telecom regulations towards real-time compliance and evidence provision.</p>
-<ul>
-<li>New regulations (Bill C-22, CCSPA, CRTC outage reporting) demand faster response times – potentially minutes or hours – and more comprehensive, auditable data.</li>
-<li>Traditional telecom data environments, optimized for cost and periodic reporting, struggle with the speed and scale required for these new demands.</li>
-<li>The OcientAIQ™ platform is positioned as a solution, designed for high-speed analytics on massive datasets, enabling complete data analysis rather than sampling.</li>
-<li>Ocient emphasizes its platform's ability to unify data across domains and provide fast, defensible results for regulatory scrutiny.</li>
-</ul></div>
-    
-  </div>
-  
-
-  
-  <section class="scraper-summary">
-    <h2>Coverage</h2>
-    
-    <div class="scraper-block">
-      <h3>ocient</h3>
-      <div class="label">Sources</div>
-      <ul>
-        <li>https://ocient.com/blog_post-sitemap.xml — blog posts</li><li>https://ocient.com/news_release-sitemap.xml — press releases</li>
-      </ul>
-      <div class="label">Excluded</div>
-      <ul>
-        <li class="excl">blog URLs containing &#34;employee-spotlight&#34;</li>
-      </ul>
-    </div>
-    
-    <div class="scraper-block">
-      <h3>cribl</h3>
-      <div class="label">Sources</div>
-      <ul>
-        <li>https://cribl.io/sitemap.xml — blog posts and news releases</li><li>https://cribl.io/products/stream/</li><li>https://cribl.io/products/lake/</li><li>https://cribl.io/products/search/</li>
-      </ul>
-      <div class="label">Excluded</div>
-      <ul>
-        <li class="excl">blog URLs containing &#34;cribl-edge&#34;</li><li class="excl">blog URLs containing &#34;company-culture&#34;</li>
-      </ul>
-    </div>
-    
-  </section>
   
 
   <script>

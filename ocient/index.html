@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ocient News & Blog Posts</title>
+  <script>
+    if (localStorage.getItem('theme') === 'light')
+      document.documentElement.setAttribute('data-theme', 'light');
+  </script>
+  <style>
+    :root {
+      --bg:               #111;
+      --surface:          #1e1e1e;
+      --border:           #2e2e2e;
+      --border-subtle:    #252525;
+      --text:             #d4d4d4;
+      --text-2:           #888;
+      --text-3:           #555;
+      --link:             #7ab3f5;
+      --link-hover:       #a0c8ff;
+      --month-color:      #666;
+      --track-bg:         #444;
+      --track-active:     #5a8de0;
+      --thumb:            #bbb;
+      --thumb-active:     #fff;
+    }
+    html[data-theme="light"] {
+      --bg:               #fff;
+      --surface:          #fff;
+      --border:           #e0e0e0;
+      --border-subtle:    #eee;
+      --text:             #222;
+      --text-2:           #666;
+      --text-3:           #999;
+      --link:             #0066cc;
+      --link-hover:       #004499;
+      --month-color:      #555;
+      --track-bg:         #c8d8f0;
+      --track-active:     #0066cc;
+      --thumb:            #0066cc;
+      --thumb-active:     #fff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: var(--text); background: var(--bg); }
+    h1 { border-bottom: 2px solid var(--border); padding-bottom: .5rem; margin-bottom: .75rem; }
+    .top-bar { display: flex; align-items: center; margin-bottom: 1.5rem; }
+    .breadcrumb { flex: 1; font-size: .9rem; }
+    .breadcrumb a { color: var(--link); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--link-hover); }
+    h2.month { margin: 1.75rem 0 .75rem; font-size: 1rem; color: var(--month-color); text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--border-subtle); padding-bottom: .25rem; }
+    .card { border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: .75rem; background: var(--surface); }
+    .meta { font-size: .85rem; color: var(--text-2); margin-bottom: .4rem; }
+    .card h3 { margin: .2rem 0 .5rem; font-size: 1rem; }
+    .card h3 a { color: var(--link); text-decoration: none; }
+    .card h3 a:hover { color: var(--link-hover); text-decoration: underline; }
+    .summary { font-size: .9rem; line-height: 1.5; color: var(--text-2); }
+    .generated-at { font-size: .82rem; color: var(--text-3); margin: -.5rem 0 1.5rem; }
+
+    /* theme toggle */
+    .theme-toggle { display: flex; align-items: center; gap: .4rem; cursor: pointer; user-select: none; }
+    .theme-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .track { width: 38px; height: 21px; background: var(--track-bg); border-radius: 21px; position: relative; transition: background .2s; flex-shrink: 0; }
+    .track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 15px; height: 15px; border-radius: 50%; background: var(--thumb); transition: transform .2s, background .2s; }
+    .theme-toggle input:checked ~ .track { background: var(--track-active); }
+    .theme-toggle input:checked ~ .track::after { transform: translateX(17px); background: var(--thumb-active); }
+    .toggle-icon { font-size: .9rem; line-height: 1; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="breadcrumb"><a href="../">← All Updates</a></div>
+    <label class="theme-toggle" title="Toggle light/dark theme">
+      <input type="checkbox" id="theme-chk">
+      <span class="track"></span>
+      <span class="toggle-icon" id="theme-icon">☀</span>
+    </label>
+  </div>
+  <h1>Ocient News & Blog Posts</h1>
+  <p class="generated-at">Generated 2026-06-01 09:53 PM EDT</p>
+
+  
+  <h2 class="month">June 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-02</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/graph-analytics-at-scale-without-spark-bottlenecks/" target="_blank" rel="noopener">Graph analytics at scale without Spark bottlenecks</a></h3>
+    
+    <div class="summary"><p>OcientAIQ™ introduces OCGraph, a library for running large-scale graph algorithms directly within the platform, avoiding Spark bottlenecks.</p>
+<ul>
+<li>OCGraph is available in Java (via the Ocient JDBC driver – <code>com.ocient:ocient-jdbc4</code>) and Python (<code>pip install ocient-graph</code>) with identical APIs.</li>
+<li>Graphs are represented as two relational tables: a vertices table (with an <code>id</code> column) and an edges table (with <code>srcid</code> and <code>destid</code> columns). This allows leveraging existing Ocient table features like indexing and joining.</li>
+<li>The library currently supports algorithms including Connected Components, PageRank, Triangle Count, Weighted Shortest Paths, and Label Propagation, offering similar functionality to GraphX/GraphFrames but with a simplified API.</li>
+<li>Benchmarking against GraphFrames/GraphX on the LDBC Graphalytics twitter_mpi dataset (52.6M vertices, 1.96B edges) showed OCGraph running algorithms 7x to 17x faster, and successfully completing Triangle Count where Spark failed.</li>
+</ul></div>
+    
+  </div>
+  
+  
+  <h2 class="month">May 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-05-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/ocient-joins-the-gsma-advancing-the-future-of-data-driven-telecom/" target="_blank" rel="noopener">Ocient Joins the GSMA: Advancing the future of data-driven telecom</a></h3>
+    
+    <div class="summary"><p>Ocient has joined the GSMA to better serve the telecommunications industry with its data and AI solutions.</p>
+<ul>
+<li>OcientAIQ™ platform is designed to unify and analyze high-volume, high-velocity data for Communication Service Providers (CSPs).</li>
+<li>The platform focuses on enabling real-time network analytics, anomaly detection, and cross-domain data correlation.</li>
+<li>Ocient aims to help CSPs transition from AI experimentation to production-ready AI and automation.</li>
+<li>GSMA membership will facilitate collaboration with industry leaders and contribution to emerging standards in AI, data architecture, and automation within the telecom sector.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-05-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/canadas-telecom-rules-are-changing/" target="_blank" rel="noopener">Canada&#39;s telecom rules are changing - quietly, but fundamentally</a></h3>
+    
+    <div class="summary"><p>Ocient highlights a shift in Canadian telecom regulations towards real-time compliance and evidence provision.</p>
+<ul>
+<li>New regulations (Bill C-22, CCSPA, CRTC outage reporting) demand faster response times – potentially minutes or hours – and more comprehensive, auditable data.</li>
+<li>Traditional telecom data environments, optimized for cost and periodic reporting, struggle with the speed and scale required for these new demands.</li>
+<li>The OcientAIQ™ platform is positioned as a solution, designed for high-speed analytics on massive datasets, enabling complete data analysis rather than sampling.</li>
+<li>Ocient emphasizes its platform's ability to unify data across domains and provide fast, defensible results for regulatory scrutiny.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-05-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/compute-adjacent-storage-at-work-24-drives-9-6-tb-1-query/" target="_blank" rel="noopener">Compute-Adjacent Storage at Work: 24 drives, 9.6 TB, 1 query</a></h3>
+    
+    <div class="summary"><p>OcientAIQ demonstrates high sustained I/O throughput through its “compute-adjacent storage” model, pushing processing to the drive level.</p>
+<ul>
+<li>A benchmark utilizing 24 NVMe drives (3 nodes of 8 drives each) processed 9.6 TB of uncompressed, randomly generated 64-bit integers.</li>
+<li>A single query achieved aggregate throughput of 35.82 GB/s, or 1.49 GB/s per drive, sustained for 268 seconds.</li>
+<li>This performance represents 29-44% of the theoretical maximum read speed of the Samsung NVMe drives used (rated at 5.2 GB/s sequential reads).</li>
+<li>The architecture avoids network bandwidth bottlenecks by filtering and processing data directly at the drive level, only propagating a single count value upwards.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-05-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/from-connectivity-to-clarity-the-real-data-challenge-in-the-indo-pacific/" target="_blank" rel="noopener">From Connectivity to Clarity: The real data challenge in the Indo-Pacific</a></h3>
+    
+    <div class="summary"><p>Ocient highlights a shift from focusing on data connectivity to ensuring data <em>clarity</em> for operations in the Indo-Pacific region.</p>
+<ul>
+<li>The core issue isn't a lack of data, but the difficulty of transforming fragmented and inconsistent data into usable insight quickly enough for decision-making.</li>
+<li>Ocient advocates for a data-centric architecture with a “translation layer” to ingest, normalize, and enrich data at scale, sitting between data sources and applications.</li>
+<li>The article emphasizes the limitations of relying on increased connectivity when data engineering, specifically ETL pipelines, schema alignment, and metadata standardization, are the primary bottlenecks.</li>
+<li>Ocient’s platform is positioned as enabling high-performance data processing, schema alignment, and real-time analytics in complex, distributed environments – crucial for operating in disconnected, intermittent, or low-bandwidth (DDIL) conditions.</li>
+</ul></div>
+    
+  </div>
+  
+  
+
+  <script>
+    const chk = document.getElementById('theme-chk');
+    const icon = document.getElementById('theme-icon');
+    const saved = localStorage.getItem('theme') || 'dark';
+    if (saved === 'light') { chk.checked = true; icon.textContent = '🌙'; }
+    chk.addEventListener('change', function () {
+      if (this.checked) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        icon.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        icon.textContent = '☀';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>
