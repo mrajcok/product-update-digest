@@ -21,10 +21,8 @@
       --link-hover:       #a0c8ff;
       --tag-bg:           #2a2a2a;
       --tag-color:        #888;
-      --badge-cribl-bg:   #003333;
-      --badge-cribl-fg:   #00cccc;
-      --badge-ocient-bg:  #3a2200;
-      --badge-ocient-fg:  #f0a030;
+      --badge-cribl-bg:   #00cccc;
+      --badge-cribl-fg:   #111;
       --track-bg:         #444;
       --track-active:     #5a8de0;
       --thumb:            #bbb;
@@ -42,10 +40,8 @@
       --link-hover:       #004499;
       --tag-bg:           #f0f0f0;
       --tag-color:        #555;
-      --badge-cribl-bg:   #e0fafa;
-      --badge-cribl-fg:   #006666;
-      --badge-ocient-bg:  #fef3c7;
-      --badge-ocient-fg:  #92400e;
+      --badge-cribl-bg:   #00cccc;
+      --badge-cribl-fg:   #111;
       --track-bg:         #c8d8f0;
       --track-active:     #0066cc;
       --thumb:            #0066cc;
@@ -64,7 +60,7 @@
     .badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .75rem; font-weight: 600; margin-right: .4rem; text-decoration: none; }
     .badge:hover { opacity: .85; }
     .badge-cribl  { background: var(--badge-cribl-bg);  color: var(--badge-cribl-fg); }
-    .badge-ocient { background: var(--badge-ocient-bg); color: var(--badge-ocient-fg); }
+    .badge-ocient { background: linear-gradient(270deg, rgba(0,235,252,1) 0%, rgba(193,227,33,1) 100%); color: #111; }
     .card h2 { margin: .25rem 0 .5rem; font-size: 1.05rem; }
     .card h2 a { color: var(--link); text-decoration: none; }
     .card h2 a:hover { color: var(--link-hover); text-decoration: underline; }
@@ -91,7 +87,7 @@
 </head>
 <body>
   <h1>Cribl & Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-01 09:59 PM EDT</p>
+  <p class="generated-at">Generated 2026-06-01 10:24 PM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 10 most recent updates — see <a href="cribl/">Cribl</a> and <a href="ocient/">Ocient</a> for full history.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -182,6 +178,42 @@
       <span>blog</span>
       <span> · 2026-05-29</span>
     </div>
+    <h2><a href="https://cribl.io/blog/cribl-search/" target="_blank" rel="noopener">Cribl Search | Cribl Blog</a></h2>
+    
+    <div class="summary"><p>The Cribl blog highlights frequent updates to both <strong>Cribl Search</strong> and <strong>Cribl Lake</strong>. A new architecture for <strong>Cribl Search v2</strong> promises faster federated searches, while recent posts detail “Search Packs” for integrations with platforms like Palo Alto SLS, Corelight, and AWS WAF, offering instant visibility into those data sources. <strong>Cribl Search</strong> also introduces Notebook templates to standardize investigations and leverages AI-driven capabilities for improved search functionality. Several posts focus on use cases within healthcare, security (bot traffic analysis with Hydrolix), and operational technology.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-05-29</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/cribl-stream/" target="_blank" rel="noopener">Cribl Stream | Cribl Blog</a></h2>
+    
+    <div class="summary"><p>Recent Cribl blog posts cover a wide range of updates and integrations, including guidance on using self-signed TLS for secure Cribl-to-Cribl data streams and leveraging the Claude Compliance API for AI telemetry. Several posts focus on observability and security, such as using Cribl Guard for sensitive data discovery, integrating with AppOmni for SaaS security, and temporal threat hunting.  Additionally, Cribl has become a CVE Numbering Authority (CNA) and introduced Group Variables for improved Cribl Pack configuration; CrowdStream end-of-life migration guidance is also available. Cribl Insights can now be utilized to monitor system health and data flow.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-05-29</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/cribl-lake/" target="_blank" rel="noopener">Cribl Lake | Cribl Blog</a></h2>
+    
+    <div class="summary"><p>The Cribl Lake blog covers a range of topics related to data pipelines and data lakes, with recent posts focusing on integrations and capabilities within Cribl Lake. Specifically, the “Direct Access” feature allows for data ingestion with minimal overhead. Several posts detail searching data in place within Microsoft Azure and achieving data residency, while others explore using Cribl Lake for security data lakes, scalability, and compliance. Additional topics include Bring Your Own Storage (BYOS) configurations and ingesting Splunk DDSS data directly into Cribl Lake.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-05-29</span>
+    </div>
     <h2><a href="https://cribl.io/blog/smarter-data-pipelines-for-modern-healthcare/" target="_blank" rel="noopener">Smarter data pipelines for modern healthcare | Cribl</a></h2>
     
     <div class="summary"><h2>Smarter Data Pipelines for Modern Healthcare</h2>
@@ -201,16 +233,10 @@
       <span>blog</span>
       <span> · 2026-05-28</span>
     </div>
-    <h2><a href="https://cribl.io/blog/data-lake-vs-data-warehouse-what-is-the-difference/" target="_blank" rel="noopener">Data Lake vs. Data Warehouse: What is the Difference | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/learning/" target="_blank" rel="noopener">Learning | Cribl Blog</a></h2>
     
-    <div class="summary"><h2>Data Lake vs. Data Warehouse: What is the Difference?</h2>
-<p>This article discusses the evolving landscape of data storage and processing, particularly in the context of AI and machine learning. It highlights that the choice isn't simply between data lakes and data warehouses, but building a comprehensive data architecture that emphasizes data quality, governance, and pipeline control.</p>
-<ul>
-<li>Data lakes store raw, multi-format data cheaply, ideal for ML, telemetry, observability, and exploratory analysis.</li>
-<li>Data warehouses store cleaned, structured data optimized for fast BI, reporting, and governed analytics.</li>
-<li>Lakehouses combine the scale and flexibility of lakes with the performance and governance of warehouses, leading to hybrid architectures.</li>
-<li>Cribl helps teams filter, enrich, route, and reduce telemetry data <em>before</em> storage to control costs and complexity – with features like Cribl Lake and Cribl Search.</li>
-</ul></div>
+    <div class="summary"><p>The Cribl blog features a variety of technical content focused on modern data strategies. Recent posts detail the ability to utilize "Bring Your Own Model" (BYOM) to power Cribl AI with preferred backends, and leverage Cribl Notebooks for troubleshooting. Several articles address the impact of AI and agentic AI on data infrastructure, security, and observability, advocating for a new architectural approach. Additional topics include using Cribl Stream as a MELT data broker, replay data from object storage for incident investigations, and leveraging Cribl Guard for privacy compliance. </p>
+<p>For a comprehensive view of all topics, please consult the original blog.</p></div>
     
   </div>
   
@@ -220,68 +246,15 @@
       <span>blog</span>
       <span> · 2026-05-28</span>
     </div>
-    <h2><a href="https://cribl.io/blog/from-m2131-to-m2614-a-more-practical-path-to-federal-logging-and-visibility/" target="_blank" rel="noopener">From M-21-31 to M-26-14: A more practical path to federal logging and visibility | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/data-lake-vs-data-warehouse-what-is-the-difference/" target="_blank" rel="noopener">Data Lake vs. Data Warehouse: What is the Difference | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl supports the move from OMB Memorandum M-21-31 to M-26-14, which prioritizes a risk-based, tiered approach to federal logging and visibility.</p>
+    <div class="summary"><h2>Data Lake vs. Data Warehouse: What is the Difference?</h2>
+<p>This article discusses the evolving landscape of data storage and processing, particularly in the context of AI and machine learning. It highlights that the choice isn't simply between data lakes and data warehouses, but building a comprehensive data architecture that emphasizes data quality, governance, and pipeline control.</p>
 <ul>
-<li>M-26-14 separates logging into two objectives: Continuous Event Monitoring (CEM) for real-time response and Threat Hunting, Investigation, Response, and Forensics (THIRF) for post-compromise analysis.</li>
-<li>Cribl's platform – Cribl Stream, Cribl Edge, Cribl Lake, and Cribl Search – provides a vendor-neutral control plane for collecting, shaping, retaining, and searching data, aligning with the new memo’s requirements for data tiering and federated access.</li>
-<li>Cribl Guard offers pipeline-based sensitive data detection and redaction, addressing a key concern in M-26-14, with proactive identification of sensitive data patterns.</li>
-<li>Cribl is now available as a FedRAMP Moderate authorized managed service (Cribl.Cloud Government) for federal agencies, enabling implementation of M-26-14 compliant architectures.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-05-27</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/combining-logging-metrics-and-monitoring/" target="_blank" rel="noopener">Mastering the Art of Combining Logging, Metrics and Monitoring | Cribl</a></h2>
-    
-    <div class="summary"><p>Cribl enables combining logs and metrics by treating them as connected signals, allowing teams to quickly move from metric-based alerts to relevant log data for root cause analysis and reduce storage/indexing costs.</p>
-<ul>
-<li>Cribl Stream converts logs to metrics in-stream, reducing indexing costs.</li>
-<li>The platform supports routing, filtering, and enriching telemetry data before it reaches storage.</li>
-<li>Organizations can choose between a unified observability platform or a “best-of-breed” stack connected by telemetry pipelines.</li>
-<li>Cribl Lake provides cost-effective long-term storage for full-fidelity telemetry data, while Cribl Search offers unified search and analytics across data sources.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-05-14</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/ocient-joins-the-gsma-advancing-the-future-of-data-driven-telecom/" target="_blank" rel="noopener">Ocient Joins the GSMA: Advancing the future of data-driven telecom</a></h2>
-    
-    <div class="summary"><p>Ocient has joined the GSMA to better serve the telecommunications industry with its data and AI solutions.</p>
-<ul>
-<li>OcientAIQ™ platform is designed to unify and analyze high-volume, high-velocity data for Communication Service Providers (CSPs).</li>
-<li>The platform focuses on enabling real-time network analytics, anomaly detection, and cross-domain data correlation.</li>
-<li>Ocient aims to help CSPs transition from AI experimentation to production-ready AI and automation.</li>
-<li>GSMA membership will facilitate collaboration with industry leaders and contribution to emerging standards in AI, data architecture, and automation within the telecom sector.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-05-14</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/canadas-telecom-rules-are-changing/" target="_blank" rel="noopener">Canada&#39;s telecom rules are changing - quietly, but fundamentally</a></h2>
-    
-    <div class="summary"><p>Ocient highlights a shift in Canadian telecom regulations towards real-time compliance and evidence provision.</p>
-<ul>
-<li>New regulations (Bill C-22, CCSPA, CRTC outage reporting) demand faster response times – potentially minutes or hours – and more comprehensive, auditable data.</li>
-<li>Traditional telecom data environments, optimized for cost and periodic reporting, struggle with the speed and scale required for these new demands.</li>
-<li>The OcientAIQ™ platform is positioned as a solution, designed for high-speed analytics on massive datasets, enabling complete data analysis rather than sampling.</li>
-<li>Ocient emphasizes its platform's ability to unify data across domains and provide fast, defensible results for regulatory scrutiny.</li>
+<li>Data lakes store raw, multi-format data cheaply, ideal for ML, telemetry, observability, and exploratory analysis.</li>
+<li>Data warehouses store cleaned, structured data optimized for fast BI, reporting, and governed analytics.</li>
+<li>Lakehouses combine the scale and flexibility of lakes with the performance and governance of warehouses, leading to hybrid architectures.</li>
+<li>Cribl helps teams filter, enrich, route, and reduce telemetry data <em>before</em> storage to control costs and complexity – with features like Cribl Lake and Cribl Search.</li>
 </ul></div>
     
   </div>
