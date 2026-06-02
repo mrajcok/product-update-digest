@@ -86,7 +86,8 @@ def _print_results_rich(results: list[tuple[ProductUpdate, float]]) -> None:
 # Main loop
 # ---------------------------------------------------------------------------
 
-def _run(company_filter: str | None, n_results: int, use_temp: bool, discord_mode: bool) -> None:
+def _run(company_filter: str | None, n_results: int, use_temp: bool, discord_mode: bool,
+         min_score: float | None) -> None:
     if use_temp:
         db_path = str(_VEC_TEST_DB)
         if not _VEC_TEST_DB.exists():
@@ -104,7 +105,12 @@ def _run(company_filter: str | None, n_results: int, use_temp: bool, discord_mod
     label = f"temp ({db_path})" if use_temp else db_path
     total = vec.count(company=company_filter)
     print(f"Vector store: {total} document(s)" + (f" for {company_filter}" if company_filter else "") + f"  [{label}]")
+    print(f"Embedding model: {settings.openrouter_embedding_model}  |  search score threshold: {settings.search_score_threshold:.2f}" + (f"  [override: {min_score:.2f}]" if min_score is not None else ""))
+    print("Performs semantic search (cosine similarity) over whole-article vectors and returns matching article summaries.")
     print("Type a query and press Enter. Ctrl-C or empty input to exit.\n")
+
+    from rich.console import Console
+    console = Console()
 
     try:
         while True:
@@ -117,13 +123,21 @@ def _run(company_filter: str | None, n_results: int, use_temp: bool, discord_mod
                 break
 
             try:
-                results = vec.search(query, company=company_filter, n_results=n_results)
+                with console.status("[dim]Searching stored articles…[/dim]"):
+                    results, n_candidates = vec.search(query, company=company_filter,
+                                                       n_results=n_results, min_score=min_score)
             except Exception as e:
                 print(f"Query error: {e}")
                 continue
 
             if not results:
-                print("No results found.")
+                if n_candidates:
+                    threshold = min_score if min_score is not None else settings.search_score_threshold
+                    print(f"No results above score threshold ({threshold}). "
+                          f"{n_candidates} candidate(s) found but all scored too low. "
+                          f"Try --min-score 0 to see them.")
+                else:
+                    print("No results found.")
                 continue
 
             if discord_mode:
@@ -144,8 +158,11 @@ def main() -> None:
     parser.add_argument("--results", type=int, default=5, metavar="N", help="Number of results (default: 5)")
     parser.add_argument("--temp", action="store_true", help="Search the --stage vector dry-run store instead of production")
     parser.add_argument("--discord", action="store_true", help="Print Discord-formatted output (for testing bot output)")
+    parser.add_argument("--min-score", type=float, default=None, metavar="N",
+                        help="Override SEARCH_SCORE_THRESHOLD for this run (e.g. 0 to see all results)")
     args = parser.parse_args()
-    _run(company_filter=args.company, n_results=args.results, use_temp=args.temp, discord_mode=args.discord)
+    _run(company_filter=args.company, n_results=args.results, use_temp=args.temp,
+         discord_mode=args.discord, min_score=args.min_score)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 # product-update-digest
 
-A daily cron job that scrapes news and blog posts from Cribl and Ocient (blog posts, press releases, product page changes), summarizes them with an LLM via [OpenRouter](https://openrouter.ai), publishes a static feed to GitHub Pages, and stores embeddings in a [sqlite-vec](https://github.com/asg017/sqlite-vec) vector database for retrieval by an AI assistant or the `tools/search.py` CLI.
+A daily cron job that scrapes news and blog posts from Cribl and Ocient (blog posts, press releases, product page changes), summarizes them with an LLM via [OpenRouter](https://openrouter.ai), publishes a static feed to GitHub Pages, and stores embeddings in a [sqlite-vec](https://github.com/asg017/sqlite-vec) vector database for retrieval by an AI assistant or the `tools/search.py` or `tools/rag.py` CLI.
 
 ## What it does
 
@@ -14,7 +14,7 @@ A daily cron job that scrapes news and blog posts from Cribl and Ocient (blog po
 
 - Python 3.13
 - [uv](https://docs.astral.sh/uv/) — fast Python package manager
-- [OpenRouter](https://openrouter.ai) API key
+- [OpenRouter](https://openrouter.ai) API key or local Ollama server for LLM calls
 - GitHub personal access token with `repo` scope (for pushing to GitHub Pages)
 
 ## Setup

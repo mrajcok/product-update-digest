@@ -7,7 +7,6 @@
 - OpenRouter API key
 - GitHub personal access token with `repo` scope
 
----
 
 ## 1. Install uv
 
@@ -18,8 +17,6 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 Verify: `uv --version`
-
----
 
 ## 2. Clone and Set Up
 
@@ -35,8 +32,6 @@ uv venv --python 3.13
 uv pip install -r requirements.txt
 ```
 
----
-
 ## 3. Environment Variables
 
 Copy the example and fill in real values:
@@ -46,25 +41,28 @@ cp .env.example .env
 nano .env
 ```
 
-```ini
-OPENROUTER_API_KEY=sk-or-...
-OPENROUTER_SUMMARIZATION_MODEL=anthropic/claude-sonnet-4-5
-OPENROUTER_EMBEDDING_MODEL=openai/text-embedding-3-small
-EMBEDDING_DIMENSIONS=1536
-
-SQLITE_DB_PATH=data/product_updates.db
-
-GITHUB_TOKEN=ghp_...
-GITHUB_REPO=username/product-updates
-GITHUB_PAGES_BRANCH=gh-pages
-
-MAX_ARTICLE_AGE_DAYS=30
-LOG_LEVEL=INFO
-```
+See `.env.example` for all available variables and their defaults.
 
 > Note: cron does not source `.bashrc`. The agent uses pydantic-settings to load `.env` from the working directory. The cron command below uses `cd` first to ensure the `.env` file is found.
 
----
+**Alternative: system environment variables instead of `.env`**
+
+pydantic-settings reads system env vars first (they take precedence over `.env`). Two practical alternatives for cron deployments:
+
+1. *Wrapper script* — create `/home/<user>/bin/run-product-update-digest.sh`:
+   ```bash
+   #!/bin/bash
+   export OPENROUTER_API_KEY=sk-or-...
+   export GITHUB_TOKEN=ghp_...
+   # ... other secrets ...
+   exec /home/<user>/product-update-digest/.venv/bin/python main.py "$@"
+   ```
+   Then `chmod 700 run-product-update-digest.sh` and point cron at it. Restrict permissions so only your user can read the file.
+
+2. *Inline cron env* — set vars directly in crontab (practical for a small number of secrets):
+   ```cron
+   0 12 * * * OPENROUTER_API_KEY=sk-or-... GITHUB_TOKEN=ghp_... cd /home/<user>/product-update-digest && .venv/bin/python main.   py >> logs/cron.log 2>&1
+   ```
 
 ## 4. GitHub Pages — First-Time Setup
 
@@ -83,8 +81,6 @@ rm -rf /tmp/pages-init
 ```
 
 Enable GitHub Pages in the repo settings → Pages → Source: `gh-pages` branch, `/ (root)`.
-
----
 
 ## 5. Cron Job
 
@@ -105,8 +101,6 @@ cd /home/<user>/product-update-digest
 .venv/bin/python main.py                    # full run
 ```
 
----
-
 ## 6. Logs
 
 - **stdout**: captured by cron into `logs/cron.log`
@@ -116,8 +110,6 @@ cd /home/<user>/product-update-digest
 tail -f logs/cron.log
 tail -f logs/agent.log
 ```
-
----
 
 ## 7. Updating
 

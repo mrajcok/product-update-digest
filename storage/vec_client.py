@@ -230,7 +230,10 @@ class VecClient:
     # Search
     # ------------------------------------------------------------------
 
-    def search(self, query: str, company: str | None = None, n_results: int = 5) -> list[tuple[ProductUpdate, float]]:
+    def search(self, query: str, company: str | None = None, n_results: int = 5,
+               min_score: float | None = None) -> tuple[list[tuple[ProductUpdate, float]], int]:
+        """Return (results, n_candidates) where n_candidates is the raw KNN count before threshold filtering."""
+        threshold = min_score if min_score is not None else settings.search_score_threshold
         query_vec = self._embed(query)
         company_filter = "AND vi.company = :company" if company else ""
         sql = f"""
@@ -258,7 +261,7 @@ class VecClient:
         results = []
         for row in rows:
             score = 1 - row["distance"]
-            if score < settings.search_score_threshold:
+            if score < threshold:
                 continue
             update = ProductUpdate(
                 url=row["url"],
@@ -271,10 +274,12 @@ class VecClient:
                 source_text=row["source_text"],
             )
             results.append((update, row["distance"]))
-        return results
+        return results, len(rows)
 
-    def search_chunks(self, query: str, company: str | None = None, n_results: int = 5) -> list[ChunkResult]:
-        """Return the most relevant chunks across all articles for RAG."""
+    def search_chunks(self, query: str, company: str | None = None, n_results: int = 5,
+                      min_score: float | None = None) -> tuple[list[ChunkResult], int]:
+        """Return (results, n_candidates) where n_candidates is the raw KNN count before threshold filtering."""
+        threshold = min_score if min_score is not None else settings.search_score_threshold
         query_vec = self._embed(query)
         company_filter = "AND ci.company = :company" if company else ""
         sql = f"""
@@ -302,7 +307,7 @@ class VecClient:
         results = []
         for row in rows:
             score = 1 - row["distance"]
-            if score < settings.search_score_threshold:
+            if score < threshold:
                 continue
             results.append(ChunkResult(
                 chunk_text=row["chunk_text"],
@@ -314,7 +319,7 @@ class VecClient:
                 chunk_index=row["chunk_index"],
                 score=score,
             ))
-        return results
+        return results, len(rows)
 
     # ------------------------------------------------------------------
     # Bulk read / utilities

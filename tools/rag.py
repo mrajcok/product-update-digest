@@ -139,7 +139,7 @@ def _format_discord(question: str, chunks: list[ChunkResult], answer: str, model
 # ---------------------------------------------------------------------------
 
 def _run(company_filter: str | None, n_results: int, use_temp: bool,
-         show_chunks: bool, discord_mode: bool) -> None:
+         show_chunks: bool, discord_mode: bool, min_score: float | None) -> None:
     if use_temp:
         db_path = str(_VEC_TEST_DB)
         if not _VEC_TEST_DB.exists():
@@ -158,8 +158,13 @@ def _run(company_filter: str | None, n_results: int, use_temp: bool,
     label = f"temp ({db_path})" if use_temp else db_path
     total = vec.count(company=company_filter)
     print(f"Vector store: {total} article(s)" + (f" for {company_filter}" if company_filter else "") + f"  [{label}]")
-    print(f"RAG model: {model}  |  chunks per query: {n_results}")
+    print(f"Embedding model: {settings.openrouter_embedding_model}  |  RAG model: {model}  |  chunks per query: {n_results}"
+          f"  |  search score threshold: {settings.search_score_threshold:.2f}" + (f"  [override: {min_score:.2f}]" if min_score is not None else ""))
+    print("Performs semantic search (cosine similarity) over article-chunk vectors and returns an LLM-generated answer.")
     print("Type a question and press Enter. Ctrl-C or empty input to exit.\n")
+
+    from rich.console import Console
+    console = Console()
 
     try:
         while True:
@@ -171,20 +176,29 @@ def _run(company_filter: str | None, n_results: int, use_temp: bool,
                 break
 
             try:
-                chunks = vec.search_chunks(question, company=company_filter, n_results=n_results)
+                with console.status("[dim]Finding relevant text from stored articles…[/dim]"):
+                    chunks, n_candidates = vec.search_chunks(question, company=company_filter,
+                                                             n_results=n_results, min_score=min_score)
             except Exception as e:
                 print(f"Retrieval error: {e}")
                 continue
 
             if not chunks:
-                print("No relevant chunks found above the score threshold.\n")
+                if n_candidates:
+                    threshold = min_score if min_score is not None else settings.search_score_threshold
+                    print(f"No chunks above score threshold ({threshold}). "
+                          f"{n_candidates} candidate(s) found but all scored too low. "
+                          f"Try --min-score 0 to see them.")
+                else:
+                    print("No relevant chunks found.")
                 continue
 
             if show_chunks and not discord_mode:
                 _print_chunks_rich(chunks)
 
             try:
-                answer, model_used, elapsed = _call_llm(question, chunks)
+                with console.status("[dim]Generating answer…[/dim]"):
+                    answer, model_used, elapsed = _call_llm(question, chunks)
             except Exception as e:
                 print(f"LLM error: {e}")
                 continue
@@ -208,6 +222,8 @@ def main() -> None:
     parser.add_argument("--temp", action="store_true", help="Use --stage vector dry-run store instead of production")
     parser.add_argument("--show-chunks", action="store_true", help="Print retrieved chunks before the answer")
     parser.add_argument("--discord", action="store_true", help="Format answer as Discord markdown")
+    parser.add_argument("--min-score", type=float, default=None, metavar="N",
+                        help="Override SEARCH_SCORE_THRESHOLD for this run (e.g. 0 to see all results)")
     args = parser.parse_args()
     _run(
         company_filter=args.company,
@@ -215,6 +231,7 @@ def main() -> None:
         use_temp=args.temp,
         show_chunks=args.show_chunks,
         discord_mode=args.discord,
+        min_score=args.min_score,
     )
 
 
