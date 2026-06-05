@@ -182,7 +182,7 @@ scrapers/
   base.py                      # abstract scraper (dedup loop, retry logic)
   cribl.py                     # Cribl scraper (sitemap-based discovery)
   ocient.py                    # Ocient scraper (sitemap-based discovery)
-  paloalto.py                  # Palo Alto Networks scraper (XSIAM content only; sitemap index + fixed docs URLs)
+  paloalto.py                  # Palo Alto Networks scraper (XSIAM content only; tag page + main sitemap)
 storage/
   models.py                    # Pydantic models: ScrapedPage, ArticleRecord, ProductUpdate
   db.py                        # SQLite client (URL tracking, deduplication)
@@ -234,7 +234,14 @@ Chunk embeddings are generated in a single batched API call per article. A 15,00
 
 ## Design Notes
 
-Scrapers use the sitemap.xml files for URL discovery rather than scraping listing pages, which avoids JS-rendered pagination and gives reliable `lastmod` dates for pre-filtering old articles. All HTTP fetching uses httpx only — no headless browser needed.
+Cribl and Ocient scrapers use sitemap.xml files for URL discovery, which avoids JS-rendered pagination and provides reliable `lastmod` dates for pre-filtering old articles.
+
+The XSIAM scraper uses two different discovery strategies:
+
+- **Blog posts**: scraped from `paloaltonetworks.com/blog/tag/xsiam/` (the XSIAM tag page), which renders as static HTML without JavaScript. The blog sitemap index (`blog/sitemap_index.xml`) cannot be used because all its child sitemaps have `lastmod` dates months in the past — even when new posts exist — so the 30-day cutoff filter would silently drop every child sitemap.
+- **Press releases**: filtered from the main `sitemap.xml` (which is a flat urlset), keeping only `/company/press/` URLs that also contain "xsiam". The press release pages lack `article:published_time` meta tags, so dates are extracted from the PR Newswire dateline in the article body (e.g. `"March 6, 2023 /PRNewswire/"`). This correctly ages out old releases rather than falling back to the sitemap `lastmod`, which Palo Alto sets to the current date for all entries daily.
+
+All HTTP fetching uses httpx only — no headless browser needed.
 
 Vector storage uses sqlite-vec (a ~163KB SQLite extension) instead of a separate Chroma server. This eliminates the need for a running HTTP service and reduces the venv from ~500MB to ~260MB by dropping onnxruntime, numpy, kubernetes, and grpcio.
 

@@ -81,6 +81,11 @@ class TestExtractDate:
         soup = BeautifulSoup(html, "lxml")
         assert scraper._extract_date(soup) == "2026-04-01"
 
+    def test_extracts_prnewswire_dateline(self, scraper):
+        html = "<html><body><p>SANTA CLARA, Calif., March 6, 2023 /PRNewswire/ -- Palo Alto Networks announced...</p></body></html>"
+        soup = BeautifulSoup(html, "lxml")
+        assert scraper._extract_date(soup) == "2023-03-06"
+
     def test_returns_none_when_no_date(self, scraper):
         soup = BeautifulSoup("<html><body><p>No date here</p></body></html>", "lxml")
         assert scraper._extract_date(soup) is None

@@ -14,6 +14,13 @@ logger = logging.getLogger(__name__)
 
 _SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
+# Matches PR Newswire datelines: "March 6, 2023 /PRNewswire/"
+_PRNEWSWIRE_DATE_RE = re.compile(
+    r"(January|February|March|April|May|June|July|August|September|October|November|December)"
+    r"\s+(\d{1,2}),?\s+(\d{4})\s*/PRNewswire/",
+    re.IGNORECASE,
+)
+
 # Blog posts: scraped from the XSIAM tag page (static HTML, no JS required).
 # The tag page lists XSIAM-tagged posts; blog post URLs don't contain "xsiam"
 # in the slug, so sitemap URL-pattern filtering misses them entirely.
@@ -233,4 +240,11 @@ class PaloAltoScraper(BaseScraper):
         time_tag = soup.find("time", attrs={"datetime": True})
         if time_tag:
             return str(time_tag["datetime"])[:10]
+        # PR Newswire dateline: "March 6, 2023 /PRNewswire/"
+        m = _PRNEWSWIRE_DATE_RE.search(soup.get_text(" ", strip=True)[:1000])
+        if m:
+            try:
+                return datetime.strptime(f"{m.group(1)} {m.group(2)} {m.group(3)}", "%B %d %Y").strftime("%Y-%m-%d")
+            except ValueError:
+                pass
         return None

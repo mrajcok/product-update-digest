@@ -74,7 +74,7 @@
     .scraper-summary { margin-top: 2.5rem; border-top: 2px solid var(--border); padding-top: 1rem; }
     .scraper-summary h2 { font-size: 1rem; color: var(--text-2); margin-bottom: 1rem; }
     .scraper-block { margin-bottom: 1.25rem; }
-    .scraper-block h3 { font-size: .9rem; font-weight: 600; color: var(--text); margin: 0 0 .35rem; text-transform: capitalize; }
+    .scraper-block h3 { font-size: .9rem; font-weight: 600; color: var(--text); margin: 0 0 .35rem; }
     .scraper-block ul { margin: 0 0 .5rem 1.25rem; padding: 0; font-size: .82rem; color: var(--text-2); }
     .scraper-block li { margin-bottom: .2rem; }
     .scraper-block .label { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--text-3); margin: .4rem 0 .2rem; }
@@ -123,7 +123,7 @@
     <h2>Coverage</h2>
     {% for info in scraper_infos %}
     <div class="scraper-block">
-      <h3>{{ info.company }}</h3>
+      <h3>{{ info.company | upper if info.company == 'xsiam' else info.company | capitalize }}</h3>
       <div class="label">Sources</div>
       <ul>
         {% for s in info.sources %}<li>{{ s }}</li>{% endfor %}
