@@ -11,6 +11,7 @@ from config import setup_logging, settings
 from publisher.github_pages import GitHubPagesPublisher
 from scrapers.cribl import CriblScraper
 from scrapers.ocient import OcientScraper
+from scrapers.paloalto import PaloAltoScraper
 from storage.db import ArticleDB
 from storage.models import ArticleRecord, ProductUpdate, ScrapedPage, normalize_url, vec_id_for
 from storage.vec_client import VecClient
@@ -112,6 +113,8 @@ def _build_scrapers(site: str | None) -> list:
         scrapers.append(OcientScraper())
     if site in (None, "cribl"):
         scrapers.append(CriblScraper())
+    if site in (None, "xsiam"):
+        scrapers.append(PaloAltoScraper())
     return scrapers
 
 
@@ -361,8 +364,8 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--site",
-        choices=["cribl", "ocient"],
-        help="Run only one scraper (default: both)",
+        choices=["cribl", "ocient", "xsiam"],
+        help="Run only one scraper (default: all)",
     )
     parser.add_argument(
         "--limit",

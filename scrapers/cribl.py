@@ -16,12 +16,6 @@ logger = logging.getLogger(__name__)
 # unreliable. The sitemap is server-generated and is the authoritative URL source.
 _SITEMAP_URL = "https://cribl.io/sitemap.xml"
 
-_PRODUCT_URLS = [
-    "https://cribl.io/products/stream/",
-    "https://cribl.io/products/lake/",
-    "https://cribl.io/products/search/",
-]
-
 _BLOG_RE = re.compile(r"^https://cribl\.io/blog/[^/]+/")
 _NEWS_RE = re.compile(r"^https://cribl\.io/news/[^/]+/")
 
@@ -34,7 +28,6 @@ _BLOG_BLOCKLIST = ("cribl-edge", "company-culture")
 class CriblScraper(BaseScraper):
     sources = [
         f"{_SITEMAP_URL} — blog posts and news releases",
-        *_PRODUCT_URLS,
     ]
     exclusions = [
         *[f'blog URLs containing "{b}"' for b in _BLOG_BLOCKLIST]
@@ -60,10 +53,6 @@ class CriblScraper(BaseScraper):
             if u not in seen:
                 seen.add(u)
                 urls.append((u, "press_release"))
-        for u in _PRODUCT_URLS:
-            if u not in seen:
-                seen.add(u)
-                urls.append((u, "product"))
         return urls
 
     def _discover_from_sitemap(self) -> tuple[list[str], list[str]]:

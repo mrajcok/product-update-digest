@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cribl & Ocient News & Blog Posts</title>
+  <title>Cribl, Ocient & XSIAM News & Blog Posts</title>
   <script>
     if (localStorage.getItem('theme') === 'light')
       document.documentElement.setAttribute('data-theme', 'light');
@@ -21,9 +21,11 @@
       --link-hover:       #a0c8ff;
       --tag-bg:           #2a2a2a;
       --tag-color:        #888;
-      --badge-cribl-bg:   #00cccc;
-      --badge-cribl-fg:   #111;
-      --track-bg:         #444;
+      --badge-cribl-bg:      #00cccc;
+      --badge-cribl-fg:      #111;
+      --badge-xsiam-bg:   #01d169;
+      --badge-xsiam-fg:   #111;
+      --track-bg:            #444;
       --track-active:     #5a8de0;
       --thumb:            #bbb;
       --thumb-active:     #fff;
@@ -40,9 +42,11 @@
       --link-hover:       #004499;
       --tag-bg:           #f0f0f0;
       --tag-color:        #555;
-      --badge-cribl-bg:   #00cccc;
-      --badge-cribl-fg:   #111;
-      --track-bg:         #c8d8f0;
+      --badge-cribl-bg:      #00cccc;
+      --badge-cribl-fg:      #111;
+      --badge-xsiam-bg:   #01d169;
+      --badge-xsiam-fg:   #111;
+      --track-bg:            #c8d8f0;
       --track-active:     #0066cc;
       --thumb:            #0066cc;
       --thumb-active:     #fff;
@@ -59,8 +63,9 @@
     .meta { font-size: .85rem; color: var(--text-2); margin-bottom: .4rem; }
     .badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .75rem; font-weight: 600; margin-right: .4rem; text-decoration: none; }
     .badge:hover { opacity: .85; }
-    .badge-cribl  { background: var(--badge-cribl-bg);  color: var(--badge-cribl-fg); }
-    .badge-ocient { background: linear-gradient(270deg, rgba(0,235,252,1) 0%, rgba(193,227,33,1) 100%); color: #111; }
+    .badge-cribl   { background: var(--badge-cribl-bg);  color: var(--badge-cribl-fg); }
+    .badge-ocient  { background: linear-gradient(270deg, rgba(0,235,252,1) 0%, rgba(193,227,33,1) 100%); color: #111; }
+    .badge-xsiam { background: var(--badge-xsiam-bg); color: var(--badge-xsiam-fg); }
     .card h2 { margin: .25rem 0 .5rem; font-size: 1.05rem; }
     .card h2 a { color: var(--link); text-decoration: none; }
     .card h2 a:hover { color: var(--link-hover); text-decoration: underline; }
@@ -86,10 +91,10 @@
   </style>
 </head>
 <body>
-  <h1>Cribl & Ocient News & Blog Posts</h1>
+  <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
   <p class="generated-at">Generated {{ generated_at }}</p>
   <div class="top-bar">
-    <p class="index-hint">Showing the {{ index_page_limit }} most recent updates — see <a href="cribl/">Cribl</a> and <a href="ocient/">Ocient</a> for full history.</p>
+    <p class="index-hint">Showing the {{ index_per_company }} most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for full history.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
       <input type="checkbox" id="theme-chk">
       <span class="track"></span>
@@ -100,11 +105,11 @@
   {% for r in updates %}
   <div class="card">
     <div class="meta">
-      <a href="{{ r.company }}/" class="badge badge-{{ r.company }}">{{ r.company | capitalize }}</a>
+      <a href="{{ r.company }}/" class="badge badge-{{ r.company }}">{{ r.company | upper if r.company == 'xsiam' else r.company | capitalize }}</a>
       <span>{{ r.category | replace("_", " ") }}</span>
       {% if r.published_date %}<span> · {{ r.published_date }}</span>{% endif %}
     </div>
-    <h2><a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.title }}</a></h2>
+    <h2><a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.title | plaintitle }}</a></h2>
     {% if r.summary %}
     <div class="summary">{{ r.summary | markdown }}</div>
     {% endif %}

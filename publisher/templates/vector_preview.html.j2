@@ -21,10 +21,12 @@
       --link-hover:       #a0c8ff;
       --tag-bg:           #2a2a2a;
       --tag-color:        #888;
-      --badge-cribl-bg:   #1b3558;
-      --badge-cribl-fg:   #7ab3f5;
-      --badge-ocient-bg:  #3a2200;
-      --badge-ocient-fg:  #f0a030;
+      --badge-cribl-bg:      #1b3558;
+      --badge-cribl-fg:      #7ab3f5;
+      --badge-ocient-bg:     #3a2200;
+      --badge-ocient-fg:     #f0a030;
+      --badge-xsiam-bg:   #01d169;
+      --badge-xsiam-fg:   #111;
       --pre-bg:           #161616;
       --track-bg:         #444;
       --track-active:     #5a8de0;
@@ -43,10 +45,12 @@
       --link-hover:       #004499;
       --tag-bg:           #f0f0f0;
       --tag-color:        #555;
-      --badge-cribl-bg:   #e8f0fe;
-      --badge-cribl-fg:   #1a56db;
-      --badge-ocient-bg:  #fef3c7;
-      --badge-ocient-fg:  #92400e;
+      --badge-cribl-bg:      #e8f0fe;
+      --badge-cribl-fg:      #1a56db;
+      --badge-ocient-bg:     #fef3c7;
+      --badge-ocient-fg:     #92400e;
+      --badge-xsiam-bg:   #01d169;
+      --badge-xsiam-fg:   #111;
       --pre-bg:           #f5f5f5;
       --track-bg:         #c8d8f0;
       --track-active:     #0066cc;
@@ -63,8 +67,9 @@
     .card { border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: 1rem; background: var(--surface); }
     .meta { font-size: .85rem; color: var(--text-2); margin-bottom: .4rem; }
     .badge { display: inline-block; padding: .15rem .5rem; border-radius: 4px; font-size: .75rem; font-weight: 600; margin-right: .4rem; }
-    .badge-cribl  { background: var(--badge-cribl-bg);  color: var(--badge-cribl-fg); }
-    .badge-ocient { background: var(--badge-ocient-bg); color: var(--badge-ocient-fg); }
+    .badge-cribl    { background: var(--badge-cribl-bg);    color: var(--badge-cribl-fg); }
+    .badge-ocient   { background: var(--badge-ocient-bg);   color: var(--badge-ocient-fg); }
+    .badge-xsiam { background: var(--badge-xsiam-bg); color: var(--badge-xsiam-fg); }
     .tag { display: inline-block; padding: .15rem .4rem; border-radius: 4px; font-size: .75rem; background: var(--tag-bg); color: var(--tag-color); margin-right: .4rem; }
     .card h2 { margin: .25rem 0 .5rem; font-size: 1.05rem; }
     .card h2 a { color: var(--link); text-decoration: none; }
@@ -98,11 +103,11 @@
   {% for u in updates %}
   <div class="card">
     <div class="meta">
-      <span class="badge badge-{{ u.company }}">{{ u.company | capitalize }}</span>
+      <span class="badge badge-{{ u.company }}">{{ u.company | upper if u.company == 'xsiam' else u.company | capitalize }}</span>
       <span class="tag">{{ u.category | replace("_", " ") }}</span>
       {% if u.published_date %}<span>{{ u.published_date }}</span>{% endif %}
     </div>
-    <h2><a href="{{ u.url }}" target="_blank" rel="noopener">{{ u.title }}</a></h2>
+    <h2><a href="{{ u.url }}" target="_blank" rel="noopener">{{ u.title | plaintitle }}</a></h2>
     <button class="raw-text-toggle" onclick="toggleRaw(this)">Show raw text ({{ u.source_text | length }} chars embedded)</button>
     <pre class="raw-text" style="display:none">{{ u.source_text }}</pre>
   </div>

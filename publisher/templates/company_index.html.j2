@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{ company | capitalize }} News & Blog Posts</title>
+  <title>{{ company | upper if company == 'xsiam' else company | capitalize }} News & Blog Posts</title>
   <script>
     if (localStorage.getItem('theme') === 'light')
       document.documentElement.setAttribute('data-theme', 'light');
@@ -77,7 +77,7 @@
       <span class="toggle-icon" id="theme-icon">☀</span>
     </label>
   </div>
-  <h1>{{ company | capitalize }} News & Blog Posts</h1>
+  <h1>{{ company | upper if company == 'xsiam' else company | capitalize }} News & Blog Posts</h1>
   <p class="generated-at">Generated {{ generated_at }}</p>
 
   {% for month_label, records in grouped %}
@@ -88,7 +88,7 @@
       <span>{{ r.category | replace("_", " ") }}</span>
       {% if r.published_date %}<span> · {{ r.published_date }}</span>{% endif %}
     </div>
-    <h3><a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.title }}</a></h3>
+    <h3><a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.title | plaintitle }}</a></h3>
     {% if r.summary %}
     <div class="summary">{{ r.summary | markdown }}</div>
     {% endif %}

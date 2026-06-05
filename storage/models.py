@@ -26,7 +26,7 @@ class ScrapedPage(BaseModel):
     """Transient in-memory representation of a freshly scraped page."""
 
     url: str
-    company: Literal["cribl", "ocient"]
+    company: Literal["cribl", "ocient", "xsiam"]
     category: Literal["blog", "press_release", "product"]
     title: str
     raw_text: str
@@ -49,7 +49,7 @@ class ArticleRecord(BaseModel):
 
     url: str
     normalized_url: str
-    company: Literal["cribl", "ocient"]
+    company: Literal["cribl", "ocient", "xsiam"]
     category: Literal["blog", "press_release", "product"]
     title: str
     first_scraped_at: str  # ISO 8601
@@ -89,7 +89,7 @@ class ProductUpdate(BaseModel):
     """Document stored in sqlite-vec — used for vector search and summary retrieval."""
 
     url: str
-    company: Literal["cribl", "ocient"]
+    company: Literal["cribl", "ocient", "xsiam"]
     category: Literal["blog", "press_release", "product"]
     title: str
     scraped_at: str       # ISO 8601 string (Chroma metadata must be str/int/float/bool)

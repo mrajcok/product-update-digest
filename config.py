@@ -32,7 +32,8 @@ class Settings(BaseSettings):
 
     log_level: str = "INFO"
     max_article_age_days: int = 30
-    index_page_limit: int = 10
+    index_page_limit: int = 10  # kept for backward compat; no longer used for index page layout
+    index_per_company: int = 3
     max_api_retries: int = 5
     summarizer_content_chars: int
     max_source_text_chars: int

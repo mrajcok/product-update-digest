@@ -1,4 +1,6 @@
+import html as html_module
 import logging
+import re
 import shutil
 import tempfile
 from datetime import datetime, timezone
@@ -16,10 +18,18 @@ from storage.models import ArticleRecord, ProductUpdate, ScrapedPage
 logger = logging.getLogger(__name__)
 
 TEMPLATES_DIR = Path(__file__).parent / "templates"
-COMPANIES = ["ocient", "cribl"]
+COMPANIES = ["cribl", "ocient", "xsiam"]
 
 def _sort_key(record: ArticleRecord) -> str:
     return record.published_date or record.last_scraped_at or ""
+
+
+def _top_per_company(company_updates: dict[str, list[ArticleRecord]], n: int) -> list[ArticleRecord]:
+    """Return up to n most-recent records per company, in COMPANIES order."""
+    result = []
+    for records in company_updates.values():
+        result.extend(records[:n])
+    return result
 
 
 class GitHubPagesPublisher:
@@ -30,14 +40,13 @@ class GitHubPagesPublisher:
             autoescape=True,
         )
         self._env.filters["markdown"] = lambda text: Markup(md.markdown(text or ""))
+        self._env.filters["plaintitle"] = lambda text: html_module.unescape(re.sub(r"<[^>]+>", "", text or ""))
 
     def publish(self, scraper_infos: list[dict] | None = None) -> None:
         all_records = self._db.get_all()
         ok_records = [r for r in all_records if r.status == "ok" and r.summary]
 
         from config import settings
-        top_updates = sorted(ok_records, key=_sort_key, reverse=True)[:settings.index_page_limit]
-
         company_updates: dict[str, list[ArticleRecord]] = {
             c: sorted(
                 [r for r in ok_records if r.company == c],
@@ -46,6 +55,7 @@ class GitHubPagesPublisher:
             )
             for c in COMPANIES
         }
+        top_updates = _top_per_company(company_updates, settings.index_per_company)
 
         html_files = self._render(top_updates, company_updates, scraper_infos)
         self._push_to_github(html_files)
@@ -59,8 +69,7 @@ class GitHubPagesPublisher:
             c: sorted([r for r in ok_records if r.company == c], key=_sort_key, reverse=True)[:limit]
             for c in COMPANIES
         }
-        all_limited = [r for records in company_updates.values() for r in records]
-        top_updates = sorted(all_limited, key=_sort_key, reverse=True)[:settings.index_page_limit]
+        top_updates = _top_per_company(company_updates, settings.index_per_company)
         html_files = self._render(top_updates, company_updates, scraper_infos)
         self._write_to_dir(html_files, out_dir)
         rendered = sum(len(v) for v in company_updates.values())
@@ -82,11 +91,11 @@ class GitHubPagesPublisher:
             ArticleRecord.from_scraped_page(p, summary="[summary not generated]")
             for p in pages
         ]
-        top_updates = sorted(records, key=_sort_key, reverse=True)[:settings.index_page_limit]
         company_updates: dict[str, list[ArticleRecord]] = {
             c: sorted([r for r in records if r.company == c], key=_sort_key, reverse=True)
             for c in COMPANIES
         }
+        top_updates = _top_per_company(company_updates, settings.index_per_company)
         html_files = self._render(top_updates, company_updates, scraper_infos)
         self._write_to_dir(html_files, out_dir)
         logger.info("[stage:scrape] HTML written to %s/index.html", out_dir)
@@ -99,11 +108,11 @@ class GitHubPagesPublisher:
     ) -> None:
         """Render index using production templates from already-summarized DB records."""
         from config import settings
-        top_updates = sorted(records, key=_sort_key, reverse=True)[:settings.index_page_limit]
         company_updates: dict[str, list[ArticleRecord]] = {
             c: sorted([r for r in records if r.company == c], key=_sort_key, reverse=True)
             for c in COMPANIES
         }
+        top_updates = _top_per_company(company_updates, settings.index_per_company)
         html_files = self._render(top_updates, company_updates, scraper_infos)
         self._write_to_dir(html_files, out_dir)
         logger.info("[stage:summarize] HTML written to %s/index.html", out_dir)
@@ -134,7 +143,7 @@ class GitHubPagesPublisher:
         from config import settings
         files["index.html"] = index_tmpl.render(
             updates=top_updates,
-            index_page_limit=settings.index_page_limit,
+            index_per_company=settings.index_per_company,
             generated_at=datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d %I:%M %p %Z"),
             scraper_infos=scraper_infos or [],
         )

@@ -1,10 +1,10 @@
 # product-update-digest
 
-A daily cron job that scrapes news and blog posts from Cribl and Ocient (blog posts, press releases, product page changes), summarizes them with an LLM via [OpenRouter](https://openrouter.ai), publishes a static feed to GitHub Pages, and stores embeddings in a [sqlite-vec](https://github.com/asg017/sqlite-vec) vector database for retrieval by an AI assistant or the `tools/search.py` or `tools/rag.py` CLI.
+A daily cron job that scrapes news and blog posts from Cribl, Ocient, and Palo Alto Networks (XSIAM) — blog posts, press releases, and product release notes — summarizes them with an LLM via [OpenRouter](https://openrouter.ai), publishes a static feed to GitHub Pages, and stores embeddings in a [sqlite-vec](https://github.com/asg017/sqlite-vec) vector database for retrieval by an AI assistant or the `tools/search.py` or `tools/rag.py` CLI.
 
 ## What it does
 
-1. **Scrapes** Cribl and Ocient websites for new or changed content
+1. **Scrapes** Cribl, Ocient, and Palo Alto Networks (XSIAM only) for new or changed content
 2. **Deduplicates** using SQLite — skips unchanged content via URL tracking and SHA-256 content hashing
 3. **Summarizes** each new item using a configurable LLM (default: `google/gemma-3-27b-it` via OpenRouter)
 4. **Stores** summaries and two types of embeddings in sqlite-vec: whole-document vectors for semantic search, and overlapping chunks for RAG (default: `qwen/qwen3-embedding-8b` via OpenRouter)
@@ -92,7 +92,8 @@ As of 2026-05-30, evaluated by Claude Sonnet 4.6.
 
 ```bash
 uv run digest                   # full pipeline: scrape → summarize → vector → publish
-uv run digest --site cribl      # run only the Cribl scraper (default: both)
+uv run digest --site cribl      # run only the Cribl scraper (default: all three)
+uv run digest --site xsiam      # run only the Palo Alto XSIAM scraper
 uv run digest --publish         # rebuild full site from DB and push to GitHub Pages
 ```
 
@@ -125,6 +126,7 @@ Use `--category` to filter by article type — useful for checking whether summa
 
 ```bash
 uv run digest --stage scrape --limit 5 --site ocient
+uv run digest --stage scrape --limit 3 --site xsiam
 uv run digest --stage summarize --category press_release
 uv run digest --stage summarize --category blog --site cribl
 ```
@@ -161,7 +163,7 @@ Retrieves the most relevant article *chunks* (not whole documents) for the quest
 make test
 ```
 
-82 tests, no external services required (SQLite uses in-memory DB; HTTP calls are mocked).
+101 tests, no external services required (SQLite uses in-memory DB; HTTP calls are mocked).
 
 ## Deployment
 
@@ -180,6 +182,7 @@ scrapers/
   base.py                      # abstract scraper (dedup loop, retry logic)
   cribl.py                     # Cribl scraper (sitemap-based discovery)
   ocient.py                    # Ocient scraper (sitemap-based discovery)
+  paloalto.py                  # Palo Alto Networks scraper (XSIAM content only; sitemap index + fixed docs URLs)
 storage/
   models.py                    # Pydantic models: ScrapedPage, ArticleRecord, ProductUpdate
   db.py                        # SQLite client (URL tracking, deduplication)
@@ -208,7 +211,7 @@ Each article produces two types of embeddings written during the vector stage:
 |---|---|---|
 | `id` | string | MD5 of normalized URL (`vec_id_for(url)`) |
 | `url` | string | canonical article URL |
-| `company` | string | `cribl` or `ocient` |
+| `company` | string | `cribl`, `ocient`, or `xsiam` |
 | `category` | string | `blog`, `press_release`, or `product` |
 | `title` | string | article title |
 | `scraped_at` | string | ISO 8601 |
@@ -223,7 +226,7 @@ Each article produces two types of embeddings written during the vector stage:
 | `id` | string | `{article_id}_c{n}` |
 | `article_id` | string | references `vec_items.id` |
 | `url` | string | canonical article URL |
-| `company` / `category` / `title` / `published_date` | string | copied from parent article |
+| `company` / `category` / `title` / `published_date` | string | copied from parent article (`company` is `cribl`, `ocient`, or `xsiam`) |
 | `chunk_index` | integer | position within the article |
 | `chunk_text` | string | the chunk content (`RAG_CHUNK_SIZE_CHARS` with `RAG_CHUNK_OVERLAP_CHARS` overlap) |
 
