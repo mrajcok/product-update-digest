@@ -1,5 +1,7 @@
 # product-update-digest
 
+**[View the live digest →](https://mrajcok.github.io/product-update-digest/)**
+
 A daily cron job that scrapes news and blog posts from Cribl, Ocient, and Palo Alto Networks (XSIAM) — blog posts, press releases, and product release notes — summarizes them with an LLM via [OpenRouter](https://openrouter.ai), publishes a static feed to GitHub Pages, and stores embeddings in a [sqlite-vec](https://github.com/asg017/sqlite-vec) vector database for retrieval by an AI assistant or the `tools/search.py` or `tools/rag.py` CLI.
 
 ## What it does
