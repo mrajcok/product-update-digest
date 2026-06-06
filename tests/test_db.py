@@ -3,8 +3,8 @@ import time
 
 import pytest
 
-from storage.db import ArticleDB
-from storage.models import ArticleRecord, ScrapedPage, vec_id_for, normalize_url
+from digest.storage.db import ArticleDB
+from digest.storage.models import ArticleRecord, ScrapedPage, vec_id_for, normalize_url
 
 
 def make_record(url: str, company="cribl", category="blog", raw_text="hello world content here") -> ArticleRecord:

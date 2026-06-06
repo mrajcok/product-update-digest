@@ -3,16 +3,16 @@ name = "product-update-digest"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
-    "langchain>=0.3,<0.4",
-    "langchain-openai>=0.2,<0.3",        # OpenRouter is OpenAI-compatible
-    "openai>=1.0,<2",                     # used by VecClient for embeddings via OpenRouter
+    "langchain-core>=1.0,<2",
+    "langchain-openai>=1.0,<2",          # OpenRouter is OpenAI-compatible
+    "openai>=2.0,<3",                    # used by VecClient for embeddings via OpenRouter
     "sqlite-vec>=0.1.9,<0.2",
     "pydantic>=2.11,<3",
     "pydantic-settings>=2.10,<3",
     "python-dotenv>=1.1,<2",
     "httpx>=0.28,<1",                     # primary HTTP client (sync + async, HTTP/2)
     "beautifulsoup4>=4.13,<5",
-    "lxml>=5.4,<6",
+    "lxml>=6.0,<7",
     "Jinja2>=3.1,<4",
     "Markdown>=3.7,<4",                   # convert LLM markdown output to HTML in templates
     "gitpython>=3.1,<4",
@@ -28,15 +28,14 @@ dev = [
 ]
 
 [project.scripts]
-digest = "main:main"
+digest = "digest.main:main"
 
 [build-system]
 requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-packages = ["scrapers", "storage", "publisher"]
-py-modules = ["main", "config", "summarizer"]
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

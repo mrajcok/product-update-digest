@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 from bs4 import BeautifulSoup
 
-from scrapers.cribl import CriblScraper
+from digest.scrapers.cribl import CriblScraper
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

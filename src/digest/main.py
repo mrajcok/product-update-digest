@@ -7,15 +7,15 @@ from pathlib import Path
 
 import httpx
 
-from config import setup_logging, settings
-from publisher.github_pages import GitHubPagesPublisher
-from scrapers.cribl import CriblScraper
-from scrapers.ocient import OcientScraper
-from scrapers.paloalto import PaloAltoScraper
-from storage.db import ArticleDB
-from storage.models import ArticleRecord, ProductUpdate, ScrapedPage, normalize_url, vec_id_for
-from storage.vec_client import VecClient
-from summarizer import Summarizer
+from digest.config import setup_logging, settings
+from digest.publisher.github_pages import GitHubPagesPublisher
+from digest.scrapers.cribl import CriblScraper
+from digest.scrapers.ocient import OcientScraper
+from digest.scrapers.paloalto import PaloAltoScraper
+from digest.storage.db import ArticleDB
+from digest.storage.models import ArticleRecord, ProductUpdate, ScrapedPage, normalize_url, vec_id_for
+from digest.storage.vec_client import VecClient
+from digest.summarizer import Summarizer
 
 logger = logging.getLogger(__name__)
 
@@ -290,6 +290,13 @@ def _run_render(args: argparse.Namespace, db: ArticleDB) -> None:
 
 
 def _run_publish(args: argparse.Namespace, db: ArticleDB) -> None:
+    html_files = list(_DRY_RUN_DIR.glob("**/*.html")) if _DRY_RUN_DIR.exists() else []
+    if not html_files:
+        logger.error(
+            "No rendered HTML in %s — run '--stage render' first, review, then '--publish'.",
+            _DRY_RUN_DIR,
+        )
+        sys.exit(1)
     publisher = GitHubPagesPublisher(db)
     publisher.publish(_scraper_infos(_build_scrapers(args.site)))
 

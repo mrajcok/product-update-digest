@@ -3,7 +3,7 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-from storage.models import ArticleRecord, normalize_url
+from digest.storage.models import ArticleRecord, normalize_url
 
 logger = logging.getLogger(__name__)
 

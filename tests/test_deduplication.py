@@ -1,9 +1,9 @@
 """Tests for deduplication logic in BaseScraper — SQLite-backed."""
 import pytest
 
-from scrapers.base import BaseScraper
-from storage.db import ArticleDB
-from storage.models import ArticleRecord, ScrapedPage, vec_id_for
+from digest.scrapers.base import BaseScraper
+from digest.storage.db import ArticleDB
+from digest.storage.models import ArticleRecord, ScrapedPage, vec_id_for
 
 
 # ---------------------------------------------------------------------------

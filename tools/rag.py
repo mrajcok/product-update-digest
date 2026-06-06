@@ -23,8 +23,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from config import settings  # noqa: E402
-from storage.vec_client import ChunkResult, VecClient  # noqa: E402
+from digest.config import settings  # noqa: E402
+from digest.storage.vec_client import ChunkResult, VecClient  # noqa: E402
 
 _VEC_TEST_DB = Path("data/dry-run/vec_test.db")
 

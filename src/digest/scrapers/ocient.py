@@ -4,9 +4,9 @@ from xml.etree import ElementTree as ET
 
 from bs4 import BeautifulSoup
 
-from config import settings
-from scrapers.base import BaseScraper, Category
-from storage.models import ScrapedPage
+from digest.config import settings
+from digest.scrapers.base import BaseScraper, Category
+from digest.storage.models import ScrapedPage
 
 logger = logging.getLogger(__name__)
 

@@ -12,8 +12,8 @@ import markdown as md
 from jinja2 import Environment, FileSystemLoader
 from markupsafe import Markup
 
-from storage.db import ArticleDB
-from storage.models import ArticleRecord, ProductUpdate, ScrapedPage
+from digest.storage.db import ArticleDB
+from digest.storage.models import ArticleRecord, ProductUpdate, ScrapedPage
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +46,7 @@ class GitHubPagesPublisher:
         all_records = self._db.get_all()
         ok_records = [r for r in all_records if r.status == "ok" and r.summary]
 
-        from config import settings
+        from digest.config import settings
         company_updates: dict[str, list[ArticleRecord]] = {
             c: sorted(
                 [r for r in ok_records if r.company == c],
@@ -62,7 +62,7 @@ class GitHubPagesPublisher:
 
     def render_from_db(self, out_dir: Path, scraper_infos: list[dict] | None = None, limit: int | None = None) -> None:
         """Render pages from DB to out_dir (no push). limit caps articles per company on company pages."""
-        from config import settings
+        from digest.config import settings
         all_records = self._db.get_all()
         ok_records = [r for r in all_records if r.status == "ok" and r.summary]
         company_updates: dict[str, list[ArticleRecord]] = {
@@ -86,7 +86,7 @@ class GitHubPagesPublisher:
         scraper_infos: list[dict] | None = None,
     ) -> None:
         """Render scraped-page preview (no summaries) to out_dir."""
-        from config import settings
+        from digest.config import settings
         records = [
             ArticleRecord.from_scraped_page(p, summary="[summary not generated]")
             for p in pages
@@ -107,7 +107,7 @@ class GitHubPagesPublisher:
         scraper_infos: list[dict] | None = None,
     ) -> None:
         """Render index using production templates from already-summarized DB records."""
-        from config import settings
+        from digest.config import settings
         company_updates: dict[str, list[ArticleRecord]] = {
             c: sorted([r for r in records if r.company == c], key=_sort_key, reverse=True)
             for c in COMPANIES
@@ -140,7 +140,7 @@ class GitHubPagesPublisher:
         files: dict[str, str] = {}
 
         index_tmpl = self._env.get_template("index.html.j2")
-        from config import settings
+        from digest.config import settings
         files["index.html"] = index_tmpl.render(
             updates=top_updates,
             index_per_company=settings.index_per_company,
@@ -167,7 +167,7 @@ class GitHubPagesPublisher:
             dest.write_text(content, encoding="utf-8")
 
     def _push_to_github(self, html_files: dict[str, str]) -> None:
-        from config import settings  # deferred to avoid module-level Settings() at import time
+        from digest.config import settings  # deferred to avoid module-level Settings() at import time
 
         repo_url = (
             f"https://{settings.github_token}@github.com/{settings.github_repo}.git"

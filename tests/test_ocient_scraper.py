@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 from bs4 import BeautifulSoup
 
-from scrapers.ocient import OcientScraper
+from digest.scrapers.ocient import OcientScraper
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

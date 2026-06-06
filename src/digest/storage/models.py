@@ -5,7 +5,7 @@ from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 from pydantic import BaseModel, model_validator
 
-from config import settings
+from digest.config import settings
 
 def normalize_url(url: str) -> str:
     """Normalize a URL for consistent deduplication across minor variations."""

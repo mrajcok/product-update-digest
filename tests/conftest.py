@@ -10,8 +10,8 @@ import sqlite3
 
 import pytest
 
-from storage.db import ArticleDB
-from storage.models import ScrapedPage, vec_id_for
+from digest.storage.db import ArticleDB
+from digest.storage.models import ScrapedPage, vec_id_for
 
 
 # ---------------------------------------------------------------------------

@@ -1,8 +1,8 @@
 """Tests for article_text table in storage/db.py."""
 import pytest
 
-from storage.db import ArticleDB
-from storage.models import ArticleRecord, ScrapedPage, normalize_url, vec_id_for
+from digest.storage.db import ArticleDB
+from digest.storage.models import ArticleRecord, ScrapedPage, normalize_url, vec_id_for
 
 
 def _make_record(url: str, company: str = "cribl", published_date: str | None = "2026-03-15") -> ArticleRecord:

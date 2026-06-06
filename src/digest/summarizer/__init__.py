@@ -6,8 +6,8 @@ from langchain_openai import ChatOpenAI
 from pydantic import SecretStr
 from tenacity import Retrying, before_sleep_log, stop_after_attempt, wait_exponential
 
-from config import settings
-from storage.models import ScrapedPage
+from digest.config import settings
+from digest.storage.models import ScrapedPage
 
 logger = logging.getLogger(__name__)
 
@@ -82,12 +82,16 @@ class Summarizer:
                 "Focus on what changed or was announced and why it matters.",
             ),
         }
-        for attempt in Retrying(
-            stop=stop_after_attempt(settings.max_api_retries),
-            wait=wait_exponential(multiplier=1, min=2, max=30),
-            before_sleep=before_sleep_log(logger, logging.WARNING),
-            reraise=True,
-        ):
-            with attempt:
-                return self._chain.invoke(inputs)
-        raise AssertionError("unreachable: tenacity reraise=True always raises on exhaustion")
+        try:
+            for attempt in Retrying(
+                stop=stop_after_attempt(settings.max_api_retries),
+                wait=wait_exponential(multiplier=1, min=2, max=30),
+                before_sleep=before_sleep_log(logger, logging.WARNING),
+                reraise=True,
+            ):
+                with attempt:
+                    return self._chain.invoke(inputs)
+        except Exception as exc:
+            logger.error("Summarization failed after %d attempts (%s) — using raw text fallback", settings.max_api_retries, exc)
+            return page.raw_text[:300]
+        raise AssertionError("unreachable")

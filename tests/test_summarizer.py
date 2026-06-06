@@ -2,7 +2,7 @@
 import pytest
 from unittest.mock import MagicMock, patch
 
-from storage.models import ScrapedPage
+from digest.storage.models import ScrapedPage
 
 
 @pytest.fixture
@@ -10,8 +10,8 @@ def mock_chain(mocker):
     """Patch ChatOpenAI so no real API call is made."""
     mock = MagicMock()
     mock.invoke.return_value = "This is a mocked summary of the article."
-    mocker.patch("summarizer.ChatOpenAI", return_value=MagicMock())
-    mocker.patch("summarizer._PROMPT.__or__", return_value=MagicMock(__or__=lambda s, o: mock))
+    mocker.patch("digest.summarizer.ChatOpenAI", return_value=MagicMock())
+    mocker.patch("digest.summarizer._PROMPT.__or__", return_value=MagicMock(__or__=lambda s, o: mock))
     return mock
 
 
@@ -19,12 +19,12 @@ class TestSummarizer:
     def test_returns_summary_on_success(self, mocker):
         mock_chain = MagicMock()
         mock_chain.invoke.return_value = "Cribl Stream 4.0 released with new features."
-        mocker.patch("summarizer.ChatOpenAI")
+        mocker.patch("digest.summarizer.ChatOpenAI")
         mocker.patch("langchain_core.prompts.ChatPromptTemplate.__or__", return_value=MagicMock(
             __or__=lambda s, o: mock_chain
         ))
 
-        from summarizer import Summarizer
+        from digest.summarizer import Summarizer
         s = Summarizer()
         s._chain = mock_chain
 
@@ -42,9 +42,9 @@ class TestSummarizer:
     def test_prompt_receives_correct_fields(self, mocker):
         mock_chain = MagicMock()
         mock_chain.invoke.return_value = "summary"
-        mocker.patch("summarizer.ChatOpenAI")
+        mocker.patch("digest.summarizer.ChatOpenAI")
 
-        from summarizer import Summarizer
+        from digest.summarizer import Summarizer
         s = Summarizer()
         s._chain = mock_chain
 
@@ -65,9 +65,11 @@ class TestSummarizer:
     def test_content_truncated_to_limit(self, mocker):
         mock_chain = MagicMock()
         mock_chain.invoke.return_value = "summary"
-        mocker.patch("summarizer.ChatOpenAI")
+        mocker.patch("digest.summarizer.ChatOpenAI")
+        from digest.config import settings
+        mocker.patch.object(settings, "summarizer_content_chars", 6000)
 
-        from summarizer import Summarizer
+        from digest.summarizer import Summarizer
         s = Summarizer()
         s._chain = mock_chain
 
@@ -85,9 +87,11 @@ class TestSummarizer:
     def test_fallback_on_llm_failure(self, mocker):
         mock_chain = MagicMock()
         mock_chain.invoke.side_effect = Exception("API timeout")
-        mocker.patch("summarizer.ChatOpenAI")
+        mocker.patch("digest.summarizer.ChatOpenAI")
+        from digest.config import settings
+        mocker.patch.object(settings, "max_api_retries", 1)
 
-        from summarizer import Summarizer
+        from digest.summarizer import Summarizer
         s = Summarizer()
         s._chain = mock_chain
 

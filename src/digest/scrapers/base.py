@@ -8,9 +8,9 @@ from typing import Literal
 import httpx
 from bs4 import BeautifulSoup
 
-from config import settings
-from storage.db import ArticleDB
-from storage.models import ArticleRecord, ScrapedPage
+from digest.config import settings
+from digest.storage.db import ArticleDB
+from digest.storage.models import ArticleRecord, ScrapedPage
 
 Category = Literal["blog", "press_release", "product"]
 

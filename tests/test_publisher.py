@@ -1,9 +1,9 @@
 """Tests for publisher/github_pages.py — mocks git push, no network calls."""
 import pytest
 
-from storage.db import ArticleDB
-from storage.models import ArticleRecord, normalize_url
-from publisher.github_pages import GitHubPagesPublisher, _group_by_month
+from digest.storage.db import ArticleDB
+from digest.storage.models import ArticleRecord, normalize_url
+from digest.publisher.github_pages import GitHubPagesPublisher, _group_by_month
 
 
 def _make_record(**kwargs) -> ArticleRecord:

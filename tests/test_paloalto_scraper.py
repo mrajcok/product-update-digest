@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 from bs4 import BeautifulSoup
 
-from scrapers.paloalto import PaloAltoScraper, _PRESS_URL_FILTER
+from digest.scrapers.paloalto import PaloAltoScraper, _PRESS_URL_FILTER
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

@@ -5,12 +5,12 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from storage.db import ArticleDB
-from storage.models import ArticleRecord, ScrapedPage, normalize_url, vec_id_for
+from digest.storage.db import ArticleDB
+from digest.storage.models import ArticleRecord, ScrapedPage, normalize_url, vec_id_for
 
 
 def _args(stage: str, site: str | None = None, limit: int = 1) -> argparse.Namespace:
-    return argparse.Namespace(stage=stage, site=site, limit=limit)
+    return argparse.Namespace(stage=stage, site=site, limit=limit, category=None)
 
 
 def _cribl_page(url: str = "https://cribl.io/blog/post/") -> ScrapedPage:
@@ -40,10 +40,10 @@ class TestRunScrape:
         mock_scraper.exclusions = []
         mock_scraper.run.return_value = [page]
 
-        mocker.patch("main._build_scrapers", return_value=[mock_scraper])
-        mocker.patch("main._DRY_RUN_DIR", tmp_path)
+        mocker.patch("digest.main._build_scrapers", return_value=[mock_scraper])
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
 
-        from main import _run_scrape
+        from digest.main import _run_scrape
         _run_scrape(_args("scrape"), db)
 
         text = db.get_text(normalize_url(page.url))
@@ -57,10 +57,10 @@ class TestRunScrape:
         mock_scraper.exclusions = []
         mock_scraper.run.return_value = [page]
 
-        mocker.patch("main._build_scrapers", return_value=[mock_scraper])
-        mocker.patch("main._DRY_RUN_DIR", tmp_path)
+        mocker.patch("digest.main._build_scrapers", return_value=[mock_scraper])
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
 
-        from main import _run_scrape
+        from digest.main import _run_scrape
         _run_scrape(_args("scrape"), db)
 
         assert (tmp_path / "index.html").exists()
@@ -82,16 +82,16 @@ class TestRunSummarize:
         mock_scraper.sources = []
         mock_scraper.exclusions = []
 
-        mocker.patch("main._build_scrapers", return_value=[mock_scraper])
-        mocker.patch("main._DRY_RUN_DIR", tmp_path)
+        mocker.patch("digest.main._build_scrapers", return_value=[mock_scraper])
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
 
         mock_summarizer = MagicMock()
         mock_summarizer.summarize.return_value = "A cached summary."
-        mocker.patch("main._make_summarizer", return_value=mock_summarizer)
-        mocker.patch("main._assert_ollama_available")
-        mocker.patch("main._assert_model_available")
+        mocker.patch("digest.main._make_summarizer", return_value=mock_summarizer)
+        mocker.patch("digest.main._assert_ollama_available")
+        mocker.patch("digest.main._assert_model_available")
 
-        from main import _run_summarize
+        from digest.main import _run_summarize
         _run_summarize(_args("summarize"), db)
 
         # Scraper.run should NOT have been called — we had cached text
@@ -107,16 +107,16 @@ class TestRunSummarize:
         mock_scraper.exclusions = []
         mock_scraper.run.return_value = [page]
 
-        mocker.patch("main._build_scrapers", return_value=[mock_scraper])
-        mocker.patch("main._DRY_RUN_DIR", tmp_path)
+        mocker.patch("digest.main._build_scrapers", return_value=[mock_scraper])
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
 
         mock_summarizer = MagicMock()
         mock_summarizer.summarize.return_value = "A fresh summary."
-        mocker.patch("main._make_summarizer", return_value=mock_summarizer)
-        mocker.patch("main._assert_ollama_available")
-        mocker.patch("main._assert_model_available")
+        mocker.patch("digest.main._make_summarizer", return_value=mock_summarizer)
+        mocker.patch("digest.main._assert_ollama_available")
+        mocker.patch("digest.main._assert_model_available")
 
-        from main import _run_summarize
+        from digest.main import _run_summarize
         _run_summarize(_args("summarize"), db)
 
         mock_scraper.run.assert_called_once()
@@ -133,16 +133,16 @@ class TestRunSummarize:
         mock_scraper.sources = []
         mock_scraper.exclusions = []
 
-        mocker.patch("main._build_scrapers", return_value=[mock_scraper])
-        mocker.patch("main._DRY_RUN_DIR", tmp_path)
+        mocker.patch("digest.main._build_scrapers", return_value=[mock_scraper])
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
 
         mock_summarizer = MagicMock()
         mock_summarizer.summarize.return_value = "Persisted summary."
-        mocker.patch("main._make_summarizer", return_value=mock_summarizer)
-        mocker.patch("main._assert_ollama_available")
-        mocker.patch("main._assert_model_available")
+        mocker.patch("digest.main._make_summarizer", return_value=mock_summarizer)
+        mocker.patch("digest.main._assert_ollama_available")
+        mocker.patch("digest.main._assert_model_available")
 
-        from main import _run_summarize
+        from digest.main import _run_summarize
         _run_summarize(_args("summarize"), db)
 
         stored = db.get_by_url(page.url)
@@ -160,13 +160,13 @@ class TestRunSummarize:
         mock_scraper.sources = []
         mock_scraper.exclusions = []
 
-        mocker.patch("main._build_scrapers", return_value=[mock_scraper])
-        mocker.patch("main._DRY_RUN_DIR", tmp_path)
-        mocker.patch("main._make_summarizer", return_value=MagicMock(summarize=MagicMock(return_value="s")))
-        mocker.patch("main._assert_ollama_available")
-        mocker.patch("main._assert_model_available")
+        mocker.patch("digest.main._build_scrapers", return_value=[mock_scraper])
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
+        mocker.patch("digest.main._make_summarizer", return_value=MagicMock(summarize=MagicMock(return_value="s")))
+        mocker.patch("digest.main._assert_ollama_available")
+        mocker.patch("digest.main._assert_model_available")
 
-        from main import _run_summarize
+        from digest.main import _run_summarize
         _run_summarize(_args("summarize"), db)
 
         assert (tmp_path / "index.html").exists()
@@ -188,8 +188,8 @@ class TestRunVector:
         mock_scraper.sources = []
         mock_scraper.exclusions = []
 
-        mocker.patch("main._build_scrapers", return_value=[mock_scraper])
-        mocker.patch("main._DRY_RUN_DIR", tmp_path)
+        mocker.patch("digest.main._build_scrapers", return_value=[mock_scraper])
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
 
         upsert_calls = []
 
@@ -202,15 +202,18 @@ class TestRunVector:
             def upsert(self, update, vid):
                 upsert_calls.append((update, vid))
 
+            def upsert_chunks(self, update, vid):
+                return 0
+
             def get_all(self, company=None):
                 return []
 
             def close(self):
                 pass
 
-        mocker.patch("main.VecClient", FakeVecClient)
+        mocker.patch("digest.main.VecClient", FakeVecClient)
 
-        from main import _run_vector
+        from digest.main import _run_vector
         _run_vector(_args("vector"), db)
 
         assert len(upsert_calls) == 1
@@ -225,8 +228,8 @@ class TestRunVector:
         mock_scraper.exclusions = []
         mock_scraper.run.return_value = [page]
 
-        mocker.patch("main._build_scrapers", return_value=[mock_scraper])
-        mocker.patch("main._DRY_RUN_DIR", tmp_path)
+        mocker.patch("digest.main._build_scrapers", return_value=[mock_scraper])
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
 
         class FakeVecClient:
             def __init__(self, db_path=None):
@@ -237,15 +240,18 @@ class TestRunVector:
             def upsert(self, update, vid):
                 pass
 
+            def upsert_chunks(self, update, vid):
+                return 0
+
             def get_all(self, company=None):
                 return []
 
             def close(self):
                 pass
 
-        mocker.patch("main.VecClient", FakeVecClient)
+        mocker.patch("digest.main.VecClient", FakeVecClient)
 
-        from main import _run_vector
+        from digest.main import _run_vector
         _run_vector(_args("vector"), db)
 
         mock_scraper.run.assert_called_once()
@@ -261,8 +267,8 @@ class TestRunVector:
         mock_scraper.sources = []
         mock_scraper.exclusions = []
 
-        mocker.patch("main._build_scrapers", return_value=[mock_scraper])
-        mocker.patch("main._DRY_RUN_DIR", tmp_path)
+        mocker.patch("digest.main._build_scrapers", return_value=[mock_scraper])
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
 
         class FakeVecClient:
             def __init__(self, db_path=None):
@@ -273,15 +279,18 @@ class TestRunVector:
             def upsert(self, update, vid):
                 pass
 
+            def upsert_chunks(self, update, vid):
+                return 0
+
             def get_all(self, company=None):
                 return []
 
             def close(self):
                 pass
 
-        mocker.patch("main.VecClient", FakeVecClient)
+        mocker.patch("digest.main.VecClient", FakeVecClient)
 
-        from main import _run_vector
+        from digest.main import _run_vector
         _run_vector(_args("vector"), db)
 
         assert (tmp_path / "index.html").exists()
@@ -293,18 +302,18 @@ class TestRunVector:
 
 class TestRunPublish:
     def test_errors_when_dir_empty(self, db: ArticleDB, tmp_path: Path, mocker):
-        mocker.patch("main._DRY_RUN_DIR", tmp_path)
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
 
         import sys
-        from main import _run_publish
+        from digest.main import _run_publish
 
         with pytest.raises(SystemExit):
             _run_publish(_args("publish"), db)
 
     def test_errors_when_dir_missing(self, db: ArticleDB, tmp_path: Path, mocker):
-        mocker.patch("main._DRY_RUN_DIR", tmp_path / "nonexistent")
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path / "nonexistent")
 
-        from main import _run_publish
+        from digest.main import _run_publish
 
         with pytest.raises(SystemExit):
             _run_publish(_args("publish"), db)
@@ -314,12 +323,12 @@ class TestRunPublish:
         (tmp_path / "cribl").mkdir()
         (tmp_path / "cribl" / "index.html").write_text("<html>cribl</html>")
 
-        mocker.patch("main._DRY_RUN_DIR", tmp_path)
+        mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
 
-        from publisher.github_pages import GitHubPagesPublisher
+        from digest.publisher.github_pages import GitHubPagesPublisher
         mock_push = mocker.patch.object(GitHubPagesPublisher, "_push_to_github")
 
-        from main import _run_publish
+        from digest.main import _run_publish
         _run_publish(_args("publish"), db)
 
         mock_push.assert_called_once()

@@ -8,8 +8,8 @@ import sqlite_vec
 from openai import OpenAI
 from tenacity import Retrying, before_sleep_log, stop_after_attempt, wait_exponential
 
-from config import settings
-from storage.models import ProductUpdate
+from digest.config import settings
+from digest.storage.models import ProductUpdate
 
 logger = logging.getLogger(__name__)
 
