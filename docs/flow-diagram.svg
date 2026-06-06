@@ -1,111 +1,148 @@
-<svg width="100%" viewBox="0 0 680 800" role="img" style="" xmlns="http://www.w3.org/2000/svg">
-  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Product Update Digest – system architecture infographic</title>
-  <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </marker>
-  <mask id="imagine-text-gaps-97dq67" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="680" height="800" fill="white"/><rect x="261.9583435058594" y="14" width="156.0833282470703" height="21.566667556762695" fill="black" rx="2"/><rect x="291.79998779296875" y="47" width="96.4000015258789" height="20" fill="black" rx="2"/><rect x="187.3249969482422" y="76" width="305.3500061035156" height="19.333333015441895" fill="black" rx="2"/><rect x="116.65833282470703" y="121.33333587646484" width="96.68333435058594" height="21.33333396911621" fill="black" rx="2"/><rect x="102.28333282470703" y="140.3333282470703" width="125.43333435058594" height="19.333333015441895" fill="black" rx="2"/><rect x="460.26666259765625" y="121.33333587646484" width="109.46666717529297" height="21.33333396911621" fill="black" rx="2"/><rect x="452.2833251953125" y="140.3333282470703" width="125.43333435058594" height="19.333333015441895" fill="black" rx="2"/><rect x="309.9416809082031" y="219.3333282470703" width="60.11666488647461" height="21.399999618530273" fill="black" rx="2"/><rect x="247.41665649414062" y="238.3333282470703" width="185.1666717529297" height="19.333333015441895" fill="black" rx="2"/><rect x="486" y="214" width="78.4000015258789" height="19.333333015441895" fill="black" rx="2"/><rect x="486" y="229" width="64.53333282470703" height="19.333333015441895" fill="black" rx="2"/><rect x="486" y="244" width="67.79999923706055" height="19.333333015441895" fill="black" rx="2"/><rect x="295.4666748046875" y="313.3333435058594" width="89.06666564941406" height="21.399999618530273" fill="black" rx="2"/><rect x="273.0916748046875" y="332.3333435058594" width="133.81666564941406" height="19.333333015441895" fill="black" rx="2"/><rect x="458" y="317" width="97.68333435058594" height="19.333333015441895" fill="black" rx="2"/><rect x="352" y="367" width="92.3499984741211" height="19.333333015441895" fill="black" rx="2"/><rect x="280.70001220703125" y="404.3333435058594" width="118.5999984741211" height="21.33333396911621" fill="black" rx="2"/><rect x="257.29998779296875" y="423.3333435058594" width="165.39999389648438" height="19.333333015441895" fill="black" rx="2"/><rect x="321.25" y="474" width="37.5" height="19.333333015441895" fill="black" rx="2"/><rect x="161.2083282470703" y="547.3333129882812" width="53.58333206176758" height="21.33333396911621" fill="black" rx="2"/><rect x="116.28333282470703" y="566.3333129882812" width="143.43333435058594" height="19.333333015441895" fill="black" rx="2"/><rect x="454.9583435058594" y="547.3333129882812" width="74.08333587646484" height="21.399999618530273" fill="black" rx="2"/><rect x="402.54998779296875" y="566.3333129882812" width="178.89999389648438" height="19.333333015441895" fill="black" rx="2"/><rect x="218.10833740234375" y="594" width="243.78334045410156" height="19.333333015441895" fill="black" rx="2"/><rect x="418.8333435058594" y="610" width="146.3333282470703" height="19.333333015441895" fill="black" rx="2"/><rect x="1.7999992370605469" y="436" width="72.4000015258789" height="19.333333015441895" fill="black" rx="2"/><rect x="304.6833190917969" y="655.3333129882812" width="70.63333511352539" height="21.33333396911621" fill="black" rx="2"/><rect x="274.5" y="674.3333129882812" width="131" height="19.333333015441895" fill="black" rx="2"/><rect x="290.9166564941406" y="745.3333129882812" width="98.16666412353516" height="21.566667556762695" fill="black" rx="2"/><rect x="261.3083190917969" y="764.3333129882812" width="157.38333129882812" height="19.333333015441895" fill="black" rx="2"/></mask></defs>
+<svg width="100%" viewBox="0 0 680 800" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Product Update Digest – system architecture infographic</title>
+<defs>
+<style>
+text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:12px}
+line,path{fill:none;stroke:rgb(156,154,146);stroke-width:1.5}
+</style>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+  <path d="M2 1L8 5L2 9" stroke="rgb(156,154,146)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+<mask id="m" maskUnits="userSpaceOnUse">
+  <rect width="680" height="800" fill="white"/>
+  <rect x="261.9" y="14"  width="156.1" height="21.6" fill="black" rx="2"/>
+  <rect x="291.8" y="47"  width="96.4"  height="20"   fill="black" rx="2"/>
+  <rect x="187.3" y="76"  width="305.4" height="19.3" fill="black" rx="2"/>
+  <rect x="116.7" y="121" width="96.7"  height="21.3" fill="black" rx="2"/>
+  <rect x="102.3" y="140" width="125.4" height="19.3" fill="black" rx="2"/>
+  <rect x="460.3" y="121" width="109.5" height="21.3" fill="black" rx="2"/>
+  <rect x="452.3" y="140" width="125.4" height="19.3" fill="black" rx="2"/>
+  <rect x="309.9" y="219" width="60.1"  height="21.4" fill="black" rx="2"/>
+  <rect x="247.4" y="238" width="185.2" height="19.3" fill="black" rx="2"/>
+  <rect x="486"   y="214" width="78.4"  height="19.3" fill="black" rx="2"/>
+  <rect x="486"   y="229" width="64.5"  height="19.3" fill="black" rx="2"/>
+  <rect x="486"   y="244" width="67.8"  height="19.3" fill="black" rx="2"/>
+  <rect x="295.5" y="313" width="89.1"  height="21.4" fill="black" rx="2"/>
+  <rect x="273.1" y="332" width="133.8" height="19.3" fill="black" rx="2"/>
+  <rect x="458"   y="317" width="97.7"  height="19.3" fill="black" rx="2"/>
+  <rect x="352"   y="367" width="92.4"  height="19.3" fill="black" rx="2"/>
+  <rect x="280.7" y="404" width="118.6" height="21.3" fill="black" rx="2"/>
+  <rect x="257.3" y="423" width="165.4" height="19.3" fill="black" rx="2"/>
+  <rect x="321.3" y="474" width="37.5"  height="19.3" fill="black" rx="2"/>
+  <rect x="161.2" y="547" width="53.6"  height="21.3" fill="black" rx="2"/>
+  <rect x="116.3" y="566" width="143.4" height="19.3" fill="black" rx="2"/>
+  <rect x="455"   y="547" width="74.1"  height="21.4" fill="black" rx="2"/>
+  <rect x="402.5" y="566" width="178.9" height="19.3" fill="black" rx="2"/>
+  <rect x="218.1" y="594" width="243.8" height="19.3" fill="black" rx="2"/>
+  <rect x="418.8" y="610" width="146.3" height="19.3" fill="black" rx="2"/>
+  <rect x="1.8"   y="436" width="72.4"  height="19.3" fill="black" rx="2"/>
+  <rect x="304.7" y="655" width="70.6"  height="21.3" fill="black" rx="2"/>
+  <rect x="274.5" y="674" width="131"   height="19.3" fill="black" rx="2"/>
+  <rect x="290.9" y="745" width="98.2"  height="21.6" fill="black" rx="2"/>
+  <rect x="261.3" y="764" width="157.4" height="19.3" fill="black" rx="2"/>
+</mask>
+</defs>
 
-  <!-- Title -->
-  <text x="340" y="30" text-anchor="middle" font-size="17" style="fill:rgb(250, 249, 245);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:auto">Product update digest</text>
+<!-- Title -->
+<text x="340" y="30" text-anchor="middle" font-size="17" fill="rgb(250,249,245)">Product update digest</text>
 
-  <!-- Daily cron badge -->
-  <g onclick="sendPrompt('How is the daily cron job configured?')" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="258" y="42" width="164" height="30" rx="14" stroke-width="0.5" style="fill:rgb(99, 56, 6);stroke:rgb(239, 159, 39);color:rgb(251, 251, 254);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="340" y="57" text-anchor="middle" dominant-baseline="central" style="fill:rgb(239, 159, 39);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">⏱ daily cron job</text>
-  </g>
+<!-- Daily cron badge -->
+<g onclick="sendPrompt('How is the daily cron job configured?')">
+  <rect x="258" y="42" width="164" height="30" rx="14" fill="rgb(99,56,6)" stroke="rgb(239,159,39)" stroke-width="0.5"/>
+  <text x="340" y="57" text-anchor="middle" dominant-baseline="central" fill="rgb(239,159,39)">&#x23F1; daily cron job</text>
+</g>
 
-  <text x="340" y="90" text-anchor="middle" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">scrape → deduplicate → summarize → store → publish</text>
+<text x="340" y="90" text-anchor="middle" fill="rgb(194,192,182)">scrape &#x2192; deduplicate &#x2192; summarize &#x2192; store &#x2192; publish</text>
 
-  <!-- ── ROW 1: Sources ── -->
-  <g onclick="sendPrompt('What does the Cribl scraper do?')" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="90" y="110" width="150" height="52" rx="8" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(251, 251, 254);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="165" y="132" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Cribl website</text>
-    <text x="165" y="150" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">Blog · press · product</text>
-  </g>
-  <g onclick="sendPrompt('What does the Ocient scraper do?')" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="440" y="110" width="150" height="52" rx="8" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);color:rgb(251, 251, 254);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="515" y="132" text-anchor="middle" dominant-baseline="central" style="fill:rgb(159, 225, 203);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Ocient website</text>
-    <text x="515" y="150" text-anchor="middle" dominant-baseline="central" style="fill:rgb(93, 202, 165);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">Blog · press · product</text>
-  </g>
+<!-- ROW 1: Sources -->
+<g onclick="sendPrompt('What does the Cribl scraper do?')">
+  <rect x="90" y="110" width="150" height="52" rx="8" fill="rgb(8,80,65)" stroke="rgb(93,202,165)" stroke-width="0.5"/>
+  <text x="165" y="132" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(159,225,203)">Cribl website</text>
+  <text x="165" y="150" text-anchor="middle" dominant-baseline="central" fill="rgb(93,202,165)">Blog &#xB7; press &#xB7; product</text>
+</g>
+<g onclick="sendPrompt('What does the Ocient scraper do?')">
+  <rect x="440" y="110" width="150" height="52" rx="8" fill="rgb(8,80,65)" stroke="rgb(93,202,165)" stroke-width="0.5"/>
+  <text x="515" y="132" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(159,225,203)">Ocient website</text>
+  <text x="515" y="150" text-anchor="middle" dominant-baseline="central" fill="rgb(93,202,165)">Blog &#xB7; press &#xB7; product</text>
+</g>
 
-  <line x1="165" y1="162" x2="278" y2="208" marker-end="url(#arrow)" stroke="var(--t)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <line x1="515" y1="162" x2="402" y2="208" marker-end="url(#arrow)" stroke="var(--t)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="165" y1="162" x2="278" y2="208" marker-end="url(#arrow)"/>
+<line x1="515" y1="162" x2="402" y2="208" marker-end="url(#arrow)"/>
 
-  <!-- ── ROW 2: Scraper ── -->
-  <g onclick="sendPrompt('How does the scraper work?')" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="240" y="208" width="200" height="56" rx="8" stroke-width="0.5" style="fill:rgb(60, 52, 137);stroke:rgb(175, 169, 236);color:rgb(251, 251, 254);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="340" y="230" text-anchor="middle" dominant-baseline="central" style="fill:rgb(206, 203, 246);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Scraper</text>
-    <text x="340" y="248" text-anchor="middle" dominant-baseline="central" style="fill:rgb(175, 169, 236);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">HTTP fetch · sitemap discovery</text>
-  </g>
+<!-- ROW 2: Scraper -->
+<g onclick="sendPrompt('How does the scraper work?')">
+  <rect x="240" y="208" width="200" height="56" rx="8" fill="rgb(60,52,137)" stroke="rgb(175,169,236)" stroke-width="0.5"/>
+  <text x="340" y="230" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(206,203,246)">Scraper</text>
+  <text x="340" y="248" text-anchor="middle" dominant-baseline="central" fill="rgb(175,169,236)">HTTP fetch &#xB7; sitemap discovery</text>
+</g>
 
-  <line x1="340" y1="264" x2="340" y2="302" marker-end="url(#arrow)" stroke="var(--t)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="340" y1="264" x2="340" y2="302" marker-end="url(#arrow)"/>
 
-  <!-- ── ROW 3: Deduplication ── -->
-  <g onclick="sendPrompt('How does the SQLite deduplication work?')" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="240" y="302" width="200" height="56" rx="8" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);color:rgb(251, 251, 254);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="340" y="324" text-anchor="middle" dominant-baseline="central" style="fill:rgb(211, 209, 199);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Deduplicate</text>
-    <text x="340" y="342" text-anchor="middle" dominant-baseline="central" style="fill:rgb(180, 178, 169);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">SHA-256 content hash</text>
-  </g>
+<!-- ROW 3: Deduplication -->
+<g onclick="sendPrompt('How does the SQLite deduplication work?')">
+  <rect x="240" y="302" width="200" height="56" rx="8" fill="rgb(68,68,65)" stroke="rgb(180,178,169)" stroke-width="0.5"/>
+  <text x="340" y="324" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(211,209,199)">Deduplicate</text>
+  <text x="340" y="342" text-anchor="middle" dominant-baseline="central" fill="rgb(180,178,169)">SHA-256 content hash</text>
+</g>
 
-  <text x="462" y="331" text-anchor="start" fill="var(--s)" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:auto">Skip unchanged</text>
-  <line x1="460" y1="331" x2="442" y2="331" mask="url(#imagine-text-gaps-97dq67)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:0.5px;stroke-dasharray:4px, 3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<text x="462" y="331" fill="rgb(194,192,182)">Skip unchanged</text>
+<line x1="460" y1="331" x2="442" y2="331" mask="url(#m)" stroke-width="0.5" stroke-dasharray="4 3"/>
 
-  <line x1="340" y1="358" x2="340" y2="396" marker-end="url(#arrow)" stroke="var(--t)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="356" y="381" fill="var(--s)" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:auto">new items only</text>
+<line x1="340" y1="358" x2="340" y2="396" marker-end="url(#arrow)"/>
+<text x="356" y="381" fill="rgb(194,192,182)">new items only</text>
 
-  <!-- ── ROW 4: LLM Summarizer ── -->
-  <g onclick="sendPrompt('How does the LangChain summarization chain work?')" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="240" y="396" width="200" height="56" rx="8" stroke-width="0.5" style="fill:rgb(99, 56, 6);stroke:rgb(239, 159, 39);color:rgb(251, 251, 254);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="340" y="415" text-anchor="middle" dominant-baseline="central" style="fill:rgb(250, 199, 117);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">LLM summarizer</text>
-    <text x="340" y="433" text-anchor="middle" dominant-baseline="central" style="fill:rgb(239, 159, 39);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">LangChain · via OpenRouter</text>
-  </g>
+<!-- ROW 4: LLM Summarizer -->
+<g onclick="sendPrompt('How does the LangChain summarization chain work?')">
+  <rect x="240" y="396" width="200" height="56" rx="8" fill="rgb(99,56,6)" stroke="rgb(239,159,39)" stroke-width="0.5"/>
+  <text x="340" y="415" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(250,199,117)">LLM summarizer</text>
+  <text x="340" y="433" text-anchor="middle" dominant-baseline="central" fill="rgb(239,159,39)">LangChain &#xB7; OpenRouter or Ollama</text>
+</g>
 
-  <line x1="340" y1="452" x2="340" y2="490" marker-end="url(#arrow)" stroke="var(--t)" mask="url(#imagine-text-gaps-97dq67)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="340" y1="452" x2="340" y2="490" marker-end="url(#arrow)" mask="url(#m)"/>
+<text x="340" y="488" text-anchor="middle" fill="rgb(194,192,182)">store</text>
 
-  <!-- ── ROW 5: Storage – two branches ── -->
-  <text x="340" y="488" text-anchor="middle" fill="var(--s)" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">store</text>
-  <line x1="310" y1="501" x2="188" y2="536" marker-end="url(#arrow)" stroke="var(--t)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <line x1="370" y1="501" x2="492" y2="536" marker-end="url(#arrow)" stroke="var(--t)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<!-- ROW 5: Storage branches -->
+<line x1="310" y1="501" x2="188" y2="536" marker-end="url(#arrow)"/>
+<line x1="370" y1="501" x2="492" y2="536" marker-end="url(#arrow)"/>
 
-  <!-- SQLite box -->
-  <g onclick="sendPrompt('What data is stored in SQLite?')" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="78" y="536" width="220" height="56" rx="8" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);color:rgb(251, 251, 254);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="188" y="558" text-anchor="middle" dominant-baseline="central" style="fill:rgb(211, 209, 199);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">SQLite</text>
-    <text x="188" y="576" text-anchor="middle" dominant-baseline="central" style="fill:rgb(180, 178, 169);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">Metadata · URL tracking</text>
-  </g>
+<!-- SQLite -->
+<g onclick="sendPrompt('What data is stored in SQLite?')">
+  <rect x="78" y="536" width="220" height="56" rx="8" fill="rgb(68,68,65)" stroke="rgb(180,178,169)" stroke-width="0.5"/>
+  <text x="188" y="558" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(211,209,199)">SQLite</text>
+  <text x="188" y="576" text-anchor="middle" dominant-baseline="central" fill="rgb(180,178,169)">Metadata &#xB7; URL tracking</text>
+</g>
 
-  <!-- sqlite-vec box -->
-  <g onclick="sendPrompt('How is sqlite-vec used for semantic search?')" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="382" y="536" width="220" height="56" rx="8" stroke-width="0.5" style="fill:rgb(12, 68, 124);stroke:rgb(133, 183, 235);color:rgb(251, 251, 254);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="492" y="558" text-anchor="middle" dominant-baseline="central" style="fill:rgb(181, 212, 244);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">sqlite-vec</text>
-    <text x="492" y="576" text-anchor="middle" dominant-baseline="central" style="fill:rgb(133, 183, 235);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">Whole-doc vectors · chunk embeddings</text>
-  </g>
+<!-- sqlite-vec -->
+<g onclick="sendPrompt('How is sqlite-vec used for semantic search?')">
+  <rect x="382" y="536" width="220" height="56" rx="8" fill="rgb(12,68,124)" stroke="rgb(133,183,235)" stroke-width="0.5"/>
+  <text x="492" y="558" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(181,212,244)">sqlite-vec</text>
+  <text x="492" y="576" text-anchor="middle" dominant-baseline="central" fill="rgb(133,183,235)">Vectors &#xB7; chunks &#xB7; RAG Q&amp;A</text>
+</g>
 
-  <text x="340" y="608" text-anchor="middle" fill="var(--s)" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">cross-referenced via vec_id (MD5 of URL)</text>
-  <text x="492" y="624" text-anchor="middle" fill="var(--s)" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">also queried by Hermes</text>
+<text x="340" y="608" text-anchor="middle" fill="rgb(194,192,182)">cross-referenced via vec_id (MD5 of URL)</text>
+<text x="492" y="624" text-anchor="middle" fill="rgb(194,192,182)">also queried by Hermes</text>
 
-  <!-- SQLite feedback arrow back to Deduplicate -->
-  <path d="M78 564 L44 564 L44 330 L238 330" fill="none" stroke="var(--t)" stroke-width="1" stroke-dasharray="5 3" marker-end="url(#arrow)" opacity="0.6" mask="url(#imagine-text-gaps-97dq67)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:1px;stroke-dasharray:5px, 3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.6;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="38" y="450" text-anchor="middle" fill="var(--s)" transform="rotate(-90,38,450)" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">URL lookup</text>
+<!-- SQLite feedback arrow -->
+<path d="M78 564 L44 564 L44 330 L238 330" stroke-dasharray="5 3" stroke-width="1" opacity="0.6" marker-end="url(#arrow)" mask="url(#m)"/>
+<text x="38" y="450" text-anchor="middle" transform="rotate(-90,38,450)" fill="rgb(194,192,182)">URL lookup</text>
 
-  <!-- arrows from storage down to publisher -->
-  <line x1="188" y1="592" x2="280" y2="644" marker-end="url(#arrow)" stroke="var(--t)" mask="url(#imagine-text-gaps-97dq67)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <line x1="492" y1="592" x2="400" y2="644" marker-end="url(#arrow)" stroke="var(--t)" mask="url(#imagine-text-gaps-97dq67)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<!-- Arrows from storage to publisher -->
+<line x1="188" y1="592" x2="280" y2="644" marker-end="url(#arrow)" mask="url(#m)"/>
+<line x1="492" y1="592" x2="400" y2="644" marker-end="url(#arrow)" mask="url(#m)"/>
 
-  <!-- ── ROW 6: Publisher ── -->
-  <g onclick="sendPrompt('How does the publisher push to GitHub Pages?')" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="240" y="644" width="200" height="56" rx="8" stroke-width="0.5" style="fill:rgb(113, 43, 19);stroke:rgb(240, 153, 123);color:rgb(251, 251, 254);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="340" y="666" text-anchor="middle" dominant-baseline="central" style="fill:rgb(245, 196, 179);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">Publisher</text>
-    <text x="340" y="684" text-anchor="middle" dominant-baseline="central" style="fill:rgb(240, 153, 123);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">Jinja2 HTML · git push</text>
-  </g>
+<!-- ROW 6: Publisher -->
+<g onclick="sendPrompt('How does the publisher push to GitHub Pages?')">
+  <rect x="240" y="644" width="200" height="56" rx="8" fill="rgb(113,43,19)" stroke="rgb(240,153,123)" stroke-width="0.5"/>
+  <text x="340" y="666" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(245,196,179)">Publisher</text>
+  <text x="340" y="684" text-anchor="middle" dominant-baseline="central" fill="rgb(240,153,123)">Jinja2 &#xB7; Markdown&#x2192;HTML &#xB7; git push</text>
+</g>
 
-  <line x1="340" y1="700" x2="340" y2="734" marker-end="url(#arrow)" stroke="var(--t)" style="fill:none;stroke:rgb(156, 154, 146);color:rgb(251, 251, 254);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="340" y1="700" x2="340" y2="734" marker-end="url(#arrow)"/>
 
-  <!-- ── ROW 7: GitHub Pages ── -->
-  <g onclick="sendPrompt('What does the GitHub Pages digest look like?')" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
-    <rect x="240" y="734" width="200" height="52" rx="8" stroke-width="0.5" style="fill:rgb(39, 80, 10);stroke:rgb(151, 196, 89);color:rgb(251, 251, 254);stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-    <text x="340" y="756" text-anchor="middle" dominant-baseline="central" style="fill:rgb(192, 221, 151);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:14px;font-weight:500;text-anchor:middle;dominant-baseline:central">GitHub Pages</text>
-    <text x="340" y="774" text-anchor="middle" dominant-baseline="central" style="fill:rgb(151, 196, 89);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">Static HTML digest · public</text>
-  </g>
+<!-- ROW 7: GitHub Pages -->
+<g onclick="sendPrompt('What does the GitHub Pages digest look like?')">
+  <rect x="240" y="734" width="200" height="52" rx="8" fill="rgb(39,80,10)" stroke="rgb(151,196,89)" stroke-width="0.5"/>
+  <text x="340" y="756" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(192,221,151)">GitHub Pages</text>
+  <text x="340" y="774" text-anchor="middle" dominant-baseline="central" fill="rgb(151,196,89)">Static HTML digest &#xB7; public</text>
+</g>
 </svg>

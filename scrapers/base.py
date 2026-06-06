@@ -58,11 +58,12 @@ class BaseScraper(ABC):
         cutoff = (datetime.now(timezone.utc) - timedelta(days=settings.max_article_age_days)).date()
 
         results: list[ScrapedPage] = []
-        for url, url_category in urls:
+        for i, (url, url_category) in enumerate(urls, 1):
             if category and url_category != category:
                 continue
             if limit is not None and len(results) >= limit:
                 break
+            logger.info("%s: [%d/%d] %s", self.company, i, len(urls), url)
             try:
                 page = self._process_url(url, url_category, db)
                 if page is not None:

@@ -44,6 +44,10 @@ _PRESS_URL_FILTER: Callable[[str], bool] = (
     lambda u: "/company/press/" in u and bool(_XSIAM_RE.search(u))
 )
 
+# The docs portal (docs-cortex.paloaltonetworks.com) requires JavaScript to
+# render — httpx only receives a loading screen with no useful content.
+_BLOCKED_DOMAINS = ("docs-cortex.paloaltonetworks.com",)
+
 
 class PaloAltoScraper(BaseScraper):
     company = "xsiam"
@@ -51,7 +55,7 @@ class PaloAltoScraper(BaseScraper):
         f"{_BLOG_TAG_URL} — XSIAM-tagged blog posts",
         f"{_MAIN_SITEMAP_URL} — press releases filtered for /company/press/ + XSIAM",
     ]
-    exclusions: list[str] = []
+    exclusions = [f"URLs from {d} (JS-rendered portal, no scrapeable content)" for d in _BLOCKED_DOMAINS]
 
     # Use browser UA — paloaltonetworks.com blocks generic bot UAs
     _user_agent = (
@@ -70,11 +74,15 @@ class PaloAltoScraper(BaseScraper):
         urls: list[tuple[str, Category]] = []
 
         for u in self._blog_urls_from_tag_page():
+            if any(d in u for d in _BLOCKED_DOMAINS):
+                continue
             if u not in seen:
                 seen.add(u)
                 urls.append((u, "blog"))
 
         for u in self._urls_from_source(_MAIN_SITEMAP_URL, cutoff, url_filter=_PRESS_URL_FILTER):
+            if any(d in u for d in _BLOCKED_DOMAINS):
+                continue
             if u not in seen:
                 seen.add(u)
                 urls.append((u, "press_release"))
