@@ -78,7 +78,7 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-08 10:17 PM EDT</p>
+  <p class="generated-at">Generated 2026-06-09 10:42 PM EDT</p>
 
   
   <h2 class="month">June 2026</h2>
@@ -86,11 +86,97 @@
   <div class="card">
     <div class="meta">
       <span>blog</span>
-      <span> · 2026-06-03</span>
+      <span> · 2026-06-09</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/cribl-stream/" target="_blank" rel="noopener">Cribl Stream | Cribl Blog</a></h3>
+    
+    <div class="summary"><p>Recent Cribl blog posts cover a wide range of updates and integrations. Cribl Guard’s latest model, Cribl-Privacy 1.5, aims to improve recall performance while maintaining the same resource footprint.  Several posts detail integrations with other platforms, including AWS, AppOmni, and the Claude Compliance API for AI telemetry. Additionally, Cribl has been granted CVE Numbering Authority (CNA) status and is encouraging migration away from CrowdStream. </p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-09</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/engineering/" target="_blank" rel="noopener">Engineering | Cribl Blog</a></h3>
+    
+    <div class="summary"><p>Recent Cribl engineering updates include improved diagnostics for the REST Collector. Cribl Guard 1.5 now offers higher recall with the same resource footprint. Several “Cribl Search Packs” have been released for integrations with Palo Alto SLS, Corelight, Palo Alto Firewalls, and AWS WAF, enabling faster insights and tiering. Cribl Stream now includes real-time LLM cost analytics and simplified integration with Microsoft Fabric. </p>
+<p>For a complete overview of updates, consult the original Engineering blog.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-09</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/rest-collector-diagnostics-now-easier-than-ever/" target="_blank" rel="noopener">REST Collector Diagnostics — Now easier than ever! | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl has released new debugging tools for its REST Collector, improving visibility into potential issues when collecting data from HTTP APIs.</p>
+<ul>
+<li>The new REST Collector Diagnostics allow users to run collector jobs in debug mode and interactively inspect request and response details – including headers, payloads, URLs, and status codes.</li>
+<li>Diagnostics provide visibility into authentication, discovery, and collection phases, pinpointing failures like authentication errors or unexpected data formats.</li>
+<li>A generated <code>curl</code> command is included, enabling users to replicate requests for testing in external tools like Postman.</li>
+<li>Diagnostic data is encrypted, stored locally, and features built-in redaction to protect sensitive information; it is <em>not</em> ingested into Cribl.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-08</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/podcasts/" target="_blank" rel="noopener">Podcasts | Cribl Blog</a></h3>
+    
+    <div class="summary"><p>The Cribl blog features “The Stream Life” podcast, covering topics relevant to Cribl products and the data streaming landscape. Recent episodes detail the introduction of <strong>Cribl Lakehouse</strong> (February 2025) and <strong>Cribl Lake</strong> (April 2024), and explore integrations with <strong>Microsoft Azure</strong>. Another episode focuses on <strong>Cribl Copilot</strong> (June 2024).</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-05</span>
     </div>
     <h3><a href="https://cribl.io/blog/cribl-search/" target="_blank" rel="noopener">Cribl Search | Cribl Blog</a></h3>
     
-    <div class="summary"><p>Recent Cribl blog posts highlight updates and integrations across Cribl Search, Cribl Lake, and Cribl Edge.  Cribl Search v2 introduces a faster federated architecture for improved performance. New Cribl Search Packs are available for Zscaler, Palo Alto SLS, Corelight, AWS WAF, and Palo Alto Firewalls, enabling faster insights into those platforms.  Blog posts also detail integrations with Microsoft Azure data and AWS Security Hub, and discuss using Cribl to address data challenges in AI/ML operations and healthcare.</p></div>
+    <div class="summary"><p>Recent Cribl blog posts highlight updates across Cribl Stream, Cribl Search, and Cribl Lake. A new version of Cribl Search (v2) features a faster, federated architecture. Several new “Search Packs” have been released for integrations with Zscaler, Azure data, Palo Alto Networks (Strata Logs, Firewalls), Corelight, AWS WAF, and Hydrolix, offering pre-built search capabilities for these platforms. The blog also details use cases for AI/ML telemetry analysis with Cribl Stream and Claude, as well as enhanced investigation workflows with Notebook templates in Cribl Search.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-05</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/when-the-technical-problem-is-the-easy-part-lessons-from-wrangling-telemetry-at-getty-images/" target="_blank" rel="noopener">When the technical problem is the easy part: Lessons from wrangling telemetry at Getty Images | Cribl</a></h3>
+    
+    <div class="summary"><h2>Getty Images Reduced Telemetry Costs &amp; Increased Flexibility with Cribl</h2>
+<p>Getty Images halved their telemetry data ingestion volume and stabilized growth by leveraging <strong>Cribl</strong> to treat data in flight—cleaning, filtering, restructuring, and routing it. This resulted in significant cost savings, particularly in indexing, and improved visibility and agility for teams like security, enabling them to operate independently of the main SIEM.</p>
+<ul>
+<li><strong>Cribl Stream</strong> was used to partition worker groups by team/use case for isolation and configure devnull pipelines for error monitoring.</li>
+<li>The team utilized <strong>Cribl Stream</strong>’s data generation capabilities to create sample data for load testing and Proof of Concepts.</li>
+<li><strong>Cribl Copilot</strong>’s AI features were used to build data processing pipelines and generate KQL queries.</li>
+<li>The implementation relied on a strict “observability ingest form” to qualify data requests <em>before</em> ingestion, shifting the burden of justification to data owners.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-05</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/cribl-guards-latest-model-cribl-privacy-1-5-with-higher-recall-at-the-same-footprint/" target="_blank" rel="noopener">Cribl Guard’s latest model: Cribl-Privacy 1.5 with higher recall at the same footprint | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl has released Cribl-Privacy 1.5, a new version of its custom model for Cribl Guard’s background detection. </p>
+<ul>
+<li>The new model demonstrates a 7.5 percentage point increase in F1 score (to 85.5%), an 11.5 percentage point increase in recall (to 84.1%), and a 2.8 percentage point increase in precision (to 87.0%) compared to v1.0.</li>
+<li>False negatives were reduced by 41.9% and false positives by 7.6%, improving detection accuracy and reducing noise.</li>
+<li>Cribl-Privacy 1.5 maintains the same memory footprint and throughput profile as v1.0, allowing for a seamless upgrade without increasing compute costs.</li>
+<li>The update is included in Cribl version 4.17.1 and is automatically available to existing Cribl Guard customers on that version or later.</li>
+</ul></div>
     
   </div>
   
@@ -103,10 +189,10 @@
     
     <div class="summary"><p>Cribl released a Search Pack for Zscaler to simplify analysis of Zscaler security telemetry data.</p>
 <ul>
-<li>The Search Pack provides pre-built dashboards tailored to different Zscaler log families (web, firewall, CASB, etc.).</li>
-<li>Macros within the pack simplify search configuration by baking in dataset and sourcetype filters.</li>
-<li>Datatypes are included to extract structured fields from Zscaler events, improving searchability.</li>
-<li>The pack requires Zscaler logs to be ingested into a Cribl Search-compatible dataset (e.g., Cribl Lake, Lakehouse) and relies on either the Zscaler Stream Pack for Cribl Stream or pre-normalized logs for datatype application.</li>
+<li>The Search Pack provides pre-built dashboards tailored to specific Zscaler log families (web, firewall, CASB, etc.).</li>
+<li>Macros within the pack pre-configure dataset and sourcetype filters, simplifying environment-specific adjustments.</li>
+<li>Datatypes are included to automatically extract structured fields from Zscaler events.</li>
+<li>The pack requires Zscaler logs to be ingested into a Cribl Search-compatible dataset (like Cribl Lake or Lakehouse) and utilizes either the “Zscaler Datatypes” or “Zscaler Raw Datatypes” dataset depending on prior normalization.</li>
 </ul></div>
     
   </div>
@@ -174,24 +260,13 @@
     </div>
     <h3><a href="https://cribl.io/blog/smarter-data-pipelines-for-modern-healthcare/" target="_blank" rel="noopener">Smarter data pipelines for modern healthcare | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl provides a suite of products (Cribl Stream, Guard, Edge, Lake, and Search) designed to create “smarter” data pipelines for healthcare organizations, focusing on control and intelligence within the pipeline itself.</p>
+    <div class="summary"><p>Cribl provides a suite of products – Cribl Stream, Guard, Edge, Lake, and Search – designed to create intelligent data pipelines for healthcare organizations, addressing challenges around data volume, cost, and complexity. </p>
 <ul>
-<li><strong>Cribl Stream</strong> ingests, transforms, and routes data, reducing volume and supporting multiple destinations simultaneously.</li>
-<li><strong>Cribl Edge</strong> extends data collection and processing closer to the data source, beneficial in distributed healthcare environments.</li>
-<li><strong>Cribl Guard</strong> scans telemetry in real-time to detect sensitive data and facilitate masking, redaction, or rerouting for HIPAA compliance.</li>
-<li><strong>Cribl Lake</strong> offers cost-effective data retention, allowing organizations to balance immediate analytics needs with long-term storage and investigation via <strong>Cribl Search</strong>.</li>
+<li>Cribl Stream can ingest, transform, and route data to multiple destinations, reducing unnecessary data volume and controlling data flow to SIEMs and observability platforms.</li>
+<li>Cribl Edge extends data processing closer to the source in distributed healthcare environments, improving control and standardizing collection.</li>
+<li>Cribl Guard utilizes AI to detect and protect sensitive data (PHI) in real-time, supporting HIPAA compliance through masking, redaction, and rerouting.</li>
+<li>Cribl Lake offers cost-effective, long-term data retention alongside Stream, allowing organizations to strategically allocate data to analytics tools or archive it for later use.</li>
 </ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-29</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/cribl-stream/" target="_blank" rel="noopener">Cribl Stream | Cribl Blog</a></h3>
-    
-    <div class="summary"><p>Recent Cribl blog posts cover a wide range of updates and integrations, including guidance on using self-signed TLS for secure Cribl-to-Cribl data streams and leveraging the Claude Compliance API for AI telemetry. Several posts focus on observability and security, such as using Cribl Guard for sensitive data discovery, integrating with AppOmni for SaaS security, and temporal threat hunting.  Additionally, Cribl has become a CVE Numbering Authority (CNA) and introduced Group Variables for improved Cribl Pack configuration; CrowdStream end-of-life migration guidance is also available. Cribl Insights can now be utilized to monitor system health and data flow.</p></div>
     
   </div>
   
@@ -213,13 +288,13 @@
     </div>
     <h3><a href="https://cribl.io/blog/data-lake-vs-data-warehouse-what-is-the-difference/" target="_blank" rel="noopener">Data Lake vs. Data Warehouse: What is the Difference | Cribl</a></h3>
     
-    <div class="summary"><h2>Data Lake vs. Data Warehouse: What is the Difference?</h2>
-<p>This article discusses the evolving landscape of data storage and processing, particularly in the context of AI and machine learning. It highlights that the choice isn't simply between data lakes and data warehouses, but building a smart data architecture focused on quality, governance, and pipeline control.</p>
+    <div class="summary"><h2>Data Lake vs. Data Warehouse: Understanding the Differences &amp; Modern Architectures</h2>
+<p>This blog post details the distinctions between data lakes and data warehouses, and how the rise of AI is impacting data strategy. Data lakes store raw, multi-format data cheaply for use cases like ML and observability, while data warehouses store cleaned, structured data for fast BI and reporting. The core claim is that success now hinges on data quality, governance, and pipeline control, leading many towards hybrid architectures (including lakehouses) rather than a single solution. </p>
 <ul>
-<li>Data lakes store raw, multi-format data cheaply, ideal for ML, telemetry, and exploratory analysis.</li>
-<li>Data warehouses store cleaned, structured data optimized for fast BI, reporting, and governed analytics.</li>
-<li>Lakehouses combine the scalability of lakes with the performance and governance of warehouses, leading to hybrid architectures. </li>
-<li>Cribl helps organizations filter, enrich, route, and reduce telemetry data <em>before</em> storage, controlling cost and complexity in both lake and warehouse environments, and offers search capabilities across data lakes and object storage with Cribl Search.</li>
+<li><strong>Data Lakes:</strong> Designed for raw, varied data suited for exploration, ML, observability, and security.</li>
+<li><strong>Data Warehouses:</strong> Optimized for curated, structured analytics, consistent reporting, and business intelligence. Use schema-on-write for structure at ingestion.</li>
+<li><strong>Lakehouses:</strong> Combine the scalability of data lakes with the governance and performance of data warehouses.</li>
+<li><strong>Cribl's Role:</strong> Cribl enables filtering, enrichment, routing, and reduction of telemetry data <em>before</em> storage to control cost and complexity across lakes, warehouses, and lakehouses, and provides faster AI-powered investigations with Cribl Search.</li>
 </ul></div>
     
   </div>
@@ -231,12 +306,12 @@
     </div>
     <h3><a href="https://cribl.io/blog/from-m2131-to-m2614-a-more-practical-path-to-federal-logging-and-visibility/" target="_blank" rel="noopener">From M-21-31 to M-26-14: A more practical path to federal logging and visibility | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl supports the transition from OMB Memorandum M-21-31 to M-26-14, which prioritizes a risk-based, cost-effective approach to federal logging and visibility. </p>
+    <div class="summary"><p>Cribl supports federal agencies transitioning from M-21-31 to M-26-14, a new OMB memo prioritizing risk-based, prioritized logging.</p>
 <ul>
-<li>M-26-14 focuses on two key objectives: Continuous Event Monitoring (CEM) for real-time detection and Threat Hunting, Investigation, Response, and Forensics (THIRF) for post-compromise analysis.</li>
-<li>Cribl’s platform – Cribl Stream, Cribl Edge, Cribl Lake, and Cribl Search – is now FedRAMP Moderate authorized via Cribl.Cloud Government, aligning with the new architecture requirements for data collection, tiering, security, and federated access.</li>
-<li>Cribl Stream enables deliberate data tiering by helping agencies determine which logs support CEM vs. THIRF, reducing SIEM ingest volume (40-60% reduction reported by customers) while retaining full-fidelity copies for investigation.</li>
-<li>Cribl Guard provides pipeline-based sensitive data detection and masking, addressing requirements within the forthcoming Logging Reference Architecture (LRA) to protect confidential log data.</li>
+<li>M-26-14 emphasizes separating Continuous Event Monitoring (CEM) and Threat Hunting, Investigation, Response, and Forensics (THIRF) data, allowing for deliberate data tiering and cost optimization.</li>
+<li>Cribl Stream enables data control at the edge, shaping and routing data based on these objectives, reducing SIEM ingest volume by 40-60% in some deployments while retaining full-fidelity copies in lower-cost storage. </li>
+<li>Cribl Search provides federated search across Cribl Lake and major object stores (S3, Azure Blob, GCS) for efficient incident investigation without re-ingestion.</li>
+<li>Cribl Guard offers pipeline-based sensitive data detection and masking, aiding compliance with CISA's forthcoming Logging Reference Architecture (LRA) and protecting confidential information.</li>
 </ul></div>
     
   </div>
@@ -260,12 +335,12 @@
     </div>
     <h3><a href="https://cribl.io/blog/certs-up-using-self-signed-tls-to-encrypt-cribl-to-cribl-data-streams/" target="_blank" rel="noopener">Cert’s up: Using self-signed TLS to encrypt Cribl-to-Cribl data streams | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl Stream and Edge Nodes now support encrypting data streams using self-signed TLS certificates, offering an alternative to cloud-managed certificates.</p>
+    <div class="summary"><p>Cribl Stream and Edge Nodes can now utilize self-signed TLS certificates for encrypted data transmission.</p>
 <ul>
-<li>The process involves creating a Certificate Authority (CA), generating a certificate for the Worker Node, defining Subject Alternative Names (SANs) for hostname and IP address resolution, and signing the certificate with the CA.</li>
-<li>Specific OpenSSL commands are provided for generating keys, CSRs, and signing certificates, including recommended settings for certificate validity periods (e.g., 825 days to avoid Apple device limitations).</li>
-<li>Configuration requires placing the CA certificate on the Edge Node and the worker certificate within the Stream Worker Group settings, followed by committing and deploying the changes.</li>
-<li>The article emphasizes the importance of SANs for modern TLS validation and provides guidance on file permissions (chmod 600) to maintain security.</li>
+<li>The process involves creating a Certificate Authority (CA), generating a certificate for the Worker Node, and defining Subject Alternative Names (SANs) for the certificate.</li>
+<li>Specifically, <code>openssl</code> commands are used to generate keys, Certificate Signing Requests (CSRs), and sign certificates, with example commands provided for creating a CA (<code>openssl genpkey</code>), a worker CSR (<code>openssl req</code>), and signing the CSR (<code>openssl x509</code>).</li>
+<li>Configuration requires placing the CA certificate (<code>ca.crt</code>) on the Edge Node and the worker key/certificate (e.g., <code>worker.key</code>, <code>worker.crt</code>) on the Stream Worker, with explicit instructions for file locations and permissions (<code>chmod 600</code>).</li>
+<li>The article highlights the importance of including SANs in the certificate configuration to ensure compatibility with modern TLS validation, and recommends a certificate validity period of 825 days to avoid Apple device compatibility issues.</li>
 </ul></div>
     
   </div>
@@ -284,27 +359,16 @@
   <div class="card">
     <div class="meta">
       <span>blog</span>
-      <span> · 2026-05-27</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/engineering/" target="_blank" rel="noopener">Engineering | Cribl Blog</a></h3>
-    
-    <div class="summary"><p>Recent Cribl Engineering blog posts detail several new capabilities and integrations. Multiple posts highlight <strong>Cribl Search Packs</strong> for platforms like Palo Alto SLS, Corelight, Palo Alto Firewalls, and AWS WAF, providing enhanced visibility into those data sources. <strong>Cribl Stream</strong> integrations with Microsoft Fabric and 1Password were announced, simplifying data pipelines and security workflows. Further technical focuses include using self-signed TLS for secure Cribl-to-Cribl communication, data decomposition techniques, and real-time LLM cost analytics within telemetry pipelines. </p></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
       <span> · 2026-05-26</span>
     </div>
     <h3><a href="https://cribl.io/blog/the-ai-soc-and-sre-data-problem-and-why-cribl-is-the-answer/" target="_blank" rel="noopener">The AI SOC and SRE data problem — and why Cribl is the answer | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl positions itself as a solution to data access challenges for emerging AI-powered SOC and SRE tools.</p>
+    <div class="summary"><p>Cribl positions itself as a solution for AI-powered SOC and SRE tools struggling with data access limitations. </p>
 <ul>
-<li><strong>Cribl Search</strong>, with its <strong>Lakehouse Engine</strong>, provides federated search and high-performance access to logs, metrics, and events across hybrid environments without data ingestion into a proprietary store.</li>
-<li>This allows AI agents to access raw telemetry data (endpoint, network, identity, application logs) independently of vendor API limitations or “walled gardens.”</li>
-<li>Cribl aims to overcome the "data bottleneck" hindering AI SOC/SRE startups, ensuring agents have complete, normalized, and context-rich data for effective operation.</li>
-<li>The core claim is that Cribl enables AI SOC/SRE companies to access the best data, independently of incumbents, improving key pilot metrics like escalation rates and analyst time savings.</li>
+<li>Cribl Search provides federated search across diverse data sources (cloud, on-prem, hybrid) without requiring data ingestion into a central store.</li>
+<li>The Lakehouse Engine within Cribl Search offers high-performance access to logs, metrics, and events on demand for AI agents.</li>
+<li>Cribl aims to break down data access bottlenecks imposed by incumbent security vendors (CrowdStrike, Palo Alto Networks, Microsoft, Splunk) and their “walled gardens.”</li>
+<li>The platform enables AI agents to access raw telemetry, network flows, identity signals, and application logs independent of vendor API restrictions.</li>
 </ul></div>
     
   </div>
@@ -333,12 +397,12 @@
     </div>
     <h3><a href="https://cribl.io/blog/stop-guessing-what-your-ai-did-using-claude-cowork-telemetry-with-the-claude-compliance-api/" target="_blank" rel="noopener">Stop guessing what your AI did: Using Claude Cowork Telemetry with the Claude Compliance API | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl now supports ingesting telemetry from Anthropic’s Claude Cowork AI assistant via both OpenTelemetry (OTel) and the Claude Compliance API, enabling comprehensive monitoring of AI activity. </p>
+    <div class="summary"><p>Cribl enables ingestion and processing of telemetry data from Anthropic's Claude Cowork through both OpenTelemetry (OTel) and the Claude Compliance API, providing visibility into AI assistant activity.</p>
 <ul>
-<li>Anthropic provides two data streams: Claude Cowork OTLP for runtime details (tool calls, file access, approvals) and the Claude Compliance API for organizational-level events (workspace changes, policies).</li>
-<li>Cribl Stream can ingest, normalize, enrich, and route both streams to existing SIEM, data lake, or observability tools.</li>
-<li>Cribl Search allows landing data in object storage for long-term retention and KQL-style querying across Anthropic and other datasets.</li>
-<li>Cribl simplifies onboarding these streams, applying consistent schema/policies, and delivering governed telemetry to relevant teams for security, compliance, and operational visibility.</li>
+<li>Anthropic provides two data streams: Claude Cowork OTLP (runtime view of assistant actions) and the Claude Compliance API (audit view of organizational activity).</li>
+<li>Cribl Stream can ingest both OTLP and HTTPS events, normalize data, enrich records, and route events to SIEMs, data lakes, or observability platforms.</li>
+<li>Cribl Search allows querying Claude Cowork and Compliance API data alongside other telemetry in object storage for investigations and reporting.</li>
+<li>Cribl facilitates establishing a shared foundation by normalizing key fields across both streams (user, workspace, tool, file, approval state) for consistent analysis.</li>
 </ul></div>
     
   </div>
@@ -378,12 +442,12 @@
     </div>
     <h3><a href="https://cribl.io/blog/jumpstart-and-standardize-investigations-with-new-notebook-templates-in-cribl-search/" target="_blank" rel="noopener">Jumpstart and standardize investigations with new Notebook templates in Cribl Search | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl Search now includes Notebook templates to standardize and accelerate investigations.</p>
+    <div class="summary"><p>Cribl Search now offers Notebook templates to standardize and accelerate investigations.</p>
 <ul>
-<li>Templates can be created from existing Notebooks or built from scratch, preserving structure, queries, and documentation while excluding historical data.</li>
-<li>Templates support dynamic variables for customization (e.g., dataset name, IP address) during Notebook creation.</li>
-<li>Versioning and governance features allow for template management, permissions control, and audit trails.</li>
-<li>Integration with the Cribl Search API and AI tools (like Claude or ChatGPT) enables programmatic management and assisted template creation.</li>
+<li>Templates can be created from scratch or from existing Notebooks, preserving structure, queries, and documentation while excluding historical data.</li>
+<li>Templates support versioning, governance controls (permissions, auditing), and a searchable gallery for discovery.</li>
+<li>Dynamic variables allow templates to be customized with inputs like dataset names or time ranges during Notebook creation.</li>
+<li>Integration with AI tools (e.g., Claude, ChatGPT) can assist in template generation based on defined investigation workflows.</li>
 </ul></div>
     
   </div>
@@ -395,12 +459,12 @@
     </div>
     <h3><a href="https://cribl.io/blog/new-engine-under-the-hood-cribl-search-v2s-faster-federated-architecture/" target="_blank" rel="noopener">New engine under the hood: Cribl Search v2’s faster federated architecture | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl Search v2 introduces a fully rewritten federated search engine designed for significantly faster performance.</p>
+    <div class="summary"><p>Cribl Search v2 introduces a redesigned federated search engine claiming 3–5x faster performance.</p>
 <ul>
-<li>The new engine delivers 3–5x faster search speeds compared to Cribl Search v1.</li>
-<li>Search v2 supports data sources including Amazon S3, Azure Blob, and Cribl Lake datasets, as well as Parquet and NDJSON file formats.</li>
-<li>The architecture utilizes modern, multi-threaded execution to process more data in parallel and reduce data movement.</li>
-<li>Existing workflows and queries remain compatible with v2; no changes are required to upgrade.</li>
+<li>The new engine is a complete rewrite focused on efficient, multi-threaded execution to minimize data movement.</li>
+<li>v2 supports Amazon S3, Azure Blob Storage, and Cribl Lake datasets, along with Parquet and NDJSON file formats.</li>
+<li>Search v2 aims to enable live investigations directly against object stores without needing to copy data, addressing performance limitations of v1.</li>
+<li>Existing users can access v2 without changes to their workflow; new users benefit from faster search speeds and reduced costs.</li>
 </ul></div>
     
   </div>
@@ -412,12 +476,12 @@
     </div>
     <h3><a href="https://cribl.io/blog/how-to-search-your-microsoft-azure-data-in-place-no-movement-no-copies-no-compromise/" target="_blank" rel="noopener">How to search your Microsoft Azure data in place. No movement. No copies. No compromise. | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl Lake now supports Bring Your Own Storage (BYOS) for Microsoft Azure, enabling search-in-place capabilities without data movement.</p>
+    <div class="summary"><p>Cribl Lake now supports Bring Your Own Storage (BYOS) for Microsoft Azure, allowing users to directly query data in Azure Blob Storage without data movement. </p>
 <ul>
-<li>Cribl Lake BYOS for Azure allows querying data directly in Azure Blob Storage via a federated engine with Cribl Search, eliminating egress fees and rehydration pipelines.</li>
-<li>The feature supports Entra ID authentication, customer-managed encryption with Azure Key Vault, and retention policies managed through Cribl Lake.</li>
-<li>Organizations can connect multiple storage locations, route data by use case, and leverage ARM templates for simplified infrastructure setup.</li>
-<li>BYOS for Azure is available to Enterprise customers at a cost of 0.02 credits/GB and is designed for rapid deployment with guided workflows.</li>
+<li>Cribl Search utilizes a federated engine to query Azure Blob Storage directly, eliminating egress fees and rehydration pipelines.</li>
+<li>The solution integrates with Entra ID for authentication and supports customer-managed encryption with Azure Key Vault.</li>
+<li>Retention policies and role-based access controls are managed through Cribl Lake, alongside native Azure controls, ensuring data governance.</li>
+<li>BYOS supports multiple storage locations, datasets organized by use case, and cost control through tiered storage classes, deployed via ARM templates.</li>
 </ul></div>
     
   </div>
@@ -446,12 +510,12 @@
     </div>
     <h3><a href="https://cribl.io/blog/operational-technology-challenges-meet-cribl-solutions/" target="_blank" rel="noopener">Operational technology challenges? Meet Cribl solutions. | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl offers a solution for collecting and processing data from challenging Operational Technology (OT) environments.</p>
+    <div class="summary"><p>Cribl provides a data engine (Edge, Stream, Lake, Search, and Outposts) designed to address the challenges of collecting and utilizing telemetry data from Operational Technology (OT) environments.</p>
 <ul>
-<li><strong>Cribl Edge</strong> consolidates multiple monitoring agents into a single agent for Windows and Linux, offering local processing and flexible routing options.</li>
-<li><strong>Cribl Outposts</strong> act as relay nodes to simplify control-plane connectivity for Edge and Stream in segmented networks, reducing the number of required firewall rules. </li>
-<li><strong>Cribl Stream and Lake</strong> enable data tiering, allowing selective routing of “hot” data to security tools and storing “cold” data in object storage for cost-effective long-term retention and searchability.</li>
-<li>The combined architecture leverages Edge, Outposts, Stream, and Lake to provide a secure and centrally controlled data pipeline for OT environments, respecting network boundaries and compliance requirements.</li>
+<li><strong>Cribl Edge</strong> acts as a “universal agent” consolidating multiple monitoring agents into one, offering local data processing and flexible routing aligned with security models.</li>
+<li><strong>Cribl Outposts</strong> function as relay nodes to simplify firewall configurations by reducing the number of outbound connections required from OT networks to a Cribl Leader or Cribl Cloud.</li>
+<li><strong>Cribl Stream and Lake</strong> enable data tiering, routing high-value data to real-time tools and storing less critical data in cost-effective object storage for later analysis.</li>
+<li>The combination of these components allows secure centralization of OT data without compromising network security or compliance requirements, addressing challenges like network segmentation and strict safety regulations.</li>
 </ul></div>
     
   </div>
@@ -463,12 +527,12 @@
     </div>
     <h3><a href="https://cribl.io/blog/a-different-architecture-for-agentic-telemetry-operations/" target="_blank" rel="noopener">A different architecture for agentic telemetry operations | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl introduces an architecture for agentic telemetry operations focused on providing a unified and governed data access layer for AI-driven systems.</p>
+    <div class="summary"><p>Cribl introduced a new architecture for agentic telemetry operations centered around two key products: Cribl Stream and Cribl Search, aiming to address limitations in current AI-driven telemetry systems.</p>
 <ul>
-<li><strong>Cribl Stream</strong> collects, transforms, routes, and governs telemetry data from any source to any destination, normalizing schemas and enforcing governance policies in-flight.</li>
-<li><strong>Cribl Search</strong> provides a unified query surface with two engines: a Lakehouse Engine for indexed data and a Federated Engine for querying data in its original location, avoiding data duplication and preprocessing costs.</li>
-<li>Cribl differentiates itself by not requiring data centralization or schema normalization upfront, instead focusing on query-time processing and a vendor-agnostic approach.</li>
-<li>The architecture emphasizes a layered approach – Stream for pipeline management, Search for AI access, and partner integrations for identity and governance – to address the challenges of agent-to-agent trust and data integrity in multi-agent environments.</li>
+<li><strong>Cribl Stream</strong> acts as a collection, transformation, routing, and governance layer for telemetry data from any source to any destination, normalizing data and enforcing governance policies <em>before</em> data reaches its final location. It integrates with existing platforms like CrowdStrike and Datadog.</li>
+<li><strong>Cribl Search</strong> provides a unified query surface with two engines: a Lakehouse Engine for indexed data and a Federated Engine for querying data in its original location without re-ingestion or schema normalization. </li>
+<li>Unlike competitors, Cribl Search doesn’t require centralizing or reformatting data upfront, offering a query-time schema normalization across formats like OCSF, OTLP, ECS, and custom formats.</li>
+<li>The combination of Stream and Search aims to create a consistent, governed data retrieval layer, addressing the risk of "hallucinations" or poisoned data propagating through multi-agent pipelines, a problem the industry hasn’t solved yet.</li>
 </ul></div>
     
   </div>
@@ -497,15 +561,13 @@
       <span>blog</span>
       <span> · 2026-05-07</span>
     </div>
-    <h3><a href="https://cribl.io/blog/telemetry-is-the-hardest-case-of-the-ai-access-problem/" target="_blank" rel="noopener">Telemetry is the hardest case of the AI access problem  | Cribl</a></h3>
+    <h3><a href="https://cribl.io/blog/implementing-centralized-log-management/" target="_blank" rel="noopener">A Comprehensive Guide to Implementing Centralized Log Management | Cribl</a></h3>
     
-    <div class="summary"><p>Telemetry presents unique challenges for AI access, differing significantly from business data.</p>
-<ul>
-<li>Telemetry data is highly fragmented across diverse sources (SIEMs, APM platforms, cloud providers, edge infrastructure) lacking inherent interoperability.</li>
-<li>Schema inconsistencies (OCSF, OTLP, ECS, custom formats) require complex normalization, which Cribl argues should occur at query time rather than via upfront data preprocessing.</li>
-<li>The article contrasts two approaches for AI accessing telemetry: direct integration with each system (Option A, leading to technical debt) versus querying a unified, normalized layer (Option B, advocated by Cribl).</li>
-<li>Cribl positions itself as providing this “front door” – a single query layer for federated, governed, and normalized telemetry access, enabling AI agents to operate effectively without building numerous direct integrations.</li>
-</ul></div>
+    <div class="summary"><p>Cribl provides a vendor-neutral approach to centralized log management, focusing on cost control and flexibility by separating compute from storage. 
+*   Cribl Edge supports in-stream filtering, masking, and enrichment to reduce bandwidth and costs.
+*   Cribl Stream provides persistent queues and backpressure control for reliable data flow, and can act as a syslog receiver for routing to multiple destinations.
+*   The platform emphasizes policy-driven routing, tiered storage (hot, warm, cold), and automated lifecycle management to optimize costs. 
+*   For Kubernetes deployments, Cribl Edge can be deployed as a DaemonSet for efficient log collection or as a sidecar for greater flexibility.</p></div>
     
   </div>
   
@@ -514,14 +576,14 @@
       <span>blog</span>
       <span> · 2026-05-07</span>
     </div>
-    <h3><a href="https://cribl.io/blog/implementing-centralized-log-management/" target="_blank" rel="noopener">A Comprehensive Guide to Implementing Centralized Log Management | Cribl</a></h3>
+    <h3><a href="https://cribl.io/blog/telemetry-is-the-hardest-case-of-the-ai-access-problem/" target="_blank" rel="noopener">Telemetry is the hardest case of the AI access problem  | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl provides solutions for centralized log management, emphasizing planning and vendor-neutral data routing to control costs and avoid lock-in.</p>
+    <div class="summary"><p>Telemetry presents unique challenges for AI access, differing significantly from business data.</p>
 <ul>
-<li>Planning includes auditing log sources &amp; volumes, defining retention/compliance needs, prioritizing use cases, choosing an architecture, and setting KPIs.</li>
-<li>Cribl Edge supports in-stream filtering, masking, and enrichment to reduce bandwidth and costs at the source.</li>
-<li>Cribl Stream offers persistent queues, backpressure control, and distributed worker groups for horizontal scaling and high availability.</li>
-<li>The platform supports policy-driven data routing, tiered storage, and automated lifecycle management to optimize costs and maintain compliance.</li>
+<li>Telemetry data is highly fragmented across diverse sources (SIEMs, APM platforms, cloud providers, edge infrastructure) lacking inherent interoperability.</li>
+<li>Schema inconsistencies (OCSF, OTLP, ECS, custom formats) require complex normalization, which Cribl argues should occur at query time rather than via upfront data preprocessing.</li>
+<li>The article contrasts two approaches for AI accessing telemetry: direct integration with each system (Option A, leading to technical debt) versus querying a unified, normalized layer (Option B, advocated by Cribl).</li>
+<li>Cribl positions itself as providing this “front door” – a single query layer for federated, governed, and normalized telemetry access, enabling AI agents to operate effectively without building numerous direct integrations.</li>
 </ul></div>
     
   </div>
@@ -569,12 +631,29 @@
     </div>
     <h3><a href="https://cribl.io/blog/the-ai-readiness-gap-new-hbr-report-reveals-why-infrastructure-is-the-real-bottleneck/" target="_blank" rel="noopener">The AI readiness gap: New HBR report reveals why infrastructure is the real bottleneck | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl highlights a significant "AI readiness gap" revealed in a new Harvard Business Review report, noting that while 96% of leaders see agentic AI as critical, only 23% are currently prepared to support it. </p>
+    <div class="summary"><p>Cribl highlights a significant "AI readiness gap" identified in a new Harvard Business Review (HBR) report, where 96% of leaders see agentic AI as critical, but only 23% are prepared to support it. </p>
 <ul>
-<li>The report identifies three core issues: a surge in telemetry volume straining legacy infrastructure, unexpectedly high AI infrastructure costs, and an inability to demonstrate ROI due to insufficient telemetry data.</li>
-<li>Cribl emphasizes the need to treat telemetry as a first-class workload, advocating for control through data routing, filtering, and tiering, as well as adding semantic context to raw telemetry data.</li>
-<li>Organizations ready for agentic AI prioritize open, interoperable architectures, avoiding vendor lock-in and enabling data flow across multiple systems.</li>
-<li>The core claim is that successful agentic AI implementation hinges on a robust telemetry architecture, focusing on data quality, integration, governance, and storage – not simply adding more tools.</li>
+<li>The report identifies three key issues: a surge in telemetry volume exceeding infrastructure capacity, unexpectedly high AI infrastructure costs, and difficulty proving AI ROI due to lack of telemetry context.</li>
+<li>Cribl advocates for treating telemetry as a first-class workload, emphasizing control through data routing, filtering, and tiering, combined with semantic context and vendor-agnostic architectures.</li>
+<li>Organizations ready for agentic AI prioritize data quality, integration, governance, and storage over simply adding more tools or hardware.</li>
+<li>Cribl offers resources to benchmark AI infrastructure readiness, including the full HBR report and an "Agentic AI Infrastructure Benchmark" assessment.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-05-04</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/ai-doesnt-fail-because-its-not-smart-enough-it-fails-because-it-cant-see/" target="_blank" rel="noopener">AI doesn&#39;t fail because it&#39;s not smart enough. It fails because it can&#39;t see. | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl argues that AI failures stem from a lack of real-time, complete data access rather than insufficient AI intelligence.</p>
+<ul>
+<li>The core claim is that AI operates on a “shadow” of reality if it lacks access to current inventory, pricing, or system context.</li>
+<li>Cribl emphasizes that sandboxing and prompt engineering are insufficient solutions; securing <em>access</em> to consistent, normalized data is critical.</li>
+<li>The article highlights a growing problem with multi-agent systems where flawed data from one agent cascades through the pipeline undetected.</li>
+<li>Cribl positions itself as providing a solution through its “AI Platform for Telemetry” enabling consistent data access for AI agents.</li>
 </ul></div>
     
   </div>
@@ -590,19 +669,142 @@
     
   </div>
   
+  
+  <h2 class="month">April 2026</h2>
+  
   <div class="card">
     <div class="meta">
       <span>blog</span>
-      <span> · 2026-05-04</span>
+      <span> · 2026-04-30</span>
     </div>
-    <h3><a href="https://cribl.io/blog/ai-doesnt-fail-because-its-not-smart-enough-it-fails-because-it-cant-see/" target="_blank" rel="noopener">AI doesn&#39;t fail because it&#39;s not smart enough. It fails because it can&#39;t see. | Cribl</a></h3>
+    <h3><a href="https://cribl.io/blog/streamline-workload-migrations-with-cribl-and-aws/" target="_blank" rel="noopener">Streamline workload migrations with Cribl and AWS | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl highlights a critical issue with AI deployments: lack of real-time, complete data access, leading to confident but incorrect decisions.</p>
+    <div class="summary"><p>Cribl integrates with AWS to streamline workload migrations and avoid data visibility gaps.</p>
 <ul>
-<li>The core claim is that AI failures stem not from a lack of intelligence, but from “blindness” – operating on stale or incomplete data.</li>
-<li>Cribl argues that current security approaches (sandboxing, endpoint control) address <em>what</em> agents do, but not <em>what</em> they see, which is the fundamental problem.</li>
-<li>The emergence of multi-agent systems exacerbates the issue, as flawed outputs from one agent can cascade through the pipeline undetected.</li>
-<li>Cribl positions its platform as a solution by providing a consistent, normalized retrieval layer to ensure agents operate on the same “version of reality,” focusing on data access <em>before</em> governance or model capabilities.</li>
+<li>Cribl Stream decouples data sources from destinations, allowing for data transformation and routing to AWS services without vendor lock-in.</li>
+<li>Cribl.Cloud Government provides a dedicated environment for federal agencies and SaaS workloads.</li>
+<li>A three-stage migration blueprint (Pre, During, and Post-migration) focuses on data preparation, validation, and optimization.</li>
+<li>Case studies show Autodesk reduced duplicate log ingestion by 166% using Cribl Stream, and Accenture Federal Services completed a cloud sprint in 3-4 months with uninterrupted visibility.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-04-28</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/data-decomposition-stop-keeping-everything-start-keeping-what-matters/" target="_blank" rel="noopener">Data decomposition: Stop keeping everything. Start keeping what matters.  | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl introduces data decomposition as a method to selectively retain and manage telemetry data, addressing the challenges of growing data volumes and costs.</p>
+<ul>
+<li>Data decomposition breaks complex records into entities, attributes, sensitive elements, and contextual metadata to apply specific policies to each part.</li>
+<li>Cribl leverages this technique to enable masking/tokenization of sensitive data, tiering data based on value (hot, warm, cold), and cost-effective storage of less-frequently used data.</li>
+<li>The strategy emphasizes keeping only data tied to specific decisions (security, reliability, business insights) and recognizing that data value changes over time.</li>
+<li>This capability fully integrates with Cribl's existing features like routing, reduction, masking, tiering, schema-on-need, and search-in-place.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-04-27</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/why-hands-on-exploitation-makes-product-security-stronger/" target="_blank" rel="noopener">Why hands-on exploitation makes product security stronger | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl’s Product Security team members achieved the Hack The Box Certified Web Exploitation Expert (CWEE) certification to strengthen real-world security skills.</p>
+<ul>
+<li>The CWEE certification validates practical web exploitation skills through realistic, challenging exams that require identifying, exploiting, and documenting vulnerabilities.</li>
+<li>This certification enhances the team’s ability to think like an attacker during design and code reviews, spot subtle vulnerabilities, and prioritize issues based on exploitability.</li>
+<li>Hands-on exploitation experience improves communication of technical risk to both engineering and leadership, fostering better security partnerships.</li>
+<li>Cribl emphasizes the importance of closing the gap between security awareness and practical expertise through offensive security training to proactively identify and mitigate risks.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-04-24</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/open-ai-privacy-filter-is-a-strong-step-but-telemetry-still-needs-a-different-kind-of-model/" target="_blank" rel="noopener">OpenAI’s Privacy Filter is a strong step, but telemetry still needs a different kind of model | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl asserts that while OpenAI’s new Privacy Filter is a positive step for AI privacy, it’s less effective when applied to the complexities of telemetry data.</p>
+<ul>
+<li><strong>Cribl Guard</strong> is presented as a more suitable solution for telemetry, utilizing transformer-based models specifically trained on semi-structured machine data like logs.</li>
+<li>Internal testing shows <strong>Cribl-Privacy 1.5</strong> models achieve higher recall and precision than OpenAI’s filter on log-focused benchmarks, minimizing false positives.</li>
+<li>Cribl Guard prioritizes both accuracy <em>and</em> throughput, designed to operate efficiently within high-volume production telemetry pipelines – focusing on an F1-throughput balance.</li>
+<li>The solution aims to provide security and compliance teams visibility into AI usage (prompts, responses, metadata) within existing workflows, without creating performance bottlenecks.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-04-17</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/building-data-pipelines-for-reliability/" target="_blank" rel="noopener">Building data pipelines for reliability | Cribl</a></h3>
+    
+    <div class="summary"><h2>Building Data Pipelines for Reliability – Cribl</h2>
+<p>This guide details best practices for building reliable data pipelines, vital for accurate metrics, alerts, and machine learning. </p>
+<ul>
+<li>Cribl Stream can be positioned within the ingestion and processing layers, acting as a vendor-neutral data plane to normalize and route machine data before it reaches SIEMs, observability platforms, or data lakes.</li>
+<li>The article emphasizes defining Service Level Agreements (SLAs) and Key Performance Indicators (KPIs) – focusing on data freshness, latency, error rates, and availability – to drive pipeline design decisions.</li>
+<li>Cribl supports three common ingestion patterns: Batch, Streaming, and Change Data Capture (CDC), and can handle a variety of data sources and formats natively.</li>
+<li>Cribl Stream performs real-time transformation, filtering, and enrichment <em>before</em> data is stored, enabling data governance and optimized costs by reducing data volume sent to expensive systems.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-04-16</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/when-your-telemetry-meets-ai-it-usually-fails/" target="_blank" rel="noopener">When your telemetry meets AI. (It usually fails.) | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl highlights the necessity of adapting telemetry infrastructure for modern AI-driven operations, claiming that traditional systems optimized for human analysis struggle with the demands of continuous machine analysis.</p>
+<ul>
+<li>Cribl advocates for “structured at ingest,” parsing, normalizing, and enriching data <em>before</em> storage to avoid errors caused by systems inferring meaning from ambiguous data.</li>
+<li>The blog details how decoupling ingest, processing, routing, and storage enables cost control without sacrificing data coverage, addressing the economic limitations of legacy platforms facing high-frequency queries.</li>
+<li>Cribl emphasizes embedding operational knowledge (runbooks, policies, etc.) directly into telemetry streams, fusing machine signals with human rules for more contextualized and valuable analysis.</li>
+<li>A key architectural component is governance and policy enforcement integrated <em>within</em> the data pipeline, not as an afterthought, and designing for cost-awareness throughout the entire process.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-04-15</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/break-free-from-legacy-limits-how-one-fortune-50-company-expands-the-value/" target="_blank" rel="noopener">Break free from legacy limits: How one Fortune 50 company expands the value of its data | Cribl</a></h3>
+    
+    <div class="summary"><p>A Fortune 50 company modernized its data analytics infrastructure using Cribl to overcome limitations of a 20-year-old legacy system.</p>
+<ul>
+<li>The company deployed <strong>Cribl Engine for IT and Security</strong> to democratize data access, moving from 15 direct users to hundreds with access to data across departments.</li>
+<li>Modernization focused on speeding data access and analysis, reducing reporting from weekly cycles to real-time insights via programmatic tools and automated tasks.</li>
+<li>A key component of the project was a gap analysis and the implementation of a data governance structure to improve data quality and consistency.</li>
+<li>The project prioritized business value from data – not simply data volume – and enabled faster experimentation and dashboard creation for analysts and developers.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-04-13</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/federated-security-observability-investigating-bot-traffic-with-cribl-search/" target="_blank" rel="noopener">Federated security observability: Investigating bot traffic with Cribl Search and Hydrolix | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl Search can now federate queries across Cribl Lake and Hydrolix to investigate issues like bot traffic causing cache busting. </p>
+<ul>
+<li>Analysts can correlate origin application logs (Cribl Lake) with CDN logs (Hydrolix) using Cribl Search’s union operator to identify traffic patterns indicative of bots.</li>
+<li>The example scenario focuses on detecting bots that overload an inventory API by bypassing the cache with randomized query parameters (e.g., <code>cb=928374</code>).</li>
+<li>Hydrolix provides cost-effective, long-term storage of full-fidelity CDN telemetry, including client IP, user agent, cache status, and response timing.</li>
+<li>Cribl CoPilot can automatically summarize investigations into narratives, and queries can be documented in Cribl Search Notebooks for sharing.</li>
 </ul></div>
     
   </div>

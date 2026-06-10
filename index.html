@@ -92,9 +92,9 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-08 10:17 PM EDT</p>
+  <p class="generated-at">Generated 2026-06-09 10:42 PM EDT</p>
   <div class="top-bar">
-    <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for history.</p>
+    <p class="index-hint">Showing only the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for history.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
       <input type="checkbox" id="theme-chk">
       <span class="track"></span>
@@ -107,11 +107,11 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-06-03</span>
+      <span> · 2026-06-09</span>
     </div>
-    <h2><a href="https://cribl.io/blog/cribl-search/" target="_blank" rel="noopener">Cribl Search | Cribl Blog</a></h2>
+    <h2><a href="https://cribl.io/blog/cribl-stream/" target="_blank" rel="noopener">Cribl Stream | Cribl Blog</a></h2>
     
-    <div class="summary"><p>Recent Cribl blog posts highlight updates and integrations across Cribl Search, Cribl Lake, and Cribl Edge.  Cribl Search v2 introduces a faster federated architecture for improved performance. New Cribl Search Packs are available for Zscaler, Palo Alto SLS, Corelight, AWS WAF, and Palo Alto Firewalls, enabling faster insights into those platforms.  Blog posts also detail integrations with Microsoft Azure data and AWS Security Hub, and discuss using Cribl to address data challenges in AI/ML operations and healthcare.</p></div>
+    <div class="summary"><p>Recent Cribl blog posts cover a wide range of updates and integrations. Cribl Guard’s latest model, Cribl-Privacy 1.5, aims to improve recall performance while maintaining the same resource footprint.  Several posts detail integrations with other platforms, including AWS, AppOmni, and the Claude Compliance API for AI telemetry. Additionally, Cribl has been granted CVE Numbering Authority (CNA) status and is encouraging migration away from CrowdStream. </p></div>
     
   </div>
   
@@ -119,35 +119,65 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-06-03</span>
+      <span> · 2026-06-09</span>
     </div>
-    <h2><a href="https://cribl.io/blog/cribl-search-pack-for-zscaler-your-traffic-went-that-way-now-prove-it/" target="_blank" rel="noopener">Cribl Search Pack for Zscaler: Your traffic went that way — now prove it | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/engineering/" target="_blank" rel="noopener">Engineering | Cribl Blog</a></h2>
     
-    <div class="summary"><p>Cribl released a Search Pack for Zscaler to simplify analysis of Zscaler security telemetry data.</p>
-<ul>
-<li>The Search Pack provides pre-built dashboards tailored to different Zscaler log families (web, firewall, CASB, etc.).</li>
-<li>Macros within the pack simplify search configuration by baking in dataset and sourcetype filters.</li>
-<li>Datatypes are included to extract structured fields from Zscaler events, improving searchability.</li>
-<li>The pack requires Zscaler logs to be ingested into a Cribl Search-compatible dataset (e.g., Cribl Lake, Lakehouse) and relies on either the Zscaler Stream Pack for Cribl Stream or pre-normalized logs for datatype application.</li>
-</ul></div>
+    <div class="summary"><p>Recent Cribl engineering updates include improved diagnostics for the REST Collector. Cribl Guard 1.5 now offers higher recall with the same resource footprint. Several “Cribl Search Packs” have been released for integrations with Palo Alto SLS, Corelight, Palo Alto Firewalls, and AWS WAF, enabling faster insights and tiering. Cribl Stream now includes real-time LLM cost analytics and simplified integration with Microsoft Fabric. </p>
+<p>For a complete overview of updates, consult the original Engineering blog.</p></div>
     
   </div>
   
   <div class="card">
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>product</span>
-      
+      <span>blog</span>
+      <span> · 2026-06-09</span>
     </div>
-    <h2><a href="https://cribl.io/products/search/" target="_blank" rel="noopener">Cribl Search - Faster Log Investigations Without SIEM Costs or Complexity | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/rest-collector-diagnostics-now-easier-than-ever/" target="_blank" rel="noopener">REST Collector Diagnostics — Now easier than ever! | Cribl</a></h2>
     
-    <div class="summary"><h2>Cribl Search: AI-Powered Log Investigation</h2>
-<p>Cribl Search offers faster log investigations without the costs and complexity of a SIEM, leveraging AI to accelerate workflows and reduce manual toil.</p>
+    <div class="summary"><p>Cribl has released new debugging tools for its REST Collector, improving visibility into potential issues when collecting data from HTTP APIs.</p>
 <ul>
-<li><strong>Unified Platform:</strong> Combines data collection, normalization, storage, search, dashboards, and alerting into a single product.</li>
-<li><strong>AI-Assisted Investigation:</strong> Uses agentic AI and natural language queries to guide investigations, reducing the need for complex query building and accelerating time-to-resolution.</li>
-<li><strong>Search-in-Place Architecture:</strong> Eliminates data rehydration by searching data in its existing location (data lakes, object stores, etc.), reducing costs and delays.</li>
-<li><strong>Search Packs:</strong> Pre-built dashboards, searches, and configurations for common use cases (e.g., AWS WAF, Kubernetes) are available to accelerate onboarding and provide instant visibility.</li>
+<li>The new REST Collector Diagnostics allow users to run collector jobs in debug mode and interactively inspect request and response details – including headers, payloads, URLs, and status codes.</li>
+<li>Diagnostics provide visibility into authentication, discovery, and collection phases, pinpointing failures like authentication errors or unexpected data formats.</li>
+<li>A generated <code>curl</code> command is included, enabling users to replicate requests for testing in external tools like Postman.</li>
+<li>Diagnostic data is encrypted, stored locally, and features built-in redaction to protect sensitive information; it is <em>not</em> ingested into Cribl.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>blog</span>
+      <span> · 2026-06-09</span>
+    </div>
+    <h2><a href="https://ocient.com/blog/the-hidden-infrastructure-challenge-of-agentic-ai/" target="_blank" rel="noopener">The hidden infrastructure challenge of agentic AI</a></h2>
+    
+    <div class="summary"><p>Ocient highlights the increased infrastructure demands created by agentic AI systems due to their iterative and parallel query nature.</p>
+<ul>
+<li>OcientAIQ™ is positioned as a solution designed to handle the increased workload from autonomous agents, which decompose tasks into numerous sub-questions and continuously iterate.</li>
+<li>The article argues that traditional approaches like semantic layers and governance frameworks don't address the fundamental issue of <em>query volume</em> generated by agents.</li>
+<li>Data fragmentation across multiple platforms exacerbates the problem, increasing latency, cost (due to context window and token usage), and orchestration overhead for agentic AI workflows.</li>
+<li>Ocient recommends building analytical environments that anticipate agent behavior – prioritizing visibility into resource contention, consolidation of capabilities, machine-speed governance, and treating agent workloads as production-level.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>blog</span>
+      <span> · 2026-06-05</span>
+    </div>
+    <h2><a href="https://ocient.com/blog/graph-analytics-at-scale-without-spark-bottlenecks/" target="_blank" rel="noopener">Graph analytics at scale without Spark bottlenecks</a></h2>
+    
+    <div class="summary"><p>OcientAIQ™ now features OCGraph, a library for running large-scale graph algorithms directly within the platform, eliminating Spark bottlenecks. </p>
+<ul>
+<li>OCGraph is available in Java (as part of the Ocient JDBC driver – <code>com.ocient:ocient-jdbc4</code>) and Python (<code>ocient-graph</code> via PyPI). Both libraries offer identical sets of algorithms.</li>
+<li>Graphs are represented as two standard Ocient tables: a vertices table (with 'id' as a required column) and an edges table (with 'srcid' and 'destid' as required columns). This allows leveraging existing Ocient table features like indexing and joins.</li>
+<li>The library includes algorithms such as Connected Components, PageRank, Triangle Count, Weighted Shortest Paths, and Label Propagation, offering comparable functionality to Spark’s GraphX/GraphFrames with a simplified API.</li>
+<li>Benchmarks on the LDBC Graphalytics XL twitter_mpi dataset (52.6M vertices, 1.96B edges) show OCGraph achieving performance improvements of 7x to 17x for iterative algorithms like PageRank, Connected Components, and Label Propagation, with successful (and faster) completion of triangle count where Spark failed.</li>
 </ul></div>
     
   </div>
@@ -166,42 +196,6 @@
 <li>Key metrics available include query performance, disk usage, table metrics (size, activity), and system health (CPU/memory).</li>
 <li>The integration utilizes standard interfaces like SQL and JDBC for seamless communication.</li>
 <li>Configuration is designed to be effortless with a guided setup process and customizable Datadog dashboards.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-06-04</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/ocienteers-turn-up-the-volume-in-austin-at-spring-event/" target="_blank" rel="noopener">Ocienteers turn up the volume in Austin at spring event</a></h2>
-    
-    <div class="summary"><p>Ocient held a company-wide spring event in Austin, Texas, focused on future development and collaboration around the OcientAIQ platform.</p>
-<ul>
-<li>The event centered on aligning teams around opportunities in AI and large-scale analytics powered by OcientAIQ.</li>
-<li>Discussions covered product innovation, customer success, engineering, and go-to-market strategy for OcientAIQ. </li>
-<li>Emphasis was placed on building trusted data foundations for intelligent applications using OcientAIQ.</li>
-<li>The event highlighted internal team building and collaboration within the remote-first company.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-06-03</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/the-time-is-now-why-ocient-is-your-netezza-replacement/" target="_blank" rel="noopener">The Time is Now: Why Ocient is Your Netezza Replacement</a></h2>
-    
-    <div class="summary"><p>Ocient positions itself as a direct replacement for IBM Netezza, particularly given IBM’s shift to a cloud-based Netezza offering and end-of-support for existing appliances in 2023.</p>
-<ul>
-<li>The <strong>Ocient Hyperscale Data Warehouse (OHDW)</strong> is presented as a high-performance alternative built for modern enterprises, offering better storage efficiency and rapid analysis.</li>
-<li>Ocient supports direct loading of various data formats – <strong>Avro, Parquet, JSON, and mainframe data</strong> – eliminating the need for separate ETL tooling.</li>
-<li>The company offers a customer engagement model including <strong>no-cost pre-pilots and low-risk re-platforming pilots</strong> aiming for production deployment within months.</li>
-<li>OHDW provides features not found in Netezza, including <strong>fully-managed service, multiple cloud deployment options</strong>, and dedicated migration support, with claims of up to <strong>80% cost reduction</strong>.</li>
 </ul></div>
     
   </div>
