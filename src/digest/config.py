@@ -41,6 +41,14 @@ class Settings(BaseSettings):
     rag_chunk_size_chars: int = 2000
     rag_chunk_overlap_chars: int = 200
 
+    # Discord run-completion notification
+    discord_notify: bool = True
+    # "webhook" posts to DISCORD_WEBHOOK_URL; "hermes" invokes the hermes CLI
+    discord_notify_method: str = "hermes"
+    discord_webhook_url: str = ""
+    discord_hermes_channel: str = "discord:#vendor-updates"
+    discord_hermes_bin: str = "/home/hermes/.local/bin/hermes"
+
 
 settings = Settings()  # type: ignore[call-arg]
 

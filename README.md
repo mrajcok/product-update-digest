@@ -61,6 +61,31 @@ All configuration is via environment variables (`.env` file locally, system env 
 | `OLLAMA_SUMMARIZATION_MODEL` | Ollama model for full-pipeline summarization (e.g. `gemma3:4b`) |
 | `OLLAMA_STAGE_SUMMARIZATION_MODEL` | Ollama model for `--stage summarize`; defaults to `OLLAMA_SUMMARIZATION_MODEL` |
 | `OLLAMA_RAG_MODEL` | Ollama model for RAG Q&A; defaults to `OLLAMA_SUMMARIZATION_MODEL` |
+| `DISCORD_NOTIFY` | Post a per-vendor summary to Discord after each run (default: `true`; set `false` to disable) |
+| `DISCORD_NOTIFY_METHOD` | `webhook` (default) or `hermes` |
+| `DISCORD_WEBHOOK_URL` | Discord webhook URL; required when `DISCORD_NOTIFY_METHOD=webhook` |
+| `DISCORD_HERMES_CHANNEL` | Channel to send to via hermes CLI (default: `discord:#general`); required when `DISCORD_NOTIFY_METHOD=hermes` |
+| `DISCORD_HERMES_BIN` | Path to the hermes binary (default: `/home/hermes/.local/bin/hermes`) |
+
+### Discord run-completion notification
+
+After each daily run the digest posts a per-vendor summary to Discord (**on by default**).
+
+**Method: webhook** — create a webhook in your Discord channel settings and set `DISCORD_WEBHOOK_URL`. No hermes dependency.
+
+**Method: hermes** — uses the hermes CLI and your existing bot token. Set `DISCORD_NOTIFY_METHOD=hermes` and `DISCORD_HERMES_CHANNEL`.
+
+The message looks like:
+
+```
+**Daily digest complete**
+• Cribl: 3 new articles
+• Ocient: 1 new article
+• Palo Alto XSIAM: 5 found, 4 processed (1 failed)
+**Total: 9 found, 8 processed**
+```
+
+Notification errors are logged as warnings and never interrupt the pipeline. Set `DISCORD_NOTIFY=false` to disable.
 
 ### Model recommendations
 As of 2026-05-30, evaluated by Claude Sonnet 4.6.
@@ -166,6 +191,79 @@ make test
 ```
 
 101 tests, no external services required (SQLite uses in-memory DB; HTTP calls are mocked).
+
+## Hermes AI integration
+
+`src/hermes/digest_mcp.py` is a standalone [MCP](https://modelcontextprotocol.io) server that
+exposes the vector store to a [Hermes](https://hermes-agent.nousresearch.com) AI gateway,
+enabling natural-language search and RAG Q&A via Discord (or any platform Hermes supports).
+
+### How it works
+
+The script runs as a stdio MCP server under the Hermes system account. It has no dependency
+on this project's source tree — it queries the sqlite-vec database directly using the known
+schema and calls OpenRouter for embeddings and completions via httpx. This lets the project
+directory stay locked down (mode 700) while Hermes reads only the database from a separate
+group-accessible directory.
+
+Two tools are exposed to the Hermes reasoning loop:
+
+| Tool | Description |
+|---|---|
+| `semantic_search(query, company?, n_results?)` | Whole-document KNN search — good for "what's new with Cribl?" style queries |
+| `rag_query(question, company?, n_chunks?)` | Chunk retrieval + LLM answer with citations — good for specific questions like "Does Cribl support HIPAA?" |
+
+### Setup
+
+See [CLAUDE-INSTALL.md](CLAUDE-INSTALL.md) for the full VPS installation guide.
+The quick version for the MCP server specifically:
+
+```bash
+# 1. Create a hermes-readable data directory
+mkdir -p /home/mark/digest-data
+sudo chown mark:hermes /home/mark/digest-data
+sudo chmod 2750 /home/mark/digest-data
+
+# 2. Create a venv for the MCP server (separate from the project venv)
+cd /home/mark/digest-data
+uv venv --python 3.13 venv
+uv pip install --python venv/bin/python sqlite-vec httpx mcp
+sudo chown -R mark:hermes venv && sudo chmod -R g+rX venv
+
+# 3. Deploy the MCP server script
+cd /home/mark/product-update-digest
+make deploy-mcp
+```
+
+After each `git pull` that updates `src/hermes/digest_mcp.py`, re-run `make deploy-mcp`.
+
+### Hermes config.yaml
+
+Add to `/home/hermes/.hermes/config.yaml`:
+
+```yaml
+mcp_servers:
+  digest-search:
+    command: /home/mark/digest-data/venv/bin/python
+    args: [/home/mark/digest-data/digest_mcp.py]
+    env:
+      DIGEST_DB_PATH: /home/mark/digest-data/product_updates.db
+      OPENROUTER_EMBEDDING_MODEL: qwen/qwen3-embedding-8b
+      EMBEDDING_DIMENSIONS: "4096"
+      SEARCH_SCORE_THRESHOLD: "0.10"
+```
+
+`OPENROUTER_API_KEY` is omitted — Hermes inherits it from its own `.env`.
+
+### Usage via Discord
+
+After restarting the Hermes gateway (`sudo systemctl restart hermes-gateway`):
+
+```
+@hai what's new with Cribl?
+@hai does Ocient support columnar storage for time-series data?
+@hai search for Palo Alto press releases about AI
+```
 
 ## Deployment
 

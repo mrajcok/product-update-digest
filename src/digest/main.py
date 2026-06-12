@@ -8,6 +8,7 @@ from pathlib import Path
 import httpx
 
 from digest.config import setup_logging, settings
+from digest.notifier import post_discord_summary
 from digest.publisher.github_pages import GitHubPagesPublisher
 from digest.scrapers.cribl import CriblScraper
 from digest.scrapers.ocient import OcientScraper
@@ -312,39 +313,47 @@ def _run_full_pipeline(args: argparse.Namespace, db: ArticleDB) -> None:
     vec = VecClient()
     publisher = GitHubPagesPublisher(db)
     new_updates: list[ProductUpdate] = []
+    stats: dict[str, dict[str, int]] = {}
 
     for scraper in scrapers:
         pages = scraper.run(db)
         logger.info("%s: %d new/updated pages", scraper.company, len(pages))
+        stats[scraper.company] = {"found": len(pages), "processed": 0}
 
         for page in pages:
-            # Persist raw text for future staged runs
-            db.save_text(normalize_url(page.url), page.raw_text)
+            try:
+                # Persist raw text for future staged runs
+                db.save_text(normalize_url(page.url), page.raw_text)
 
-            summary = summarizer.summarize(page)
-            vid = vec_id_for(page.url)
+                summary = summarizer.summarize(page)
+                vid = vec_id_for(page.url)
 
-            update = ProductUpdate.from_scraped_page(page, summary)
-            vec.upsert(update, vid)
-            vec.upsert_chunks(update, vid)
+                update = ProductUpdate.from_scraped_page(page, summary)
+                vec.upsert(update, vid)
+                vec.upsert_chunks(update, vid)
 
-            existing = db.get_by_url(page.url)
-            first_scraped_at = existing.first_scraped_at if existing else None
-            record = ArticleRecord.from_scraped_page(
-                page,
-                vec_id=vid,
-                first_scraped_at=first_scraped_at,
-                summary=summary,
-            )
-            db.upsert(record)
-            new_updates.append(update)
-            logger.debug("Processed %s", page.url)
+                existing = db.get_by_url(page.url)
+                first_scraped_at = existing.first_scraped_at if existing else None
+                record = ArticleRecord.from_scraped_page(
+                    page,
+                    vec_id=vid,
+                    first_scraped_at=first_scraped_at,
+                    summary=summary,
+                )
+                db.upsert(record)
+                new_updates.append(update)
+                stats[scraper.company]["processed"] += 1
+                logger.debug("Processed %s", page.url)
+            except Exception:
+                logger.exception("Failed to process %s — skipping", page.url)
 
     if new_updates:
         logger.info("Publishing %d updates to GitHub Pages", len(new_updates))
         publisher.publish(_scraper_infos(scrapers))
     else:
         logger.info("No new updates — skipping publish")
+
+    post_discord_summary(stats)
 
 
 # ---------------------------------------------------------------------------
