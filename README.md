@@ -2,7 +2,7 @@
 
 **[View the live digest →](https://mrajcok.github.io/product-update-digest/)**
 
-A daily cron job that scrapes news and blog posts from Cribl, Ocient, and Palo Alto Networks (XSIAM) — blog posts, press releases, and product release notes — summarizes them with an LLM via [OpenRouter](https://openrouter.ai), publishes a static feed to GitHub Pages, and stores embeddings in a [sqlite-vec](https://github.com/asg017/sqlite-vec) vector database for retrieval by an AI assistant or the `tools/search.py` or `tools/rag.py` CLI.
+A daily cron job that scrapes news and blog posts from Cribl, Ocient, and Palo Alto Networks (XSIAM) — blog posts, press releases, and product release notes — summarizes them with an LLM via [OpenRouter](https://openrouter.ai), publishes a static feed to GitHub Pages, and stores embeddings in a [sqlite-vec](https://github.com/asg017/sqlite-vec) vector database for retrieval by an AI assistant using MCP server `hermes/digest_mcp.py` or the `tools/search.py` or `tools/rag.py` CLI.
 
 ## What it does
 
@@ -56,6 +56,7 @@ All configuration is via environment variables (`.env` file locally, system env 
 | `GITHUB_REPO` | Target GitHub repo for Pages (e.g., `username/product-updates`) |
 | `GITHUB_PAGES_BRANCH` | Branch to publish to (default: `gh-pages`) |
 | `MAX_ARTICLE_AGE_DAYS` | How far back to index articles (default: `30`) |
+| `COMPANY_PAGE_LIMIT` | Max articles shown on each vendor page on GitHub Pages (default: `30`; all articles are still searchable in the vector DB) |
 | `MAX_API_RETRIES` | Max retry attempts for LLM/embedding API calls (default: `5`) |
 | `OLLAMA_BASE_URL` | Local Ollama server URL (e.g. `http://localhost:11434/v1`); when set, takes precedence over OpenRouter for summarization and RAG |
 | `OLLAMA_SUMMARIZATION_MODEL` | Ollama model for full-pipeline summarization (e.g. `gemma3:4b`) |
@@ -122,6 +123,15 @@ uv run digest                   # full pipeline: scrape → summarize → vector
 uv run digest --site cribl      # run only the Cribl scraper (default: all three)
 uv run digest --site xsiam      # run only the Palo Alto XSIAM scraper
 uv run digest --publish         # rebuild full site from DB and push to GitHub Pages
+
+# Count discoverable URLs without scraping or writing to the DB
+uv run digest --count                          # all vendors, default 30-day window
+uv run digest --count --site cribl             # one vendor
+uv run digest --count --site cribl --since 2026-01-01   # custom date window
+
+# Override the article age cutoff for any command (overrides MAX_ARTICLE_AGE_DAYS)
+uv run digest --since 2026-01-01               # full pipeline back to Jan 1
+uv run digest --stage scrape --since 2026-01-01 --site cribl   # backfill scrape
 ```
 
 All stage commands write preview HTML to `data/dry-run/` for local review before publishing.
@@ -211,7 +221,7 @@ Two tools are exposed to the Hermes reasoning loop:
 | Tool | Description |
 |---|---|
 | `semantic_search(query, company?, n_results?)` | Whole-document KNN search — good for "what's new with Cribl?" style queries |
-| `rag_query(question, company?, n_chunks?)` | Chunk retrieval + LLM answer with citations — good for specific questions like "Does Cribl support HIPAA?" |
+| `rag_query(question, company?, n_chunks?)` | Chunk retrieval — returns ranked passages for the host LLM (Hermes) to synthesize into a cited answer; good for specific questions like "Does Cribl support HIPAA?" |
 
 ### Setup
 
@@ -291,7 +301,7 @@ publisher/
   github_pages.py              # Jinja2 HTML rendering + git push to gh-pages
   templates/
     index.html.j2              # top N updates across all companies (INDEX_PAGE_LIMIT)
-    company_index.html.j2      # full history for one company, grouped by month
+    company_index.html.j2      # recent articles for one company, grouped by month (capped at COMPANY_PAGE_LIMIT)
 tools/
   search.py                    # CLI for semantic search (whole-doc vectors, returns summaries)
   rag.py                       # CLI for RAG Q&A (chunk retrieval → LLM answer with citations)
@@ -345,7 +355,7 @@ All HTTP fetching uses httpx only — no headless browser needed.
 
 Vector storage uses sqlite-vec (a ~163KB SQLite extension) instead of a separate Chroma server. This eliminates the need for a running HTTP service and reduces the venv from ~500MB to ~260MB by dropping onnxruntime, numpy, kubernetes, and grpcio.
 
-Semantic search (`tools/search.py`) uses whole-document vectors and returns LLM summaries — fast and good for "what's new" queries. RAG (`tools/rag.py`) uses chunk-level vectors to retrieve specific passages, then synthesizes a grounded answer via an LLM — better for specific questions like "Does Cribl support HIPAA?". Both suppress results below `SEARCH_SCORE_THRESHOLD` (default 0.10).
+Semantic search (`tools/search.py`) uses whole-document vectors and returns LLM summaries — fast and good for "what's new" queries. RAG (`tools/rag.py`) uses chunk-level vectors to retrieve specific passages, then synthesizes a grounded answer via an LLM — better for specific questions like "Does Cribl support HIPAA?". Both suppress results below `SEARCH_SCORE_THRESHOLD` (default 0.10). The MCP `rag_query` tool follows the standard MCP pattern of returning raw chunks to the host LLM (Hermes) rather than calling an LLM internally.
 
 ## License
 

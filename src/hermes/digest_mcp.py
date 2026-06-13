@@ -25,7 +25,6 @@ DB_PATH = os.environ.get("DIGEST_DB_PATH", "/home/mark/digest-data/product_updat
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 EMBEDDING_MODEL = os.environ.get("OPENROUTER_EMBEDDING_MODEL", "qwen/qwen3-embedding-8b")
 EMBEDDING_DIMS = int(os.environ.get("EMBEDDING_DIMENSIONS", "4096"))
-RAG_MODEL = os.environ.get("OPENROUTER_RAG_MODEL", "qwen/qwen3.7-plus")
 SCORE_THRESHOLD = float(os.environ.get("SEARCH_SCORE_THRESHOLD", "0.10"))
 
 OPENROUTER_BASE = "https://openrouter.ai/api/v1"
@@ -85,7 +84,7 @@ def semantic_search(
 
     Returns the most relevant articles for a natural-language query.
     Use this for broad discovery ("what's new with Cribl?", "any press releases
-    about Palo Alto?").
+    about XSIAM?").
 
     Args:
         query: Natural language search query.
@@ -137,13 +136,11 @@ def rag_query(
     company: Optional[str] = None,
     n_chunks: int = 5,
 ) -> str:
-    """Answer a specific question using Retrieval-Augmented Generation over
-    product update digests.
+    """Retrieve relevant passage chunks for a specific question.
 
-    Retrieves the most relevant passage chunks, then calls an LLM for a
-    grounded answer with source citations.  Use this for specific factual
-    questions ("Does Cribl support HIPAA?", "What embedding models does Ocient
-    use?").
+    Returns the most relevant article passages so you can synthesize a
+    grounded answer with numbered source citations.  Use this for specific
+    factual questions ("Does Cribl support HIPAA?", "How can an AI agent interact with Ocient?").
 
     Args:
         question: The specific question to answer.
@@ -175,42 +172,16 @@ def rag_query(
     if not chunks:
         return "No relevant passages found for that question."
 
-    context_parts = []
+    lines = [f"**Passage chunks for:** {question}\n"]
     for i, c in enumerate(chunks, 1):
-        context_parts.append(
-            f"[Source {i}] {c['title']} ({c['company']}, {c['published_date'] or 'n/d'})\n{c['chunk_text']}"
+        score = _score(c["distance"])
+        date = c["published_date"] or "n/d"
+        lines.append(
+            f"**[{i}] {c['title']}** ({c['company']}, {date}) | Score: {score}\n"
+            f"<{c['url']}>\n\n"
+            f"{c['chunk_text']}"
         )
-    context = "\n\n---\n\n".join(context_parts)
-
-    prompt = (
-        f"Answer the following question using only the provided sources. "
-        f"Cite sources by number (e.g. [1]). "
-        f"If the sources do not contain enough information, say so.\n\n"
-        f"Question: {question}\n\n"
-        f"Sources:\n{context}"
-    )
-
-    resp = httpx.post(
-        f"{OPENROUTER_BASE}/chat/completions",
-        headers={"Authorization": f"Bearer {OPENROUTER_API_KEY}"},
-        json={
-            "model": RAG_MODEL,
-            "messages": [{"role": "user", "content": prompt}],
-        },
-        timeout=120,
-    )
-    resp.raise_for_status()
-    answer = resp.json()["choices"][0]["message"]["content"]
-
-    source_lines = []
-    for i, c in enumerate(chunks, 1):
-        source_lines.append(f"  [{i}] {c['title']} — <{c['url']}>")
-
-    return (
-        f"**Q: {question}**\n\n"
-        f"{answer}\n\n"
-        f"**Sources:**\n" + "\n".join(source_lines)
-    )
+    return "\n\n---\n\n".join(lines)
 
 
 # ── Entry point ────────────────────────────────────────────────────────────────
