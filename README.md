@@ -134,9 +134,8 @@ uv run digest --since 2026-01-01               # full pipeline back to Jan 1
 uv run digest --stage scrape --since 2026-01-01 --site cribl   # backfill scrape
 ```
 
-All stage commands write preview HTML to `data/dry-run/` for local review before publishing.
-
 ### Pipeline stages (for development / testing)
+All stage commands write preview HTML to `data/dry-run/` for local review before publishing.
 
 Run one stage at a time with `--stage <name>`:
 
@@ -225,7 +224,7 @@ Two tools are exposed to the Hermes reasoning loop:
 
 ### Setup
 
-See [CLAUDE-INSTALL.md](CLAUDE-INSTALL.md) for the full VPS installation guide.
+See [INSTALL.md](INSTALL.md) for the full VPS installation guide.
 The quick version for the MCP server specifically:
 
 ```bash
@@ -277,7 +276,7 @@ After restarting the Hermes gateway (`sudo systemctl restart hermes-gateway`):
 
 ## Deployment
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for full instructions covering GitHub Pages first-time initialization and cron job configuration.
+See [INSTALL.md](INSTALL.md) for full instructions covering GitHub Pages first-time initialization and cron job configuration.
 
 ## Architecture
 

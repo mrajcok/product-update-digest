@@ -179,13 +179,36 @@ Output overwrites `last_run.log` on each run.
 
 ---
 
-## Step 10 — Run the pipeline once manually
+## Step 10 — GitHub Pages — First-Time Setup
+
+The digest pipeline pushes the generated HTML to a `gh-pages` branch. Create it once
+as an orphan branch:
+
+```bash
+git clone https://<token>@github.com/<your-repo>.git /tmp/pages-init
+cd /tmp/pages-init
+git checkout --orphan gh-pages
+git rm -rf .
+echo "<h1>Coming soon</h1>" > index.html
+git add index.html
+git commit -m "Init gh-pages"
+git push origin gh-pages
+rm -rf /tmp/pages-init
+```
+
+Then enable GitHub Pages in the repo settings → **Pages** → Source: `gh-pages` branch,
+`/ (root)`.
+
+---
+
+## Step 11 — Run the pipeline once manually
 
 Populates the database before hermes can search it:
 
 ```bash
 cd ~/product-update-digest
-uv run digest
+uv run digest --site cribl    # one vendor, full pipeline — quick sanity check
+uv run digest                  # full run
 ```
 
 Verify the database was created with correct permissions:
@@ -204,7 +227,7 @@ chmod 640 ~/digest-data/product_updates.db
 
 ---
 
-## Step 11 — Restart the Hermes gateway
+## Step 12 — Restart the Hermes gateway
 
 The hermes gateway runs as a system-level systemd service. Restart it to pick up the new
 `mcp_servers` config:
@@ -216,7 +239,7 @@ sudo systemctl status hermes-gateway
 
 ---
 
-## Step 12 — Set Discord bot nickname
+## Step 13 — Set Discord bot nickname
 
 In the Discord server → Members → find the bot → Edit Nickname → set to `hai`.
 
@@ -253,3 +276,31 @@ sudo -u hermes ~/digest-data/venv/bin/python ~/digest-data/digest_mcp.py
 # 7. Cron log after 6 am
 cat ~/digest-data/last_run.log
 ```
+
+---
+
+## Logs
+
+Two log destinations:
+
+- **`~/digest-data/last_run.log`** — overwritten on each cron run (stdout + stderr)
+- **`logs/agent.log`** inside the project directory — rotating file written by `setup_logging()` (5 MB max, 3 backups); persists across runs
+
+```bash
+tail -f ~/digest-data/last_run.log
+tail -f ~/product-update-digest/logs/agent.log
+```
+
+---
+
+## Updating
+
+```bash
+cd ~/product-update-digest
+git pull
+make sync          # reinstall deps if pyproject.toml/uv.lock changed
+make deploy-mcp    # redeploy MCP server if src/hermes/digest_mcp.py changed
+```
+
+No database migrations needed — `CREATE TABLE IF NOT EXISTS` is idempotent, and schema
+column renames are handled automatically on first run.

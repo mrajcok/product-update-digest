@@ -267,8 +267,9 @@ def _run_vector(args: argparse.Namespace, db: ArticleDB) -> None:
         )
         update = ProductUpdate.from_scraped_page(page, summary=record.summary)
         vid = vec_id_for(record.url)
-        vec.upsert(update, vid)
-        n_chunks = vec.upsert_chunks(update, vid)
+        progress = f"[{i}/{total}]"
+        vec.upsert(update, vid, progress=progress)
+        n_chunks = vec.upsert_chunks(update, vid, progress=progress)
         logger.info("[stage:vector] [%d/%d] → %d chunk(s) embedded", i, total, n_chunks)
         upserted += 1
 
@@ -317,10 +318,13 @@ def _run_full_pipeline(args: argparse.Namespace, db: ArticleDB) -> None:
 
     for scraper in scrapers:
         pages = scraper.run(db)
-        logger.info("%s: %d new/updated pages", scraper.company, len(pages))
-        stats[scraper.company] = {"found": len(pages), "processed": 0}
+        n_pages = len(pages)
+        logger.info("%s: %d new/updated pages", scraper.company, n_pages)
+        stats[scraper.company] = {"found": n_pages, "processed": 0}
 
-        for page in pages:
+        for j, page in enumerate(pages, 1):
+            progress = f"[{j}/{n_pages}]"
+            logger.info("%s %s | %s", progress, page.company, page.title)
             try:
                 # Persist raw text for future staged runs
                 db.save_text(normalize_url(page.url), page.raw_text)
@@ -329,8 +333,8 @@ def _run_full_pipeline(args: argparse.Namespace, db: ArticleDB) -> None:
                 vid = vec_id_for(page.url)
 
                 update = ProductUpdate.from_scraped_page(page, summary)
-                vec.upsert(update, vid)
-                vec.upsert_chunks(update, vid)
+                vec.upsert(update, vid, progress=progress)
+                vec.upsert_chunks(update, vid, progress=progress)
 
                 existing = db.get_by_url(page.url)
                 first_scraped_at = existing.first_scraped_at if existing else None

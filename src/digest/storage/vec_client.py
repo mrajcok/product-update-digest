@@ -82,6 +82,16 @@ def _chunk_text(text: str, chunk_size: int, overlap: int) -> list[str]:
     return chunks
 
 
+def _fmt_ctx(progress: str, title: str) -> str:
+    parts = []
+    if progress:
+        parts.append(progress)
+    if title:
+        t = title if len(title) <= 60 else title[:59] + "…"
+        parts.append(f'"{t}"')
+    return (" — " + " ".join(parts)) if parts else ""
+
+
 def _open_conn(db_path: str) -> sqlite3.Connection:
     if db_path != ":memory:":
         Path(db_path).parent.mkdir(parents=True, exist_ok=True)
@@ -115,7 +125,7 @@ class VecClient:
     # Embedding helpers
     # ------------------------------------------------------------------
 
-    def _embed(self, text: str) -> list[float]:
+    def _embed(self, text: str, *, title: str = "", progress: str = "") -> list[float]:
         t0 = time.monotonic()
         for attempt in Retrying(
             stop=stop_after_attempt(settings.max_api_retries),
@@ -129,14 +139,15 @@ class VecClient:
                     model=settings.openrouter_embedding_model,
                 )
                 embedding = resp.data[0].embedding
+                ctx = _fmt_ctx(progress, title)
                 logger.info(
-                    "embed done in %.1fs — input %d chars, output %d dims, model %s",
-                    time.monotonic() - t0, len(text), len(embedding), settings.openrouter_embedding_model,
+                    "embed done in %.1fs%s — input %d chars, output %d dims, model %s",
+                    time.monotonic() - t0, ctx, len(text), len(embedding), settings.openrouter_embedding_model,
                 )
                 return embedding
         raise AssertionError("unreachable: tenacity reraise=True always raises on exhaustion")
 
-    def _embed_batch(self, texts: list[str]) -> list[list[float]]:
+    def _embed_batch(self, texts: list[str], *, title: str = "", progress: str = "") -> list[list[float]]:
         """Embed multiple texts in one API call; results are returned in input order."""
         t0 = time.monotonic()
         for attempt in Retrying(
@@ -151,9 +162,10 @@ class VecClient:
                     model=settings.openrouter_embedding_model,
                 )
                 embeddings = [d.embedding for d in sorted(resp.data, key=lambda d: d.index)]
+                ctx = _fmt_ctx(progress, title)
                 logger.info(
-                    "embed_batch done in %.1fs — %d texts, output %d dims, model %s",
-                    time.monotonic() - t0, len(texts), len(embeddings[0]) if embeddings else 0,
+                    "embed_batch done in %.1fs%s — %d texts, output %d dims, model %s",
+                    time.monotonic() - t0, ctx, len(texts), len(embeddings[0]) if embeddings else 0,
                     settings.openrouter_embedding_model,
                 )
                 return embeddings
@@ -163,12 +175,12 @@ class VecClient:
     # Whole-document upsert (for semantic search)
     # ------------------------------------------------------------------
 
-    def upsert(self, update: ProductUpdate, vec_id: str) -> None:
+    def upsert(self, update: ProductUpdate, vec_id: str, *, progress: str = "") -> None:
         # vec0 virtual tables don't support ON CONFLICT, so delete + insert.
         self._conn.execute("DELETE FROM vec_embeddings WHERE id = ?", (vec_id,))
         self._conn.execute("DELETE FROM vec_items WHERE id = ?", (vec_id,))
 
-        embedding = self._embed(update.source_text)
+        embedding = self._embed(update.source_text, title=update.title, progress=progress)
 
         self._conn.execute(
             """INSERT INTO vec_items (id, url, company, category, title, scraped_at, published_date, summary, source_text)
@@ -187,7 +199,7 @@ class VecClient:
     # Chunk upsert (for RAG)
     # ------------------------------------------------------------------
 
-    def upsert_chunks(self, update: ProductUpdate, article_id: str) -> int:
+    def upsert_chunks(self, update: ProductUpdate, article_id: str, *, progress: str = "") -> int:
         """Chunk and embed source_text for RAG; returns number of chunks stored."""
         chunks = _chunk_text(
             update.source_text,
@@ -207,7 +219,7 @@ class VecClient:
             self._conn.execute("DELETE FROM vec_chunk_embeddings WHERE id = ?", (cid,))
         self._conn.execute("DELETE FROM vec_chunk_items WHERE article_id = ?", (article_id,))
 
-        embeddings = self._embed_batch(chunks)
+        embeddings = self._embed_batch(chunks, title=update.title, progress=progress)
 
         for i, (chunk_text, embedding) in enumerate(zip(chunks, embeddings)):
             chunk_id = f"{article_id}_c{i}"
