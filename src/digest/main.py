@@ -292,13 +292,6 @@ def _run_render(args: argparse.Namespace, db: ArticleDB) -> None:
 
 
 def _run_publish(args: argparse.Namespace, db: ArticleDB) -> None:
-    html_files = list(_DRY_RUN_DIR.glob("**/*.html")) if _DRY_RUN_DIR.exists() else []
-    if not html_files:
-        logger.error(
-            "No rendered HTML in %s — run '--stage render' first, review, then '--publish'.",
-            _DRY_RUN_DIR,
-        )
-        sys.exit(1)
     publisher = GitHubPagesPublisher(db)
     publisher.publish(_scraper_infos(_build_scrapers(args.site)))
 
