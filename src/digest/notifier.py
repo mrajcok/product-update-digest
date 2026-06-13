@@ -1,7 +1,5 @@
 import logging
-import os
 import subprocess
-from pathlib import Path
 
 import httpx
 
@@ -54,13 +52,9 @@ def _post_via_hermes(message: str) -> None:
     if not settings.discord_hermes_channel:
         logger.warning("discord_notify_method=hermes but DISCORD_HERMES_CHANNEL not set — skipping")
         return
-    hermes_home = str(Path(settings.discord_hermes_bin).parents[2])
-    env = dict(os.environ)
-    env["HOME"] = hermes_home
     try:
         result = subprocess.run(
-            [settings.discord_hermes_bin, "send", "--to", settings.discord_hermes_channel, message],
-            env=env,
+            ["sudo", "-n", "-u", "hermes", settings.discord_hermes_bin, "send", "--to", settings.discord_hermes_channel, message],
             capture_output=True,
             text=True,
             timeout=15,
