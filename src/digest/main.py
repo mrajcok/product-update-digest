@@ -360,8 +360,52 @@ def _run_full_pipeline(args: argparse.Namespace, db: ArticleDB) -> None:
 # CLI
 # ---------------------------------------------------------------------------
 
+def _run_count(args: argparse.Namespace) -> None:
+    """Discover URLs via sitemap/RSS and print counts — no scraping, no DB writes."""
+    if args.since:
+        try:
+            since_date = date.fromisoformat(args.since)
+        except ValueError:
+            logger.error("--since must be YYYY-MM-DD, got: %s", args.since)
+            sys.exit(1)
+        age_days = (date.today() - since_date).days
+        if age_days < 0:
+            logger.error("--since date %s is in the future", args.since)
+            sys.exit(1)
+        settings.max_article_age_days = age_days
+        logger.info("Using cutoff date %s (%d days back)", since_date, age_days)
+
+    scrapers = _build_scrapers(args.site)
+    grand_total = 0
+    for scraper in scrapers:
+        urls = scraper.discover_urls()
+        by_cat: dict[str, int] = {}
+        for _, cat in urls:
+            by_cat[cat] = by_cat.get(cat, 0) + 1
+        total = len(urls)
+        grand_total += total
+        breakdown = ", ".join(f"{cat}: {n}" for cat, n in sorted(by_cat.items()))
+        print(f"{scraper.company}: {total} URL(s)  [{breakdown}]")
+        for url, cat in urls:
+            logger.debug("  [%s] %s", cat, url)
+        scraper.close()
+
+    if len(scrapers) > 1:
+        print(f"total: {grand_total} URL(s)")
+
+
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Scrape news and blog posts and publish to GitHub Pages")
+    parser.add_argument(
+        "--count",
+        action="store_true",
+        help="Discover and count URLs only — no scraping, no DB writes",
+    )
+    parser.add_argument(
+        "--since",
+        metavar="YYYY-MM-DD",
+        help="Override the article age cutoff (used with --count or any stage)",
+    )
     parser.add_argument(
         "--stage",
         choices=["scrape", "summarize", "vector", "render"],
@@ -401,6 +445,20 @@ def _parse_args() -> argparse.Namespace:
 def main() -> None:
     args = _parse_args()
     setup_logging()
+
+    if args.count:
+        _run_count(args)
+        return
+
+    # Apply --since outside of --count too (e.g. backfill scrape)
+    if args.since:
+        try:
+            since_date = date.fromisoformat(args.since)
+        except ValueError:
+            logger.error("--since must be YYYY-MM-DD, got: %s", args.since)
+            sys.exit(1)
+        settings.max_article_age_days = (date.today() - since_date).days
+        logger.info("Cutoff overridden to %s (%d days)", since_date, settings.max_article_age_days)
 
     logger.info("Starting product-update-digest (stage=%s, site=%s)", args.stage, args.site)
 

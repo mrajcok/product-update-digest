@@ -57,6 +57,7 @@
     .card h3 a:hover { color: var(--link-hover); text-decoration: underline; }
     .summary { font-size: .9rem; line-height: 1.5; color: var(--text-2); }
     .generated-at { font-size: .82rem; color: var(--text-3); margin: -.5rem 0 1.5rem; }
+    .index-hint { font-size: .9rem; color: var(--text-2); margin: -.75rem 0 1.5rem; }
 
     /* theme toggle */
     .theme-toggle { display: flex; align-items: center; gap: .4rem; cursor: pointer; user-select: none; }
@@ -79,6 +80,9 @@
   </div>
   <h1>{{ company | upper if company == 'xsiam' else company | capitalize }} News & Blog Posts</h1>
   <p class="generated-at">Generated {{ generated_at }}</p>
+  {% if article_count >= company_page_limit %}
+  <p class="index-hint">Showing the most recent {{ article_count }} articles — older articles are searchable in the vector database.</p>
+  {% endif %}
 
   {% for month_label, records in grouped %}
   <h2 class="month">{{ month_label }}</h2>

@@ -52,7 +52,7 @@ class GitHubPagesPublisher:
                 [r for r in ok_records if r.company == c],
                 key=_sort_key,
                 reverse=True,
-            )
+            )[:settings.company_page_limit]
             for c in COMPANIES
         }
         top_updates = _top_per_company(company_updates, settings.index_per_company)
@@ -63,10 +63,11 @@ class GitHubPagesPublisher:
     def render_from_db(self, out_dir: Path, scraper_infos: list[dict] | None = None, limit: int | None = None) -> None:
         """Render pages from DB to out_dir (no push). limit caps articles per company on company pages."""
         from digest.config import settings
+        effective_limit = limit if limit is not None else settings.company_page_limit
         all_records = self._db.get_all()
         ok_records = [r for r in all_records if r.status == "ok" and r.summary]
         company_updates: dict[str, list[ArticleRecord]] = {
-            c: sorted([r for r in ok_records if r.company == c], key=_sort_key, reverse=True)[:limit]
+            c: sorted([r for r in ok_records if r.company == c], key=_sort_key, reverse=True)[:effective_limit]
             for c in COMPANIES
         }
         top_updates = _top_per_company(company_updates, settings.index_per_company)
@@ -74,9 +75,8 @@ class GitHubPagesPublisher:
         self._write_to_dir(html_files, out_dir)
         rendered = sum(len(v) for v in company_updates.values())
         logger.info(
-            "Rendered %d/%d record(s) from DB to %s%s",
-            rendered, len(ok_records), out_dir,
-            f" (limit={limit} per company)" if limit else "",
+            "Rendered %d/%d record(s) from DB to %s (limit=%d per company)",
+            rendered, len(ok_records), out_dir, effective_limit,
         )
 
     def render_scrape_preview(
@@ -154,6 +154,8 @@ class GitHubPagesPublisher:
             files[f"{company}/index.html"] = company_tmpl.render(
                 company=company,
                 grouped=grouped,
+                article_count=len(records),
+                company_page_limit=settings.company_page_limit,
                 generated_at=datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d %I:%M %p %Z"),
             )
 
