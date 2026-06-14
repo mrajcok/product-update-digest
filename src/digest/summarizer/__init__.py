@@ -55,7 +55,7 @@ def _length_guidance(char_count: int) -> str:
         return "2-3 sentences."
     if char_count < 4000:
         return "3-5 sentences."
-    return "One short lead sentence, then up to 4 bullet points for the key technical details."
+    return "One short lead sentence, then up to 4 bullet points for the key technical details. Each bullet must start on its own line with '* '."
 
 
 class Summarizer:

@@ -3,7 +3,37 @@ import pytest
 
 from digest.storage.db import ArticleDB
 from digest.storage.models import ArticleRecord, normalize_url
-from digest.publisher.github_pages import GitHubPagesPublisher, _group_by_month
+from digest.publisher.github_pages import (
+    GitHubPagesPublisher,
+    _fix_inline_bullets,
+    _group_by_month,
+)
+
+
+@pytest.mark.parametrize(
+    "raw, lead, n_bullets",
+    [
+        # inline bullets on one line (the reported CriblCon case)
+        ("Lead sentence. * One. * Two. * Three.", "Lead sentence.", 3),
+        # trailing newline must not disable the fix
+        ("Lead sentence. * One. * Two.\n", "Lead sentence.", 2),
+        # newline after lead, but bullets still inline
+        ("Lead sentence.\n* One. * Two. * Three.", "Lead sentence.", 3),
+        # already well-formed list -> idempotent
+        ("Lead sentence.\n\n* One.\n* Two.", "Lead sentence.", 2),
+    ],
+)
+def test_fix_inline_bullets_normalizes(raw, lead, n_bullets):
+    fixed = _fix_inline_bullets(raw)
+    assert fixed.startswith(lead + "\n\n")
+    bullet_lines = [ln for ln in fixed.splitlines() if ln.startswith("* ")]
+    assert len(bullet_lines) == n_bullets
+
+
+def test_fix_inline_bullets_leaves_prose_and_emphasis_untouched():
+    # No bullet markers ('* ' after whitespace) -> only stripped.
+    assert _fix_inline_bullets("Plain *emphasis* sentence.\n") == "Plain *emphasis* sentence."
+    assert _fix_inline_bullets("Just one sentence.") == "Just one sentence."
 
 
 def _make_record(**kwargs) -> ArticleRecord:

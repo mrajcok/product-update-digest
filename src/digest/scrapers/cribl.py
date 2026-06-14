@@ -103,6 +103,9 @@ class CriblScraper(BaseScraper):
             html = self._fetch_page(url)
             soup = BeautifulSoup(html, "lxml")
             title = self._extract_title(soup)
+            if title.endswith("| Cribl Blog"):
+                logger.info("cribl: skipping category/listing page %s (title=%r)", url, title)
+                return None
             published_date = self._extract_date(soup) or self._sitemap_lastmod.get(url)
             text = self.extract_text(html)
             if len(text) < 200:

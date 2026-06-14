@@ -20,6 +20,31 @@ logger = logging.getLogger(__name__)
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 COMPANIES = ["cribl", "ocient", "xsiam"]
 
+
+def _fix_inline_bullets(text: str) -> str:
+    """Fix LLM summaries that place bullet markers inline on one line.
+
+    LLMs sometimes produce 'Lead sentence. * Bullet 1. * Bullet 2.' all on one
+    line. Python's markdown library requires a blank line before a list that
+    follows a paragraph, so split on the bullet markers and reassemble with
+    proper spacing.
+
+    A bullet marker is a '* ' preceded by start-of-text or whitespace. A
+    correctly-formatted list already has its markers at line-start, so this is
+    idempotent on well-formed input; it does not match inline emphasis like
+    '*word*' (no space after the star). Robust to trailing newlines and to a
+    newline placed after the lead sentence with bullets still inline.
+    """
+    text = (text or "").strip()
+    first = re.search(r"(?:^|\s)\* ", text)
+    if first is None:
+        return text
+    lead = text[: first.start()].strip()
+    bullets = [b.strip() for b in re.split(r"(?:^|\s)\* ", text[first.start():]) if b.strip()]
+    out = f"{lead}\n\n" if lead else ""
+    return out + "\n".join(f"* {b}" for b in bullets)
+
+
 def _sort_key(record: ArticleRecord) -> str:
     return record.published_date or record.last_scraped_at or ""
 
@@ -39,7 +64,7 @@ class GitHubPagesPublisher:
             loader=FileSystemLoader(str(TEMPLATES_DIR)),
             autoescape=True,
         )
-        self._env.filters["markdown"] = lambda text: Markup(md.markdown(text or ""))
+        self._env.filters["markdown"] = lambda text: Markup(md.markdown(_fix_inline_bullets(text or "")))
         self._env.filters["plaintitle"] = lambda text: html_module.unescape(re.sub(r"<[^>]+>", "", text or ""))
 
     def publish(self, scraper_infos: list[dict] | None = None) -> None:
@@ -56,6 +81,10 @@ class GitHubPagesPublisher:
             for c in COMPANIES
         }
         top_updates = _top_per_company(company_updates, settings.index_per_company)
+
+        for company, records in company_updates.items():
+            logger.info("Publishing %s: %d article(s)", company, len(records))
+        logger.info("Publishing total: %d article(s)", sum(len(v) for v in company_updates.values()))
 
         html_files = self._render(top_updates, company_updates, scraper_infos)
         self._push_to_github(html_files)
