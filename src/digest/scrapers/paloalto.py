@@ -21,6 +21,14 @@ _PRNEWSWIRE_DATE_RE = re.compile(
     re.IGNORECASE,
 )
 
+# Broader dateline for /company/press/ pages without /PRNewswire/:
+# e.g. "DENVER and SANTA CLARA, Calif. – September 26, 2024"
+_PRESS_DATE_RE = re.compile(
+    r"\b(January|February|March|April|May|June|July|August|September|October|November|December)"
+    r"\s+(\d{1,2}),?\s+(\d{4})\b",
+    re.IGNORECASE,
+)
+
 # Blog posts: scraped from the XSIAM tag page (static HTML, no JS required).
 # The tag page lists XSIAM-tagged posts; blog post URLs don't contain "xsiam"
 # in the slug, so sitemap URL-pattern filtering misses them entirely.
@@ -212,7 +220,7 @@ class PaloAltoScraper(BaseScraper):
             html = self._fetch_page(url)
             soup = BeautifulSoup(html, "lxml")
             title = self._extract_title(soup)
-            published_date = self._extract_date(soup) or self._sitemap_lastmod.get(url)
+            published_date = self._extract_date(soup, url) or self._sitemap_lastmod.get(url)
             text = self.extract_text(html)
             if len(text) < 200:
                 logger.warning("xsiam: thin content (%d chars) at %s", len(text), url)
@@ -240,7 +248,7 @@ class PaloAltoScraper(BaseScraper):
         return title_tag.get_text(strip=True) if title_tag else ""
 
     @staticmethod
-    def _extract_date(soup: BeautifulSoup) -> str | None:
+    def _extract_date(soup: BeautifulSoup, url: str = "") -> str | None:
         for prop in ("article:published_time", "og:article:published_time"):
             meta = soup.find("meta", property=prop)
             if meta and meta.get("content"):
@@ -248,11 +256,21 @@ class PaloAltoScraper(BaseScraper):
         time_tag = soup.find("time", attrs={"datetime": True})
         if time_tag:
             return str(time_tag["datetime"])[:10]
+        # Search in first 5000 chars to clear past nav/header bloat before the dateline
+        text = soup.get_text(" ", strip=True)[:5000]
         # PR Newswire dateline: "March 6, 2023 /PRNewswire/"
-        m = _PRNEWSWIRE_DATE_RE.search(soup.get_text(" ", strip=True)[:1000])
+        m = _PRNEWSWIRE_DATE_RE.search(text)
         if m:
             try:
                 return datetime.strptime(f"{m.group(1)} {m.group(2)} {m.group(3)}", "%B %d %Y").strftime("%Y-%m-%d")
             except ValueError:
                 pass
+        # General press release dateline (e.g. "CITY – September 26, 2024")
+        if "/company/press/" in url:
+            m = _PRESS_DATE_RE.search(text)
+            if m:
+                try:
+                    return datetime.strptime(f"{m.group(1)} {m.group(2)} {m.group(3)}", "%B %d %Y").strftime("%Y-%m-%d")
+                except ValueError:
+                    pass
         return None
