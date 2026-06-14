@@ -15,7 +15,7 @@ clean:
 	find . -name "__pycache__" -not -path "./.venv/*" -exec rm -rf {} + 2>/dev/null || true
 
 deploy-mcp:
-	cp src/hermes/digest_mcp.py $(HOME)/digest-data/digest_mcp.py
-	sudo chown $(USER):hermes $(HOME)/digest-data/digest_mcp.py
-	chmod 750 $(HOME)/digest-data/digest_mcp.py
-	@echo "digest_mcp.py deployed to $(HOME)/digest-data/"
+	sudo cp src/hermes/digest_mcp.py /opt/digest/digest_mcp.py
+	sudo chown root:digest /opt/digest/digest_mcp.py
+	sudo chmod 754 /opt/digest/digest_mcp.py
+	@echo "digest_mcp.py deployed to /opt/digest/"

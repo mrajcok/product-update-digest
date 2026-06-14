@@ -21,7 +21,7 @@ from mcp.server.fastmcp import FastMCP
 
 # ── Configuration from environment ────────────────────────────────────────────
 
-DB_PATH = os.environ.get("DIGEST_DB_PATH", "/home/mark/digest-data/product_updates.db")
+DB_PATH = os.environ.get("DIGEST_DB_PATH", "/opt/digest/product_updates.db")
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 EMBEDDING_MODEL = os.environ.get("OPENROUTER_EMBEDDING_MODEL", "qwen/qwen3-embedding-8b")
 EMBEDDING_DIMS = int(os.environ.get("EMBEDDING_DIMENSIONS", "4096"))
