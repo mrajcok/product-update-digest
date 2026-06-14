@@ -273,4 +273,8 @@ class PaloAltoScraper(BaseScraper):
                     return datetime.strptime(f"{m.group(1)} {m.group(2)} {m.group(3)}", "%B %d %Y").strftime("%Y-%m-%d")
                 except ValueError:
                     pass
+            # Last resort: extract year from URL path e.g. /company/press/2022/slug
+            m2 = re.search(r"/company/press/(\d{4})/", url)
+            if m2:
+                return f"{m2.group(1)}-01-01"
         return None
