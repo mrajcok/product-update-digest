@@ -282,6 +282,8 @@ See [INSTALL.md](INSTALL.md) for full instructions covering GitHub Pages first-t
 
 ![Pipeline diagram](docs/flow-diagram.svg)
 
+![RAG diagram](docs/flow-discord-rag-search.svg)
+
 ```
 main.py                        # orchestration entry point
 config.py                      # pydantic-settings config

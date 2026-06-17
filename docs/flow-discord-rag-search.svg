@@ -33,29 +33,29 @@ line,path{fill:none;stroke:rgb(156,154,146);stroke-width:1.5}
 <g onclick="sendPrompt('What is the Hermes agent and how does it coordinate tool calls?')">
   <rect x="120" y="200" width="240" height="72" rx="8" fill="rgb(99,56,6)" stroke="rgb(239,159,39)" stroke-width="1"/>
   <text x="240" y="228" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="700" fill="rgb(250,199,117)">Hermes agent</text>
-  <text x="240" y="252" text-anchor="middle" dominant-baseline="central" fill="rgb(239,159,39)">LangChain ReAct agent</text>
+  <text x="220" y="252" text-anchor="middle" dominant-baseline="central" fill="rgb(239,159,39)">LangChain ReAct agent</text>
 </g>
 
 <!-- LLM — right side, called twice by Hermes -->
 <g onclick="sendPrompt('How does the LLM participate in the Hermes agent loop?')">
   <rect x="410" y="208" width="230" height="56" rx="8" fill="rgb(99,56,6)" stroke="rgb(239,159,39)" stroke-width="0.5"/>
   <text x="525" y="232" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(250,199,117)">LLM</text>
-  <text x="525" y="250" text-anchor="middle" dominant-baseline="central" fill="rgb(239,159,39)">OpenRouter or Ollama</text>
+  <text x="545" y="250" text-anchor="middle" dominant-baseline="central" fill="rgb(239,159,39)">OpenRouter or Ollama</text>
 </g>
 
 <!-- Hermes → LLM call 1: reason -->
 <line x1="360" y1="215" x2="410" y2="215" marker-end="url(#arrow)"/>
-<text x="358" y="211" text-anchor="end" font-size="10" fill="rgb(250,199,117)">① reason</text>
+<text x="358" y="219" text-anchor="end" font-size="10" fill="rgb(250,199,117)">① reason</text>
 <!-- LLM → Hermes: tool decision -->
 <line x1="410" y1="227" x2="360" y2="227" marker-end="url(#arrow)"/>
-<text x="412" y="237" text-anchor="start" font-size="10" fill="rgb(194,192,182)">② call rag_query</text>
+<text x="412" y="232" text-anchor="start" font-size="10" fill="rgb(194,192,182)">② call rag_query</text>
 
 <!-- Hermes → LLM call 2: synthesize -->
 <line x1="360" y1="247" x2="410" y2="247" marker-end="url(#arrow)"/>
-<text x="358" y="243" text-anchor="end" font-size="10" fill="rgb(250,199,117)">⑤ synthesize</text>
+<text x="358" y="248" text-anchor="end" font-size="10" fill="rgb(250,199,117)">⑤ synthesize</text>
 <!-- LLM → Hermes: reply text -->
-<line x1="410" y1="259" x2="360" y2="259" marker-end="url(#arrow)"/>
-<text x="412" y="269" text-anchor="start" font-size="10" fill="rgb(194,192,182)">⑥ reply text</text>
+<line x1="410" y1="254" x2="360" y2="254" marker-end="url(#arrow)"/>
+<text x="412" y="258" text-anchor="start" font-size="10" fill="rgb(194,192,182)">⑥ reply text</text>
 
 <!-- Hermes → MCP (③ call tool) -->
 <line x1="192" y1="272" x2="192" y2="358" marker-end="url(#arrow)"/>
