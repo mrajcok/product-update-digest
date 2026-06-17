@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-16 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-06-17 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,42 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-06-16</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/5-security-data-decisions-ai-should-assist-not-own/" target="_blank" rel="noopener">5 security data decisions AI should assist, not own | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl details a strategy for integrating AI into security data operations, emphasizing human oversight in critical decision-making processes.</p>
+<ul>
+<li>AI can effectively identify opportunities to reduce data volume, but human review should be required before implementing any data filtering to prevent the loss of crucial forensic information.</li>
+<li>AI excels at mapping raw telemetry to standard schemas like OCSF, accelerating onboarding, but human validation is crucial to ensure accurate data translation and prevent subtle errors impacting detections.</li>
+<li>While AI can discover sensitive data needing masking or redaction, policy decisions regarding these actions should remain with human owners, considering legal, privacy, and compliance requirements.</li>
+<li>AI can draft data pipeline configurations and troubleshoot issues, but a human preview, testing, and approval process is necessary before deploying changes to production environments to maintain data integrity.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-06-16</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/effective-ai-observability-is-a-telemetry-problem-not-a-tool-problem/" target="_blank" rel="noopener">Effective AI observability is a telemetry problem, not a tool problem. | Cribl</a></h2>
+    
+    <div class="summary"><p>Effective AI observability is a telemetry problem, not a tool problem, and existing tools provide only partial views.</p>
+<ul>
+<li>Cribl Stream and Edge provide the infrastructure layer for collecting, normalizing, and routing AI telemetry from sources like OpenTelemetry (OTLP), vLLM/Triton, DCGM, CASB, DLP, and NGFW.</li>
+<li>Cribl Lake offers full-fidelity retention of LLM and GPU telemetry at object-storage costs, storing prompts, completions, and hardware metrics.</li>
+<li>Cribl Search provides a unified investigation surface with a lakehouse engine for centralized data and a federated engine to query data in-place across existing silos (Datadog, Splunk, etc.) without data movement.</li>
+<li>The platform addresses three dimensions of AI observability: LLM applications, GPU infrastructure, and shadow AI activity by correlating instrumented telemetry with network egress data.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -117,42 +153,6 @@
 <li>Teams often lack experience migrating SIEMs and struggle to quickly gain proficiency in new platforms while maintaining existing security coverage.</li>
 <li>Security programs often become overly dependent on the SIEM vendor, tying detection logic and workflows to a specific platform.</li>
 <li>Migrations routinely take longer than planned due to underestimated effort, competing priorities and the need to rebuild (not migrate) content/rules.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-06-10</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/criblcon-26-is-coming-to-chicago-register-now/" target="_blank" rel="noopener">CriblCon 26 is coming to Chicago. Register now. | Cribl</a></h2>
-    
-    <div class="summary"><p>CriblCon 26 will be held in Chicago from September 28-30, focusing on practical applications of “Agentic Telemetry” for the AI era.</p>
-<ul>
-<li>Attendees can participate in technical sessions and hands-on labs, categorized into three tracks: Cribl Core, Cribl Advanced, and a new Cribl Expert track for troubleshooting.</li>
-<li>The “Campus Experience” (a paid add-on) offers expert-led training focused on real-world data challenges, with completion awarding a “2026 Practical Data Skills” badge.</li>
-<li>The event will showcase Cribl’s platform and solutions for managing telemetry data, with a focus on enabling AI-ready data pipelines without lock-in or data loss.</li>
-<li>CriblCon aims to provide attendees with actionable insights and networking opportunities to solve real-world telemetry management challenges.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-06-09</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/rest-collector-diagnostics-now-easier-than-ever/" target="_blank" rel="noopener">REST Collector Diagnostics — Now easier than ever! | Cribl</a></h2>
-    
-    <div class="summary"><p>REST Collector Diagnostics now provide interactive debugging capabilities within Cribl.</p>
-<ul>
-<li>Debugging mode allows inspection of request and response details, including headers, payloads, URLs, and status codes.</li>
-<li>Diagnostics cover authentication, discovery, and collection phases of the REST Collector workflow.</li>
-<li>A generated <code>curl</code> command is provided for external testing and troubleshooting.</li>
-<li>Data is encrypted and stored locally with configurable redaction to protect sensitive information; diagnostic data is not ingested into Cribl.</li>
 </ul></div>
     
   </div>

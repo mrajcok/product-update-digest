@@ -79,13 +79,47 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-16 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-06-17 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">June 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-16</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/5-security-data-decisions-ai-should-assist-not-own/" target="_blank" rel="noopener">5 security data decisions AI should assist, not own | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl details a strategy for integrating AI into security data operations, emphasizing human oversight in critical decision-making processes.</p>
+<ul>
+<li>AI can effectively identify opportunities to reduce data volume, but human review should be required before implementing any data filtering to prevent the loss of crucial forensic information.</li>
+<li>AI excels at mapping raw telemetry to standard schemas like OCSF, accelerating onboarding, but human validation is crucial to ensure accurate data translation and prevent subtle errors impacting detections.</li>
+<li>While AI can discover sensitive data needing masking or redaction, policy decisions regarding these actions should remain with human owners, considering legal, privacy, and compliance requirements.</li>
+<li>AI can draft data pipeline configurations and troubleshoot issues, but a human preview, testing, and approval process is necessary before deploying changes to production environments to maintain data integrity.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-16</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/effective-ai-observability-is-a-telemetry-problem-not-a-tool-problem/" target="_blank" rel="noopener">Effective AI observability is a telemetry problem, not a tool problem. | Cribl</a></h3>
+    
+    <div class="summary"><p>Effective AI observability is a telemetry problem, not a tool problem, and existing tools provide only partial views.</p>
+<ul>
+<li>Cribl Stream and Edge provide the infrastructure layer for collecting, normalizing, and routing AI telemetry from sources like OpenTelemetry (OTLP), vLLM/Triton, DCGM, CASB, DLP, and NGFW.</li>
+<li>Cribl Lake offers full-fidelity retention of LLM and GPU telemetry at object-storage costs, storing prompts, completions, and hardware metrics.</li>
+<li>Cribl Search provides a unified investigation surface with a lakehouse engine for centralized data and a federated engine to query data in-place across existing silos (Datadog, Splunk, etc.) without data movement.</li>
+<li>The platform addresses three dimensions of AI observability: LLM applications, GPU infrastructure, and shadow AI activity by correlating instrumented telemetry with network egress data.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -563,43 +597,6 @@
 <li>Traditional security approaches like sandboxing only control <em>what</em> agents do, not <em>what</em> they see, failing to address the root “access” problem.</li>
 <li>Multi-agent systems amplify this issue, as flawed outputs from one agent become trusted inputs for others, causing cascading failures.</li>
 <li>Cribl advocates prioritizing data access and consistency – ensuring agents operate on a “single version of reality” – before focusing on model improvements or governance.</li>
-</ul></div>
-    
-  </div>
-  
-  
-  <h2 class="month">April 2026</h2>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-04-30</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/streamline-workload-migrations-with-cribl-and-aws/" target="_blank" rel="noopener">Streamline workload migrations with Cribl and AWS | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl and AWS streamline workload migrations by providing data control and visibility throughout the process.</p>
-<ul>
-<li>Cribl Stream decouples data sources from destinations, enabling data transformation and routing to AWS services without vendor lock-in.</li>
-<li>The solution supports a three-stage migration blueprint: pre-migration preparation &amp; prioritization, during-migration decoupling &amp; validation, and post-migration optimization.</li>
-<li>Cribl.Cloud Government offers a dedicated environment for federal agencies and organizations with SaaS mandates.</li>
-<li>Customers like Autodesk reduced duplicate log ingestion by 166% and Accenture Federal Services completed a cloud sprint in 3-4 months using Cribl during migrations.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-04-28</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/data-decomposition-stop-keeping-everything-start-keeping-what-matters/" target="_blank" rel="noopener">Data decomposition: Stop keeping everything. Start keeping what matters.  | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl introduces data decomposition as a method to selectively retain and manage telemetry data, addressing challenges with growing data volumes and costs.</p>
-<ul>
-<li>Data decomposition breaks complex records into entities, attributes, sensitive elements, and metadata to apply different policies to each part.</li>
-<li>Cribl emphasizes using decomposition to mask sensitive data, tier storage based on access frequency (hot, warm, cold), and retain potentially valuable data in low-cost storage with schema-on-need capabilities.</li>
-<li>The approach focuses on retaining data tied to specific decisions (security, reliability, business) and acknowledging that data value changes over time.</li>
-<li>This functionality builds upon Cribl's existing routing, reduction, masking, tiering, schema-on-need, and search-in-place capabilities, aiming for greater control and cost optimization.</li>
 </ul></div>
     
   </div>
