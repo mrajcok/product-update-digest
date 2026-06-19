@@ -79,13 +79,81 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-17 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-06-19 06:05 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">June 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-18</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/how-to-build-an-ai-telemetry-architecture-that-serves-five-teams-without-duplicate-collection/" target="_blank" rel="noopener">How to build an AI telemetry architecture that serves five teams without duplicate collection | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl introduces an architecture for AI telemetry that enables a single collection pass for multiple teams, avoiding redundant data collection and associated costs.</p>
+<ul>
+<li>The architecture normalizes heterogeneous schemas from sources like OpenTelemetry GenAI and GPU metrics (DCGM, vLLM, Triton, TensorRT-LLM) into a consistent internal schema.</li>
+<li>Cribl Stream and Edge are utilized for ingestion: Stream handles OTLP and API sources, while Edge handles on-premises GPU clusters with local data redaction and enrichment.</li>
+<li>In-flight policy features include PII redaction, workload enrichment (attaching metadata like team and model version to GPU metrics), and cost metric derivation (calculating per-request costs).</li>
+<li>Data is routed to various destinations (SRE/APM, Security/SIEM, FinOps, Eval platforms, Cribl Lake) at the appropriate fidelity and cost tier, with unified querying across all destinations provided by Cribl Search’s lakehouse and federated engines.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-17</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/one-ai-stack-five-teams-zero-compromise/" target="_blank" rel="noopener">One AI stack. Five teams. Zero compromise. | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl Search introduces a unified investigation surface for complete AI observability, allowing different teams (SRE, Security, FinOps, ML Engineering, and Compliance) to correlate data from diverse tools and sources.</p>
+<ul>
+<li>Cribl Search enables SRE teams to correlate infrastructure telemetry, GPU state, and LLM trace data to investigate performance issues beyond standard metrics like latency.</li>
+<li>For Security, it correlates instrumented application telemetry with network egress data to detect and investigate shadow AI usage and complete AI footprint visibility.</li>
+<li>FinOps teams can investigate GPU and token costs by team, model, and feature with a live investigation surface and historical querying capabilities.</li>
+<li>ML Engineering gains access to the complete historical LLM record, including traces and retrieval documents, beyond the sampled data in evaluation platforms.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-17</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/using-agents-to-run-experiments-while-we-sleep-autoresearch-for-cribl-ai/" target="_blank" rel="noopener">Using agents to run experiments while we sleep: AutoResearch for Cribl AI | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl has introduced AutoResearch, an autonomous research agent designed to iteratively improve machine learning models like <code>cribl-privacy-1.0</code> used in Cribl Guard.</p>
+<ul>
+<li>AutoResearch agents automate the process of experiment design, execution, and analysis, inspired by projects like Karpathy's AutoResearch.</li>
+<li>Initial experiments focused on improving model efficiency, achieving a 23% reduction in model training time and a 60% increase in throughput (kb/s) while maintaining F1 score as a guardrail metric.</li>
+<li>The system prioritizes deterministic steps to free the agent to focus on research, design, and analysis.</li>
+<li>Improvements are designed to benefit customers using Cribl Guard in resource-constrained environments by delivering smaller, faster, and stronger models for sensitive data detection.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-16</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/effective-ai-observability-is-a-telemetry-problem-not-a-tool-problem/" target="_blank" rel="noopener">Effective AI observability is a telemetry problem, not a tool problem. | Cribl</a></h3>
+    
+    <div class="summary"><p>Effective AI observability isn't solved by more tools, but by addressing underlying telemetry issues.</p>
+<ul>
+<li>Cribl products (Stream, Lake, Search, and Edge) aim to provide a complete view of AI observability across LLM applications, GPU infrastructure, and shadow AI activity.</li>
+<li>The core claim is that current observability solutions provide partial views, lacking the ability to correlate data across different tools and sources, leading to incomplete insights.</li>
+<li>Cribl Stream and Edge facilitate data ingestion, normalization, and routing from sources like OTel, Prometheus, and network egress logs (CASB, DLP, NGFW).</li>
+<li>Cribl Search offers a unified investigation surface with both a lakehouse engine for centralized data and a federated engine to query data in existing silos (Datadog, Splunk, etc.) without data movement.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -100,23 +168,6 @@
 <li>AI excels at mapping raw telemetry to standard schemas like OCSF, accelerating onboarding, but human validation is crucial to ensure accurate data translation and prevent subtle errors impacting detections.</li>
 <li>While AI can discover sensitive data needing masking or redaction, policy decisions regarding these actions should remain with human owners, considering legal, privacy, and compliance requirements.</li>
 <li>AI can draft data pipeline configurations and troubleshoot issues, but a human preview, testing, and approval process is necessary before deploying changes to production environments to maintain data integrity.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-06-16</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/effective-ai-observability-is-a-telemetry-problem-not-a-tool-problem/" target="_blank" rel="noopener">Effective AI observability is a telemetry problem, not a tool problem. | Cribl</a></h3>
-    
-    <div class="summary"><p>Effective AI observability is a telemetry problem, not a tool problem, and existing tools provide only partial views.</p>
-<ul>
-<li>Cribl Stream and Edge provide the infrastructure layer for collecting, normalizing, and routing AI telemetry from sources like OpenTelemetry (OTLP), vLLM/Triton, DCGM, CASB, DLP, and NGFW.</li>
-<li>Cribl Lake offers full-fidelity retention of LLM and GPU telemetry at object-storage costs, storing prompts, completions, and hardware metrics.</li>
-<li>Cribl Search provides a unified investigation surface with a lakehouse engine for centralized data and a federated engine to query data in-place across existing silos (Datadog, Splunk, etc.) without data movement.</li>
-<li>The platform addresses three dimensions of AI observability: LLM applications, GPU infrastructure, and shadow AI activity by correlating instrumented telemetry with network egress data.</li>
 </ul></div>
     
   </div>
@@ -546,57 +597,6 @@
 <li>Cribl offers an internal career development program enabling employees to rotate teams and broaden their skillsets.</li>
 <li>The company emphasizes “Culture on Purpose,” embedding values into hiring, development, and recognition processes.</li>
 <li>The post highlights Cribl’s commitment to diversity and inclusion, referencing the Black Leaders at Cribl (BL@C) employee resource group.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-06</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/managing-data-lake-data/" target="_blank" rel="noopener">Managing data lake data: best practices for scalability and efficiency | Cribl</a></h3>
-    
-    <div class="summary"><p>Managing data lake data effectively is a control problem, not just a storage problem, and Cribl addresses this by focusing on upstream control of data <em>before</em> it lands in the lake. Key techniques for scalable data lake management include:</p>
-<ul>
-<li><strong>Ingestion Control:</strong> Filtering low-value data, enriching records, masking sensitive information, and strategic routing at ingestion with <strong>Cribl Stream</strong> to reduce storage costs and improve downstream performance.</li>
-<li><strong>Zonal Architecture:</strong> Organizing data into layers based on refinement level to maintain lineage and enforce quality stages.</li>
-<li><strong>Metadata-First Governance:</strong> Creating and maintaining comprehensive metadata (data catalog, lineage tracking, access control) <em>at ingestion</em> to ensure data discoverability and trust.</li>
-<li><strong>Lifecycle Management:</strong> Implementing tiered storage, retention policies, and automated archival/deletion to control costs over time. <strong>Cribl Lake</strong> provides flexible, schema-on-read storage for investigation and analytics.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-05</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/the-ai-readiness-gap-new-hbr-report-reveals-why-infrastructure-is-the-real-bottleneck/" target="_blank" rel="noopener">The AI readiness gap: New HBR report reveals why infrastructure is the real bottleneck | Cribl</a></h3>
-    
-    <div class="summary"><p>A new Harvard Business Review report, commissioned by Cribl, highlights a significant gap between AI ambition and infrastructure readiness, with 96% of leaders viewing agentic AI as critical but only 23% feeling prepared.</p>
-<ul>
-<li>Telemetry volumes are surging due to AI adoption, exceeding budget expectations and creating infrastructure bottlenecks.</li>
-<li>The report identifies three key problems: increasing telemetry volume, unexpected infrastructure costs (82% expect a financial hit), and difficulty proving AI ROI due to inadequate telemetry.</li>
-<li>Cribl advocates for treating telemetry as a first-class workload with control (routing, filtering), context (semantic understanding), and choice (open, interoperable architectures).</li>
-<li>The research emphasizes the need to move beyond viewing telemetry as solely a forensic tool and recognize its critical role as fuel for predictive modeling and AI-driven decision-making.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-04</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/ai-doesnt-fail-because-its-not-smart-enough-it-fails-because-it-cant-see/" target="_blank" rel="noopener">AI doesn&#39;t fail because it&#39;s not smart enough. It fails because it can&#39;t see. | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl highlights a critical failure point in AI deployments: lack of access to real-time, complete data.</p>
-<ul>
-<li>AI failures aren’t due to insufficient intelligence, but to operating on stale or incomplete data, leading to confidently incorrect decisions.</li>
-<li>Traditional security approaches like sandboxing only control <em>what</em> agents do, not <em>what</em> they see, failing to address the root “access” problem.</li>
-<li>Multi-agent systems amplify this issue, as flawed outputs from one agent become trusted inputs for others, causing cascading failures.</li>
-<li>Cribl advocates prioritizing data access and consistency – ensuring agents operate on a “single version of reality” – before focusing on model improvements or governance.</li>
 </ul></div>
     
   </div>

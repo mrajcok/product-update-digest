@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-17 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-06-19 06:05 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -107,16 +107,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-06-16</span>
+      <span> · 2026-06-18</span>
     </div>
-    <h2><a href="https://cribl.io/blog/5-security-data-decisions-ai-should-assist-not-own/" target="_blank" rel="noopener">5 security data decisions AI should assist, not own | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/how-to-build-an-ai-telemetry-architecture-that-serves-five-teams-without-duplicate-collection/" target="_blank" rel="noopener">How to build an AI telemetry architecture that serves five teams without duplicate collection | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl details a strategy for integrating AI into security data operations, emphasizing human oversight in critical decision-making processes.</p>
+    <div class="summary"><p>Cribl introduces an architecture for AI telemetry that enables a single collection pass for multiple teams, avoiding redundant data collection and associated costs.</p>
 <ul>
-<li>AI can effectively identify opportunities to reduce data volume, but human review should be required before implementing any data filtering to prevent the loss of crucial forensic information.</li>
-<li>AI excels at mapping raw telemetry to standard schemas like OCSF, accelerating onboarding, but human validation is crucial to ensure accurate data translation and prevent subtle errors impacting detections.</li>
-<li>While AI can discover sensitive data needing masking or redaction, policy decisions regarding these actions should remain with human owners, considering legal, privacy, and compliance requirements.</li>
-<li>AI can draft data pipeline configurations and troubleshoot issues, but a human preview, testing, and approval process is necessary before deploying changes to production environments to maintain data integrity.</li>
+<li>The architecture normalizes heterogeneous schemas from sources like OpenTelemetry GenAI and GPU metrics (DCGM, vLLM, Triton, TensorRT-LLM) into a consistent internal schema.</li>
+<li>Cribl Stream and Edge are utilized for ingestion: Stream handles OTLP and API sources, while Edge handles on-premises GPU clusters with local data redaction and enrichment.</li>
+<li>In-flight policy features include PII redaction, workload enrichment (attaching metadata like team and model version to GPU metrics), and cost metric derivation (calculating per-request costs).</li>
+<li>Data is routed to various destinations (SRE/APM, Security/SIEM, FinOps, Eval platforms, Cribl Lake) at the appropriate fidelity and cost tier, with unified querying across all destinations provided by Cribl Search’s lakehouse and federated engines.</li>
 </ul></div>
     
   </div>
@@ -125,16 +125,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-06-16</span>
+      <span> · 2026-06-17</span>
     </div>
-    <h2><a href="https://cribl.io/blog/effective-ai-observability-is-a-telemetry-problem-not-a-tool-problem/" target="_blank" rel="noopener">Effective AI observability is a telemetry problem, not a tool problem. | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/one-ai-stack-five-teams-zero-compromise/" target="_blank" rel="noopener">One AI stack. Five teams. Zero compromise. | Cribl</a></h2>
     
-    <div class="summary"><p>Effective AI observability is a telemetry problem, not a tool problem, and existing tools provide only partial views.</p>
+    <div class="summary"><p>Cribl Search introduces a unified investigation surface for complete AI observability, allowing different teams (SRE, Security, FinOps, ML Engineering, and Compliance) to correlate data from diverse tools and sources.</p>
 <ul>
-<li>Cribl Stream and Edge provide the infrastructure layer for collecting, normalizing, and routing AI telemetry from sources like OpenTelemetry (OTLP), vLLM/Triton, DCGM, CASB, DLP, and NGFW.</li>
-<li>Cribl Lake offers full-fidelity retention of LLM and GPU telemetry at object-storage costs, storing prompts, completions, and hardware metrics.</li>
-<li>Cribl Search provides a unified investigation surface with a lakehouse engine for centralized data and a federated engine to query data in-place across existing silos (Datadog, Splunk, etc.) without data movement.</li>
-<li>The platform addresses three dimensions of AI observability: LLM applications, GPU infrastructure, and shadow AI activity by correlating instrumented telemetry with network egress data.</li>
+<li>Cribl Search enables SRE teams to correlate infrastructure telemetry, GPU state, and LLM trace data to investigate performance issues beyond standard metrics like latency.</li>
+<li>For Security, it correlates instrumented application telemetry with network egress data to detect and investigate shadow AI usage and complete AI footprint visibility.</li>
+<li>FinOps teams can investigate GPU and token costs by team, model, and feature with a live investigation surface and historical querying capabilities.</li>
+<li>ML Engineering gains access to the complete historical LLM record, including traces and retrieval documents, beyond the sampled data in evaluation platforms.</li>
 </ul></div>
     
   </div>
@@ -143,16 +143,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-06-11</span>
+      <span> · 2026-06-17</span>
     </div>
-    <h2><a href="https://cribl.io/blog/why-siem-migrations-fail-and-how-to-break-the-cycle/" target="_blank" rel="noopener">Why SIEM migrations fail and how to break the cycle | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/using-agents-to-run-experiments-while-we-sleep-autoresearch-for-cribl-ai/" target="_blank" rel="noopener">Using agents to run experiments while we sleep: AutoResearch for Cribl AI | Cribl</a></h2>
     
-    <div class="summary"><p>SIEM migrations frequently fail due to organizational, contractual, and structural issues – not the technology itself.</p>
+    <div class="summary"><p>Cribl has introduced AutoResearch, an autonomous research agent designed to iteratively improve machine learning models like <code>cribl-privacy-1.0</code> used in Cribl Guard.</p>
 <ul>
-<li>Vendor lock-in is common via proprietary data collection, retention formats, and restrictive contracts with auto-renewal clauses and data egress fees.</li>
-<li>Teams often lack experience migrating SIEMs and struggle to quickly gain proficiency in new platforms while maintaining existing security coverage.</li>
-<li>Security programs often become overly dependent on the SIEM vendor, tying detection logic and workflows to a specific platform.</li>
-<li>Migrations routinely take longer than planned due to underestimated effort, competing priorities and the need to rebuild (not migrate) content/rules.</li>
+<li>AutoResearch agents automate the process of experiment design, execution, and analysis, inspired by projects like Karpathy's AutoResearch.</li>
+<li>Initial experiments focused on improving model efficiency, achieving a 23% reduction in model training time and a 60% increase in throughput (kb/s) while maintaining F1 score as a guardrail metric.</li>
+<li>The system prioritizes deterministic steps to free the agent to focus on research, design, and analysis.</li>
+<li>Improvements are designed to benefit customers using Cribl Guard in resource-constrained environments by delivering smaller, faster, and stronger models for sensitive data detection.</li>
 </ul></div>
     
   </div>
@@ -215,6 +215,23 @@
     <div class="meta">
       <a href="xsiam/" class="badge badge-xsiam">XSIAM</a>
       <span>blog</span>
+      <span> · 2026-06-17</span>
+    </div>
+    <h2><a href="https://www.paloaltonetworks.com/blog/security-operations/cyberthreats-in-google-workspace-and-their-detection/" target="_blank" rel="noopener">Cortex ITDR: Detecting Cyber threats in Google Workspace - Palo Alto Networks Blog</a></h2>
+    
+    <div class="summary"><ul>
+<li>Palo Alto Networks Cortex XSIAM now features Identity Threat Detection and Response (ITDR) capabilities for Google Workspace, addressing the increasing shift of attacks targeting the SaaS identity layer.</li>
+<li>The platform detects attacks leveraging “living off the land” techniques—such as OAuth consent phishing, credential harvesting via the Drive API (using tools like GD-Thief), and abuse of legitimate features—that bypass traditional security controls.</li>
+<li>Cortex XSIAM establishes behavioral baselines for users and entities within Google Workspace, identifying deviations from normal activity (e.g., unauthorized app access, unusual file access patterns) and correlating multiple signals into high-severity incidents.</li>
+<li>Specific alerts are mapped to MITRE ATT&amp;CK techniques, covering areas like domain policy modification, credential access, data exfiltration, and impairment of defenses, offering comprehensive threat coverage within Google Workspace.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="xsiam/" class="badge badge-xsiam">XSIAM</a>
+      <span>blog</span>
       <span> · 2026-06-11</span>
     </div>
     <h2><a href="https://www.paloaltonetworks.com/blog/security-operations/cortex-frontier-ai/" target="_blank" rel="noopener">The Frontier AI SOC Has Arrived - Palo Alto Networks Blog</a></h2>
@@ -242,24 +259,6 @@
 <li>Cortex XSIAM leverages this data with over 13,000 detectors, including 2,900 ML models, providing precise detection specifically for Palo Alto Networks environments.</li>
 <li>The platform uses deep protocol parsing (e.g., JA3 fingerprints &amp; HTTP user-agents) to expose stealthy lateral movement and C2 activity hidden within trusted applications.</li>
 <li>Customers can expect up to 40% more insights from network logs, 20-30% lower firewall data ingestion costs, and a 257% ROI with Cortex XSIAM.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="xsiam/" class="badge badge-xsiam">XSIAM</a>
-      <span>blog</span>
-      <span> · 2026-05-19</span>
-    </div>
-    <h2><a href="https://www.paloaltonetworks.com/blog/security-operations/whats-new-in-cortex-may-26/" target="_blank" rel="noopener">What’s New in Cortex (May ‘26) - Palo Alto Networks Blog</a></h2>
-    
-    <div class="summary"><p>Cortex May ‘26 release focuses on enhancing security operations with AI-driven automation and improved identity-aware response capabilities.</p>
-<ul>
-<li><strong>Cortex XSIAM 3.5</strong> introduces Agentic Response for automated threat investigation and response, Autonomous Playbooks for real-time threat remediation, and integration with Idira Endpoint Privilege Manager for privilege-aware response.</li>
-<li><strong>Cortex XDR 5.1</strong> enhances file integrity monitoring via built-in FIM, adds Kernel Monitoring Defense for macOS and expanded Java Malware Protection, and introduces an Email Investigation Agent to streamline email security triage.</li>
-<li><strong>Cortex Exposure Management</strong> gains Issue SLAs and Exceptions for remediation governance, a Vulnerability Ingestion API for third-party scanner data, and expanded CIS Benchmark Scanning to Windows hosts.</li>
-<li><strong>Cortex Xpanse 2.12</strong> provides Alerts for Attack Surface Test (AST) results for faster validation and expanded AI Infrastructure Coverage with new rules for platforms like OpenClaw and Hugging Face.</li>
 </ul></div>
     
   </div>
