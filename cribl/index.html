@@ -79,7 +79,7 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-19 06:05 AM EDT</p>
+  <p class="generated-at">Generated 2026-06-23 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
@@ -90,16 +90,33 @@
   <div class="card">
     <div class="meta">
       <span>blog</span>
+      <span> · 2026-06-22</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/the-christof-meme-is-right-how-vendors-are-directing-your-data-strategy/" target="_blank" rel="noopener">The Christof meme is right: How vendors are directing your data strategy | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl highlights a growing trend of vendors attempting to lock customers into their ecosystems by controlling data access.</p>
+<ul>
+<li>The blog post draws a parallel between vendor data control strategies and the movie <em>The Truman Show</em>, suggesting limited customer choice and engineered narratives.</li>
+<li>Cribl positions itself as a solution to regain data control, enabling a best-of-breed approach with multiple tools.</li>
+<li>The post promotes Cribl’s products – Cribl Stream, Cribl Edge, Cribl Lake, and Cribl Search – as components of a Telemetry Data Management Strategy.</li>
+<li>Free Cribl Cloud instances and downloadable “bits” are available for testing and implementation.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
       <span> · 2026-06-18</span>
     </div>
     <h3><a href="https://cribl.io/blog/how-to-build-an-ai-telemetry-architecture-that-serves-five-teams-without-duplicate-collection/" target="_blank" rel="noopener">How to build an AI telemetry architecture that serves five teams without duplicate collection | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl introduces an architecture for AI telemetry that enables a single collection pass for multiple teams, avoiding redundant data collection and associated costs.</p>
+    <div class="summary"><p>Cribl introduces an architecture for AI telemetry that aims to solve challenges with disparate data collection and schema inconsistencies across multiple teams.</p>
 <ul>
-<li>The architecture normalizes heterogeneous schemas from sources like OpenTelemetry GenAI and GPU metrics (DCGM, vLLM, Triton, TensorRT-LLM) into a consistent internal schema.</li>
-<li>Cribl Stream and Edge are utilized for ingestion: Stream handles OTLP and API sources, while Edge handles on-premises GPU clusters with local data redaction and enrichment.</li>
+<li>The architecture focuses on collecting AI telemetry once, normalizing it across various schemas (including OpenTelemetry GenAI and GPU metrics from DCGM, vLLM, Triton, and TensorRT-LLM), and routing it to different consumers based on their needs.</li>
+<li>Cribl Stream and Edge are used for ingestion: Stream natively receives OTLP spans, while Edge facilitates collection from on-premises GPU clusters and enforces redaction/enrichment.</li>
 <li>In-flight policy features include PII redaction, workload enrichment (attaching metadata like team and model version to GPU metrics), and cost metric derivation (calculating per-request costs).</li>
-<li>Data is routed to various destinations (SRE/APM, Security/SIEM, FinOps, Eval platforms, Cribl Lake) at the appropriate fidelity and cost tier, with unified querying across all destinations provided by Cribl Search’s lakehouse and federated engines.</li>
+<li>Cribl Search provides a unified investigation surface via a lakehouse engine (for fast access) and a federated engine (for querying data in place across various destinations like Cribl Lake, S3, and tools like Datadog/Splunk.)</li>
 </ul></div>
     
   </div>
@@ -580,23 +597,6 @@
 <li>Cribl highlights the benefits of lightweight collectors (like Cribl Edge) for normalization at the source, particularly in Kubernetes and multi-region environments, reducing bandwidth and costs.</li>
 <li>Centralized logging is positioned as a cost-control strategy; routing high-value data to SIEMs, tiering storage, and filtering low-value logs with Cribl as a vendor-neutral processing layer.</li>
 <li>The guide covers architecture and best practices for collection, parsing (into JSON), high availability, multi-region deployments, compliance, and optimizing log routing/storage.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-06</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/community-catalyst-from-customer-success-to-community-impact/" target="_blank" rel="noopener">Community catalyst: From customer success to community impact | Cribl</a></h3>
-    
-    <div class="summary"><p>This blog post details Cribl’s investment in and intentional development of company culture, focusing on the creation of a new “Community Impact Program Manager” role.</p>
-<ul>
-<li>The role was created to scale community building efforts both internally and externally, connecting employees with customers and the wider tech community.</li>
-<li>Cribl offers an internal career development program enabling employees to rotate teams and broaden their skillsets.</li>
-<li>The company emphasizes “Culture on Purpose,” embedding values into hiring, development, and recognition processes.</li>
-<li>The post highlights Cribl’s commitment to diversity and inclusion, referencing the Black Leaders at Cribl (BL@C) employee resource group.</li>
 </ul></div>
     
   </div>

@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-19 06:05 AM EDT</p>
+  <p class="generated-at">Generated 2026-06-23 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -107,16 +107,34 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
+      <span> · 2026-06-22</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/the-christof-meme-is-right-how-vendors-are-directing-your-data-strategy/" target="_blank" rel="noopener">The Christof meme is right: How vendors are directing your data strategy | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl highlights a growing trend of vendors attempting to lock customers into their ecosystems by controlling data access.</p>
+<ul>
+<li>The blog post draws a parallel between vendor data control strategies and the movie <em>The Truman Show</em>, suggesting limited customer choice and engineered narratives.</li>
+<li>Cribl positions itself as a solution to regain data control, enabling a best-of-breed approach with multiple tools.</li>
+<li>The post promotes Cribl’s products – Cribl Stream, Cribl Edge, Cribl Lake, and Cribl Search – as components of a Telemetry Data Management Strategy.</li>
+<li>Free Cribl Cloud instances and downloadable “bits” are available for testing and implementation.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
       <span> · 2026-06-18</span>
     </div>
     <h2><a href="https://cribl.io/blog/how-to-build-an-ai-telemetry-architecture-that-serves-five-teams-without-duplicate-collection/" target="_blank" rel="noopener">How to build an AI telemetry architecture that serves five teams without duplicate collection | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl introduces an architecture for AI telemetry that enables a single collection pass for multiple teams, avoiding redundant data collection and associated costs.</p>
+    <div class="summary"><p>Cribl introduces an architecture for AI telemetry that aims to solve challenges with disparate data collection and schema inconsistencies across multiple teams.</p>
 <ul>
-<li>The architecture normalizes heterogeneous schemas from sources like OpenTelemetry GenAI and GPU metrics (DCGM, vLLM, Triton, TensorRT-LLM) into a consistent internal schema.</li>
-<li>Cribl Stream and Edge are utilized for ingestion: Stream handles OTLP and API sources, while Edge handles on-premises GPU clusters with local data redaction and enrichment.</li>
+<li>The architecture focuses on collecting AI telemetry once, normalizing it across various schemas (including OpenTelemetry GenAI and GPU metrics from DCGM, vLLM, Triton, and TensorRT-LLM), and routing it to different consumers based on their needs.</li>
+<li>Cribl Stream and Edge are used for ingestion: Stream natively receives OTLP spans, while Edge facilitates collection from on-premises GPU clusters and enforces redaction/enrichment.</li>
 <li>In-flight policy features include PII redaction, workload enrichment (attaching metadata like team and model version to GPU metrics), and cost metric derivation (calculating per-request costs).</li>
-<li>Data is routed to various destinations (SRE/APM, Security/SIEM, FinOps, Eval platforms, Cribl Lake) at the appropriate fidelity and cost tier, with unified querying across all destinations provided by Cribl Search’s lakehouse and federated engines.</li>
+<li>Cribl Search provides a unified investigation surface via a lakehouse engine (for fast access) and a federated engine (for querying data in place across various destinations like Cribl Lake, S3, and tools like Datadog/Splunk.)</li>
 </ul></div>
     
   </div>
@@ -141,18 +159,18 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-06-17</span>
+      <span> · 2026-06-22</span>
     </div>
-    <h2><a href="https://cribl.io/blog/using-agents-to-run-experiments-while-we-sleep-autoresearch-for-cribl-ai/" target="_blank" rel="noopener">Using agents to run experiments while we sleep: AutoResearch for Cribl AI | Cribl</a></h2>
+    <h2><a href="https://ocient.com/blog/the-modal-tax-why-agentic-analytics-breaks-the-best-of-breed-stack/" target="_blank" rel="noopener">The Modal Tax: Why agentic analytics breaks the best-of-breed stack</a></h2>
     
-    <div class="summary"><p>Cribl has introduced AutoResearch, an autonomous research agent designed to iteratively improve machine learning models like <code>cribl-privacy-1.0</code> used in Cribl Guard.</p>
+    <div class="summary"><p>OcientAIQ™ Unified Data Platform aims to eliminate performance and cost issues when using agentic analytics across disparate data systems – a problem they term the "modal tax".</p>
 <ul>
-<li>AutoResearch agents automate the process of experiment design, execution, and analysis, inspired by projects like Karpathy's AutoResearch.</li>
-<li>Initial experiments focused on improving model efficiency, achieving a 23% reduction in model training time and a 60% increase in throughput (kb/s) while maintaining F1 score as a guardrail metric.</li>
-<li>The system prioritizes deterministic steps to free the agent to focus on research, design, and analysis.</li>
-<li>Improvements are designed to benefit customers using Cribl Guard in resource-constrained environments by delivering smaller, faster, and stronger models for sensitive data detection.</li>
+<li>OcientAIQ™ provides a single engine to run relational, geospatial, ML (via OcientML™), graph, vector, and real-time analytics, eliminating the need for agents to hop between different systems and incurring associated costs.</li>
+<li>The “modal tax” manifests as a token cost (context window size for LLMs), an accuracy tax (loss of context during data transfer), and a latency tax (serialization and network overhead).</li>
+<li>OcientAIQ™’s Compute Adjacent Storage Architecture™ (CASA) utilizes local NVMe to serve both reads and writes, enabling fast access and reducing the need for data movement.</li>
+<li>Pricing is fixed per-core and capacity-based, which encourages exploratory behavior from agents without incurring per-action costs, and platform documentation is available at docs.ocient.com.</li>
 </ul></div>
     
   </div>
@@ -189,24 +207,6 @@
 <li>The platform stores full-fidelity telemetry for 12-24 months, enabling sub-ten-second queries across large datasets (e.g., 50 billion records) using ANSI SQL, without data movement delays.</li>
 <li>Ocient’s architecture supports the mandate’s required data retention tiers, keeping the entire retained corpus searchable, meeting "Advanced" and "Optimal" maturity model requirements.</li>
 <li>The platform includes an interface compatible with Large Language Models (LLMs) via Model Context Protocol (MCP), allowing AI agents to proactively hunt threats and reconstruct attack timelines across the retained historical data.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-06-11</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/the-hidden-infrastructure-challenge-of-agentic-ai/" target="_blank" rel="noopener">The hidden infrastructure challenge of agentic AI</a></h2>
-    
-    <div class="summary"><p>Ocient addresses the increased infrastructure strain caused by agentic AI systems, which generate significantly more queries than traditional analyst workflows.</p>
-<ul>
-<li>The OcientAIQ™ platform aims to provide a unified data platform for AI, avoiding the need to move data across fragmented systems.</li>
-<li>The core claim is that agentic AI increases query <em>volume</em>, not just complexity, often exceeding the capacity of existing analytical infrastructure.</li>
-<li>Ocient advocates for consolidating analytical capabilities and applying governance at machine speed to reduce friction and cost.</li>
-<li>The platform focuses on making system costs and resource contention visible, and treating agent workloads as production workloads.</li>
 </ul></div>
     
   </div>
