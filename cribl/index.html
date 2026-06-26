@@ -79,13 +79,63 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-24 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-06-26 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">June 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>press release</span>
+      <span> · 2026-06-25</span>
+    </div>
+    <h3><a href="https://cribl.io/news/cribl-named-a-customers-choice-in-2024-gartner-peer-insights-for-event-stream-processing-report/" target="_blank" rel="noopener">Cribl Named a Customers’ Choice in 2024 Gartner® Peer Insights™ for Event Stream Processing Report | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl was recognized as a Customers’ Choice in the 2024 Gartner Peer Insights ‘Voice of the Customer’ for Event Stream Processing, achieving a 4.6/5 star rating with 77 reviews and a 92% willingness to recommend.</p>
+<ul>
+<li>Cribl Stream, their observability pipeline, is highlighted for its ability to route, reduce, reformat, enrich, or shape data from any source.</li>
+<li>The report acknowledges Cribl Edge, Cribl Search, and Cribl Lake as products designed for IT and security use cases, providing choice and flexibility in data management.</li>
+<li>Customer reviews emphasize cost savings and ease of use compared to competing solutions, requiring less specialized training.</li>
+<li>Cribl reports significant financial growth, exceeding $200 million in ARR with over 70% year-over-year growth and &gt;130% net dollar retention.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-25</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/keep-telemetry-resilient-when-your-infrastructure-cant-keep-up-with-shared-pq-storage/" target="_blank" rel="noopener">Keep telemetry resilient when your infrastructure can&#39;t keep up with shared PQ storage | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>Cribl introduces shared Persistent Queue (PQ) storage using NFS or S3, allowing Worker nodes in a group to access the same queue paths for data recovery if a node fails.</li>
+<li>Orphan management detects and reassigns queue directories from failed Workers to surviving Workers, preventing data loss during worker loss, autoscaling, or infrastructure replacement.</li>
+<li>The Leader node scans shared storage at a configurable interval and, after a defined orphan detection window, assigns orphaned queues to available Workers for draining via a temporary auxiliary process called the PQ Worker.</li>
+<li>Configuration is managed via the UI or API, with options to adjust orphan detection thresholds and disable orphan management during planned downtime; metrics like <code>pq.orphan_detected</code> and <code>pq.queue_size</code> enable observability.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-24</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/build-the-workflow-not-the-infrastructure/" target="_blank" rel="noopener">Build the Workflow, Not the Infrastructure | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl announced the “AI Platform for Telemetry”, shifting focus from bundled observability solutions to a shared telemetry platform.</p>
+<ul>
+<li>The platform prioritizes <em>access</em> to telemetry data regardless of its location, supporting federation across existing observability platforms, SIEMs, and cloud services.</li>
+<li>Cribl is building core telemetry infrastructure services – collection, routing, processing, governance, storage, search, access, and federation – as a foundation for custom applications.</li>
+<li>The architecture differentiates itself from “solution platforms” by treating telemetry as the persistent asset, enabling diverse experiences built by Cribl, customers, partners, and AI tools.</li>
+<li>The goal is to enable rapid customization of workflows for security incident investigation, operational troubleshooting, and building industry-specific solutions without requiring a new telemetry stack each time.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -111,12 +161,12 @@
     </div>
     <h3><a href="https://cribl.io/blog/the-christof-meme-is-right-how-vendors-are-directing-your-data-strategy/" target="_blank" rel="noopener">The Christof meme is right: How vendors are directing your data strategy | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl highlights a growing trend of vendors attempting to lock customers into their ecosystems by controlling data access.</p>
+    <div class="summary"><p>Cribl argues that vendors are strategically limiting customer data control to maintain ecosystem lock-in.</p>
 <ul>
-<li>The blog post draws a parallel between vendor data control strategies and the movie <em>The Truman Show</em>, suggesting limited customer choice and engineered narratives.</li>
-<li>Cribl positions itself as a solution to regain data control, enabling a best-of-breed approach with multiple tools.</li>
-<li>The post promotes Cribl’s products – Cribl Stream, Cribl Edge, Cribl Lake, and Cribl Search – as components of a Telemetry Data Management Strategy.</li>
-<li>Free Cribl Cloud instances and downloadable “bits” are available for testing and implementation.</li>
+<li>The blog post draws a parallel between vendor data control strategies and the film <em>The Truman Show</em>, suggesting vendors restrict data access to keep customers reliant on their platforms.</li>
+<li>Cribl highlights the acquisition of data control solutions (like Bindplane by Dynatrace) by larger ISVs as evidence of this trend.</li>
+<li>The core claim is that vendors actively discourage a “best-of-breed” approach, creating FUD around integrations to reinforce platform dependency.</li>
+<li>Cribl positions its products – Cribl Stream, Cribl Edge, Cribl Lake, and Cribl Search – as a means to regain data control and build a flexible telemetry data management strategy.</li>
 </ul></div>
     
   </div>
@@ -545,57 +595,6 @@
 <li><strong>Cribl Outposts</strong> act as relay nodes, simplifying firewall rules by providing a native control-plane proxy for Edge and Stream within segmented networks.</li>
 <li><strong>Cribl Stream and Lake</strong> enable data tiering, allowing selective routing of "hot" data to security tools, while storing "cold" data in object storage for cost-effective long-term retention and searchability.</li>
 <li>The architecture leverages Edge, Outposts, Stream, and Lake together to respect OT boundaries while centralizing control and enabling querying across hot and cold data tiers using <strong>Cribl Search</strong>.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-15</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/a-different-architecture-for-agentic-telemetry-operations/" target="_blank" rel="noopener">A different architecture for agentic telemetry operations | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl is introducing an architecture for “agentic telemetry operations” built around two core products, Cribl Stream and Cribl Search, to address the challenges of AI accessing fragmented and inconsistent telemetry data.</p>
-<ul>
-<li><strong>Cribl Stream</strong> functions as a collection, transformation, routing, and governance layer for telemetry data from any source to any destination, normalizing schemas and enforcing governance policies in-flight, and can be deployed with <strong>Cribl Edge</strong> for source-side processing.</li>
-<li><strong>Cribl Search</strong> provides a unified query surface with two engines: a <strong>Lakehouse Engine</strong> for indexed data and a <strong>Federated Engine</strong> for querying data in its original location, offering schema normalization at query time for OCSF, OTLP, ECS, and custom formats.</li>
-<li>The architecture differentiates itself from competitors by prioritizing data retention in existing locations and querying data where it lives rather than requiring data centralization before analysis.</li>
-<li>Cribl emphasizes integration with partner solutions like CrowdStrike, Palo Alto Networks (Cortex XSIAM), Tailscale + Okta, and Wiz to address gaps in agent identity, governance, and cloud posture.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-08</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/building-a-security-data-lake/" target="_blank" rel="noopener">Building a Security Data Lake | Cribl</a></h3>
-    
-    <div class="summary"><p>Building a Security Data Lake: This article details building a secure data lake to address the challenges of scaling security telemetry beyond traditional SIEM limitations, focusing on cost-effective retention and improved investigation capabilities.</p>
-<ul>
-<li><strong>Cribl Stream</strong> is highlighted as a vendor-neutral pipeline for transforming and routing telemetry before storage.</li>
-<li>A secure data lake combines low-cost object storage with governance, access controls, encryption, and scalable analytics, supporting frameworks like <strong>Open Cybersecurity Schema Framework (OCSF)</strong> and <strong>Elastic Common Schema (ECS)</strong> for interoperability.</li>
-<li>The article emphasizes defense-in-depth security, covering encryption, identity management (SSO, MFA, RBAC), network segmentation, and immutable audit trails.</li>
-<li>Data governance is crucial, including data cataloging, automated classification, lineage tracking, and policy enforcement to prevent data swamps.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-07</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/telemetry-is-the-hardest-case-of-the-ai-access-problem/" target="_blank" rel="noopener">Telemetry is the hardest case of the AI access problem  | Cribl</a></h3>
-    
-    <div class="summary"><p>Telemetry presents a unique challenge for AI due to its fragmented, high-volume, and schema-inconsistent nature across diverse sources like SIEMs, APM platforms, and cloud providers.</p>
-<ul>
-<li>Cribl argues that AI failures in telemetry stem from limited <em>access</em> to data, not necessarily model limitations.</li>
-<li>The post contrasts two approaches for AI accessing telemetry: direct integration with each system (Option A) versus querying a centralized, normalized layer (Option B), advocating for Option B.</li>
-<li>Cribl proposes an "AI-first architecture" focused on federated, governed, and normalized data access <em>at query time</em> to avoid data movement and maintain auditability.</li>
-<li>The article positions Cribl as a platform enabling this architecture—providing a single query layer for telemetry from all sources—and details benefits such as policy enforcement and reduced integration complexity for new agents.</li>
 </ul></div>
     
   </div>

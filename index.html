@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-24 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-06-26 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -106,17 +106,17 @@
   <div class="card">
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-06-23</span>
+      <span>press release</span>
+      <span> · 2026-06-25</span>
     </div>
-    <h2><a href="https://cribl.io/blog/cribl-telemetry-gatherers/" target="_blank" rel="noopener">Cribl: Telemetry Gatherers | Cribl</a></h2>
+    <h2><a href="https://cribl.io/news/cribl-named-a-customers-choice-in-2024-gartner-peer-insights-for-event-stream-processing-report/" target="_blank" rel="noopener">Cribl Named a Customers’ Choice in 2024 Gartner® Peer Insights™ for Event Stream Processing Report | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl has created a playable set of Magic: The Gathering cards using Cribl products as artifacts, lands, and enchantments to creatively teach concepts about the platform.</p>
+    <div class="summary"><p>Cribl was recognized as a Customers’ Choice in the 2024 Gartner Peer Insights ‘Voice of the Customer’ for Event Stream Processing, achieving a 4.6/5 star rating with 77 reviews and a 92% willingness to recommend.</p>
 <ul>
-<li>A “Gemini gem” was developed by an engineer to streamline the creation of card mechanics based on simple prompts, accelerating card development.</li>
-<li>The cards represent Cribl products and concepts like pipelines, replay, and telemetry, with cards such as "Cribl Edge," "Cribl Stream", "Cribl Lake", and "Telemetry Titan."</li>
-<li>Cards mechanics such as "Route" (splitting power among players) are used to demonstrate Cribl capabilities.</li>
-<li>These cards will be distributed at conferences including CriblConnects and CRIBLCONNNNNN.</li>
+<li>Cribl Stream, their observability pipeline, is highlighted for its ability to route, reduce, reformat, enrich, or shape data from any source.</li>
+<li>The report acknowledges Cribl Edge, Cribl Search, and Cribl Lake as products designed for IT and security use cases, providing choice and flexibility in data management.</li>
+<li>Customer reviews emphasize cost savings and ease of use compared to competing solutions, requiring less specialized training.</li>
+<li>Cribl reports significant financial growth, exceeding $200 million in ARR with over 70% year-over-year growth and &gt;130% net dollar retention.</li>
 </ul></div>
     
   </div>
@@ -125,16 +125,15 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-06-22</span>
+      <span> · 2026-06-25</span>
     </div>
-    <h2><a href="https://cribl.io/blog/the-christof-meme-is-right-how-vendors-are-directing-your-data-strategy/" target="_blank" rel="noopener">The Christof meme is right: How vendors are directing your data strategy | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/keep-telemetry-resilient-when-your-infrastructure-cant-keep-up-with-shared-pq-storage/" target="_blank" rel="noopener">Keep telemetry resilient when your infrastructure can&#39;t keep up with shared PQ storage | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl highlights a growing trend of vendors attempting to lock customers into their ecosystems by controlling data access.</p>
-<ul>
-<li>The blog post draws a parallel between vendor data control strategies and the movie <em>The Truman Show</em>, suggesting limited customer choice and engineered narratives.</li>
-<li>Cribl positions itself as a solution to regain data control, enabling a best-of-breed approach with multiple tools.</li>
-<li>The post promotes Cribl’s products – Cribl Stream, Cribl Edge, Cribl Lake, and Cribl Search – as components of a Telemetry Data Management Strategy.</li>
-<li>Free Cribl Cloud instances and downloadable “bits” are available for testing and implementation.</li>
+    <div class="summary"><ul>
+<li>Cribl introduces shared Persistent Queue (PQ) storage using NFS or S3, allowing Worker nodes in a group to access the same queue paths for data recovery if a node fails.</li>
+<li>Orphan management detects and reassigns queue directories from failed Workers to surviving Workers, preventing data loss during worker loss, autoscaling, or infrastructure replacement.</li>
+<li>The Leader node scans shared storage at a configurable interval and, after a defined orphan detection window, assigns orphaned queues to available Workers for draining via a temporary auxiliary process called the PQ Worker.</li>
+<li>Configuration is managed via the UI or API, with options to adjust orphan detection thresholds and disable orphan management during planned downtime; metrics like <code>pq.orphan_detected</code> and <code>pq.queue_size</code> enable observability.</li>
 </ul></div>
     
   </div>
@@ -143,16 +142,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-06-18</span>
+      <span> · 2026-06-24</span>
     </div>
-    <h2><a href="https://cribl.io/blog/how-to-build-an-ai-telemetry-architecture-that-serves-five-teams-without-duplicate-collection/" target="_blank" rel="noopener">How to build an AI telemetry architecture that serves five teams without duplicate collection | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/build-the-workflow-not-the-infrastructure/" target="_blank" rel="noopener">Build the Workflow, Not the Infrastructure | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl introduces an architecture for AI telemetry that aims to solve challenges with disparate data collection and schema inconsistencies across multiple teams.</p>
+    <div class="summary"><p>Cribl announced the “AI Platform for Telemetry”, shifting focus from bundled observability solutions to a shared telemetry platform.</p>
 <ul>
-<li>The architecture focuses on collecting AI telemetry once, normalizing it across various schemas (including OpenTelemetry GenAI and GPU metrics from DCGM, vLLM, Triton, and TensorRT-LLM), and routing it to different consumers based on their needs.</li>
-<li>Cribl Stream and Edge are used for ingestion: Stream natively receives OTLP spans, while Edge facilitates collection from on-premises GPU clusters and enforces redaction/enrichment.</li>
-<li>In-flight policy features include PII redaction, workload enrichment (attaching metadata like team and model version to GPU metrics), and cost metric derivation (calculating per-request costs).</li>
-<li>Cribl Search provides a unified investigation surface via a lakehouse engine (for fast access) and a federated engine (for querying data in place across various destinations like Cribl Lake, S3, and tools like Datadog/Splunk.)</li>
+<li>The platform prioritizes <em>access</em> to telemetry data regardless of its location, supporting federation across existing observability platforms, SIEMs, and cloud services.</li>
+<li>Cribl is building core telemetry infrastructure services – collection, routing, processing, governance, storage, search, access, and federation – as a foundation for custom applications.</li>
+<li>The architecture differentiates itself from “solution platforms” by treating telemetry as the persistent asset, enabling diverse experiences built by Cribl, customers, partners, and AI tools.</li>
+<li>The goal is to enable rapid customization of workflows for security incident investigation, operational troubleshooting, and building industry-specific solutions without requiring a new telemetry stack each time.</li>
 </ul></div>
     
   </div>
