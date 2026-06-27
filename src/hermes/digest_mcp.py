@@ -11,13 +11,17 @@ config.yaml mcp_servers env block).
 from __future__ import annotations
 
 import json
+import logging
 import os
 import sqlite3
 import struct
+import time
 from typing import Optional
 
 import httpx
 from mcp.server.fastmcp import FastMCP
+
+logger = logging.getLogger("digest-mcp")
 
 # ── Configuration from environment ────────────────────────────────────────────
 
@@ -26,23 +30,78 @@ OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 EMBEDDING_MODEL = os.environ.get("OPENROUTER_EMBEDDING_MODEL", "qwen/qwen3-embedding-8b")
 EMBEDDING_DIMS = int(os.environ.get("EMBEDDING_DIMENSIONS", "4096"))
 SCORE_THRESHOLD = float(os.environ.get("SEARCH_SCORE_THRESHOLD", "0.10"))
+# Total embedding attempts before giving up; exponential backoff between tries.
+EMBED_MAX_RETRIES = int(os.environ.get("EMBED_MAX_RETRIES", "5"))
 
 OPENROUTER_BASE = "https://openrouter.ai/api/v1"
+
+# HTTP statuses worth retrying: 429 (rate limited) and transient 5xx upstream errors.
+_RETRYABLE_STATUS = {429, 500, 502, 503, 504}
 
 mcp = FastMCP("digest-search")
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
 
+def _backoff_seconds(resp: Optional[httpx.Response], attempt: int) -> float:
+    """Respect a Retry-After header if present, else exponential backoff (2→30s)."""
+    if resp is not None:
+        retry_after = resp.headers.get("Retry-After")
+        if retry_after:
+            try:
+                return min(float(retry_after), 30.0)
+            except ValueError:
+                pass
+    return min(2.0 * (2 ** (attempt - 1)), 30.0)
+
+
 def _embed(text: str) -> list[float]:
-    """Call OpenRouter embeddings endpoint and return a float list."""
-    resp = httpx.post(
-        f"{OPENROUTER_BASE}/embeddings",
-        headers={"Authorization": f"Bearer {OPENROUTER_API_KEY}"},
-        json={"model": EMBEDDING_MODEL, "input": text},
-        timeout=60,
-    )
-    resp.raise_for_status()
-    return resp.json()["data"][0]["embedding"]
+    """Call OpenRouter embeddings endpoint and return a float list.
+
+    Retries on HTTP 429 / transient 5xx and transport errors with exponential
+    backoff (honoring Retry-After when provided), so a momentary OpenRouter rate
+    limit doesn't fail the whole MCP tool call.
+    """
+    last_exc: Exception | None = None
+    for attempt in range(1, EMBED_MAX_RETRIES + 1):
+        try:
+            resp = httpx.post(
+                f"{OPENROUTER_BASE}/embeddings",
+                headers={"Authorization": f"Bearer {OPENROUTER_API_KEY}"},
+                json={"model": EMBEDDING_MODEL, "input": text},
+                timeout=60,
+            )
+        except httpx.TransportError as exc:
+            # Connection/timeout error — transient, always worth retrying.
+            last_exc = exc
+            if attempt >= EMBED_MAX_RETRIES:
+                break
+            wait = _backoff_seconds(None, attempt)
+            logger.warning(
+                "embeddings transport error (attempt %d/%d): %s — retrying in %.1fs",
+                attempt, EMBED_MAX_RETRIES, exc, wait,
+            )
+            time.sleep(wait)
+            continue
+
+        if resp.status_code in _RETRYABLE_STATUS and attempt < EMBED_MAX_RETRIES:
+            wait = _backoff_seconds(resp, attempt)
+            logger.warning(
+                "embeddings HTTP %d (attempt %d/%d) — retrying in %.1fs",
+                resp.status_code, attempt, EMBED_MAX_RETRIES, wait,
+            )
+            last_exc = httpx.HTTPStatusError(
+                f"HTTP {resp.status_code}", request=resp.request, response=resp
+            )
+            time.sleep(wait)
+            continue
+
+        # Non-retryable status (e.g. 4xx) raises immediately; success returns.
+        resp.raise_for_status()
+        return resp.json()["data"][0]["embedding"]
+
+    raise RuntimeError(
+        f"Embedding request failed after {EMBED_MAX_RETRIES} attempts: {last_exc}"
+    ) from last_exc
 
 
 def _serialize(vec: list[float]) -> bytes:

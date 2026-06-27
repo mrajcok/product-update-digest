@@ -168,8 +168,14 @@ mcp_servers:
       OPENROUTER_EMBEDDING_MODEL: qwen/qwen3-embedding-8b
       EMBEDDING_DIMENSIONS: "4096"
       SEARCH_SCORE_THRESHOLD: "0.10"
+      EMBED_MAX_RETRIES: "5"
       OPENROUTER_API_KEY: "<your OpenRouter key>"
 ```
+
+`EMBED_MAX_RETRIES` (default `5`) is the total number of embedding attempts before
+the tool gives up. The server retries OpenRouter `429` (rate-limit) and transient
+`5xx`/transport errors with exponential backoff (honoring `Retry-After`), so a
+momentary rate limit doesn't fail the whole search/RAG call.
 
 Replace `<your OpenRouter key>` with the same key used in your `.env`.
 Hermes does not automatically forward its own `.env` to MCP subprocesses, so the
