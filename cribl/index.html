@@ -79,13 +79,47 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-26 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-06-30 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">June 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-29</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/dora-without-the-guesswork-turning-fragmented-logs-into-an-evidence-layer/" target="_blank" rel="noopener">DORA Without the Guesswork: Turning Fragmented Logs Into an Evidence Layer | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl’s platform aims to deliver a “DORA without the guesswork” approach by transforming fragmented telemetry into a reusable evidence layer for improved incident response and resilience.</p>
+<ul>
+<li>Cribl Edge collects telemetry from diverse sources, while Cribl Stream centralizes processing, routing, and normalization.</li>
+<li>Cribl Lake provides long-term, open-format storage for evidence-grade telemetry with access controls and retention policies.</li>
+<li>Cribl Search enables analysts and engineers to query data in existing storage locations, and Cribl AI assists in data analysis and narrative construction.</li>
+<li>The platform focuses on a telemetry control plane to manage data flow based on risk, reducing costs by selectively routing data to different tools (SIEM, observability, etc.) and optimizing data retention.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-27</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/ai-incidents-are-decision-failures-your-postmortem-should-reflect-that/" target="_blank" rel="noopener">AI incidents are decision failures. Your postmortem should reflect that. | Cribl</a></h3>
+    
+    <div class="summary"><p>AI incidents are often decision failures, requiring a different postmortem approach than traditional system outages.</p>
+<ul>
+<li>Cribl advocates extending existing postmortem processes to include reconstructing the “decision environment” of AI-driven outcomes, not just focusing on system failures.</li>
+<li>Key questions for AI postmortems include: What information did the AI have (and lack)? How was the decision made? Who was accountable? And what controls failed?</li>
+<li>The blog emphasizes the importance of capturing prompts, instructions, retrieved information, and telemetry available to the AI at decision time.</li>
+<li>A real-world example illustrates how a failure may not be due to the AI being “wrong”, but rather due to lacking necessary context, visibility, and controls.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -561,40 +595,6 @@
 <li>The feature supports Entra ID authentication, customer-managed encryption (via Azure Key Vault), and retention policies managed through Cribl Lake.</li>
 <li>Multiple Azure storage locations can be connected and datasets can be organized by use case, allowing for flexible architecture across regions and teams.</li>
 <li>BYOS for Azure is available to Enterprise customers at a cost of 0.02 credits/GB.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-20</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/whats-new-4-18/" target="_blank" rel="noopener">What’s New blog — Third time’s a charm | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl 4.18 introduces several enhancements focused on AI integration and data management capabilities.</p>
-<ul>
-<li><strong>BYOM Tiered Model Selection:</strong> Customers using Bring Your Own Model (BYOM) can now select AI models based on capability tiers (small, frontier, reasoning) to optimize cost and performance for different workloads.</li>
-<li><strong>Expanded BYOM Providers:</strong>  Cribl AI now supports LiteLLM and OpenAI Retail in addition to existing BYOM options, allowing greater control over AI models and infrastructure.</li>
-<li><strong>Cribl Guard Enhancements:</strong> New model options for background detection (speed vs. depth) are available, and a user-invoked agent provides recommended actions for PII detections, streamlining security workflows.</li>
-<li><strong>Persistent Queue to S3 (Kubernetes):</strong> Persistent Queue can now write data to a central S3 bucket in Kubernetes deployments, improving data durability during outages and scaling events.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-15</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/operational-technology-challenges-meet-cribl-solutions/" target="_blank" rel="noopener">Operational technology challenges? Meet Cribl solutions. | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl provides a solution for collecting and processing data from challenging Operational Technology (OT) environments.</p>
-<ul>
-<li><strong>Cribl Edge</strong> consolidates multiple monitoring agents into a single agent for Windows and Linux, offering local processing and flexible routing options.</li>
-<li><strong>Cribl Outposts</strong> act as relay nodes, simplifying firewall rules by providing a native control-plane proxy for Edge and Stream within segmented networks.</li>
-<li><strong>Cribl Stream and Lake</strong> enable data tiering, allowing selective routing of "hot" data to security tools, while storing "cold" data in object storage for cost-effective long-term retention and searchability.</li>
-<li>The architecture leverages Edge, Outposts, Stream, and Lake together to respect OT boundaries while centralizing control and enabling querying across hot and cold data tiers using <strong>Cribl Search</strong>.</li>
 </ul></div>
     
   </div>

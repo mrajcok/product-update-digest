@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-26 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-06-30 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,42 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-06-29</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/dora-without-the-guesswork-turning-fragmented-logs-into-an-evidence-layer/" target="_blank" rel="noopener">DORA Without the Guesswork: Turning Fragmented Logs Into an Evidence Layer | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl’s platform aims to deliver a “DORA without the guesswork” approach by transforming fragmented telemetry into a reusable evidence layer for improved incident response and resilience.</p>
+<ul>
+<li>Cribl Edge collects telemetry from diverse sources, while Cribl Stream centralizes processing, routing, and normalization.</li>
+<li>Cribl Lake provides long-term, open-format storage for evidence-grade telemetry with access controls and retention policies.</li>
+<li>Cribl Search enables analysts and engineers to query data in existing storage locations, and Cribl AI assists in data analysis and narrative construction.</li>
+<li>The platform focuses on a telemetry control plane to manage data flow based on risk, reducing costs by selectively routing data to different tools (SIEM, observability, etc.) and optimizing data retention.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-06-27</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/ai-incidents-are-decision-failures-your-postmortem-should-reflect-that/" target="_blank" rel="noopener">AI incidents are decision failures. Your postmortem should reflect that. | Cribl</a></h2>
+    
+    <div class="summary"><p>AI incidents are often decision failures, requiring a different postmortem approach than traditional system outages.</p>
+<ul>
+<li>Cribl advocates extending existing postmortem processes to include reconstructing the “decision environment” of AI-driven outcomes, not just focusing on system failures.</li>
+<li>Key questions for AI postmortems include: What information did the AI have (and lack)? How was the decision made? Who was accountable? And what controls failed?</li>
+<li>The blog emphasizes the importance of capturing prompts, instructions, retrieved information, and telemetry available to the AI at decision time.</li>
+<li>A real-world example illustrates how a failure may not be due to the AI being “wrong”, but rather due to lacking necessary context, visibility, and controls.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -117,41 +153,6 @@
 <li>The report acknowledges Cribl Edge, Cribl Search, and Cribl Lake as products designed for IT and security use cases, providing choice and flexibility in data management.</li>
 <li>Customer reviews emphasize cost savings and ease of use compared to competing solutions, requiring less specialized training.</li>
 <li>Cribl reports significant financial growth, exceeding $200 million in ARR with over 70% year-over-year growth and &gt;130% net dollar retention.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-06-25</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/keep-telemetry-resilient-when-your-infrastructure-cant-keep-up-with-shared-pq-storage/" target="_blank" rel="noopener">Keep telemetry resilient when your infrastructure can&#39;t keep up with shared PQ storage | Cribl</a></h2>
-    
-    <div class="summary"><ul>
-<li>Cribl introduces shared Persistent Queue (PQ) storage using NFS or S3, allowing Worker nodes in a group to access the same queue paths for data recovery if a node fails.</li>
-<li>Orphan management detects and reassigns queue directories from failed Workers to surviving Workers, preventing data loss during worker loss, autoscaling, or infrastructure replacement.</li>
-<li>The Leader node scans shared storage at a configurable interval and, after a defined orphan detection window, assigns orphaned queues to available Workers for draining via a temporary auxiliary process called the PQ Worker.</li>
-<li>Configuration is managed via the UI or API, with options to adjust orphan detection thresholds and disable orphan management during planned downtime; metrics like <code>pq.orphan_detected</code> and <code>pq.queue_size</code> enable observability.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-06-24</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/build-the-workflow-not-the-infrastructure/" target="_blank" rel="noopener">Build the Workflow, Not the Infrastructure | Cribl</a></h2>
-    
-    <div class="summary"><p>Cribl announced the “AI Platform for Telemetry”, shifting focus from bundled observability solutions to a shared telemetry platform.</p>
-<ul>
-<li>The platform prioritizes <em>access</em> to telemetry data regardless of its location, supporting federation across existing observability platforms, SIEMs, and cloud services.</li>
-<li>Cribl is building core telemetry infrastructure services – collection, routing, processing, governance, storage, search, access, and federation – as a foundation for custom applications.</li>
-<li>The architecture differentiates itself from “solution platforms” by treating telemetry as the persistent asset, enabling diverse experiences built by Cribl, customers, partners, and AI tools.</li>
-<li>The goal is to enable rapid customization of workflows for security incident investigation, operational troubleshooting, and building industry-specific solutions without requiring a new telemetry stack each time.</li>
 </ul></div>
     
   </div>
