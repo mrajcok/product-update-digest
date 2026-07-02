@@ -79,13 +79,46 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-06-30 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-07-02 06:02 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">June 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-30</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/understanding-siem-costs/" target="_blank" rel="noopener">Understanding SIEM costs in 2026: key factors and pricing models | Cribl</a></h3>
+    
+    <div class="summary"><p>Understanding SIEM costs in 2026: key factors and pricing models. This blog post details the drivers of SIEM expenses beyond licensing, emphasizing the importance of cost optimization.</p>
+<ul>
+<li>Telemetry volume growth (20-30% annually) significantly impacts costs, especially with per-GB pricing models.</li>
+<li>Various SIEM pricing models exist (per-GB, EPS, asset-based, user-based, subscription, managed services), each with trade-offs in predictability, visibility, and control.</li>
+<li>Implementing upstream data management – filtering, normalizing, and routing data <em>before</em> it reaches the SIEM – is crucial for cost control.</li>
+<li>Cribl’s platform is positioned as a solution to reduce unnecessary data volume upstream, thereby addressing a major cost driver in volume-based pricing.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-30</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/your-workflow-shouldnt-have-to-fit-the-software/" target="_blank" rel="noopener">Your workflow shouldn&#39;t have to fit the software | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>Cribl announced “Cribl Apps”, allowing teams to build and run custom applications embedded directly within the Cribl platform without rebuilding data foundations or acquiring additional infrastructure.</li>
+<li>Apps can leverage modern front-end frameworks and access data in Cribl Lake, federated data stores, or directly within Cribl Search.</li>
+<li>The platform offers AI-assisted development, scaffolding, OpenAPI access, and a live preview environment to accelerate app creation, with built-in guardrails for RBAC, access controls, and governance.</li>
+<li>Cribl Apps aim to shift the paradigm from adapting workflows to software limitations to building software that precisely fits the workflow, reducing reliance on vendor-defined tools and improving ROI.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -561,40 +594,6 @@
 <li>Features include versioning, a template gallery for discovery, dynamic variables for initialization, and governance controls for permissions and auditing.</li>
 <li>Templates integrate with existing workflows and offer API support for programmatic management, with future extensibility planned for project and dashboard templates.</li>
 <li>AI tools like Claude or ChatGPT can be used to generate initial template content for workflows like incident timeline analysis or infrastructure checks.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-20</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/new-engine-under-the-hood-cribl-search-v2s-faster-federated-architecture/" target="_blank" rel="noopener">New engine under the hood: Cribl Search v2’s faster federated architecture | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl Search v2 delivers significantly faster search performance against federated data sources.</p>
-<ul>
-<li>The federated search engine has been completely rewritten, achieving 3–5x faster speeds compared to v1.</li>
-<li>v2 supports Amazon S3, Azure Blob, and Cribl Lake datasets, along with Parquet and NDJSON file formats.</li>
-<li>The new architecture utilizes modern, multi-threaded execution to process more data in parallel and reduce data movement.</li>
-<li>Existing Cribl Search users can seamlessly upgrade to v2 without configuration changes; new users benefit from improved speed and cost-efficiency when searching object storage.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-20</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/how-to-search-your-microsoft-azure-data-in-place-no-movement-no-copies-no-compromise/" target="_blank" rel="noopener">How to search your Microsoft Azure data in place. No movement. No copies. No compromise. | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl Lake now supports Bring Your Own Storage (BYOS) for Microsoft Azure, enabling search-in-place functionality for data residing in Azure Blob Storage.</p>
-<ul>
-<li>Cribl Lake BYOS allows querying of Azure Blob Storage directly with Cribl Search via a federated engine, eliminating data movement and associated egress fees.</li>
-<li>The feature supports Entra ID authentication, customer-managed encryption (via Azure Key Vault), and retention policies managed through Cribl Lake.</li>
-<li>Multiple Azure storage locations can be connected and datasets can be organized by use case, allowing for flexible architecture across regions and teams.</li>
-<li>BYOS for Azure is available to Enterprise customers at a cost of 0.02 credits/GB.</li>
 </ul></div>
     
   </div>
