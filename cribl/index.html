@@ -79,13 +79,64 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-03 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-07-08 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">July 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-07</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/building-ai-data-pipelines-a-complete-guide/" target="_blank" rel="noopener">Building AI data pipelines: a complete guide | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>This guide details building AI-ready data pipelines, covering ingestion, transformation, storage, search, governance, and monitoring to deliver clean, trustworthy data to AI models.</li>
+<li>Cribl helps establish a vendor-neutral foundation for telemetry collection, routing, storage, search, and analysis, reducing lock-in and operational drag.</li>
+<li>Key steps involve defining business goals and SLAs, choosing appropriate ingestion (batch vs. streaming/CDC) and storage (warehouse vs. lakehouse) strategies, and designing repeatable data processing architectures.</li>
+<li>Cribl Stream is highlighted as a real-time processing and routing layer that filters, enriches, and routes data, reducing costs without sacrificing visibility, and Cribl Lake provides low-cost, long-retention storage.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-06</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/nobody-should-have-to-babysit-a-dashboard-how-alerting-works-in-cribl-insights/" target="_blank" rel="noopener">Nobody should have to babysit a dashboard: How alerting works in Cribl Insights | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl Insights now features alerting capabilities to proactively notify teams of anomalies without manual dashboard monitoring.</p>
+<ul>
+<li>Alerting is built around three components: Monitors (define “normal” and thresholds), Alerts (record instances when data deviates), and Notifications (deliver alerts to existing team communication channels like Slack, email, or PagerDuty).</li>
+<li>Monitors can be enabled from pre-defined defaults or customized using Cribl metrics and thresholds.</li>
+<li>Alerts are recorded in Insights for historical review, enabling analysis of alert duration and severity.</li>
+<li>Notifications are context-rich, providing details about the triggering event directly within team workflows, reducing noise and ensuring actionable insights.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-06</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/designing-scalable-data-pipeline-architectures-for-the-ai-era/" target="_blank" rel="noopener">Designing scalable data pipeline architectures for the AI era | Cribl</a></h3>
+    
+    <div class="summary"><h2>Designing Scalable Data Pipeline Architectures for the AI Era – Cribl</h2>
+<p>Cribl focuses on providing a shared telemetry control plane for data ingestion, transformation, and routing, enabling scalable data pipeline architectures suitable for the demands of AI-driven workloads.</p>
+<ul>
+<li>Cribl positions itself as architecture-agnostic, functioning within ETL, ELT, Lambda, Kappa, or hybrid environments.</li>
+<li>The article highlights ELT and Kappa architectures as particularly well-suited for scalability, contrasting them with ETL and Lambda patterns.</li>
+<li>Cribl Stream enables in-flight data transformations, filtering, and routing, acting as a central control point for telemetry data flowing to various destinations (vector stores, observability tools, etc.).</li>
+<li>The discussion emphasizes designing pipelines with SLAs, modularity, buffering, observability, and automation to handle the increased pressures of AI-era telemetry.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -546,57 +597,6 @@
 <li>The launch brings Cribl's products – Cribl Stream (observability pipeline), Cribl Edge (intelligent agent), and Cribl Search (search-in-place) – to European customers.</li>
 <li>Matthew Kelly has been appointed SVP of Legal, Security, and IT to lead security and compliance.</li>
 <li>Dr. Grigori Melnik has been appointed SVP of Product to oversee product management and UX.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-26</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/the-ai-soc-and-sre-data-problem-and-why-cribl-is-the-answer/" target="_blank" rel="noopener">The AI SOC and SRE data problem — and why Cribl is the answer | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl positions itself as a solution to data access challenges faced by emerging AI-powered SOC and SRE startups.</p>
-<ul>
-<li>Cribl Search provides federated search capabilities across diverse data sources (cloud, on-premise, hybrid) without central ingestion.</li>
-<li>Its Lakehouse Engine delivers high-performance access to logs, metrics, and events on demand for AI agents.</li>
-<li>Cribl aims to bypass data access limitations imposed by cybersecurity incumbents (CrowdStrike, Palo Alto Networks, Microsoft, Splunk) and their walled garden approaches.</li>
-<li>The announcement centers around facilitating complete, normalized, and context-rich data access for AI agents, which Cribl claims is essential for effective AI SOC/SRE deployments.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>press release</span>
-      <span> · 2026-05-21</span>
-    </div>
-    <h3><a href="https://cribl.io/news/essential-visibility-for-claude-enterprise-cribl-stream-integrates-with-the-claude-compliance-api/" target="_blank" rel="noopener">Essential Visibility for Claude Enterprise: Cribl Stream Integrates with the Claude Compliance API | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl Stream now integrates with Anthropic’s Claude Compliance API to provide visibility into Claude Enterprise usage.</p>
-<ul>
-<li>The integration allows organizations to apply existing security and audit workflows to their Claude Enterprise data.</li>
-<li>Supported capabilities at launch include tracking user activity via an Activity Feed, listing organizations and users, and managing projects.</li>
-<li>The integration supports data management functions such as deleting chats, files, projects, and documents for compliance purposes.</li>
-<li>Additional Claude Compliance API capabilities will be added to Cribl Stream later in the quarter.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-21</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/stop-guessing-what-your-ai-did-using-claude-cowork-telemetry-with-the-claude-compliance-api/" target="_blank" rel="noopener">Stop guessing what your AI did: Using Claude Cowork Telemetry with the Claude Compliance API | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl integrates with Anthropic’s Claude Cowork AI assistant through two new data streams: Claude Cowork OpenTelemetry (OTel) telemetry and the Claude Compliance API. This allows organizations to monitor AI-initiated actions and address security, compliance, and operational needs.</p>
-<ul>
-<li><strong>Claude Cowork OTLP stream:</strong> Provides runtime visibility into assistant activity – tool calls, file access, skill usage, and approval status – using a vendor-neutral OpenTelemetry format.</li>
-<li><strong>Claude Compliance API:</strong>  Offers an audit view of organizational activity, including workspace management, policies, and user memberships.</li>
-<li><strong>Cribl Stream</strong> ingests and processes both data streams, normalizing fields, applying policies (masking, transformation), and routing data to existing SIEM, data lake, or observability tools.</li>
-<li><strong>Cribl Search</strong> enables querying of Claude data alongside other telemetry in object storage, supporting investigations and audit trails.</li>
 </ul></div>
     
   </div>
