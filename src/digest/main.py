@@ -433,7 +433,7 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--category",
-        choices=["blog", "press_release", "product"],
+        choices=["blog", "press_release", "product", "release_notes"],
         help="Filter to one article category (default: all)",
     )
     return parser.parse_args()

@@ -1,11 +1,14 @@
 import logging
+import re
 from datetime import date, datetime, timedelta, timezone
+from urllib.parse import parse_qs, urlparse
 from xml.etree import ElementTree as ET
 
 from bs4 import BeautifulSoup
 
 from digest.config import settings
 from digest.scrapers.base import BaseScraper, Category
+from digest.storage.db import ArticleDB
 from digest.storage.models import ScrapedPage
 
 logger = logging.getLogger(__name__)
@@ -30,6 +33,62 @@ _SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
 _BLOG_BLOCKLIST = ("employee-spotlight",)
 
+# docs.ocient.com serves docs pages as raw Markdown at the ".md" URL variant
+# (Mintlify convention) — no HTML parsing needed. Every release on this page
+# is its own "## X.Y" heading with nothing else on the line, newest first, so
+# splitting on that heading pattern gives one section of text per release.
+_RELEASE_NOTES_URL = "https://docs.ocient.com/ocientaiq-unified-data-platform-release-notes.md"
+_RELEASE_HEADING_RE = re.compile(r"^## (\d+(?:\.\d+)*)\s*$", re.MULTILINE)
+
+# The page defines MDX macros up top ('export const Parquet = "Apache® Parquet™";')
+# and references them inline as "{Parquet}" — left unresolved, these leak into
+# both the LLM summary and the stored/embedded text as literal "{Parquet}".
+_MDX_CONST_RE = re.compile(r'export const (\w+) = "([^"]*)";')
+
+
+def _parse_version(version: str) -> tuple[int, ...]:
+    try:
+        return tuple(int(p) for p in version.split("."))
+    except ValueError:
+        return (0,)
+
+
+def _resolve_mdx_constants(text: str, constants: dict[str, str]) -> str:
+    if not constants:
+        return text
+    return re.sub(r"\{(\w+)\}", lambda m: constants.get(m.group(1), m.group(0)), text)
+
+
+def _clean_markdown_escapes(text: str) -> str:
+    """Strip Mintlify's backslash-escaping of literal _ [ ] characters — noise, not content."""
+    return text.replace("\\_", "_").replace("\\[", "[").replace("\\]", "]")
+
+
+def _parse_release_sections(markdown_text: str) -> dict[str, str]:
+    """Split release-notes markdown into {version: section_text} on '## X.Y' headings."""
+    constants = dict(_MDX_CONST_RE.findall(markdown_text))
+    matches = list(_RELEASE_HEADING_RE.finditer(markdown_text))
+    sections: dict[str, str] = {}
+    for i, m in enumerate(matches):
+        start = m.end()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(markdown_text)
+        section_text = markdown_text[start:end].strip()
+        section_text = _resolve_mdx_constants(section_text, constants)
+        section_text = _clean_markdown_escapes(section_text)
+        sections[m.group(1)] = section_text
+    return sections
+
+
+def _release_url(version: str) -> str:
+    # A query param (not a #fragment) so normalize_url() keeps each release
+    # as a distinct, dedup-able URL — normalize_url() strips fragments.
+    return f"{_RELEASE_NOTES_URL}?release={version}"
+
+
+def _version_from_url(url: str) -> str | None:
+    values = parse_qs(urlparse(url).query).get("release")
+    return values[0] if values else None
+
 
 class OcientScraper(BaseScraper):
     company = "ocient"
@@ -37,10 +96,13 @@ class OcientScraper(BaseScraper):
     def __init__(self) -> None:
         super().__init__()
         self._sitemap_lastmod: dict[str, str] = {}
+        self._release_sections: dict[str, str] = {}
+        self._db: ArticleDB | None = None
 
     sources = [
         f"{_BLOG_SITEMAP_URL} — blog posts",
         f"{_NEWS_SITEMAP_URL} — press releases",
+        f"{_RELEASE_NOTES_URL} — release notes",
         *_PRODUCT_URLS,
     ]
     exclusions = [
@@ -52,6 +114,12 @@ class OcientScraper(BaseScraper):
         "AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/124.0.0.0 Safari/537.36"
     )
+
+    def run(self, db: ArticleDB, limit: int | None = None, category: str | None = None) -> list[ScrapedPage]:
+        # Stash db so discover_urls() (called with no args by BaseScraper.run)
+        # can check which releases have already been scraped and summarized.
+        self._db = db
+        return super().run(db, limit=limit, category=category)
 
     def discover_urls(self) -> list[tuple[str, Category]]:
         cutoff = (datetime.now(timezone.utc) - timedelta(days=settings.max_article_age_days)).date()
@@ -71,7 +139,54 @@ class OcientScraper(BaseScraper):
             if u not in seen:
                 seen.add(u)
                 urls.append((u, "product"))
+        for u, cat in self._discover_release_notes():
+            if u not in seen:
+                seen.add(u)
+                urls.append((u, cat))
         return urls
+
+    def _discover_release_notes(self) -> list[tuple[str, Category]]:
+        """Return (url, category) for each release newer than what's already stored."""
+        try:
+            markdown_text = self._fetch_with_httpx(_RELEASE_NOTES_URL)
+        except Exception:
+            logger.warning("ocient: failed to fetch release notes %s", _RELEASE_NOTES_URL, exc_info=True)
+            return []
+
+        self._release_sections = _parse_release_sections(markdown_text)
+        if not self._release_sections:
+            logger.warning("ocient: no release sections found at %s", _RELEASE_NOTES_URL)
+            return []
+
+        known_versions = self._known_release_versions()
+        if known_versions:
+            latest_known = max(known_versions, key=_parse_version)
+            new_versions = [
+                v for v in self._release_sections
+                if _parse_version(v) > _parse_version(latest_known)
+            ]
+        else:
+            # Nothing recorded yet — bootstrap on just the newest release
+            # instead of backfilling the entire release history at once.
+            latest_known = None
+            new_versions = [max(self._release_sections, key=_parse_version)]
+
+        if not new_versions:
+            logger.debug("ocient: release notes unchanged, latest known is %s", latest_known)
+            return []
+
+        logger.info(
+            "ocient: %d new release(s) found (latest known: %s): %s",
+            len(new_versions), latest_known or "none",
+            ", ".join(sorted(new_versions, key=_parse_version)),
+        )
+        return [(_release_url(v), "release_notes") for v in new_versions]
+
+    def _known_release_versions(self) -> set[str]:
+        if self._db is None:
+            return set()
+        records = self._db.get_all(company="ocient", category="release_notes")
+        return {v for r in records if (v := _version_from_url(r.url)) is not None}
 
     def _urls_from_sitemap(self, sitemap_url: str, cutoff: date | None = None) -> list[str]:
         try:
@@ -111,11 +226,43 @@ class OcientScraper(BaseScraper):
         return urls
 
     def scrape_page(self, url: str, category: Category) -> ScrapedPage | None:
+        if category == "release_notes":
+            return self._scrape_release_note(url)
         try:
             return self._scrape_article(url, category)
         except Exception:
             logger.warning("ocient: failed to scrape %s", url, exc_info=True)
             return None
+
+    def _scrape_release_note(self, url: str) -> ScrapedPage | None:
+        version = _version_from_url(url)
+        if version is None:
+            logger.warning("ocient: malformed release-notes URL %s", url)
+            return None
+
+        text = self._release_sections.get(version)
+        if text is None:
+            # Cache miss — e.g. scrape_page() called without a prior
+            # discover_urls() in this instance. Fetch and re-parse.
+            try:
+                markdown_text = self._fetch_with_httpx(_RELEASE_NOTES_URL)
+            except Exception:
+                logger.warning("ocient: failed to fetch release notes %s", _RELEASE_NOTES_URL, exc_info=True)
+                return None
+            self._release_sections = _parse_release_sections(markdown_text)
+            text = self._release_sections.get(version)
+
+        if text is None:
+            logger.warning("ocient: release %s no longer found on release notes page", version)
+            return None
+
+        return ScrapedPage(
+            url=url,
+            company="ocient",
+            category="release_notes",
+            title=f"OcientAIQ Unified Data Platform Release Notes — {version}",
+            raw_text=text,
+        )
 
     def _scrape_article(self, url: str, category: Category) -> ScrapedPage | None:
         html = self._fetch_page(url)

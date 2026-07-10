@@ -21,6 +21,16 @@ _CATEGORY_INSTRUCTIONS: dict[str, str] = {
         "Focus on what capabilities exist, what's new or highlighted, "
         "and any pricing or availability signals."
     ),
+    "release_notes": (
+        "Focus on what changed in this release: new features, behavior changes, "
+        "deprecations, and version-compatibility notes. Preserve exact SQL statement "
+        "names, function names, and system/catalog object names. The content below is "
+        "raw Markdown from the vendor's docs site, already organized into its own bullet "
+        "points and bold subheadings (e.g. Release Highlights, Features, Version "
+        "Compatibility) — do not describe that structure or refer to its section names. "
+        "Instead extract the individual changes into your own fresh bullet list, one "
+        "bullet per distinct change."
+    ),
 }
 
 _PROMPT = ChatPromptTemplate.from_messages([
@@ -48,7 +58,23 @@ _PROMPT = ChatPromptTemplate.from_messages([
 ])
 
 
-def _length_guidance(char_count: int) -> str:
+def _length_guidance(char_count: int, category: str = "") -> str:
+    """Release notes get roughly double the summary length of blog/press/product content.
+
+    Release notes are inherently an itemized list of discrete changes, so — unlike
+    blog/press/product — they should default to bullets well before the 4000-char
+    mark that triggers bullets for prose content.
+    """
+    if category == "release_notes":
+        if char_count < 300:
+            return "One sentence."
+        if char_count < 800:
+            return "One short lead sentence, then up to 3 bullet points for the key changes. Each bullet must start on its own line with '* '."
+        if char_count < 2000:
+            return "One short lead sentence, then up to 5 bullet points for the key changes. Each bullet must start on its own line with '* '."
+        if char_count < 4000:
+            return "One short lead sentence, then up to 7 bullet points for the key changes. Each bullet must start on its own line with '* '."
+        return "One short lead sentence, then up to 8 bullet points for the key technical details. Each bullet must start on its own line with '* '."
     if char_count < 500:
         return "One sentence."
     if char_count < 2000:
@@ -76,7 +102,7 @@ class Summarizer:
             "category": page.category,
             "title": page.title,
             "content": content,
-            "length_guidance": _length_guidance(len(page.raw_text)),
+            "length_guidance": _length_guidance(len(page.raw_text), page.category),
             "category_instruction": _CATEGORY_INSTRUCTIONS.get(
                 page.category,
                 "Focus on what changed or was announced and why it matters.",

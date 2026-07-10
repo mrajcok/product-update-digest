@@ -27,7 +27,7 @@ class ScrapedPage(BaseModel):
 
     url: str
     company: Literal["cribl", "ocient", "xsiam"]
-    category: Literal["blog", "press_release", "product"]
+    category: Literal["blog", "press_release", "product", "release_notes"]
     title: str
     raw_text: str
     scraped_at: datetime = None  # type: ignore[assignment]
@@ -50,7 +50,7 @@ class ArticleRecord(BaseModel):
     url: str
     normalized_url: str
     company: Literal["cribl", "ocient", "xsiam"]
-    category: Literal["blog", "press_release", "product"]
+    category: Literal["blog", "press_release", "product", "release_notes"]
     title: str
     first_scraped_at: str  # ISO 8601
     last_scraped_at: str   # ISO 8601
@@ -90,7 +90,7 @@ class ProductUpdate(BaseModel):
 
     url: str
     company: Literal["cribl", "ocient", "xsiam"]
-    category: Literal["blog", "press_release", "product"]
+    category: Literal["blog", "press_release", "product", "release_notes"]
     title: str
     scraped_at: str       # ISO 8601 string (Chroma metadata must be str/int/float/bool)
     published_date: str | None = None

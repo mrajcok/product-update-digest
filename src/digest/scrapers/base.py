@@ -12,7 +12,7 @@ from digest.config import settings
 from digest.storage.db import ArticleDB
 from digest.storage.models import ArticleRecord, ScrapedPage
 
-Category = Literal["blog", "press_release", "product"]
+Category = Literal["blog", "press_release", "product", "release_notes"]
 
 logger = logging.getLogger(__name__)
 
