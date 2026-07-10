@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-09 08:59 PM EDT</p>
+  <p class="generated-at">Generated 2026-07-09 09:21 PM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -103,159 +103,7 @@
   </div>
 
   
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-07-07</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/building-ai-data-pipelines-a-complete-guide/" target="_blank" rel="noopener">Building AI data pipelines: a complete guide | Cribl</a></h2>
-    
-    <div class="summary"><ul>
-<li>This guide details building AI-ready data pipelines, covering ingestion, transformation, storage, search, governance, and monitoring to deliver clean, trustworthy data to AI models.</li>
-<li>Cribl helps establish a vendor-neutral foundation for telemetry collection, routing, storage, search, and analysis, reducing lock-in and operational drag.</li>
-<li>Key steps involve defining business goals and SLAs, choosing appropriate ingestion (batch vs. streaming/CDC) and storage (warehouse vs. lakehouse) strategies, and designing repeatable data processing architectures.</li>
-<li>Cribl Stream is highlighted as a real-time processing and routing layer that filters, enriches, and routes data, reducing costs without sacrificing visibility, and Cribl Lake provides low-cost, long-retention storage.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-07-06</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/nobody-should-have-to-babysit-a-dashboard-how-alerting-works-in-cribl-insights/" target="_blank" rel="noopener">Nobody should have to babysit a dashboard: How alerting works in Cribl Insights | Cribl</a></h2>
-    
-    <div class="summary"><p>Cribl Insights now features alerting capabilities to proactively notify teams of anomalies without manual dashboard monitoring.</p>
-<ul>
-<li>Alerting is built around three components: Monitors (define “normal” and thresholds), Alerts (record instances when data deviates), and Notifications (deliver alerts to existing team communication channels like Slack, email, or PagerDuty).</li>
-<li>Monitors can be enabled from pre-defined defaults or customized using Cribl metrics and thresholds.</li>
-<li>Alerts are recorded in Insights for historical review, enabling analysis of alert duration and severity.</li>
-<li>Notifications are context-rich, providing details about the triggering event directly within team workflows, reducing noise and ensuring actionable insights.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-07-06</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/designing-scalable-data-pipeline-architectures-for-the-ai-era/" target="_blank" rel="noopener">Designing scalable data pipeline architectures for the AI era | Cribl</a></h2>
-    
-    <div class="summary"><h2>Designing Scalable Data Pipeline Architectures for the AI Era – Cribl</h2>
-<p>Cribl focuses on providing a shared telemetry control plane for data ingestion, transformation, and routing, enabling scalable data pipeline architectures suitable for the demands of AI-driven workloads.</p>
-<ul>
-<li>Cribl positions itself as architecture-agnostic, functioning within ETL, ELT, Lambda, Kappa, or hybrid environments.</li>
-<li>The article highlights ELT and Kappa architectures as particularly well-suited for scalability, contrasting them with ETL and Lambda patterns.</li>
-<li>Cribl Stream enables in-flight data transformations, filtering, and routing, acting as a central control point for telemetry data flowing to various destinations (vector stores, observability tools, etc.).</li>
-<li>The discussion emphasizes designing pipelines with SLAs, modularity, buffering, observability, and automation to handle the increased pressures of AI-era telemetry.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>release notes</span>
-      
-    </div>
-    <h2><a href="https://docs.ocient.com/ocientaiq-unified-data-platform-release-notes.md?release=27.1" target="_blank" rel="noopener">OcientAIQ Unified Data Platform Release Notes — 27.1</a></h2>
-    
-    <div class="summary"><p>OcientAIQ Unified Data Platform version 27.1 introduces several new capabilities focused on data ingestion, transactional support, and observability. The Data Extract Tool now supports extracting Parquet files. A new <code>CREATE TRANSACTIONAL PIPELINE</code> SQL statement with an optional <code>START FOREGROUND</code> clause provides immediate pipeline execution with automatic rollback on failure. JDBC Bulk Loading gains support for S3-compatible object stores via the <code>bulkLoadMode</code> connection parameter set to <code>s3</code>.</p>
-<p>This release fully supports transactions within the database and through the JDBC and pyocient drivers, using standard TCL statements for control.  New <code>DROP TASK</code> SQL statement simplifies cleanup of distributed tasks. The system catalog has been expanded with historical tables (<code>sys.pipeline_errors_historical</code>, <code>sys.pipeline_events_historical</code>, <code>sys.pipeline_files_historical</code>, <code>sys.pipeline_metrics_historical</code>) and columns (<code>transaction_id</code>, <code>transaction_prefix_len</code> in <code>sys.queries</code> and <code>sys.completed_queries</code>, and <code>transaction_id</code> in <code>sys.pipelines</code>). Information schema views have been added for enhanced pipeline status and transactional pipeline monitoring.  Notably, the <code>array_to_string</code> function's behavior has changed to remove added quotes around VARCHAR array values.</p></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-07-02</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/rethinking-network-investment-planning-and-why-tm-forum-took-notice/" target="_blank" rel="noopener">Rethinking network investment planning and why TM Forum took notice</a></h2>
-    
-    <div class="summary"><p>OcientAIQ™ is being utilized in a TM Forum award-winning Catalyst project to improve network investment planning for CSPs.</p>
-<ul>
-<li>The project unifies network planning across RAN, fixed broadband, transport, core, and data centers into a single investment view.</li>
-<li>The platform uses AI agents to evaluate demand forecasts, identify coverage gaps, model capacity, assess churn risk, and estimate financial returns.</li>
-<li>The solution leverages TM Forum Open APIs and the Open Digital Architecture (ODA) for integration with existing OSS/BSS systems.</li>
-<li>OcientAIQ™ provides the data foundation, enabling ingestion, management, and analysis of massive data streams for reliable AI recommendations at scale.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-07-02</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/building-the-data-foundation-for-autonomous-networks/" target="_blank" rel="noopener">Building the data foundation for autonomous networks</a></h2>
-    
-    <div class="summary"><ul>
-<li>OcientAIQ™ is positioned as a solution for enabling AI directly on petabyte-scale enterprise data without data movement, specifically addressing challenges in autonomous networks.</li>
-<li>The core claim focuses on overcoming the "hidden barrier" of fragmented data in telecom environments by providing a unified, real-time, and trusted data foundation for agentic AI.</li>
-<li>Ocient emphasizes its ability to handle full-resolution data at scale, enabling real-time and historical analytics within a single platform, avoiding traditional tradeoffs between cost, performance, and completeness.</li>
-<li>Ocient is participating in the TM Forum Catalyst program, specifically project “E2E multi-agent smart network CapEx – Phase III”, to demonstrate the benefits of a strong data foundation for autonomous networks.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="xsiam/" class="badge badge-xsiam">XSIAM</a>
-      <span>blog</span>
-      <span> · 2026-06-17</span>
-    </div>
-    <h2><a href="https://www.paloaltonetworks.com/blog/security-operations/cyberthreats-in-google-workspace-and-their-detection/" target="_blank" rel="noopener">Cortex ITDR: Detecting Cyber threats in Google Workspace - Palo Alto Networks Blog</a></h2>
-    
-    <div class="summary"><ul>
-<li>Palo Alto Networks Cortex XSIAM now features Identity Threat Detection and Response (ITDR) capabilities for Google Workspace, addressing the increasing shift of attacks targeting the SaaS identity layer.</li>
-<li>The platform detects attacks leveraging “living off the land” techniques—such as OAuth consent phishing, credential harvesting via the Drive API (using tools like GD-Thief), and abuse of legitimate features—that bypass traditional security controls.</li>
-<li>Cortex XSIAM establishes behavioral baselines for users and entities within Google Workspace, identifying deviations from normal activity (e.g., unauthorized app access, unusual file access patterns) and correlating multiple signals into high-severity incidents.</li>
-<li>Specific alerts are mapped to MITRE ATT&amp;CK techniques, covering areas like domain policy modification, credential access, data exfiltration, and impairment of defenses, offering comprehensive threat coverage within Google Workspace.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="xsiam/" class="badge badge-xsiam">XSIAM</a>
-      <span>blog</span>
-      <span> · 2026-06-11</span>
-    </div>
-    <h2><a href="https://www.paloaltonetworks.com/blog/security-operations/cortex-frontier-ai/" target="_blank" rel="noopener">The Frontier AI SOC Has Arrived - Palo Alto Networks Blog</a></h2>
-    
-    <div class="summary"><ul>
-<li>Palo Alto Networks Cortex platform now natively supports frontier AI models – Claude Sonnet 4.6, Claude Opus 4.8, and Gemini 3.5 Flash – across Cortex XSIAM, AgentiX, XDR, and Cloud.</li>
-<li>The platform offers selectable AI models (Basic, Fast, Thinking, or Pro) to match task requirements for speed and analytical depth.</li>
-<li>Frontier AI models enhance security investigations by synthesizing complex requests, clarifying ambiguous contexts, and translating reasoning into structured execution within agentic workflows.</li>
-<li>Cortex integrates these models with native telemetry across endpoints, networks, cloud, and identity to provide comprehensive context for AI agents and analysts, enabling faster and more governed automated responses.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="xsiam/" class="badge badge-xsiam">XSIAM</a>
-      <span>blog</span>
-      <span> · 2026-06-02</span>
-    </div>
-    <h2><a href="https://www.paloaltonetworks.com/blog/security-operations/the-end-of-the-visibility-tax/" target="_blank" rel="noopener">The End of the Visibility Tax - Palo Alto Networks Blog</a></h2>
-    
-    <div class="summary"><p>Palo Alto Networks’ Cortex XSIAM now includes Enhanced Application logging at no additional cost, removing the “visibility tax” for Next-Generation Firewall and Prisma SASE customers.</p>
-<ul>
-<li>Enhanced Application logging captures telemetry like DNS queries, HTTP headers, and Kerberos events to provide deeper behavioral context for threat detection.</li>
-<li>Cortex XSIAM leverages this data with over 13,000 detectors, including 2,900 ML models, providing precise detection specifically for Palo Alto Networks environments.</li>
-<li>The platform uses deep protocol parsing (e.g., JA3 fingerprints &amp; HTTP user-agents) to expose stealthy lateral movement and C2 activity hidden within trusted applications.</li>
-<li>Customers can expect up to 40% more insights from network logs, 20-30% lower firewall data ingestion costs, and a 257% ROI with Cortex XSIAM.</li>
-</ul></div>
-    
-  </div>
+  <p>No updates yet.</p>
   
 
   
@@ -271,6 +119,30 @@
       <div class="label">Excluded</div>
       <ul>
         <li class="excl">blog URLs containing &#34;employee-spotlight&#34;</li>
+      </ul>
+    </div>
+    
+    <div class="scraper-block">
+      <h3>Cribl</h3>
+      <div class="label">Sources</div>
+      <ul>
+        <li>https://cribl.io/sitemap.xml — blog posts and news releases</li>
+      </ul>
+      <div class="label">Excluded</div>
+      <ul>
+        <li class="excl">blog URLs containing &#34;cribl-edge&#34;</li><li class="excl">blog URLs containing &#34;company-culture&#34;</li>
+      </ul>
+    </div>
+    
+    <div class="scraper-block">
+      <h3>XSIAM</h3>
+      <div class="label">Sources</div>
+      <ul>
+        <li>https://www.paloaltonetworks.com/blog/tag/xsiam/ — XSIAM-tagged blog posts</li><li>https://www.paloaltonetworks.com/sitemap.xml — press releases filtered for /company/press/ + XSIAM</li>
+      </ul>
+      <div class="label">Excluded</div>
+      <ul>
+        <li class="excl">URLs from docs-cortex.paloaltonetworks.com (JS-rendered portal, no scrapeable content)</li>
       </ul>
     </div>
     
