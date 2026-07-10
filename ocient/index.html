@@ -79,11 +79,506 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-09 08:44 PM EDT</p>
+  <p class="generated-at">Generated 2026-07-09 08:59 PM EDT</p>
   
 
   
-  <p>No updates yet.</p>
+  <h2 class="month">July 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>release notes</span>
+      
+    </div>
+    <h3><a href="https://docs.ocient.com/ocientaiq-unified-data-platform-release-notes.md?release=27.1" target="_blank" rel="noopener">OcientAIQ Unified Data Platform Release Notes — 27.1</a></h3>
+    
+    <div class="summary"><p>OcientAIQ Unified Data Platform version 27.1 introduces several new capabilities focused on data ingestion, transactional support, and observability. The Data Extract Tool now supports extracting Parquet files. A new <code>CREATE TRANSACTIONAL PIPELINE</code> SQL statement with an optional <code>START FOREGROUND</code> clause provides immediate pipeline execution with automatic rollback on failure. JDBC Bulk Loading gains support for S3-compatible object stores via the <code>bulkLoadMode</code> connection parameter set to <code>s3</code>.</p>
+<p>This release fully supports transactions within the database and through the JDBC and pyocient drivers, using standard TCL statements for control.  New <code>DROP TASK</code> SQL statement simplifies cleanup of distributed tasks. The system catalog has been expanded with historical tables (<code>sys.pipeline_errors_historical</code>, <code>sys.pipeline_events_historical</code>, <code>sys.pipeline_files_historical</code>, <code>sys.pipeline_metrics_historical</code>) and columns (<code>transaction_id</code>, <code>transaction_prefix_len</code> in <code>sys.queries</code> and <code>sys.completed_queries</code>, and <code>transaction_id</code> in <code>sys.pipelines</code>). Information schema views have been added for enhanced pipeline status and transactional pipeline monitoring.  Notably, the <code>array_to_string</code> function's behavior has changed to remove added quotes around VARCHAR array values.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-02</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/rethinking-network-investment-planning-and-why-tm-forum-took-notice/" target="_blank" rel="noopener">Rethinking network investment planning and why TM Forum took notice</a></h3>
+    
+    <div class="summary"><p>OcientAIQ™ is being utilized in a TM Forum award-winning Catalyst project to improve network investment planning for CSPs.</p>
+<ul>
+<li>The project unifies network planning across RAN, fixed broadband, transport, core, and data centers into a single investment view.</li>
+<li>The platform uses AI agents to evaluate demand forecasts, identify coverage gaps, model capacity, assess churn risk, and estimate financial returns.</li>
+<li>The solution leverages TM Forum Open APIs and the Open Digital Architecture (ODA) for integration with existing OSS/BSS systems.</li>
+<li>OcientAIQ™ provides the data foundation, enabling ingestion, management, and analysis of massive data streams for reliable AI recommendations at scale.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-02</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/building-the-data-foundation-for-autonomous-networks/" target="_blank" rel="noopener">Building the data foundation for autonomous networks</a></h3>
+    
+    <div class="summary"><ul>
+<li>OcientAIQ™ is positioned as a solution for enabling AI directly on petabyte-scale enterprise data without data movement, specifically addressing challenges in autonomous networks.</li>
+<li>The core claim focuses on overcoming the "hidden barrier" of fragmented data in telecom environments by providing a unified, real-time, and trusted data foundation for agentic AI.</li>
+<li>Ocient emphasizes its ability to handle full-resolution data at scale, enabling real-time and historical analytics within a single platform, avoiding traditional tradeoffs between cost, performance, and completeness.</li>
+<li>Ocient is participating in the TM Forum Catalyst program, specifically project “E2E multi-agent smart network CapEx – Phase III”, to demonstrate the benefits of a strong data foundation for autonomous networks.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-01</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/growing-ocients-global-team/" target="_blank" rel="noopener">Growing Ocient&#39;s global team</a></h3>
+    
+    <div class="summary"><p>Ocient has formally integrated its India-based team as Ocient Technologies Private Limited, signifying a long-term investment in global expertise.</p>
+<ul>
+<li>The India team contributes to the full lifecycle of OcientAIQ™ solutions, including design, architecture, prototyping, production deployment, and quality assurance.</li>
+<li>Expertise within the team covers Big Data systems, full-stack solution design, quality engineering, and platform modernization.</li>
+<li>Recent initiatives focus on building capabilities for autonomous data platforms, agentic solutions, and next-generation analytics systems.</li>
+<li>The team also provides capabilities in architecture governance, performance optimization, automation, observability, security, and customer enablement for enterprise-scale deployments.</li>
+</ul></div>
+    
+  </div>
+  
+  
+  <h2 class="month">June 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-22</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/the-modal-tax-why-agentic-analytics-breaks-the-best-of-breed-stack/" target="_blank" rel="noopener">The Modal Tax: Why agentic analytics breaks the best-of-breed stack</a></h3>
+    
+    <div class="summary"><p>OcientAIQ™ Unified Data Platform aims to eliminate performance and cost issues when using agentic analytics across disparate data systems – a problem they term the "modal tax".</p>
+<ul>
+<li>OcientAIQ™ provides a single engine to run relational, geospatial, ML (via OcientML™), graph, vector, and real-time analytics, eliminating the need for agents to hop between different systems and incurring associated costs.</li>
+<li>The “modal tax” manifests as a token cost (context window size for LLMs), an accuracy tax (loss of context during data transfer), and a latency tax (serialization and network overhead).</li>
+<li>OcientAIQ™’s Compute Adjacent Storage Architecture™ (CASA) utilizes local NVMe to serve both reads and writes, enabling fast access and reducing the need for data movement.</li>
+<li>Pricing is fixed per-core and capacity-based, which encourages exploratory behavior from agents without incurring per-action costs, and platform documentation is available at docs.ocient.com.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-12</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/why-agentic-analytics-breaks-the-best-of-breed-stack-and-the-real-problem-ocientaiq-solves/" target="_blank" rel="noopener">Why agentic analytics breaks the modern data stack — and how OcientAIQ™ is built for what&#39;s next</a></h3>
+    
+    <div class="summary"><p>OcientAIQ™ is designed to address the limitations of the modern data stack when used with agentic analytics.</p>
+<ul>
+<li>Agentic analytics introduces a “modal tax” – penalties in tokens, accuracy, and latency – when agents must move between different data systems (e.g., Snowflake, SageMaker).</li>
+<li>OcientAIQ™ aims to eliminate this tax by providing a unified data platform with native support for SQL, machine learning, geospatial data, and real-time analytics within a single engine.</li>
+<li>The platform supports agent-created databases and materialization (scratch tables) across modalities without requiring data movement or external lookups.</li>
+<li>OcientAIQ™’s pricing is fixed per-core and capacity-based, removing cost constraints on agent exploration and iteration; further details are available at <a href="https://docs.ocient.com">docs.ocient.com</a>.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-12</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/the-federal-cybersecurity-logging-mandate-just-changed-and-its-good-news-for-everyone-defending-critical-infrastructure/" target="_blank" rel="noopener">The federal cybersecurity logging mandate just changed — and it&#39;s good news for everyone defending critical infrastructure</a></h3>
+    
+    <div class="summary"><p>OcientAIQ™ Unified Data Platform is positioned to meet the new federal cybersecurity logging mandate (M-26-14), which shifts focus from log retention to the <em>searchability</em> and operational usability of logs for both Continuous Event Monitoring (CEM) and Threat Hunting, Investigation, Response, and Forensics (THIRF).</p>
+<ul>
+<li>OcientAIQ™ reduces SIEM ingestion volume (by 40-60%) through pre-SIEM enrichment – deduplication, behavioral scoring, and threat context – improving alert quality and reducing costs.</li>
+<li>The platform stores full-fidelity telemetry for 12-24 months, enabling sub-ten-second queries across large datasets (e.g., 50 billion records) using ANSI SQL, without data movement delays.</li>
+<li>Ocient’s architecture supports the mandate’s required data retention tiers, keeping the entire retained corpus searchable, meeting "Advanced" and "Optimal" maturity model requirements.</li>
+<li>The platform includes an interface compatible with Large Language Models (LLMs) via Model Context Protocol (MCP), allowing AI agents to proactively hunt threats and reconstruct attack timelines across the retained historical data.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-11</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/the-hidden-infrastructure-challenge-of-agentic-ai/" target="_blank" rel="noopener">The hidden infrastructure challenge of agentic AI</a></h3>
+    
+    <div class="summary"><p>Ocient addresses the increased infrastructure strain caused by agentic AI systems, which generate significantly more queries than traditional analyst workflows.</p>
+<ul>
+<li>The OcientAIQ™ platform aims to provide a unified data platform for AI, avoiding the need to move data across fragmented systems.</li>
+<li>The core claim is that agentic AI increases query <em>volume</em>, not just complexity, often exceeding the capacity of existing analytical infrastructure.</li>
+<li>Ocient advocates for consolidating analytical capabilities and applying governance at machine speed to reduce friction and cost.</li>
+<li>The platform focuses on making system costs and resource contention visible, and treating agent workloads as production workloads.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-05</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/graph-analytics-at-scale-without-spark-bottlenecks/" target="_blank" rel="noopener">Graph analytics at scale without Spark bottlenecks</a></h3>
+    
+    <div class="summary"><p>OcientAIQ™ introduces OCGraph, a library for running large-scale graph algorithms directly within the platform, avoiding Spark bottlenecks.</p>
+<ul>
+<li>OCGraph is available in Java (via the Ocient JDBC driver - <code>com.ocient:ocient-jdbc4</code>) and Python (<code>ocient-graph</code> via PyPI). Both libraries offer identical algorithms and semantics.</li>
+<li>Graphs are represented as two relational tables: a vertices table (with <code>id</code> as a primary key) and an edges table (with <code>srcid</code> and <code>destid</code> defining relationships). This leverages existing Ocient table features like indexing and querying.</li>
+<li>The library provides algorithms including Connected Components, PageRank, Triangle Count, Weighted Shortest Paths, and Label Propagation, mirroring functionalities found in GraphX and GraphFrames but without the associated complexity.</li>
+<li>Benchmarking against the LDBC Graphalytics dataset shows OCGraph performing 7x - 17x faster than Spark for iterative algorithms, and successfully completing Triangle Count where Spark failed due to memory limitations.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-04</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/ocient-now-integrates-with-datadog/" target="_blank" rel="noopener">Ocient Now Integrates with Datadog</a></h3>
+    
+    <div class="summary"><p>Ocient now integrates directly with Datadog for enhanced monitoring of large-scale data workloads.</p>
+<ul>
+<li>The integration enables real-time monitoring of Ocient Hyperscale Data Warehouse metrics within the Datadog platform.</li>
+<li>Key metrics available include query performance, disk usage, table activity, and system health (CPU/memory).</li>
+<li>Configuration utilizes Ocient’s standard SQL and JDBC interfaces for simplified setup.</li>
+<li>Users can create customizable Datadog dashboards and configure proactive alerts based on Ocient data.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-04</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/ocienteers-turn-up-the-volume-in-austin-at-spring-event/" target="_blank" rel="noopener">Ocienteers turn up the volume in Austin at spring event</a></h3>
+    
+    <div class="summary"><p>Ocient held a company-wide event to focus on the future development of its core product, OcientAIQ™.</p>
+<ul>
+<li>The event centered on collaboration and alignment around expanding the capabilities of the OcientAIQ™ Unified Data Platform.</li>
+<li>Discussions included product innovation and go-to-market strategy related to delivering trusted, actionable intelligence from massive datasets.</li>
+<li>Emphasis was placed on supporting agentic AI solutions tailored to specific industries like AdTech, CSPs, and Financial Services.</li>
+<li>The company highlighted its commitment to providing a platform for AI applications requiring secure data foundations at petabyte scale.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-04</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/in-adtech-ai-is-moving-faster-than-the-infrastructure-beneath-it/" target="_blank" rel="noopener">In AdTech, AI Is moving faster than the infrastructure beneath it</a></h3>
+    
+    <div class="summary"><p>OcientAIQ™ is positioned as a unified data platform designed to address infrastructure limitations hindering AI adoption in petabyte-scale enterprise data environments.</p>
+<ul>
+<li>OcientAIQ™ aims to deliver trusted AI outcomes without requiring data movement across fragmented systems.</li>
+<li>The platform focuses on enabling operationalized, governed, and commercially useful AI, shifting the focus from AI workloads to business outcomes.</li>
+<li>The discussion highlighted a gap between AI experimentation and scalable, auditable, and secure deployment—currently estimated at only 2-3% of enterprises by Gartner.</li>
+<li>The platform supports agentic AI applications where a single request can trigger multiple queries, requiring infrastructure capable of handling increased volume and concurrency. </li>
+</ul>
+<p>For more details, consult the original article.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-04</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/from-connectivity-to-clarity-the-real-data-challenge-in-the-indo-pacific/" target="_blank" rel="noopener">From Connectivity to Clarity: The real data challenge in the Indo-Pacific</a></h3>
+    
+    <div class="summary"><p>OcientAIQ™ addresses the challenge of deriving actionable intelligence from fragmented and inconsistent data sources, particularly relevant in complex environments like the Indo-Pacific region.</p>
+<ul>
+<li>The article highlights a shift from focusing on data connectivity to ensuring data <em>clarity</em> and usability, asserting that communications are often not the primary bottleneck.</li>
+<li>OcientAIQ™ is presented as a platform capable of high-performance data processing, schema alignment, and real-time analytics at scale, even in distributed environments.</li>
+<li>A “translation layer” architecture is advocated for, responsible for ingesting, normalizing, and enriching data— positioning OcientAIQ™ as a key component.</li>
+<li>The piece underscores the critical importance of data engineering to support AI/ML initiatives, noting the limitations of current ETL pipelines and the need for scalable data governance.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-04</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/compute-adjacent-storage-at-work-24-drives-9-6-tb-1-query/" target="_blank" rel="noopener">Compute-Adjacent Storage at Work: 24 drives, 9.6 TB, 1 query</a></h3>
+    
+    <div class="summary"><p>OcientAIQ demonstrates high sustained I/O throughput with its "compute-adjacent storage" model.</p>
+<ul>
+<li>A benchmark using 24 NVMe drives (Ice Lake Xeon processors) achieved 35.82 GB/s aggregate throughput while querying 9.6 TB of uncompressed data.</li>
+<li>The architecture filters and transforms data at the drive level, minimizing data movement and network bandwidth constraints.</li>
+<li>The test involved a full table scan of 1.2 trillion random 64-bit integers, returning a single 8-byte count of matching entries.</li>
+<li>Sustained performance achieved between 29-44% of the theoretical maximum read speed for the Samsung NVMe drives used (5.2 GB/s sequential reads).</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-03</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/the-time-is-now-why-ocient-is-your-netezza-replacement/" target="_blank" rel="noopener">The Time is Now: Why Ocient is Your Netezza Replacement</a></h3>
+    
+    <div class="summary"><p>Ocient positions itself as a direct replacement for IBM Netezza, particularly given IBM’s shift to a cloud-based Netezza environment and end-of-support for existing appliances in 2023.</p>
+<ul>
+<li>The <strong>Ocient Hyperscale Data Warehouse (OHDW)</strong> is presented as a high-performance alternative offering better storage efficiency and rapid analysis of complex data.</li>
+<li>Ocient supports direct loading of structured and semi-structured data including <strong>Avro, Parquet, JSON</strong>, and mainframe data, eliminating the need for separate ETL tooling.</li>
+<li>The company offers a migration process with options for pre-piloting and low-risk re-platforming, aiming for production deployment within months, with dedicated support.</li>
+<li>Ocient claims to deliver equal or better performance than Netezza at up to 80% lower cost and offers features like fully-managed service and multiple cloud deployment options.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-02</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/ocient-joins-uks-ministry-of-defence-commercial-x-innovation-procurement-pathway/" target="_blank" rel="noopener">Ocient joins UK&#39;s Ministry of Defence Commercial X innovation procurement pathway</a></h3>
+    
+    <div class="summary"><p>Ocient has joined the UK Ministry of Defence’s Commercial X innovation procurement pathway, operated by Constellia, enabling faster access to its data and AI capabilities for UK defense organizations. This participation allows organizations to leverage the OcientAIQ™ Unified Data Platform for large-scale data analytics without data movement or pre-aggregation. OcientAIQ™ supports both secure cloud and on-premises deployments, designed for environments where full-fidelity data retention and querying at scale are mission-critical. The platform aims to accelerate the delivery of actionable intelligence within complex and sensitive data environments.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-06-02</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/canadas-telecom-rules-are-changing/" target="_blank" rel="noopener">Canada&#39;s telecom rules are changing - quietly, but fundamentally</a></h3>
+    
+    <div class="summary"><p>Ocient highlights emerging Canadian telecom regulations that demand faster, more verifiable compliance responses.</p>
+<ul>
+<li>New regulations (Bill C-22, CCSPA, CRTC outage reporting) require operators to respond to regulatory requests within minutes or hours, shifting compliance from periodic audits to real-time operational capability.</li>
+<li>Existing telecom data environments are often fragmented across systems with varying formats and latency, making quick, complete data retrieval challenging; common workarounds like data sampling are difficult to defend to regulators.</li>
+<li>Ocient positions its OcientAIQ™ platform as a solution, designed for high-speed analytics on massive datasets, enabling complete data analysis instead of sampling and correlation across domains without system stitching.</li>
+<li>The core claim is that Ocient’s platform facilitates real-time, auditable answers to regulatory inquiries, transforming data architecture into a core compliance capability.</li>
+</ul></div>
+    
+  </div>
+  
+  
+  <h2 class="month">May 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-05-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/agentic-ai-and-the-intelligent-data-layer-behind-responsible-autonomy/" target="_blank" rel="noopener">Agentic AI and the intelligent data layer behind responsible autonomy</a></h3>
+    
+    <div class="summary"><p>OcientAIQ™ is positioned as a foundational infrastructure for responsible agentic AI, addressing the emerging “governance gap” between AI capabilities and regulatory oversight.</p>
+<ul>
+<li>OcientAIQ™ provides real-time data validation, immutable audit structures, and compliance-aligned design to govern autonomous systems.</li>
+<li>The platform supports interactive analytics on trillions of records, with ingest rates up to 15 million records per second, scaling to hundreds of petabytes for performance-intensive agentic workflows.</li>
+<li>Ocient emphasizes traceability with granular role-based access control and immutable audit structures to enable explainable and auditable AI decision-making.</li>
+<li>Ocient offers flexible governance configuration and direct engagement with clients to adapt to evolving regulatory requirements like the EU AI Act and emerging US state-level rules.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-05-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/inside-ocient-casting-timestamps-and-secret-internal-names/" target="_blank" rel="noopener">Inside the Ocient Engine: Casting, timestamps, and “secret” internal names</a></h3>
+    
+    <div class="summary"><p>Ocient SQL offers flexible casting and timestamp handling, drawing from Postgres and DB2 concepts with unique internal optimizations.</p>
+<ul>
+<li>Ocient supports multiple functions for retrieving the current timestamp—<code>now()</code>, <code>current_timestamp</code>, and scalar functions—all mapping to the same internal function, distinguished by appended suffixes (e.g., <code>_1</code>, <code>_2</code>).</li>
+<li>Casting can be performed using ANSI SQL, Postgres-style <code>::</code>, explicit <code>CAST</code> functions, or constructor-style casts, where data type names act as functions (e.g., <code>CHAR()</code>).</li>
+<li>Intervals are internally represented as integer or bigint values with assigned units, meaning <code>INTERVAL</code> is not a native data type, and date math is best handled using constructors. Subtracting timestamps returns bigint values in nanoseconds, while subtracting dates returns integers representing days.</li>
+<li>Ocient provides both standard <code>EXTRACT</code> and <code>date_part</code> functions (returning doubles) alongside shorthand functions like <code>year()</code> and <code>minute()</code> (returning integers/bigints); shorthand functions extract specific portions of a timestamp.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-05-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/reflections-from-mwc-barcelona-four-themes-shaping-telecoms-data-future/" target="_blank" rel="noopener">Reflections from MWC Barcelona: 4 themes shaping telecom’s data future</a></h3>
+    
+    <div class="summary"><p>Ocient’s observations from MWC Barcelona highlight key trends impacting telecom data strategy.</p>
+<ul>
+<li>Telecom companies are prioritizing cost optimization when modernizing data platforms and analytics, seeking sustainable scaling of analytics.</li>
+<li>AI-assisted development is accelerating the creation of analytics workflows and applications, but data foundations are emerging as a limiting factor.</li>
+<li>Organizations are investing in data quality, governance, and domain ontologies to improve the usability and trustworthiness of data for AI systems.</li>
+<li>There’s a shift towards utilizing full-fidelity, high-resolution data for use cases like network security and operations, driving architectural changes to manage data volume and cost.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-05-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/inside-the-ocient-engine-a-deep-dive-into-arrays/" target="_blank" rel="noopener">Inside the Ocient Engine: A deep dive into arrays</a></h3>
+    
+    <div class="summary"><p>Ocient’s engine treats arrays as a core data model component, supporting features beyond typical database implementations.</p>
+<ul>
+<li><strong>Type Inference &amp; Casting:</strong> Ocient automatically infers array data types but allows explicit casting, including handling arrays containing only NULL values (defaulting to CHAR, but allowing forced type specification).</li>
+<li><strong>Complex Array Structures:</strong> The platform supports nested, multi-dimensional, and jagged arrays—arrays where sub-arrays have differing lengths.</li>
+<li><strong>Array Operators:</strong>  Ocient provides standard array operators like <code>@&gt;</code> (Contains) and <code>&amp;&amp;</code> (Overlap), as well as unique “Ocient Special” quantifiers: <code>for_some</code> and <code>for_all</code> for applying scalar predicates across array elements without unnesting.</li>
+<li><strong>Performance &amp; Manipulation:</strong> Users can create indexes on array columns (including N-gram indexes for text), aggregate data into arrays with controlled order using <code>array_agg</code>, and utilize <code>unnest</code> with standard and "Zip Unnest" functionality to manage array expansion and alignment.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-05-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/inside-the-ocient-engine-a-deep-dive-into-tuples/" target="_blank" rel="noopener">Inside the Ocient Engine: A deep dive into tuples</a></h3>
+    
+    <div class="summary"><p>Ocient’s tuple data type functions as an anonymous struct, enabling powerful querying techniques within the OcientAIQ™ Unified Data Platform.</p>
+<ul>
+<li>Tuples are defined using double angle brackets (<code>&lt;&lt;...&gt;&gt;</code>) for type specification, similar to C++ templates or Java generics, and are accessed by position (starting at 1).</li>
+<li>Ocient stores tuples as either virtual (separate columns) or materialized (binary blob) structures; tuples within arrays are always materialized, while others are virtualized on disk and may be materialized during query execution.</li>
+<li>Tuple comparisons are performed lexicographically, influencing sorting and grouping operations, and tuples can be nested with other tuples and arrays.</li>
+<li>Indexing tuples requires indexing specific elements rather than the entire tuple, and a "Tuple Max" trick can efficiently handle point-in-time queries on append-only tables using <code>MAX()</code> and tuple nesting.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-05-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/ocient-joins-the-gsma-advancing-the-future-of-data-driven-telecom/" target="_blank" rel="noopener">Ocient Joins the GSMA: Advancing the future of data-driven telecom</a></h3>
+    
+    <div class="summary"><p>Ocient has joined the GSMA to further its work with Communication Service Providers (CSPs) looking to leverage AI on large datasets.</p>
+<ul>
+<li>Ocient’s platform, <strong>OcientAIQ™</strong>, aims to unify and analyze high-volume, high-velocity data for CSPs.</li>
+<li>The platform focuses on enabling real-time network analytics and anomaly detection within telecom networks.</li>
+<li>Solutions include cross-domain data correlation for improved visibility, and capabilities for revenue assurance and fraud detection.</li>
+<li>GSMA membership will allow Ocient to collaborate directly with CSPs and contribute to industry standards discussions concerning AI, data architecture, and automation.</li>
+</ul></div>
+    
+  </div>
+  
+  
+  <h2 class="month">April 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>press release</span>
+      <span> · 2026-04-07</span>
+    </div>
+    <h3><a href="https://ocient.com/newsroom/press-releases/ocient-and-accrete-ai-announce-strategic-partnership-to-deliver-ai-driven-intelligence-solution-for-national-security-organizations/" target="_blank" rel="noopener">Ocient and Accrete AI Announce Strategic Partnership to Deliver AI-Driven Intelligence Solution for National Security Organizations</a></h3>
+    
+    <div class="summary"><p>Ocient and Accrete AI have partnered to deliver an AI-driven data intelligence solution for national security organizations.</p>
+<ul>
+<li>Accrete AI’s Knowledge Engine Platform agents now run directly on data stored within Ocient’s Data Intelligence Platform, eliminating the need for data movement.</li>
+<li>The integrated solution enables analysis of complete datasets – not samples – for trusted, traceable results.</li>
+<li>Ocient’s platform provides the high-performance processing foundation for AI-enabled analysis of complex operational data.</li>
+<li>Key use cases include operational intelligence, autonomous threat detection, geospatial intelligence analysis, and strategic decision support.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>press release</span>
+      <span> · 2026-04-07</span>
+    </div>
+    <h3><a href="https://ocient.com/newsroom/press-releases/minsait-and-ocient-announce-strategic-partnership-in-brazil-to-drive-innovation-in-the-telecommunications-and-media-industry/" target="_blank" rel="noopener">Minsait and Ocient Announce Strategic Partnership in Brazil to Drive Innovation in the Telecommunications and Media Industry</a></h3>
+    
+    <div class="summary"><p>Minsait and Ocient have partnered to accelerate digital transformation in the Brazilian telecommunications and media industry.</p>
+<ul>
+<li>The partnership will combine Minsait’s industry expertise with Ocient’s AI-ready data foundation, specifically the <strong>OcientAIQ™ Unified Data Platform</strong>.</li>
+<li>Ocient’s platform is designed for telecom-scale performance, enabling analysis of network, billing, and IoT data for use cases like autonomous networking and security.</li>
+<li>The solution supports deployment in on-premises, cloud, or hybrid environments, offering flexible data processing options.</li>
+<li>Minsait aims to leverage Ocient's technology to enhance its offerings in areas like autonomous network journeys and cloudification within the Brazilian market.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>press release</span>
+      <span> · 2026-04-07</span>
+    </div>
+    <h3><a href="https://ocient.com/newsroom/press-releases/ocient-and-teksynap-announce-strategic-partnership-to-advance-hyperscale-data-analytics-for-u-s-government-missions/" target="_blank" rel="noopener">Ocient and TekSynap Announce Strategic Partnership to Advance Hyperscale Data Analytics for U.S. Government Missions</a></h3>
+    
+    <div class="summary"><p>Ocient and TekSynap have partnered to provide hyperscale data analytics solutions to U.S. government agencies.</p>
+<ul>
+<li>The partnership combines Ocient’s AI-driven data platform (OcientAIQ™) with TekSynap’s federal systems integration expertise.</li>
+<li>The offering aims to accelerate insight generation, simplify data architectures, and operationalize analytics for defense, intelligence, and civilian missions.</li>
+<li>OcientAIQ™ is designed for large-scale data workloads, including time series, geospatial, and other complex datasets, supporting SQL analytics, machine learning, and query processing.</li>
+<li>TekSynap brings experience implementing and sustaining technology solutions within the public sector, aiming to deliver secure and scalable analytics capabilities.</li>
+</ul></div>
+    
+  </div>
+  
+  
+  <h2 class="month">March 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-03-12</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/game-on-ocients-2025-offsite-accelerates-growth/" target="_blank" rel="noopener">Game On: Ocient’s 2025 Offsite Accelerates Growth</a></h3>
+    
+    <div class="summary"><p>Ocient held a company offsite in October 2025 to reflect on growth and plan for the future, coinciding with new funding and customer innovation.</p>
+<ul>
+<li>The offsite focused on strategic alignment around Ocient’s core values: customer focus, efficient effectiveness, and collaboration.</li>
+<li>Ocient is accelerating its leadership in large-scale data analytics and expanding into AI.</li>
+<li>The company’s platform, <strong>OcientAIQ™</strong>, is intended to deliver agentic AI outcomes at petabyte scale.</li>
+<li>New fundraising was secured in 2025 to support these initiatives.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>press release</span>
+      <span> · 2026-03-05</span>
+    </div>
+    <h3><a href="https://ocient.com/newsroom/press-releases/ocient-expands-communication-service-provider-csp-leadership-and-ecosystem-as-ai-reshapes-network-operations/" target="_blank" rel="noopener">Ocient Expands Communication Service Provider (CSP) Leadership and Ecosystem as AI Reshapes Network Operations</a></h3>
+    
+    <div class="summary"><p>Ocient is expanding its focus on the Communications Service Provider (CSP) market with strategic hires and partnerships to support AI-driven network operations.</p>
+<ul>
+<li>Ocient has doubled its CSP business and added new leadership including Mats Wahlstrom (SVP of CSPs) and Steve Rycroft (VP of CSP Solutions), plus advisory board members from Ericsson and network security.</li>
+<li>New partnerships with Minsait Brazil and Clixer complement existing collaborations with Amdocs, Volt Active Data, and others to offer integrated solutions.</li>
+<li>The <strong>OcientAIQ™ Unified Data Platform</strong> and <strong>Ocient Data Intelligence Platform</strong> aim to provide a unified data foundation for telecom-scale data, enabling real-time AI applications for autonomous networking, security, customer operations, and IoT.</li>
+<li>Ocient focuses on delivering curated, AI-readable data products with built-in governance and over 20 integrated machine learning models, accessible via SQL and APIs, to function as a gateway to cloud ecosystems.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>press release</span>
+      <span> · 2026-03-05</span>
+    </div>
+    <h3><a href="https://ocient.com/newsroom/press-releases/ocient-assessed-awardable-for-department-of-war-dow-work-in-the-cdaos-tradewinds-solutions-marketplace/" target="_blank" rel="noopener">Ocient Assessed “Awardable” for Department of War (DoW) Work in the  CDAO’s Tradewinds Solutions Marketplace</a></h3>
+    
+    <div class="summary"><p>Ocient has been assessed as “Awardable” within the Department of War’s (DoW) Tradewinds Solutions Marketplace, signifying its capability to handle large-scale government data missions.</p>
+<ul>
+<li>The Ocient Data Intelligence Platform enables real-time ingestion, retention, and analysis of petabyte-scale datasets.</li>
+<li>Ocient solutions consolidate analytics and AI workloads onto a single platform for national security agencies.</li>
+<li>A demo video showcases analysis of multi-source, geospatially indexed data in near real-time, available to government customers on the Tradewinds Marketplace.</li>
+<li>This assessment highlights Ocient’s scalability and innovation in addressing the DoW’s AI/ML, data, and analytics challenges.</li>
+</ul></div>
+    
+  </div>
+  
   
 
   <script>
