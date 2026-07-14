@@ -79,13 +79,30 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-10 06:02 AM EDT</p>
+  <p class="generated-at">Generated 2026-07-14 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">July 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-13</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/effective-strategies-to-reduce-data-pipeline-costs/" target="_blank" rel="noopener">Effective strategies to reduce data pipeline costs | Cribl</a></h3>
+    
+    <div class="summary"><p>Effective strategies to reduce data pipeline costs: a comprehensive guide outlining how to understand, calculate, and systematically cut costs related to data ingestion, processing, routing, storage, and delivery.</p>
+<ul>
+<li>The article details a 7-step process to establish a baseline for data pipeline costs, including inventorying sources, measuring data volume, mapping compute resources, tallying storage costs, and accounting for tooling, engineering labor, and hidden costs.</li>
+<li>Key strategies for cost reduction include storage tiering (using hot, warm, and cold tiers), leveraging serverless and spot compute resources, reducing data volume through filtering and transformation (at the source, deduplication, field-level reduction, masking), and moving away from tool sprawl towards a shared architecture.</li>
+<li>Cribl products – Cribl Stream, Cribl Edge, and Cribl Lake – are positioned as central to these strategies, enabling data shaping, routing, collection, and tiered storage to optimize cost and control.</li>
+<li>Recent trends like AI-driven workloads, multi-cloud environments, shift-left data quality, and FinOps are increasing pressure on data pipeline costs, making a unified platform approach even more critical.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -579,23 +596,6 @@
 <li>Cribl’s platform – Cribl Stream, Cribl Edge, Cribl Lake, and Cribl Search – is now FedRAMPⓇ Certified Class C (formerly Moderate) and facilitates data collection, shaping, routing, retention, and federated search across decentralized storage.</li>
 <li>Cribl Stream enables data tiering by identifying logs for SIEM ingestion versus lower-cost object storage for investigation, achieving 40-60% volume reduction in some cases.</li>
 <li>Cribl Guard provides pipeline-based sensitive data detection and masking to address requirements of the forthcoming Logging Reference Architecture (LRA).</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-27</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/certs-up-using-self-signed-tls-to-encrypt-cribl-to-cribl-data-streams/" target="_blank" rel="noopener">Cert’s up: Using self-signed TLS to encrypt Cribl-to-Cribl data streams | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl Stream now supports using self-signed TLS certificates to encrypt data streams between Cribl Edge Nodes and Stream Workers.</p>
-<ul>
-<li>The process involves creating a Certificate Authority (CA), generating a certificate for the Worker Node, signing the certificate with the CA, and placing the necessary files in the correct locations on both Edge and Worker nodes.</li>
-<li>Configuration requires using OpenSSL commands to generate keys, Certificate Signing Requests (CSRs), and sign certificates, leveraging a <code>worker_ext.cnf</code> file to define Subject Alternative Names (SANs) for proper TLS validation.</li>
-<li>Apple devices have a certificate trust cap of 825 days, which is recommended as a default certificate validity period.</li>
-<li>Proper file permissions (chmod 600) are critical for security, and configuration changes require a “commit and deploy” step in Cribl Stream to take effect.</li>
 </ul></div>
     
   </div>
