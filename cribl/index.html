@@ -79,13 +79,63 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-15 06:05 AM EDT</p>
+  <p class="generated-at">Generated 2026-07-16 06:03 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">July 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-15</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/what-the-cardinalops-acquisition-means-for-you/" target="_blank" rel="noopener">What the CardinalOps acquisition means for you | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl has acquired CardinalOps to connect telemetry data with detection engineering, addressing the gap between data ingestion and effective threat detection.</p>
+<ul>
+<li>The acquisition aims to improve detection coverage by mapping existing detections to the MITRE ATT&amp;CK framework, identifying gaps, and recommending new rules.</li>
+<li>CardinalOps’ detection posture analysis can pinpoint missing log sources or fields when coverage gaps are identified, enabling faster remediation.</li>
+<li>This integration focuses on improving existing SIEM and EDR investments rather than replacing them, offering a more flexible path to SIEM modernization.</li>
+<li>Cribl intends to build a workflow from raw telemetry to security outcomes, emphasizing data visibility, detection health, and reduced manual rule maintenance.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-15</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/the-app-was-the-easy-part/" target="_blank" rel="noopener">The app was the easy part | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>Cribl positions itself as a platform separating telemetry infrastructure from applications consuming it, analogous to AWS enabling Netflix.</li>
+<li>The article highlights the complexity of building a secure and governed platform <em>underneath</em> applications, exceeding the effort required for the application itself, even with AI assistance.</li>
+<li>Cribl aims to provide shared capabilities – collection, routing, transformation, enrichment, governance, storage, federation, search, and access – avoiding repeated infrastructure builds for each new application or AI agent.</li>
+<li>The core technical claim is that Cribl enables secure, governed access to telemetry data across people, applications, and agents without data duplication, addressing a key limitation for AI-powered operations.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-14</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/a-new-way-to-siem/" target="_blank" rel="noopener">A new way to SIEM | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl is acquiring CardinalOps to offer a new approach to SIEM focused on continuous detection engineering.</p>
+<ul>
+<li>CardinalOps provides agentic detection engineering, assessing detection coverage, mapping detections to adversary behavior, and automatically fixing broken rules.</li>
+<li>Integration with Cribl’s AI Platform for Telemetry aims to provide a full end-to-end security solution, shifting away from traditional SIEM models.</li>
+<li>The combined solution focuses on shaping data <em>before</em> it becomes costly, enabling search across environments, and continuously improving detections.</li>
+<li>CardinalOps is positioned as a key capability <em>within</em> a broader security strategy, not a replacement for a SIEM, and builds on Cribl’s existing telemetry foundation.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -101,27 +151,16 @@
   <div class="card">
     <div class="meta">
       <span>blog</span>
-      <span> · 2026-07-14</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/a-new-way-to-siem/" target="_blank" rel="noopener">A new way to SIEM | Cribl</a></h3>
-    
-    <div class="summary"><p>A new way to SIEM | Cribl Back to the blog Announcements A new way to SIEM By Clint Sharp Last edited: July 14, 2026 For years, security teams have been sold the same bargain: send in more data, buy more tools, tune more rules, and you'll be better protected. In practice, a lot of teams have ended u</p></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
       <span> · 2026-07-13</span>
     </div>
     <h3><a href="https://cribl.io/blog/effective-strategies-to-reduce-data-pipeline-costs/" target="_blank" rel="noopener">Effective strategies to reduce data pipeline costs | Cribl</a></h3>
     
-    <div class="summary"><p>Effective strategies to reduce data pipeline costs: a comprehensive guide outlining how to understand, calculate, and systematically cut costs related to data ingestion, processing, routing, storage, and delivery.</p>
+    <div class="summary"><p>Effective strategies to reduce data pipeline costs: This blog post details how organizations can systematically understand, calculate, and reduce costs associated with their data pipelines.</p>
 <ul>
-<li>The article details a 7-step process to establish a baseline for data pipeline costs, including inventorying sources, measuring data volume, mapping compute resources, tallying storage costs, and accounting for tooling, engineering labor, and hidden costs.</li>
-<li>Key strategies for cost reduction include storage tiering (using hot, warm, and cold tiers), leveraging serverless and spot compute resources, reducing data volume through filtering and transformation (at the source, deduplication, field-level reduction, masking), and moving away from tool sprawl towards a shared architecture.</li>
-<li>Cribl products – Cribl Stream, Cribl Edge, and Cribl Lake – are positioned as central to these strategies, enabling data shaping, routing, collection, and tiered storage to optimize cost and control.</li>
-<li>Recent trends like AI-driven workloads, multi-cloud environments, shift-left data quality, and FinOps are increasing pressure on data pipeline costs, making a unified platform approach even more critical.</li>
+<li>Cribl products (Stream, Edge, Lake, and Search) are positioned as a central platform for collecting, transforming, routing, storing, and investigating telemetry data to reduce costs and avoid vendor lock-in.</li>
+<li>Strategies for cost reduction include storage tiering (using S3 Intelligent-Tiering, lifecycle policies, and columnar formats like Parquet), utilizing serverless and spot compute resources, and reducing data volume through filtering, deduplication, and masking <em>before</em> data reaches expensive destinations.</li>
+<li>The post advocates moving away from "tool sprawl" towards a shared architecture and implementing "govern once, investigate everywhere" principles to minimize duplicated infrastructure and operational overhead.</li>
+<li>A key KPI suggested for tracking improvement is "cost per GB delivered," calculated by dividing total pipeline spend by the gigabytes of usable data successfully delivered downstream.</li>
 </ul></div>
     
   </div>
@@ -547,43 +586,6 @@
 <li>The update prioritizes recall – minimizing false negatives – to reduce the risk of sensitive data leakage, while also reducing false positives by 7.6%.</li>
 <li>The model maintains the same memory footprint and throughput profile as Cribl-Privacy 1.0, enabling a seamless upgrade without impacting existing infrastructure.</li>
 <li>Cribl-Privacy 1.5 is available with Cribl version 4.17.1 and is automatically applied to existing Cribl Guard customers on that version or later.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-06-03</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/cribl-search-pack-for-zscaler-your-traffic-went-that-way-now-prove-it/" target="_blank" rel="noopener">Cribl Search Pack for Zscaler: Your traffic went that way — now prove it | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl has released a Search Pack for Zscaler designed to simplify analysis of Zscaler security telemetry data.</p>
-<ul>
-<li>The pack provides pre-built dashboards tailored to specific Zscaler log families (web, firewall, CASB, audit, VPN/tunnel, DNS, and email DLP).</li>
-<li>Macros within the pack simplify search configuration by baking in dataset and sourcetype filters.</li>
-<li>Datatypes are included to automatically extract structured fields from Zscaler events.</li>
-<li>The pack requires Zscaler logs to be ingested into a Cribl Search-compatible dataset (e.g., Cribl Lake, Lakehouse, or an object-store backed dataset) and utilizes either the “Zscaler Datatypes” or “Zscaler Raw Datatypes” depending on existing normalization.</li>
-</ul></div>
-    
-  </div>
-  
-  
-  <h2 class="month">May 2026</h2>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-29</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/smarter-data-pipelines-for-modern-healthcare/" target="_blank" rel="noopener">Smarter data pipelines for modern healthcare | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl products provide a platform for building “smarter” data pipelines tailored for modern healthcare environments, focusing on control and intelligence within the data flow.</p>
-<ul>
-<li><strong>Cribl Stream</strong> ingests, transforms, reduces, and routes data to multiple destinations, reducing unnecessary pipeline duplication and providing control over data sent to SIEMs, observability platforms, and storage.</li>
-<li><strong>Cribl Edge</strong> extends data collection and processing to distributed healthcare environments (remote clinics, devices) improving local control and standardization.</li>
-<li><strong>Cribl Guard</strong> uses AI to scan telemetry in real-time, masking or blocking sensitive data to support HIPAA compliance and reduce data exposure <em>before</em> it reaches downstream systems.</li>
-<li><strong>Cribl Lake</strong> offers cost-effective long-term telemetry retention, enabling teams to prioritize data for analytics and archiving while maintaining accessibility via <strong>Cribl Search</strong> for investigations.</li>
 </ul></div>
     
   </div>
