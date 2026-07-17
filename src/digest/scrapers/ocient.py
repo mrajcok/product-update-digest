@@ -26,7 +26,9 @@ _NEWS_SITEMAP_URL = "https://ocient.com/news_release-sitemap.xml"
 
 _PRODUCT_URLS: list[str] = []
 
-_ARTICLE_CONTENT_SELS = ["article", "div.entry-content", "div.post-content", "main"]
+_ARTICLE_CONTENT_SELS = [
+    "div.single-content", "article", "div.entry-content", "div.post-content", "main",
+]
 
 _SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
