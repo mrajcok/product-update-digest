@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-16 08:52 PM EDT</p>
+  <p class="generated-at">Generated 2026-07-16 09:00 PM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -103,7 +103,168 @@
   </div>
 
   
-  <p>No updates yet.</p>
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-07-15</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/what-the-cardinalops-acquisition-means-for-you/" target="_blank" rel="noopener">What the CardinalOps acquisition means for you | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl has acquired CardinalOps to connect telemetry data with detection engineering, addressing the gap between data ingestion and effective threat detection.</p>
+<ul>
+<li>The acquisition aims to improve detection coverage by mapping existing detections to the MITRE ATT&amp;CK framework, identifying gaps, and recommending new rules.</li>
+<li>CardinalOps’ detection posture analysis can pinpoint missing log sources or fields when coverage gaps are identified, enabling faster remediation.</li>
+<li>This integration focuses on improving existing SIEM and EDR investments rather than replacing them, offering a more flexible path to SIEM modernization.</li>
+<li>Cribl intends to build a workflow from raw telemetry to security outcomes, emphasizing data visibility, detection health, and reduced manual rule maintenance.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-07-15</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/the-app-was-the-easy-part/" target="_blank" rel="noopener">The app was the easy part | Cribl</a></h2>
+    
+    <div class="summary"><ul>
+<li>Cribl positions itself as a platform separating telemetry infrastructure from applications consuming it, analogous to AWS enabling Netflix.</li>
+<li>The article highlights the complexity of building a secure and governed platform <em>underneath</em> applications, exceeding the effort required for the application itself, even with AI assistance.</li>
+<li>Cribl aims to provide shared capabilities – collection, routing, transformation, enrichment, governance, storage, federation, search, and access – avoiding repeated infrastructure builds for each new application or AI agent.</li>
+<li>The core technical claim is that Cribl enables secure, governed access to telemetry data across people, applications, and agents without data duplication, addressing a key limitation for AI-powered operations.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-07-14</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/a-new-way-to-siem/" target="_blank" rel="noopener">A new way to SIEM | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl is acquiring CardinalOps to offer a new approach to SIEM focused on continuous detection engineering.</p>
+<ul>
+<li>CardinalOps provides agentic detection engineering, assessing detection coverage, mapping detections to adversary behavior, and automatically fixing broken rules.</li>
+<li>Integration with Cribl’s AI Platform for Telemetry aims to provide a full end-to-end security solution, shifting away from traditional SIEM models.</li>
+<li>The combined solution focuses on shaping data <em>before</em> it becomes costly, enabling search across environments, and continuously improving detections.</li>
+<li>CardinalOps is positioned as a key capability <em>within</em> a broader security strategy, not a replacement for a SIEM, and builds on Cribl’s existing telemetry foundation.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>press release</span>
+      <span> · 2026-07-14</span>
+    </div>
+    <h2><a href="https://ocient.com/newsroom/press-releases/ocient-and-siren-announce-strategic-partnership-to-deliver-trusted-investigative-intelligence-for-sovereign-national-security-missions/" target="_blank" rel="noopener">Ocient and Siren Announce Strategic Partnership to Deliver Trusted Investigative Intelligence for Sovereign National Security Missions</a></h2>
+    
+    <div class="summary"><p>Ocient and Siren have partnered to offer investigative intelligence capabilities for national security agencies.</p>
+<ul>
+<li>Siren’s investigative platform can now be deployed directly on the OcientAIQ™ Unified Data Platform, delivered by Ocient National Security Solutions (ONSS).</li>
+<li>The partnership aims to enable agencies to investigate petabyte-scale datasets with full fidelity, sovereignty, and control.</li>
+<li>OcientAIQ supports various deployment models including on-premises, hybrid-cloud, air-gapped, and classified environments, ranging from 50 terabytes to multi-petabyte scale.</li>
+<li>Siren's investigative AI, search and visualization capabilities are combined with OcientAIQ’s data foundation to accelerate trusted intelligence gathering.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>release notes</span>
+      
+    </div>
+    <h2><a href="https://docs.ocient.com/ocientaiq-unified-data-platform-release-notes.md?release=27.1" target="_blank" rel="noopener">OcientAIQ Unified Data Platform Release Notes — 27.1</a></h2>
+    
+    <div class="summary"><p>OcientAIQ Unified Data Platform version 27.1 introduces new data loading options, transactional support, and enhancements to system observability.</p>
+<ul>
+<li>Added support for extracting Apache® Parquet™ files with the Data Extract Tool.</li>
+<li>Introduced the <code>CREATE TRANSACTIONAL PIPELINE</code> SQL statement, with an optional <code>START FOREGROUND</code> clause, enabling transactional pipelines with automatic rollback on failure.</li>
+<li>JDBC Bulk Loading now supports S3-compatible object stores via the <code>bulkLoadMode = s3</code> connection parameter.</li>
+<li>Implemented full transaction support within the database and across JDBC and pyocient drivers, including <code>BEGIN TRANSACTION</code>, <code>COMMIT</code>, and <code>ROLLBACK</code> statements.</li>
+<li>Added the <code>DROP TASK</code> SQL statement for managing distributed tasks.</li>
+<li>Expanded system catalog tables with historical data views: <code>sys.pipeline_errors_historical</code>, <code>sys.pipeline_events_historical</code>, <code>sys.pipeline_files_historical</code>, and <code>sys.pipeline_metrics_historical</code>.</li>
+<li>Added <code>transaction_id</code> and <code>transaction_prefix_len</code> columns to <code>sys.queries</code> and <code>sys.completed_queries</code>, and the <code>transaction_id</code> column to <code>sys.pipelines</code>. Added <code>information_schema.pipeline_status_historical</code>, <code>information_schema.pipelines_historical</code>, and <code>information_schema.transactional_pipeline_status</code> views.</li>
+<li>The <code>array_to_string</code> SQL function now outputs VARCHAR array values without surrounding quotes.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>blog</span>
+      <span> · 2026-07-02</span>
+    </div>
+    <h2><a href="https://ocient.com/blog/rethinking-network-investment-planning-and-why-tm-forum-took-notice/" target="_blank" rel="noopener">Rethinking network investment planning and why TM Forum took notice</a></h2>
+    
+    <div class="summary"><p>OcientAIQ™ is being utilized in a TM Forum award-winning Catalyst project to improve network investment planning for CSPs.</p>
+<ul>
+<li>The project unifies network planning across RAN, fixed broadband, transport, core, and data centers into a single investment view.</li>
+<li>The platform uses AI agents to evaluate demand forecasts, identify coverage gaps, model capacity, assess churn risk, and estimate financial returns.</li>
+<li>The solution leverages TM Forum Open APIs and the Open Digital Architecture (ODA) for integration with existing OSS/BSS systems.</li>
+<li>OcientAIQ™ provides the data foundation, enabling ingestion, management, and analysis of massive data streams for reliable AI recommendations at scale.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="xsiam/" class="badge badge-xsiam">XSIAM</a>
+      <span>blog</span>
+      <span> · 2026-06-17</span>
+    </div>
+    <h2><a href="https://www.paloaltonetworks.com/blog/security-operations/cyberthreats-in-google-workspace-and-their-detection/" target="_blank" rel="noopener">Cortex ITDR: Detecting Cyber threats in Google Workspace - Palo Alto Networks Blog</a></h2>
+    
+    <div class="summary"><ul>
+<li>Palo Alto Networks Cortex XSIAM now features Identity Threat Detection and Response (ITDR) capabilities for Google Workspace, addressing the increasing shift of attacks targeting the SaaS identity layer.</li>
+<li>The platform detects attacks leveraging “living off the land” techniques—such as OAuth consent phishing, credential harvesting via the Drive API (using tools like GD-Thief), and abuse of legitimate features—that bypass traditional security controls.</li>
+<li>Cortex XSIAM establishes behavioral baselines for users and entities within Google Workspace, identifying deviations from normal activity (e.g., unauthorized app access, unusual file access patterns) and correlating multiple signals into high-severity incidents.</li>
+<li>Specific alerts are mapped to MITRE ATT&amp;CK techniques, covering areas like domain policy modification, credential access, data exfiltration, and impairment of defenses, offering comprehensive threat coverage within Google Workspace.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="xsiam/" class="badge badge-xsiam">XSIAM</a>
+      <span>blog</span>
+      <span> · 2026-06-11</span>
+    </div>
+    <h2><a href="https://www.paloaltonetworks.com/blog/security-operations/cortex-frontier-ai/" target="_blank" rel="noopener">The Frontier AI SOC Has Arrived - Palo Alto Networks Blog</a></h2>
+    
+    <div class="summary"><ul>
+<li>Palo Alto Networks Cortex platform now natively supports frontier AI models – Claude Sonnet 4.6, Claude Opus 4.8, and Gemini 3.5 Flash – across Cortex XSIAM, AgentiX, XDR, and Cloud.</li>
+<li>The platform offers selectable AI models (Basic, Fast, Thinking, or Pro) to match task requirements for speed and analytical depth.</li>
+<li>Frontier AI models enhance security investigations by synthesizing complex requests, clarifying ambiguous contexts, and translating reasoning into structured execution within agentic workflows.</li>
+<li>Cortex integrates these models with native telemetry across endpoints, networks, cloud, and identity to provide comprehensive context for AI agents and analysts, enabling faster and more governed automated responses.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="xsiam/" class="badge badge-xsiam">XSIAM</a>
+      <span>blog</span>
+      <span> · 2026-06-02</span>
+    </div>
+    <h2><a href="https://www.paloaltonetworks.com/blog/security-operations/the-end-of-the-visibility-tax/" target="_blank" rel="noopener">The End of the Visibility Tax - Palo Alto Networks Blog</a></h2>
+    
+    <div class="summary"><p>Palo Alto Networks’ Cortex XSIAM now includes Enhanced Application logging at no additional cost, removing the “visibility tax” for Next-Generation Firewall and Prisma SASE customers.</p>
+<ul>
+<li>Enhanced Application logging captures telemetry like DNS queries, HTTP headers, and Kerberos events to provide deeper behavioral context for threat detection.</li>
+<li>Cortex XSIAM leverages this data with over 13,000 detectors, including 2,900 ML models, providing precise detection specifically for Palo Alto Networks environments.</li>
+<li>The platform uses deep protocol parsing (e.g., JA3 fingerprints &amp; HTTP user-agents) to expose stealthy lateral movement and C2 activity hidden within trusted applications.</li>
+<li>Customers can expect up to 40% more insights from network logs, 20-30% lower firewall data ingestion costs, and a 257% ROI with Cortex XSIAM.</li>
+</ul></div>
+    
+  </div>
   
 
   
@@ -119,30 +280,6 @@
       <div class="label">Excluded</div>
       <ul>
         <li class="excl">blog URLs containing &#34;employee-spotlight&#34;</li>
-      </ul>
-    </div>
-    
-    <div class="scraper-block">
-      <h3>Cribl</h3>
-      <div class="label">Sources</div>
-      <ul>
-        <li>https://cribl.io/sitemap.xml — blog posts and news releases</li>
-      </ul>
-      <div class="label">Excluded</div>
-      <ul>
-        <li class="excl">blog URLs containing &#34;cribl-edge&#34;</li><li class="excl">blog URLs containing &#34;company-culture&#34;</li>
-      </ul>
-    </div>
-    
-    <div class="scraper-block">
-      <h3>XSIAM</h3>
-      <div class="label">Sources</div>
-      <ul>
-        <li>https://www.paloaltonetworks.com/blog/tag/xsiam/ — XSIAM-tagged blog posts</li><li>https://www.paloaltonetworks.com/sitemap.xml — press releases filtered for /company/press/ + XSIAM</li>
-      </ul>
-      <div class="label">Excluded</div>
-      <ul>
-        <li class="excl">URLs from docs-cortex.paloaltonetworks.com (JS-rendered portal, no scrapeable content)</li>
       </ul>
     </div>
     
