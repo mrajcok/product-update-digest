@@ -3,8 +3,6 @@ import argparse
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-import pytest
-
 from digest.storage.db import ArticleDB
 from digest.storage.models import ArticleRecord, ScrapedPage, normalize_url, vec_id_for
 
@@ -199,10 +197,10 @@ class TestRunVector:
                 self._conn.execute = MagicMock()
                 self._conn.commit = MagicMock()
 
-            def upsert(self, update, vid):
+            def upsert(self, update, vid, progress=""):
                 upsert_calls.append((update, vid))
 
-            def upsert_chunks(self, update, vid):
+            def upsert_chunks(self, update, vid, progress=""):
                 return 0
 
             def get_all(self, company=None):
@@ -237,10 +235,10 @@ class TestRunVector:
                 self._conn.execute = MagicMock()
                 self._conn.commit = MagicMock()
 
-            def upsert(self, update, vid):
+            def upsert(self, update, vid, progress=""):
                 pass
 
-            def upsert_chunks(self, update, vid):
+            def upsert_chunks(self, update, vid, progress=""):
                 return 0
 
             def get_all(self, company=None):
@@ -276,10 +274,10 @@ class TestRunVector:
                 self._conn.execute = MagicMock()
                 self._conn.commit = MagicMock()
 
-            def upsert(self, update, vid):
+            def upsert(self, update, vid, progress=""):
                 pass
 
-            def upsert_chunks(self, update, vid):
+            def upsert_chunks(self, update, vid, progress=""):
                 return 0
 
             def get_all(self, company=None):
@@ -301,22 +299,29 @@ class TestRunVector:
 # ---------------------------------------------------------------------------
 
 class TestRunPublish:
-    def test_errors_when_dir_empty(self, db: ArticleDB, tmp_path: Path, mocker):
+    def test_publishes_when_dir_empty(self, db: ArticleDB, tmp_path: Path, mocker):
+        """--publish renders straight from the DB — it must not require --stage render to
+        have populated _DRY_RUN_DIR first (regression test for 9cca0af)."""
         mocker.patch("digest.main._DRY_RUN_DIR", tmp_path)
 
-        import sys
+        from digest.publisher.github_pages import GitHubPagesPublisher
+        mock_push = mocker.patch.object(GitHubPagesPublisher, "_push_to_github")
+
         from digest.main import _run_publish
+        _run_publish(_args("publish"), db)
 
-        with pytest.raises(SystemExit):
-            _run_publish(_args("publish"), db)
+        mock_push.assert_called_once()
 
-    def test_errors_when_dir_missing(self, db: ArticleDB, tmp_path: Path, mocker):
+    def test_publishes_when_dir_missing(self, db: ArticleDB, tmp_path: Path, mocker):
         mocker.patch("digest.main._DRY_RUN_DIR", tmp_path / "nonexistent")
 
-        from digest.main import _run_publish
+        from digest.publisher.github_pages import GitHubPagesPublisher
+        mock_push = mocker.patch.object(GitHubPagesPublisher, "_push_to_github")
 
-        with pytest.raises(SystemExit):
-            _run_publish(_args("publish"), db)
+        from digest.main import _run_publish
+        _run_publish(_args("publish"), db)
+
+        mock_push.assert_called_once()
 
     def test_calls_push_with_html_files(self, db: ArticleDB, tmp_path: Path, mocker):
         (tmp_path / "index.html").write_text("<html>test</html>")

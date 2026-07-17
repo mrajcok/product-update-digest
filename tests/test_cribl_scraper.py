@@ -1,4 +1,5 @@
 """Tests for scrapers/cribl.py — mocks _fetch_page to avoid network/Playwright."""
+from datetime import date
 from pathlib import Path
 import pytest
 from bs4 import BeautifulSoup
@@ -6,6 +7,7 @@ from bs4 import BeautifulSoup
 from digest.scrapers.cribl import CriblScraper
 
 FIXTURES = Path(__file__).parent / "fixtures"
+_RECENT_DATE = date.today().isoformat()  # within max_article_age_days cutoff, unlike a hardcoded date
 
 
 def _load(name: str) -> str:
@@ -76,13 +78,13 @@ class TestScrapePageWithFixture:
 
 
 class TestDiscoverFromSitemap:
-    _SITEMAP_XML = """<?xml version="1.0" encoding="UTF-8"?>
+    _SITEMAP_XML = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://cribl.io/blog/cribl-stream-4-0-released/</loc><lastmod>2026-05-01</lastmod></url>
-  <url><loc>https://cribl.io/blog/cribl-edge/</loc><lastmod>2026-05-01</lastmod></url>
-  <url><loc>https://cribl.io/blog/company-culture/</loc><lastmod>2026-05-01</lastmod></url>
-  <url><loc>https://cribl.io/news/press-release-1/</loc><lastmod>2026-05-01</lastmod></url>
-  <url><loc>https://cribl.io/unrelated/page/</loc><lastmod>2026-05-01</lastmod></url>
+  <url><loc>https://cribl.io/blog/cribl-stream-4-0-released/</loc><lastmod>{_RECENT_DATE}</lastmod></url>
+  <url><loc>https://cribl.io/blog/cribl-edge/</loc><lastmod>{_RECENT_DATE}</lastmod></url>
+  <url><loc>https://cribl.io/blog/company-culture/</loc><lastmod>{_RECENT_DATE}</lastmod></url>
+  <url><loc>https://cribl.io/news/press-release-1/</loc><lastmod>{_RECENT_DATE}</lastmod></url>
+  <url><loc>https://cribl.io/unrelated/page/</loc><lastmod>{_RECENT_DATE}</lastmod></url>
 </urlset>"""
 
     def test_returns_blog_and_news_urls(self, scraper, mocker):
