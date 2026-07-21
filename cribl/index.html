@@ -79,13 +79,47 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-18 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-07-21 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">July 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-20</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/ai-governance-requires-evidence-building-trust-and-accountability-in-public-sector-ai/" target="_blank" rel="noopener">AI governance requires evidence: Building trust and accountability in public sector AI | Cribl</a></h3>
+    
+    <div class="summary"><p>AI governance requires demonstrable evidence of effectiveness, particularly as AI systems rapidly evolve and are integrated into critical public sector workflows.</p>
+<ul>
+<li>Cribl advocates for moving beyond periodic governance assessments to a model of <em>continuous assurance</em>, encompassing continuous monitoring of AI activity and automated policy validation.</li>
+<li>Key components of this approach include real-time risk detection, AI usage analytics, agent activity monitoring, and governance dashboards for evidence collection.</li>
+<li>The discussion highlights the need for visibility into not only security risks but also <em>mission risks</em> stemming from inaccurate recommendations, biased outputs, and data quality issues.</li>
+<li>The blog emphasizes that effective AI governance requires the ability to demonstrate control functionality, exception handling, and risk mitigation through operational evidence, not just policy documentation.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-17</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/how-cribl-helps-teams-get-more-from-their-telemetry-pipeline/" target="_blank" rel="noopener">How Cribl helps teams get more from their telemetry pipeline | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl is evolving beyond a simple telemetry optimization tool to provide a flexible control layer for data pipelines.</p>
+<ul>
+<li>Cribl enables a “collect once” approach by acting as a central collection point for data from sources like Azure Event Hubs, SaaS platforms (Salesforce, SAP HANA, Wiz), and legacy collectors (syslog, Logstash), decoupling collection from analytics destinations.</li>
+<li>The platform intelligently “shapes” data by transforming it to match destination-specific schemas (e.g., mapping SaaS JSON to Microsoft Sentinel Log Analytics tables) and improving event fidelity by unrolling large payloads into individual events with correct timestamps.</li>
+<li>Cribl offers safe “routing and adaptation” capabilities, allowing teams to deliver tailored data to different destinations, retain full-fidelity copies for compliance, and facilitate seamless migrations (e.g., dual-forwarding during SIEM transitions).</li>
+<li>Features like HEC with TLS compression, heartbeat logs, persistent queues, and internal metrics assist in operational guardrails during data migration and ensure reliable data delivery.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -552,40 +586,6 @@
 <li>Diagnostics cover authentication, discovery, and collection phases of the REST Collector workflow.</li>
 <li>A generated <code>curl</code> command is provided for external testing and troubleshooting.</li>
 <li>Data is encrypted and stored locally with configurable redaction to protect sensitive information; diagnostic data is not ingested into Cribl.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-06-05</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/when-the-technical-problem-is-the-easy-part-lessons-from-wrangling-telemetry-at-getty-images/" target="_blank" rel="noopener">When the technical problem is the easy part: Lessons from wrangling telemetry at Getty Images | Cribl</a></h3>
-    
-    <div class="summary"><p>Getty Images reduced telemetry ingestion volume by nearly half and stabilized data growth using <strong>Cribl Stream</strong>, enabling greater control, visibility, and flexibility in their data pipeline. Key technical practices implemented included:</p>
-<ul>
-<li><strong>Metadata Enrichment:</strong> Adding metadata fields to data payloads to track data origin for troubleshooting and provenance.</li>
-<li><strong>Worker Group Partitioning:</strong> Isolating Cribl Stream worker groups by team or use case to prevent performance impacts from misconfigurations or activity spikes.</li>
-<li><strong>Dev Null Monitoring &amp; Datagens:</strong> Utilizing Cribl Stream's dev null pipeline for error detection and datagens for pre-production load testing with sample data.</li>
-<li><strong>AI-Powered Assistance:</strong> Leveraging tools like <strong>Cribl Copilot</strong> for pipeline building, sample data generation, and natural language KQL query creation.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-06-05</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/cribl-guards-latest-model-cribl-privacy-1-5-with-higher-recall-at-the-same-footprint/" target="_blank" rel="noopener">Cribl Guard’s latest model: Cribl-Privacy 1.5 with higher recall at the same footprint | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl has released Cribl-Privacy 1.5, a new version of its transformer model for Cribl Guard’s data detection capabilities.</p>
-<ul>
-<li>Cribl-Privacy 1.5 demonstrates improved performance over version 1.0, achieving a 7.5% increase in F1 score, an 11.5% increase in recall, and a 2.8% increase in precision.</li>
-<li>The update prioritizes recall – minimizing false negatives – to reduce the risk of sensitive data leakage, while also reducing false positives by 7.6%.</li>
-<li>The model maintains the same memory footprint and throughput profile as Cribl-Privacy 1.0, enabling a seamless upgrade without impacting existing infrastructure.</li>
-<li>Cribl-Privacy 1.5 is available with Cribl version 4.17.1 and is automatically applied to existing Cribl Guard customers on that version or later.</li>
 </ul></div>
     
   </div>
