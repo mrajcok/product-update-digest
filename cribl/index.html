@@ -79,13 +79,63 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-22 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-07-23 06:02 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">July 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-22</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/threat-hunting-with-the-cribl-mcp/" target="_blank" rel="noopener">Threat hunting with the Cribl MCP | Cribl</a></h3>
+    
+    <div class="summary"><p>Threat hunting with the Cribl MCP improves investigation speed by shortening the loop between asking a question and finding supporting evidence.</p>
+<ul>
+<li>The Cribl MCP (Model Context Protocol) allows an AI assistant to interact with Cribl Search, translating natural-language queries into searches and summarizing results.</li>
+<li>The tool helps reduce friction in threat hunting by automating tasks like query syntax, time-window calculations, and initial correlation.</li>
+<li>Effective prompts for the MCP include defining scope, time window, behavior of interest, and the decision being made.</li>
+<li>The MCP is most valuable when used to prove or disprove impact, rather than simply identifying suspicious activity, and excels at identifying durable indicators like payload families or request sequences.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-22</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/cribl-mcp-server-interact-with-cribl-using-the-ai-tools-you-already-use/" target="_blank" rel="noopener">Cribl MCP Server: Interact with Cribl using the AI tools you already use | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl 4.19 introduces a native Cribl MCP Server, enabling secure connections between AI clients (like Claude Code, Cursor, and OpenAI Codex CLI) and Cribl environments.</p>
+<ul>
+<li>Cribl MCP Server is embedded directly within the Cribl Leader, eliminating the need for separate service or container deployment.</li>
+<li>It leverages the open standard Model Context Protocol (MCP) to allow AI clients to retrieve Cribl resources like Sources, Destinations, Pipelines, and metrics.</li>
+<li>The feature allows users to inspect Cribl configurations, troubleshoot deployments, investigate telemetry, and build AI-powered workflows directly from existing AI tools.</li>
+<li>Access is controlled through existing Cribl permissions and RBAC, ensuring security and auditability; the embedded server is the recommended approach for new deployments, though a standalone Docker option remains supported.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-22</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/whats-new-4-19/" target="_blank" rel="noopener">What’s New! We heard you like AI. | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>Cribl 4.19 introduces an app framework enabling custom-built Cribl experiences via APIs and AI-assisted tools like Cursor, allowing tailored UIs and workflows.</li>
+<li>The Cribl MCP server is now a first-class, Cribl-managed platform feature within the Cribl Leader, simplifying integration with AI tools via existing authentication and access controls.</li>
+<li>Cribl Insights now supports monitoring and alerting for non-main Workspaces, providing broader visibility across development, testing, and production environments.</li>
+<li>New native Destinations are available for Amazon Bedrock, Snowflake, Google BigQuery and IBM Cloud Object Storage, offering streamlined data streaming without reliance on intermediate storage like Kafka or S3.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -535,57 +585,6 @@
 <li>AI excels at mapping raw telemetry to standard schemas like OCSF, accelerating onboarding, but human validation is crucial to ensure accurate data translation and prevent subtle errors impacting detections.</li>
 <li>While AI can discover sensitive data needing masking or redaction, policy decisions regarding these actions should remain with human owners, considering legal, privacy, and compliance requirements.</li>
 <li>AI can draft data pipeline configurations and troubleshoot issues, but a human preview, testing, and approval process is necessary before deploying changes to production environments to maintain data integrity.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-06-11</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/why-siem-migrations-fail-and-how-to-break-the-cycle/" target="_blank" rel="noopener">Why SIEM migrations fail and how to break the cycle | Cribl</a></h3>
-    
-    <div class="summary"><p>SIEM migrations frequently fail due to organizational, contractual, and structural issues – not the technology itself.</p>
-<ul>
-<li>Vendor lock-in is common via proprietary data collection, retention formats, and restrictive contracts with auto-renewal clauses and data egress fees.</li>
-<li>Teams often lack experience migrating SIEMs and struggle to quickly gain proficiency in new platforms while maintaining existing security coverage.</li>
-<li>Security programs often become overly dependent on the SIEM vendor, tying detection logic and workflows to a specific platform.</li>
-<li>Migrations routinely take longer than planned due to underestimated effort, competing priorities and the need to rebuild (not migrate) content/rules.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-06-10</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/criblcon-26-is-coming-to-chicago-register-now/" target="_blank" rel="noopener">CriblCon 26 is coming to Chicago. Register now. | Cribl</a></h3>
-    
-    <div class="summary"><p>CriblCon 26 will be held in Chicago from September 28-30, focusing on practical applications of “Agentic Telemetry” for the AI era.</p>
-<ul>
-<li>Attendees can participate in technical sessions and hands-on labs, categorized into three tracks: Cribl Core, Cribl Advanced, and a new Cribl Expert track for troubleshooting.</li>
-<li>The “Campus Experience” (a paid add-on) offers expert-led training focused on real-world data challenges, with completion awarding a “2026 Practical Data Skills” badge.</li>
-<li>The event will showcase Cribl’s platform and solutions for managing telemetry data, with a focus on enabling AI-ready data pipelines without lock-in or data loss.</li>
-<li>CriblCon aims to provide attendees with actionable insights and networking opportunities to solve real-world telemetry management challenges.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-06-09</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/rest-collector-diagnostics-now-easier-than-ever/" target="_blank" rel="noopener">REST Collector Diagnostics — Now easier than ever! | Cribl</a></h3>
-    
-    <div class="summary"><p>REST Collector Diagnostics now provide interactive debugging capabilities within Cribl.</p>
-<ul>
-<li>Debugging mode allows inspection of request and response details, including headers, payloads, URLs, and status codes.</li>
-<li>Diagnostics cover authentication, discovery, and collection phases of the REST Collector workflow.</li>
-<li>A generated <code>curl</code> command is provided for external testing and troubleshooting.</li>
-<li>Data is encrypted and stored locally with configurable redaction to protect sensitive information; diagnostic data is not ingested into Cribl.</li>
 </ul></div>
     
   </div>
