@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-23 06:02 AM EDT</p>
+  <p class="generated-at">Generated 2026-07-24 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -107,16 +107,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-07-22</span>
+      <span> · 2026-07-23</span>
     </div>
-    <h2><a href="https://cribl.io/blog/threat-hunting-with-the-cribl-mcp/" target="_blank" rel="noopener">Threat hunting with the Cribl MCP | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/introducing-capra-cribls-design-system/" target="_blank" rel="noopener">Introducing Capra, Cribl’s design system | Cribl</a></h2>
     
-    <div class="summary"><p>Threat hunting with the Cribl MCP improves investigation speed by shortening the loop between asking a question and finding supporting evidence.</p>
+    <div class="summary"><p>Cribl has released Capra, a new in-house design system intended to improve consistency, accessibility, and code health across their platform and for Cribl Apps.</p>
 <ul>
-<li>The Cribl MCP (Model Context Protocol) allows an AI assistant to interact with Cribl Search, translating natural-language queries into searches and summarizing results.</li>
-<li>The tool helps reduce friction in threat hunting by automating tasks like query syntax, time-window calculations, and initial correlation.</li>
-<li>Effective prompts for the MCP include defining scope, time window, behavior of interest, and the decision being made.</li>
-<li>The MCP is most valuable when used to prove or disprove impact, rather than simply identifying suspicious activity, and excels at identifying durable indicators like payload families or request sequences.</li>
+<li>Capra includes design standards (encoded as design tokens) and a frontend component library built on React Aria Components, chosen for its accessibility features and style customization options.</li>
+<li>The system utilizes Style Dictionary to manage design tokens as a single source of truth for both Figma and code.</li>
+<li>Documentation is provided through Storybook and a custom rendering pipeline that converts content to Markdown, making it accessible for both humans and LLMs via an <code>/llms.txt</code> route.</li>
+<li>Capra is now published on NPM, allowing customers to build Cribl Apps with consistent design aesthetics and behavior.</li>
 </ul></div>
     
   </div>
@@ -125,16 +125,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-07-22</span>
+      <span> · 2026-07-23</span>
     </div>
-    <h2><a href="https://cribl.io/blog/cribl-mcp-server-interact-with-cribl-using-the-ai-tools-you-already-use/" target="_blank" rel="noopener">Cribl MCP Server: Interact with Cribl using the AI tools you already use | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/i-built-a-full-featured-app-on-the-cribl-platform-and-im-not-a-developer/" target="_blank" rel="noopener">I built a full-featured app on the Cribl Platform and I&#39;m not a developer | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl 4.19 introduces a native Cribl MCP Server, enabling secure connections between AI clients (like Claude Code, Cursor, and OpenAI Codex CLI) and Cribl environments.</p>
+    <div class="summary"><p>Cribl Platform allows users to build full-featured applications without extensive software development experience.</p>
 <ul>
-<li>Cribl MCP Server is embedded directly within the Cribl Leader, eliminating the need for separate service or container deployment.</li>
-<li>It leverages the open standard Model Context Protocol (MCP) to allow AI clients to retrieve Cribl resources like Sources, Destinations, Pipelines, and metrics.</li>
-<li>The feature allows users to inspect Cribl configurations, troubleshoot deployments, investigate telemetry, and build AI-powered workflows directly from existing AI tools.</li>
-<li>Access is controlled through existing Cribl permissions and RBAC, ensuring security and auditability; the embedded server is the recommended approach for new deployments, though a standalone Docker option remains supported.</li>
+<li>The platform simplifies app development by handling infrastructure concerns like hosting, authentication (using a fetch proxy), RBAC, and API gateway configuration.</li>
+<li>Applications run as sandboxed iframes within Cribl Search, eliminating server provisioning, container management, DNS configuration, and TLS certificate rotation.</li>
+<li>A single <code>npm run deploy</code> command builds, packages, uploads, and installs the app, enabling rapid deployment to a Cribl Cloud environment.</li>
+<li>The described app provides a catalog of 43 data sources with field matrices, security/observability detections (over 600 with KQL queries), enrichment recommendations, and one-click deployment to Cribl Search.</li>
 </ul></div>
     
   </div>
@@ -143,15 +143,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-07-22</span>
+      <span> · 2026-07-23</span>
     </div>
-    <h2><a href="https://cribl.io/blog/whats-new-4-19/" target="_blank" rel="noopener">What’s New! We heard you like AI. | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/architecting-for-the-speed-of-vibe-coding-introducing-apps/" target="_blank" rel="noopener">Architecting for the speed of &#34;vibe coding&#34;: Introducing Apps | Cribl</a></h2>
     
-    <div class="summary"><ul>
-<li>Cribl 4.19 introduces an app framework enabling custom-built Cribl experiences via APIs and AI-assisted tools like Cursor, allowing tailored UIs and workflows.</li>
-<li>The Cribl MCP server is now a first-class, Cribl-managed platform feature within the Cribl Leader, simplifying integration with AI tools via existing authentication and access controls.</li>
-<li>Cribl Insights now supports monitoring and alerting for non-main Workspaces, providing broader visibility across development, testing, and production environments.</li>
-<li>New native Destinations are available for Amazon Bedrock, Snowflake, Google BigQuery and IBM Cloud Object Storage, offering streamlined data streaming without reliance on intermediate storage like Kafka or S3.</li>
+    <div class="summary"><p>Cribl has introduced “Apps” to enable faster, AI-assisted development within their telemetry platform, balancing platform stability with customer customization.</p>
+<ul>
+<li>Apps provide a secure, sandboxed environment for customers to build custom functionality using standard web technologies, interacting with the Cribl platform via public APIs.</li>
+<li>The architecture is based on three core principles: a strict trust boundary (Apps never have platform privileges), sandboxed execution (customer code runs in a zero-privilege environment), and managed backend primitives (built-in state persistence and API proxies).</li>
+<li>Apps avoid the issues of both "free-for-all" (security risks of arbitrary code execution) and "walled garden" (restrictive pre-built widgets) approaches to platform customization.</li>
+<li>The initial implementation utilizes sandboxed iframes, with a foundational design geared toward supporting future execution environments, enabling rapid iteration without compromising platform stability.</li>
 </ul></div>
     
   </div>
