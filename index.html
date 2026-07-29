@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-28 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-07-29 06:03 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -107,16 +107,15 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-07-23</span>
+      <span> · 2026-07-28</span>
     </div>
-    <h2><a href="https://cribl.io/blog/introducing-capra-cribls-design-system/" target="_blank" rel="noopener">Introducing Capra, Cribl’s design system | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/optimizing-observability-spend-practical-strategies-for-sres/" target="_blank" rel="noopener">Optimizing observability spend: Practical strategies for SREs | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl has released Capra, a new in-house design system intended to improve consistency, accessibility, and code health across their platform and for Cribl Apps.</p>
-<ul>
-<li>Capra includes design standards (encoded as design tokens) and a frontend component library built on React Aria Components, chosen for its accessibility features and style customization options.</li>
-<li>The system utilizes Style Dictionary to manage design tokens as a single source of truth for both Figma and code.</li>
-<li>Documentation is provided through Storybook and a custom rendering pipeline that converts content to Markdown, making it accessible for both humans and LLMs via an <code>/llms.txt</code> route.</li>
-<li>Capra is now published on NPM, allowing customers to build Cribl Apps with consistent design aesthetics and behavior.</li>
+    <div class="summary"><ul>
+<li>Cribl details strategies for reducing observability costs by efficiently processing telemetry data using Cribl Stream, Edge, and Lake.</li>
+<li>The “Drop” function in Cribl Edge can eliminate low-value logs (like debug logs) at the source, reducing data transfer and storage costs, with the ability to re-enable collection if needed.</li>
+<li>Cribl Edge and Stream support log sampling (e.g., 1/1000 or 1/100) to reduce data volume while preserving visibility for troubleshooting high-volume logs.</li>
+<li>Aggregations and metric rollups within Cribl Edge or Stream reduce dimensionality and frequency, lowering storage footprint and query computation time.</li>
 </ul></div>
     
   </div>
@@ -125,16 +124,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-07-23</span>
+      <span> · 2026-07-28</span>
     </div>
-    <h2><a href="https://cribl.io/blog/i-built-a-full-featured-app-on-the-cribl-platform-and-im-not-a-developer/" target="_blank" rel="noopener">I built a full-featured app on the Cribl Platform and I&#39;m not a developer | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/what-is-agentic-telemetry/" target="_blank" rel="noopener">What is agentic telemetry? | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl Platform allows users to build full-featured applications without extensive software development experience.</p>
+    <div class="summary"><p>Agentic telemetry manages telemetry for both system operators and AI agents, fusing human, machine, and AI context for broader data access.</p>
 <ul>
-<li>The platform simplifies app development by handling infrastructure concerns like hosting, authentication (using a fetch proxy), RBAC, and API gateway configuration.</li>
-<li>Applications run as sandboxed iframes within Cribl Search, eliminating server provisioning, container management, DNS configuration, and TLS certificate rotation.</li>
-<li>A single <code>npm run deploy</code> command builds, packages, uploads, and installs the app, enabling rapid deployment to a Cribl Cloud environment.</li>
-<li>The described app provides a catalog of 43 data sources with field matrices, security/observability detections (over 600 with KQL queries), enrichment recommendations, and one-click deployment to Cribl Search.</li>
+<li>It proposes a shift from centralized data collection (“single pane of glass”) to an “AI Platform for Telemetry” – a modular architecture enabling collection, routing, shaping, storing, and analysis from multiple vendors.</li>
+<li>Key components include open access for agents (human &amp; AI), full-fidelity retention, search-in-place (federated query), fused context, and governance features like identity, RBAC, and audit controls.</li>
+<li>The post identifies three core problems hindering agentic telemetry: agent fatigue (proliferation of AI companions creating lock-in), context starvation (lack of complete data for agents), and token economics (the cost of querying large datasets with AI).</li>
+<li>Cribl frames this as a necessary architectural evolution, similar to the emergence of the observability pipeline, and offers a blueprint for achieving agentic telemetry with capabilities like open access, full-fidelity retention, and search-in-place.</li>
 </ul></div>
     
   </div>
@@ -143,16 +142,15 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-07-23</span>
+      <span> · 2026-07-28</span>
     </div>
-    <h2><a href="https://cribl.io/blog/architecting-for-the-speed-of-vibe-coding-introducing-apps/" target="_blank" rel="noopener">Architecting for the speed of &#34;vibe coding&#34;: Introducing Apps | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/why-full-text-search-matters-for-modern-log-analytics/" target="_blank" rel="noopener">Why full-text search matters for modern log analytics | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl has introduced “Apps” to enable faster, AI-assisted development within their telemetry platform, balancing platform stability with customer customization.</p>
-<ul>
-<li>Apps provide a secure, sandboxed environment for customers to build custom functionality using standard web technologies, interacting with the Cribl platform via public APIs.</li>
-<li>The architecture is based on three core principles: a strict trust boundary (Apps never have platform privileges), sandboxed execution (customer code runs in a zero-privilege environment), and managed backend primitives (built-in state persistence and API proxies).</li>
-<li>Apps avoid the issues of both "free-for-all" (security risks of arbitrary code execution) and "walled garden" (restrictive pre-built widgets) approaches to platform customization.</li>
-<li>The initial implementation utilizes sandboxed iframes, with a foundational design geared toward supporting future execution environments, enabling rapid iteration without compromising platform stability.</li>
+    <div class="summary"><ul>
+<li>Cribl Search 4.19 (July 2026) now defaults to using a full-text search capability built on an inverted index of the <code>_raw</code> event message.</li>
+<li>This full-text search allows for significantly faster alphanumeric token searches across log data without requiring users to know specific field locations.</li>
+<li>Internal testing on a 1 billion row dataset showed 150x to 350x acceleration for “needle in the haystack” searches using the indexed approach, with greater acceleration for rarer search terms.</li>
+<li>Full-text search complements existing indexed fields, narrowing the search space before applying structured predicates, and currently supports simple string matching via the <code>where</code> operator with the <code>has string</code> operator, but not wildcards or substring matching.</li>
 </ul></div>
     
   </div>
