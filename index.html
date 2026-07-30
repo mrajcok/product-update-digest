@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-29 06:03 AM EDT</p>
+  <p class="generated-at">Generated 2026-07-30 06:02 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,42 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-07-29</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/campus-experience-at-criblcon-26-learn-it-break-it-fix-it-brag-about-it/" target="_blank" rel="noopener">Campus experience at CriblCon 26: Learn it, break it, fix it, brag about it | Cribl</a></h2>
+    
+    <div class="summary"><p>CriblCon 26 will feature a hands-on “Campus Experience” training day on September 28, 2026, in Chicago.</p>
+<ul>
+<li>Three training tracks are available: Core (fundamentals), Advanced (complex data manipulation), and Expert (real-world troubleshooting with minimal guidance).</li>
+<li>The new “Expert” track drops users into broken, high-pressure environments to diagnose and fix issues, followed by peer discussion guided by Cribl experts.</li>
+<li>Each track awards a “Practical Data Skills” badge (Core, Advanced, or Expert) upon completion.</li>
+<li>The training costs $250 per person (in addition to CriblCon registration) and has limited capacity (50 people per track).</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-07-28</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/ai-assisted-vulnerability-research-at-cribl/" target="_blank" rel="noopener">AI-assisted vulnerability research at Cribl | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl leveraged OpenAI’s GPT-5.5 to assist in vulnerability research, resulting in the discovery and remediation of multiple vulnerabilities, including CVE-2026-56747 and CVE-2026-56748.</p>
+<ul>
+<li>The AI assistant was integrated into the vulnerability research workflow to trace code paths, connect product behavior, generate proofs of concept, and challenge assumptions.</li>
+<li>Providing the AI with detailed product context, including documentation and threat models, improved research quality by reducing false positives and accelerating validation.</li>
+<li>The primary strengths of the AI model were call-path tracing, building quick test harnesses, and draft writing for vulnerability reports.</li>
+<li>Human oversight remained critical for validating findings, assessing impact, and ensuring the accuracy of the AI-generated results; the AI accelerated but did not replace human security expertise.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -122,35 +158,18 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-07-28</span>
+      <span> · 2026-07-29</span>
     </div>
-    <h2><a href="https://cribl.io/blog/what-is-agentic-telemetry/" target="_blank" rel="noopener">What is agentic telemetry? | Cribl</a></h2>
+    <h2><a href="https://ocient.com/blog/the-threshold-question-is-your-data-platform-ready-for-agentic-ai/" target="_blank" rel="noopener">The threshold question: Is your data platform ready for agentic AI?</a></h2>
     
-    <div class="summary"><p>Agentic telemetry manages telemetry for both system operators and AI agents, fusing human, machine, and AI context for broader data access.</p>
+    <div class="summary"><p>OcientAIQ™ Unified Data Platform is designed for agentic AI workloads that exceed the capabilities of traditional data platforms reliant on caching.</p>
 <ul>
-<li>It proposes a shift from centralized data collection (“single pane of glass”) to an “AI Platform for Telemetry” – a modular architecture enabling collection, routing, shaping, storing, and analysis from multiple vendors.</li>
-<li>Key components include open access for agents (human &amp; AI), full-fidelity retention, search-in-place (federated query), fused context, and governance features like identity, RBAC, and audit controls.</li>
-<li>The post identifies three core problems hindering agentic telemetry: agent fatigue (proliferation of AI companions creating lock-in), context starvation (lack of complete data for agents), and token economics (the cost of querying large datasets with AI).</li>
-<li>Cribl frames this as a necessary architectural evolution, similar to the emergence of the observability pipeline, and offers a blueprint for achieving agentic telemetry with capabilities like open access, full-fidelity retention, and search-in-place.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-07-28</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/why-full-text-search-matters-for-modern-log-analytics/" target="_blank" rel="noopener">Why full-text search matters for modern log analytics | Cribl</a></h2>
-    
-    <div class="summary"><ul>
-<li>Cribl Search 4.19 (July 2026) now defaults to using a full-text search capability built on an inverted index of the <code>_raw</code> event message.</li>
-<li>This full-text search allows for significantly faster alphanumeric token searches across log data without requiring users to know specific field locations.</li>
-<li>Internal testing on a 1 billion row dataset showed 150x to 350x acceleration for “needle in the haystack” searches using the indexed approach, with greater acceleration for rarer search terms.</li>
-<li>Full-text search complements existing indexed fields, narrowing the search space before applying structured predicates, and currently supports simple string matching via the <code>where</code> operator with the <code>has string</code> operator, but not wildcards or substring matching.</li>
+<li>The platform identifies a “threshold” where cache misses begin to reveal underlying architectural limitations in data platforms, a point agentic AI workloads reach faster due to their exploratory and continuous nature.</li>
+<li>OcientAIQ utilizes Compute Adjacent Storage Architecture (CASA), placing data on local NVMe via PCIe, avoiding network I/O bottlenecks common in cloud architectures that separate compute and storage.</li>
+<li>It supports all six core analytical modalities (relational, geospatial, ML via OcientML™, graph, vector search, and real-time rollups) within a single engine and data copy, improving performance for cross-modal queries.</li>
+<li>OcientAIQ features per-core pricing which contrasts with per-query or per-byte pricing models, providing more predictable costs for the continuous and exploratory behavior of AI agents.</li>
 </ul></div>
     
   </div>
@@ -187,24 +206,6 @@
 <li>Ocient stores tuples as either virtual columns (separate columns logically related) or materialized (single binary blob), with tuples inside arrays always being materialized.</li>
 <li>Tuple comparisons are performed lexicographically, meaning elements are compared in order, enabling specific sorting behavior (e.g., <code>(1, "Z")</code> comes before <code>(2, "A")</code>).</li>
 <li>A "Tuple Max" trick can be used for point-in-time queries by packaging a timestamp and value in a tuple and utilizing the <code>MAX()</code> function's lexicographical sorting to efficiently retrieve the latest value, avoiding self-joins.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>press release</span>
-      <span> · 2026-07-14</span>
-    </div>
-    <h2><a href="https://ocient.com/newsroom/press-releases/ocient-and-siren-announce-strategic-partnership-to-deliver-trusted-investigative-intelligence-for-sovereign-national-security-missions/" target="_blank" rel="noopener">Ocient and Siren Announce Strategic Partnership to Deliver Trusted Investigative Intelligence for Sovereign National Security Missions</a></h2>
-    
-    <div class="summary"><p>Ocient and Siren have partnered to offer investigative intelligence capabilities for national security agencies.</p>
-<ul>
-<li>Siren’s investigative platform can now be deployed directly on the OcientAIQ™ Unified Data Platform, delivered by Ocient National Security Solutions (ONSS).</li>
-<li>The partnership aims to enable agencies to investigate petabyte-scale datasets with full fidelity, sovereignty, and control.</li>
-<li>OcientAIQ supports various deployment models including on-premises, hybrid-cloud, air-gapped, and classified environments, ranging from 50 terabytes to multi-petabyte scale.</li>
-<li>Siren's investigative AI, search and visualization capabilities are combined with OcientAIQ’s data foundation to accelerate trusted intelligence gathering.</li>
 </ul></div>
     
   </div>

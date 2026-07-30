@@ -79,13 +79,47 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-29 06:03 AM EDT</p>
+  <p class="generated-at">Generated 2026-07-30 06:02 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">July 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-29</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/campus-experience-at-criblcon-26-learn-it-break-it-fix-it-brag-about-it/" target="_blank" rel="noopener">Campus experience at CriblCon 26: Learn it, break it, fix it, brag about it | Cribl</a></h3>
+    
+    <div class="summary"><p>CriblCon 26 will feature a hands-on “Campus Experience” training day on September 28, 2026, in Chicago.</p>
+<ul>
+<li>Three training tracks are available: Core (fundamentals), Advanced (complex data manipulation), and Expert (real-world troubleshooting with minimal guidance).</li>
+<li>The new “Expert” track drops users into broken, high-pressure environments to diagnose and fix issues, followed by peer discussion guided by Cribl experts.</li>
+<li>Each track awards a “Practical Data Skills” badge (Core, Advanced, or Expert) upon completion.</li>
+<li>The training costs $250 per person (in addition to CriblCon registration) and has limited capacity (50 people per track).</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-28</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/ai-assisted-vulnerability-research-at-cribl/" target="_blank" rel="noopener">AI-assisted vulnerability research at Cribl | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl leveraged OpenAI’s GPT-5.5 to assist in vulnerability research, resulting in the discovery and remediation of multiple vulnerabilities, including CVE-2026-56747 and CVE-2026-56748.</p>
+<ul>
+<li>The AI assistant was integrated into the vulnerability research workflow to trace code paths, connect product behavior, generate proofs of concept, and challenge assumptions.</li>
+<li>Providing the AI with detailed product context, including documentation and threat models, improved research quality by reducing false positives and accelerating validation.</li>
+<li>The primary strengths of the AI model were call-path tracing, building quick test harnesses, and draft writing for vulnerability reports.</li>
+<li>Human oversight remained critical for validating findings, assessing impact, and ensuring the accuracy of the AI-generated results; the AI accelerated but did not replace human security expertise.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -132,23 +166,6 @@
 <li>This full-text search allows for significantly faster alphanumeric token searches across log data without requiring users to know specific field locations.</li>
 <li>Internal testing on a 1 billion row dataset showed 150x to 350x acceleration for “needle in the haystack” searches using the indexed approach, with greater acceleration for rarer search terms.</li>
 <li>Full-text search complements existing indexed fields, narrowing the search space before applying structured predicates, and currently supports simple string matching via the <code>where</code> operator with the <code>has string</code> operator, but not wildcards or substring matching.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-28</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/ai-assisted-vulnerability-research-at-cribl/" target="_blank" rel="noopener">AI-assisted vulnerability research at Cribl | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl leveraged OpenAI’s GPT-5.5 to assist in vulnerability research, resulting in the identification and remediation of multiple vulnerabilities, including CVE-2026-56747 and CVE-2026-56748.</p>
-<ul>
-<li>The AI assistant, provided with extensive product context (documentation, threat models, etc.), aided in tracing code paths and connecting product behavior.</li>
-<li>It facilitated the generation of proofs of concept and helped validate potential vulnerabilities, accelerating the research loop.</li>
-<li>The strongest use cases were call-path tracing, building test harnesses, and improving the clarity of vulnerability documentation.</li>
-<li>Human oversight remained critical for validating findings, addressing false positives, and ensuring accurate impact assessments.</li>
 </ul></div>
     
   </div>
@@ -570,23 +587,6 @@
 <li>Orphan management detects and reassigns queue directories from failed Workers to surviving Workers, preventing data loss during worker loss, autoscaling, or infrastructure replacement.</li>
 <li>The Leader node scans shared storage at a configurable interval and, after a defined orphan detection window, assigns orphaned queues to available Workers for draining via a temporary auxiliary process called the PQ Worker.</li>
 <li>Configuration is managed via the UI or API, with options to adjust orphan detection thresholds and disable orphan management during planned downtime; metrics like <code>pq.orphan_detected</code> and <code>pq.queue_size</code> enable observability.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-06-24</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/build-the-workflow-not-the-infrastructure/" target="_blank" rel="noopener">Build the Workflow, Not the Infrastructure | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl announced the “AI Platform for Telemetry”, shifting focus from bundled observability solutions to a shared telemetry platform.</p>
-<ul>
-<li>The platform prioritizes <em>access</em> to telemetry data regardless of its location, supporting federation across existing observability platforms, SIEMs, and cloud services.</li>
-<li>Cribl is building core telemetry infrastructure services – collection, routing, processing, governance, storage, search, access, and federation – as a foundation for custom applications.</li>
-<li>The architecture differentiates itself from “solution platforms” by treating telemetry as the persistent asset, enabling diverse experiences built by Cribl, customers, partners, and AI tools.</li>
-<li>The goal is to enable rapid customization of workflows for security incident investigation, operational troubleshooting, and building industry-specific solutions without requiring a new telemetry stack each time.</li>
 </ul></div>
     
   </div>
