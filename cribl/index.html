@@ -79,13 +79,29 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-30 06:02 AM EDT</p>
+  <p class="generated-at">Generated 2026-07-31 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">July 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-30</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/the-night-before-dora-one-ciso-five-timelines-zero-confidence/" target="_blank" rel="noopener">The night before DORA: One CISO. Five timelines. Zero confidence. | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>Cribl addresses challenges presented by the Digital Operational Resilience Act (DORA), which demands verifiable evidence of an organization’s ability to withstand, respond to, and recover from disruptions.</li>
+<li>The article highlights the difficulty of creating a unified timeline during major incidents due to fragmented data sources (SIEMs, XDRs, observability tools, data lakes) with differing contexts and identifiers.</li>
+<li>Cribl advocates for treating telemetry as an "evidence layer" for DORA compliance, prioritizing data quality and consistency over simply logging more data to address budget constraints.</li>
+<li>The company positions itself as providing a platform to overcome telemetry fragmentation, improve AI-driven security analysis, and establish a strong basis for defense against audits and regulatory scrutiny, specifically referencing their "DORA telemetry guide" for detailed architectures and roadmaps.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -571,22 +587,6 @@
 <li>The report acknowledges Cribl Edge, Cribl Search, and Cribl Lake as products designed for IT and security use cases, providing choice and flexibility in data management.</li>
 <li>Customer reviews emphasize cost savings and ease of use compared to competing solutions, requiring less specialized training.</li>
 <li>Cribl reports significant financial growth, exceeding $200 million in ARR with over 70% year-over-year growth and &gt;130% net dollar retention.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-06-25</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/keep-telemetry-resilient-when-your-infrastructure-cant-keep-up-with-shared-pq-storage/" target="_blank" rel="noopener">Keep telemetry resilient when your infrastructure can&#39;t keep up with shared PQ storage | Cribl</a></h3>
-    
-    <div class="summary"><ul>
-<li>Cribl introduces shared Persistent Queue (PQ) storage using NFS or S3, allowing Worker nodes in a group to access the same queue paths for data recovery if a node fails.</li>
-<li>Orphan management detects and reassigns queue directories from failed Workers to surviving Workers, preventing data loss during worker loss, autoscaling, or infrastructure replacement.</li>
-<li>The Leader node scans shared storage at a configurable interval and, after a defined orphan detection window, assigns orphaned queues to available Workers for draining via a temporary auxiliary process called the PQ Worker.</li>
-<li>Configuration is managed via the UI or API, with options to adjust orphan detection thresholds and disable orphan management during planned downtime; metrics like <code>pq.orphan_detected</code> and <code>pq.queue_size</code> enable observability.</li>
 </ul></div>
     
   </div>
