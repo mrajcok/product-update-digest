@@ -79,13 +79,86 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-31 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-01 06:08 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">July 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-31</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/ocient-collaborates-with-amd-to-increase-compute-efficiency-and-decrease-customers-tco/" target="_blank" rel="noopener">Ocient + AMD: Increase efficiency and decrease TCO</a></h3>
+    
+    <div class="summary"><p>Ocient, in collaboration with AMD, has achieved significant performance and efficiency gains for data processing and AI workloads.</p>
+<ul>
+<li>The Ocient Hyperscale Data Warehouse™ running on 4th Gen AMD EPYC processors delivers a 3.5x increase in processing power and a 2x+ increase in memory throughput.</li>
+<li>Ocient leverages the high core density of 4th Gen AMD EPYC processors to accelerate analytics and AI workloads, improving concurrency and model training.</li>
+<li>Ocient’s Compute Adjacent Storage Architecture® (CASA) combined with AMD EPYC processors and NVMe drives lowers latency and increases data throughput.</li>
+<li>The collaboration allows customers to reduce TCO by up to 90% and decrease the system footprint and energy consumption for compute-intensive tasks.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-31</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/inside-ocient-casting-timestamps-and-secret-internal-names/" target="_blank" rel="noopener">Inside the Ocient Engine: Casting, timestamps, and names</a></h3>
+    
+    <div class="summary"><p>Ocient provides flexible SQL syntax for casting and timestamp handling, drawing inspiration from both Postgres and DB2 while introducing unique features.</p>
+<ul>
+<li>Ocient supports multiple ways to retrieve the current timestamp, including <code>now()</code>, <code>current_timestamp</code>, and special registers, all mapping to the same internal function with appended suffixes to resolve naming collisions.</li>
+<li>Casting can be achieved using ANSI SQL, Postgres' <code>::</code> syntax, explicit <code>CAST</code> functions, or by using the data type name as a function (e.g., <code>CHAR()</code>).</li>
+<li>Intervals are internally represented as integer or bigint values with assigned units, meaning <code>INTERVAL</code> is not a distinct data type and <code>CAST(... AS INTERVAL)</code> is not supported; date math is performed using constructors.</li>
+<li>Timestamp components can be extracted using standard <code>EXTRACT</code> and <code>date_part</code> functions (returning doubles) or Ocient's shorthand functions like <code>year()</code> and <code>minute()</code> (returning integers/bigints), with subtraction resulting in nanosecond (bigint) or day (int) values.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-31</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/hdd-or-ssd-an-opposing-look-at-lowering-carbon-emissions-for-real-time-analytics/" target="_blank" rel="noopener">HDD vs SSD for Lowering Carbon Emissions</a></h3>
+    
+    <div class="summary"><p>Ocient’s white paper, “Meeting the Challenges of Modern Big Data,” argues that while SSDs have a higher manufacturing carbon footprint, they are more energy-efficient over their lifespan–especially in enterprise analytics environments. The paper demonstrates that a single NVMe SSD can replace hundreds of HDDs, reducing overall power consumption and operational emissions for high IOPS workloads like real-time data streaming and AI. The analysis suggests SSDs are the more sustainable choice for large-scale data centers, contrasting with consumer applications where HDDs may be preferable.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-31</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/how-ocient-outperforms-druid-in-real-time-analysis-of-large-compute-intensive-workloads/" target="_blank" rel="noopener">Ocient vs Druid: Real-Time Analytics Performance Comparison</a></h3>
+    
+    <div class="summary"><p>Ocient demonstrates significantly improved performance and cost-efficiency compared to Druid for real-time analytics workloads.</p>
+<ul>
+<li>Ocient achieved nearly double the performance of Druid on compute-intensive workloads, according to benchmark testing.</li>
+<li>Ocient’s list price is up to 69% lower than Druid’s for on-premises deployments, and OcientCloud provides nearly 9x the storage (945TB NVMe) of Imply Polaris (105.6TB S3) at 64% of the cost.</li>
+<li>Ocient utilizes a Compute Adjacent Storage Architecture designed for scale and efficient handling of concurrent data loading and querying.</li>
+<li>Ocient requires roughly one-third the disk space of Druid for the same dataset and offers features beyond real-time analytics, including data loading, transformation, machine learning, and geospatial analytics within the Ocient Hyperscale Data Warehouse.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-07-31</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/at-the-whiteboard-with-ocient-compute-adjacent-architecture/" target="_blank" rel="noopener">At the Whiteboard: Compute Adjacent Storage Architecture</a></h3>
+    
+    <div class="summary"><p>Ocient introduces a compute-adjacent storage architecture leveraging its Ocient Hyperscale Data Warehouse to minimize data movement and latency by colocating compute resources directly with storage, improving query performance for large-scale analytical workloads.</p></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -470,23 +543,6 @@
       <span>blog</span>
       <span> · 2026-05-14</span>
     </div>
-    <h3><a href="https://ocient.com/blog/inside-ocient-casting-timestamps-and-secret-internal-names/" target="_blank" rel="noopener">Inside the Ocient Engine: Casting, timestamps, and “secret” internal names</a></h3>
-    
-    <div class="summary"><p>Ocient SQL offers flexible casting and timestamp handling, drawing from Postgres and DB2 concepts with unique internal optimizations.</p>
-<ul>
-<li>Ocient supports multiple functions for retrieving the current timestamp—<code>now()</code>, <code>current_timestamp</code>, and scalar functions—all mapping to the same internal function, distinguished by appended suffixes (e.g., <code>_1</code>, <code>_2</code>).</li>
-<li>Casting can be performed using ANSI SQL, Postgres-style <code>::</code>, explicit <code>CAST</code> functions, or constructor-style casts, where data type names act as functions (e.g., <code>CHAR()</code>).</li>
-<li>Intervals are internally represented as integer or bigint values with assigned units, meaning <code>INTERVAL</code> is not a native data type, and date math is best handled using constructors. Subtracting timestamps returns bigint values in nanoseconds, while subtracting dates returns integers representing days.</li>
-<li>Ocient provides both standard <code>EXTRACT</code> and <code>date_part</code> functions (returning doubles) alongside shorthand functions like <code>year()</code> and <code>minute()</code> (returning integers/bigints); shorthand functions extract specific portions of a timestamp.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-05-14</span>
-    </div>
     <h3><a href="https://ocient.com/blog/reflections-from-mwc-barcelona-four-themes-shaping-telecoms-data-future/" target="_blank" rel="noopener">Reflections from MWC Barcelona: 4 themes shaping telecom’s data future</a></h3>
     
     <div class="summary"><p>Ocient’s observations from MWC Barcelona highlight key trends impacting telecom data strategy.</p>
@@ -529,80 +585,6 @@
 <li>The platform focuses on enabling real-time network analytics and anomaly detection within telecom networks.</li>
 <li>Solutions include cross-domain data correlation for improved visibility, and capabilities for revenue assurance and fraud detection.</li>
 <li>GSMA membership will allow Ocient to collaborate directly with CSPs and contribute to industry standards discussions concerning AI, data architecture, and automation.</li>
-</ul></div>
-    
-  </div>
-  
-  
-  <h2 class="month">April 2026</h2>
-  
-  <div class="card">
-    <div class="meta">
-      <span>press release</span>
-      <span> · 2026-04-07</span>
-    </div>
-    <h3><a href="https://ocient.com/newsroom/press-releases/ocient-and-accrete-ai-announce-strategic-partnership-to-deliver-ai-driven-intelligence-solution-for-national-security-organizations/" target="_blank" rel="noopener">Ocient and Accrete AI Announce Strategic Partnership to Deliver AI-Driven Intelligence Solution for National Security Organizations</a></h3>
-    
-    <div class="summary"><p>Ocient and Accrete AI have partnered to deliver an AI-driven data intelligence solution for national security organizations.</p>
-<ul>
-<li>Accrete AI’s Knowledge Engine Platform agents now run directly on data stored within Ocient’s Data Intelligence Platform, eliminating the need for data movement.</li>
-<li>The integrated solution enables analysis of complete datasets – not samples – for trusted, traceable results.</li>
-<li>Ocient’s platform provides the high-performance processing foundation for AI-enabled analysis of complex operational data.</li>
-<li>Key use cases include operational intelligence, autonomous threat detection, geospatial intelligence analysis, and strategic decision support.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>press release</span>
-      <span> · 2026-04-07</span>
-    </div>
-    <h3><a href="https://ocient.com/newsroom/press-releases/minsait-and-ocient-announce-strategic-partnership-in-brazil-to-drive-innovation-in-the-telecommunications-and-media-industry/" target="_blank" rel="noopener">Minsait and Ocient Announce Strategic Partnership in Brazil to Drive Innovation in the Telecommunications and Media Industry</a></h3>
-    
-    <div class="summary"><p>Minsait and Ocient have partnered to accelerate digital transformation in the Brazilian telecommunications and media industry.</p>
-<ul>
-<li>The partnership will combine Minsait’s industry expertise with Ocient’s AI-ready data foundation, specifically the <strong>OcientAIQ™ Unified Data Platform</strong>.</li>
-<li>Ocient’s platform is designed for telecom-scale performance, enabling analysis of network, billing, and IoT data for use cases like autonomous networking and security.</li>
-<li>The solution supports deployment in on-premises, cloud, or hybrid environments, offering flexible data processing options.</li>
-<li>Minsait aims to leverage Ocient's technology to enhance its offerings in areas like autonomous network journeys and cloudification within the Brazilian market.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>press release</span>
-      <span> · 2026-04-07</span>
-    </div>
-    <h3><a href="https://ocient.com/newsroom/press-releases/ocient-and-teksynap-announce-strategic-partnership-to-advance-hyperscale-data-analytics-for-u-s-government-missions/" target="_blank" rel="noopener">Ocient and TekSynap Announce Strategic Partnership to Advance Hyperscale Data Analytics for U.S. Government Missions</a></h3>
-    
-    <div class="summary"><p>Ocient and TekSynap have partnered to provide hyperscale data analytics solutions to U.S. government agencies.</p>
-<ul>
-<li>The partnership combines Ocient’s AI-driven data platform (OcientAIQ™) with TekSynap’s federal systems integration expertise.</li>
-<li>The offering aims to accelerate insight generation, simplify data architectures, and operationalize analytics for defense, intelligence, and civilian missions.</li>
-<li>OcientAIQ™ is designed for large-scale data workloads, including time series, geospatial, and other complex datasets, supporting SQL analytics, machine learning, and query processing.</li>
-<li>TekSynap brings experience implementing and sustaining technology solutions within the public sector, aiming to deliver secure and scalable analytics capabilities.</li>
-</ul></div>
-    
-  </div>
-  
-  
-  <h2 class="month">March 2026</h2>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-03-12</span>
-    </div>
-    <h3><a href="https://ocient.com/blog/game-on-ocients-2025-offsite-accelerates-growth/" target="_blank" rel="noopener">Game On: Ocient’s 2025 Offsite Accelerates Growth</a></h3>
-    
-    <div class="summary"><p>Ocient held a company offsite in October 2025 to reflect on growth and plan for the future, coinciding with new funding and customer innovation.</p>
-<ul>
-<li>The offsite focused on strategic alignment around Ocient’s core values: customer focus, efficient effectiveness, and collaboration.</li>
-<li>Ocient is accelerating its leadership in large-scale data analytics and expanding into AI.</li>
-<li>The company’s platform, <strong>OcientAIQ™</strong>, is intended to deliver agentic AI outcomes at petabyte scale.</li>
-<li>New fundraising was secured in 2025 to support these initiatives.</li>
 </ul></div>
     
   </div>

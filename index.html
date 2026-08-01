@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-07-31 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-01 06:08 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,24 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-07-31</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/what-is-your-ai-actually-doing-introducing-the-cribl-app-for-ai-observability/" target="_blank" rel="noopener">What is your AI actually doing? Introducing the Cribl app for AI Observability  | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl released the Cribl app for AI Observability, built on the Cribl AI Platform for Telemetry, providing centralized visibility into AI telemetry data.</p>
+<ul>
+<li>The app enables searching, investigating, and reporting on AI telemetry across models, tools, and environments, preventing data silos.</li>
+<li>It features dashboards for Usage and Cost analysis, including spend tracking, token consumption, and efficiency monitoring, with customizable Goals and Monitors.</li>
+<li>Security and Compliance capabilities identify sensitive data exposure, including PII and credentials, with detailed tracing and analysis over time.</li>
+<li>Integrated AI Insights provide a conversational agent for querying data and AI-generated briefs highlight potential issues, streamlining investigations.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -140,18 +158,18 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-07-28</span>
+      <span> · 2026-07-31</span>
     </div>
-    <h2><a href="https://cribl.io/blog/ai-assisted-vulnerability-research-at-cribl/" target="_blank" rel="noopener">AI-assisted vulnerability research at Cribl | Cribl</a></h2>
+    <h2><a href="https://ocient.com/blog/ocient-collaborates-with-amd-to-increase-compute-efficiency-and-decrease-customers-tco/" target="_blank" rel="noopener">Ocient + AMD: Increase efficiency and decrease TCO</a></h2>
     
-    <div class="summary"><p>Cribl leveraged OpenAI’s GPT-5.5 to assist in vulnerability research, resulting in the discovery and remediation of multiple vulnerabilities, including CVE-2026-56747 and CVE-2026-56748.</p>
+    <div class="summary"><p>Ocient, in collaboration with AMD, has achieved significant performance and efficiency gains for data processing and AI workloads.</p>
 <ul>
-<li>The AI assistant was integrated into the vulnerability research workflow to trace code paths, connect product behavior, generate proofs of concept, and challenge assumptions.</li>
-<li>Providing the AI with detailed product context, including documentation and threat models, improved research quality by reducing false positives and accelerating validation.</li>
-<li>The primary strengths of the AI model were call-path tracing, building quick test harnesses, and draft writing for vulnerability reports.</li>
-<li>Human oversight remained critical for validating findings, assessing impact, and ensuring the accuracy of the AI-generated results; the AI accelerated but did not replace human security expertise.</li>
+<li>The Ocient Hyperscale Data Warehouse™ running on 4th Gen AMD EPYC processors delivers a 3.5x increase in processing power and a 2x+ increase in memory throughput.</li>
+<li>Ocient leverages the high core density of 4th Gen AMD EPYC processors to accelerate analytics and AI workloads, improving concurrency and model training.</li>
+<li>Ocient’s Compute Adjacent Storage Architecture® (CASA) combined with AMD EPYC processors and NVMe drives lowers latency and increases data throughput.</li>
+<li>The collaboration allows customers to reduce TCO by up to 90% and decrease the system footprint and energy consumption for compute-intensive tasks.</li>
 </ul></div>
     
   </div>
@@ -160,16 +178,16 @@
     <div class="meta">
       <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-07-29</span>
+      <span> · 2026-07-31</span>
     </div>
-    <h2><a href="https://ocient.com/blog/the-threshold-question-is-your-data-platform-ready-for-agentic-ai/" target="_blank" rel="noopener">The threshold question: Is your data platform ready for agentic AI?</a></h2>
+    <h2><a href="https://ocient.com/blog/inside-ocient-casting-timestamps-and-secret-internal-names/" target="_blank" rel="noopener">Inside the Ocient Engine: Casting, timestamps, and names</a></h2>
     
-    <div class="summary"><p>OcientAIQ™ Unified Data Platform is designed for agentic AI workloads that exceed the capabilities of traditional data platforms reliant on caching.</p>
+    <div class="summary"><p>Ocient provides flexible SQL syntax for casting and timestamp handling, drawing inspiration from both Postgres and DB2 while introducing unique features.</p>
 <ul>
-<li>The platform identifies a “threshold” where cache misses begin to reveal underlying architectural limitations in data platforms, a point agentic AI workloads reach faster due to their exploratory and continuous nature.</li>
-<li>OcientAIQ utilizes Compute Adjacent Storage Architecture (CASA), placing data on local NVMe via PCIe, avoiding network I/O bottlenecks common in cloud architectures that separate compute and storage.</li>
-<li>It supports all six core analytical modalities (relational, geospatial, ML via OcientML™, graph, vector search, and real-time rollups) within a single engine and data copy, improving performance for cross-modal queries.</li>
-<li>OcientAIQ features per-core pricing which contrasts with per-query or per-byte pricing models, providing more predictable costs for the continuous and exploratory behavior of AI agents.</li>
+<li>Ocient supports multiple ways to retrieve the current timestamp, including <code>now()</code>, <code>current_timestamp</code>, and special registers, all mapping to the same internal function with appended suffixes to resolve naming collisions.</li>
+<li>Casting can be achieved using ANSI SQL, Postgres' <code>::</code> syntax, explicit <code>CAST</code> functions, or by using the data type name as a function (e.g., <code>CHAR()</code>).</li>
+<li>Intervals are internally represented as integer or bigint values with assigned units, meaning <code>INTERVAL</code> is not a distinct data type and <code>CAST(... AS INTERVAL)</code> is not supported; date math is performed using constructors.</li>
+<li>Timestamp components can be extracted using standard <code>EXTRACT</code> and <code>date_part</code> functions (returning doubles) or Ocient's shorthand functions like <code>year()</code> and <code>minute()</code> (returning integers/bigints), with subtraction resulting in nanosecond (bigint) or day (int) values.</li>
 </ul></div>
     
   </div>
@@ -178,35 +196,11 @@
     <div class="meta">
       <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-07-27</span>
+      <span> · 2026-07-31</span>
     </div>
-    <h2><a href="https://ocient.com/blog/inside-the-ocientaiq-engine-dataflows-are-the-stored-procedures-you-never-have-to-create/" target="_blank" rel="noopener">Inside OcientAIQ™: Dataflows are the stored procedures you never have to create</a></h2>
+    <h2><a href="https://ocient.com/blog/hdd-or-ssd-an-opposing-look-at-lowering-carbon-emissions-for-real-time-analytics/" target="_blank" rel="noopener">HDD vs SSD for Lowering Carbon Emissions</a></h2>
     
-    <div class="summary"><p>Dataflows in OcientAIQ bring imperative programming capabilities—loops, variables, conditionals, and exception handling—directly to SQL, allowing complex processing within the database without creating stored procedures.</p>
-<ul>
-<li>Dataflows are anonymous, ad-hoc SQL scripts submitted like queries, eliminating the need for pre-defined stored procedures or specialized protocols.</li>
-<li>They support variables with strong typing and three expansion modes (@ for values, @@ for identifiers, and @! for raw text) for dynamic SQL generation.</li>
-<li>Control flow constructs like <code>WHILE</code> loops, <code>FOR</code> loops, <code>IF/ELSEIF</code> statements, and <code>TRY/EXCEPTION/FINALLY</code> blocks are now available within SQL.</li>
-<li>The platform optimizes execution by dynamically adjusting query plans between loop iterations and managing temporary data (scratch tables) automatically, with automatic cleanup upon completion or cancellation.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-07-21</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/inside-the-ocient-engine-a-deep-dive-into-tuples/" target="_blank" rel="noopener">Inside the Ocient Engine: A deep dive into tuples</a></h2>
-    
-    <div class="summary"><p>Ocient’s tuple data type functions as an anonymous struct, enabling powerful querying techniques.</p>
-<ul>
-<li>Tuples are defined using doubled angle brackets (<code>&lt;&lt;...&gt;&gt;</code>) to specify inner types, similar to C++ templates or Java generics, and accessed by position starting with 1.</li>
-<li>Ocient stores tuples as either virtual columns (separate columns logically related) or materialized (single binary blob), with tuples inside arrays always being materialized.</li>
-<li>Tuple comparisons are performed lexicographically, meaning elements are compared in order, enabling specific sorting behavior (e.g., <code>(1, "Z")</code> comes before <code>(2, "A")</code>).</li>
-<li>A "Tuple Max" trick can be used for point-in-time queries by packaging a timestamp and value in a tuple and utilizing the <code>MAX()</code> function's lexicographical sorting to efficiently retrieve the latest value, avoiding self-joins.</li>
-</ul></div>
+    <div class="summary"><p>Ocient’s white paper, “Meeting the Challenges of Modern Big Data,” argues that while SSDs have a higher manufacturing carbon footprint, they are more energy-efficient over their lifespan–especially in enterprise analytics environments. The paper demonstrates that a single NVMe SSD can replace hundreds of HDDs, reducing overall power consumption and operational emissions for high IOPS workloads like real-time data streaming and AI. The analysis suggests SSDs are the more sustainable choice for large-scale data centers, contrasting with consumer applications where HDDs may be preferable.</p></div>
     
   </div>
   
