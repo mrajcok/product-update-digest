@@ -79,13 +79,29 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-04 06:06 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-05 06:07 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">August 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-04</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/from-prompt-to-action-why-agent-workflows-need-observability/" target="_blank" rel="noopener">From prompt to action: Why agent workflows need observability | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>Cribl emphasizes the need to move beyond simply observing AI model prompts and responses to observing the entire "agent workflow" – the sequence of actions an AI takes, including information retrieval, tool calls, and decisions.</li>
+<li>The article details five layers of observable agent workflows: Request, Context, Tool, Decision, and Action, outlining the specific telemetry needed for each layer to understand <em>why</em> an AI agent took a particular action.</li>
+<li>Cribl’s telemetry pipeline architecture is positioned as a solution to collect, normalize, govern, and correlate workflow signals across multiple systems, providing a single operational view of AI agent activity.</li>
+<li>The core claim is that true AI observability requires visibility into the complete path from request to action, enabling trust, explainability, and governance – going beyond isolated event logging to understand the entire workflow execution.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -114,12 +130,12 @@
     </div>
     <h3><a href="https://cribl.io/blog/what-is-your-ai-actually-doing-introducing-the-cribl-app-for-ai-observability/" target="_blank" rel="noopener">What is your AI actually doing? Introducing the Cribl app for AI Observability  | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl released the Cribl app for AI Observability, built on the Cribl AI Platform for Telemetry, providing centralized visibility into AI telemetry data.</p>
+    <div class="summary"><p>Cribl has released the Cribl App for AI Observability, built on the Cribl AI Platform for Telemetry, to provide a unified view of AI telemetry data.</p>
 <ul>
-<li>The app enables searching, investigating, and reporting on AI telemetry across models, tools, and environments, preventing data silos.</li>
-<li>It features dashboards for Usage and Cost analysis, including spend tracking, token consumption, and efficiency monitoring, with customizable Goals and Monitors.</li>
-<li>Security and Compliance capabilities identify sensitive data exposure, including PII and credentials, with detailed tracing and analysis over time.</li>
-<li>Integrated AI Insights provide a conversational agent for querying data and AI-generated briefs highlight potential issues, streamlining investigations.</li>
+<li>The app offers visibility into AI usage and cost, including spending trends, token consumption, and LLM efficiency analysis, with features like Org View and goal-based monitoring.</li>
+<li>It includes security and compliance features to detect sensitive data exposure (PII, credentials, API keys) through dashboards, traces, and time-based analysis.</li>
+<li>The app facilitates AI-driven investigation with session/trace visibility, a conversational AI agent (AI Insights) for querying data, and AI-generated briefs highlighting important issues.</li>
+<li>It requires Cribl.Cloud to be running and is available for installation via the GitHub repository, with a setup wizard to connect telemetry services and configure data storage.</li>
 </ul></div>
     
   </div>
@@ -573,23 +589,6 @@
 <li>Apps can leverage modern front-end frameworks and access data from Cribl Lake, federated sources, or directly within Cribl Search, offering flexibility in data access and analysis.</li>
 <li>AI-assisted development and lightweight coding environments are provided, enabling subject matter experts to build tailored apps and interfaces with minimal coding experience.</li>
 <li>The feature includes built-in guardrails – RBAC, access controls, and governance – to ensure secure and compliant app development and deployment within the existing platform infrastructure.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-06-29</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/dora-without-the-guesswork-turning-fragmented-logs-into-an-evidence-layer/" target="_blank" rel="noopener">DORA Without the Guesswork: Turning Fragmented Logs Into an Evidence Layer | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl positions its platform as a "telemetry control plane" to address the challenges of achieving DORA (Data-Oriented Resilient Architecture) compliance.</p>
-<ul>
-<li>Cribl Edge collects telemetry from diverse sources, Cribl Stream processes and routes it, Cribl Lake provides long-term, open-format storage for evidence, and Cribl Search enables data interrogation.</li>
-<li>The platform aims to shift organizations from fragmented, siloed telemetry to a shared “evidence layer” for consistent normalization, enrichment, and retention.</li>
-<li>Cribl's approach focuses on risk-based data routing, reducing costs by selectively sending data to expensive analytical tools while preserving evidence-grade copies.</li>
-<li>The solution integrates with existing tools (SIEM, observability, etc.) by acting as an upstream control plane – enabling unified views across security, IT, and risk teams, and better enabling AI/ML use cases with reliable data.</li>
 </ul></div>
     
   </div>
