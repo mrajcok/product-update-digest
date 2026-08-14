@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-13 06:02 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-14 06:03 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,41 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-08-13</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/no-rest-for-the-weary/" target="_blank" rel="noopener">No REST for the weary | Cribl</a></h2>
+    
+    <div class="summary"><ul>
+<li>The Cribl REST sandbox has been updated to connect directly to a Cribl Cloud instance, providing access to the latest features and enabling testing with publicly available REST APIs like dummyjson.com and haveibeenpwned.com.</li>
+<li>The sandbox includes lessons demonstrating the use of <code>curl</code> and <code>jq</code> for API interaction, emphasizing the command line as a troubleshooting tool.</li>
+<li>Cribl's REST collector benefits from parameterization, allowing dynamic values from other system components to be used for sorting, filtering, and sampling data.</li>
+<li>The updated sandbox demonstrates the use of Event Breakers, configurable rules to split JSON array data into individual events within Cribl, using a new ruleset creation workflow (Stream &gt; Manage &gt; Processing &gt; Knowledge).</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-08-12</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/high-enough-to-read-it-low-enough-to-see-it/" target="_blank" rel="noopener">High enough to read it, low enough to see it | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl introduces a strategy for improved OT (Operational Technology) security visibility by focusing on data pipeline placement.</p>
+<ul>
+<li>The core concept is to position a telemetry layer “high enough to read, low enough to see” within the Purdue model – specifically Levels 2-3 for lightweight collection and Level 3.5 (the DMZ) for a vendor-neutral pipeline.</li>
+<li>Data transport utilizes chained worker groups with unidirectional forwarding to preserve network segmentation and avoid violating security boundaries.</li>
+<li>Enrichment within the pipeline adds critical context (asset inventory, engineering registers) to low-fidelity OT logs, transforming them into actionable events. Enrichment transforms a basic log event into a detailed JSON event including asset information and severity.</li>
+<li>The approach avoids touching Levels 0-1 (PLCs and field devices) and emphasizes intent-based monitoring to prevent blind spots, brownouts, and blackouts in telemetry data.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -123,36 +158,35 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-08-12</span>
+      <span> · 2026-08-13</span>
     </div>
-    <h2><a href="https://cribl.io/blog/high-enough-to-read-it-low-enough-to-see-it/" target="_blank" rel="noopener">High enough to read it, low enough to see it | Cribl</a></h2>
+    <h2><a href="https://ocient.com/blog/the-question-nobody-could-stop-asking-at-dodiis-2026/" target="_blank" rel="noopener">The question nobody could stop asking at DODIIS 2026</a></h2>
     
-    <div class="summary"><p>Cribl introduces a strategy for improved Operational Technology (OT) security visibility by focusing on data pipeline placement.</p>
+    <div class="summary"><p>Ocient highlights a shift in focus within the intelligence community toward data infrastructure capable of supporting modern analytical needs.</p>
 <ul>
-<li>The core concept is to position a telemetry layer “high enough to read” data (avoiding proprietary protocols) but “low enough to see” all relevant OT telemetry, typically Levels 2-3 of the Purdue Model.</li>
-<li>Lightweight collection is recommended on Levels 2-3 (SCADA, HMIs) using edge agents, with no direct interaction with Levels 0-1 (PLCs, sensors).</li>
-<li>A vendor-neutral pipeline is placed in the DMZ (Level 3.5) to enrich data with asset context from CMDBs or engineering registers <em>before</em> it reaches analytics tools. This transforms basic events (like logons) into actionable alerts.</li>
-<li>Data transport relies on chained worker groups forwarding telemetry unidirectionally to maintain segmentation and avoid breaching security boundaries, employing a “forward only” architecture.</li>
+<li>Discussions at DODIIS 2026 repeatedly centered on the challenge of managing and analyzing rapidly growing datasets, with organizations struggling to retain data long enough to uncover valuable connections.</li>
+<li>Ocient advocates for a “bring compute to the data” approach, emphasizing the need for foundational architecture that enables fast analysis of petabyte-scale datasets <em>within</em> existing security and compliance controls.</li>
+<li>The company introduced OcientAIQ™, positioned as a solution for handling the demands of real-time decision-making with trillions of rows of data, addressing both performance and cost concerns associated with AI-driven analytics.</li>
+<li>A core argument is that the value lies not just in data retention, but in enabling rapid analysis of <em>all</em> retained data to support timely intelligence delivery.</li>
 </ul></div>
     
   </div>
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-08-11</span>
+      <span> · 2026-08-13</span>
     </div>
-    <h2><a href="https://cribl.io/blog/cribl-secops-uncovers-etherhiding-malware-campaign-on-the-blockchain/" target="_blank" rel="noopener">Cribl SecOps uncovers EtherHiding malware campaign on the blockchain | Cribl</a></h2>
+    <h2><a href="https://ocient.com/blog/the-infrastructure-tax-of-agentic-ai-in-adtech/" target="_blank" rel="noopener">The infrastructure tax of agentic AI in AdTech</a></h2>
     
-    <div class="summary"><p>Cribl SecOps identified a ClickFix malware campaign using a novel “EtherHiding” technique on the Polygon blockchain to obfuscate command-and-control (C2) infrastructure.</p>
-<ul>
-<li>The campaign embeds a malicious script in compromised WordPress sites’ robots.txt files, which queries the Polygon blockchain via RPC endpoints to retrieve encoded C2 domains.</li>
-<li>The attacker utilizes Polygon smart contracts to store malicious domains in blockchain transaction data, enabling a resilient and censorship-resistant delivery mechanism.</li>
-<li>Analysis revealed 11 domain-rotation transactions linked to a single smart contract creator and 26 total transactions across 4 unique contracts, funded through FixedFloat.</li>
-<li>Cribl Search and Push Security were used to investigate the campaign; detection opportunities and IOCs are included in the report, with PowerShell and DNS traffic patterns highlighted as detection methods.</li>
+    <div class="summary"><ul>
+<li>Ocient highlights a significant "infrastructure tax" incurred when deploying agentic AI systems in AdTech, stemming from the intensive, iterative querying required by agents – replacing a single human query with 30-50 sequential, dependent queries.</li>
+<li>The article claims that existing consumption-priced data systems (like Snowflake and BigQuery) are not optimized for this agent-driven query load, as they were designed for a lower, human-paced query cadence, leading to unexpectedly high bills.</li>
+<li>A parallel challenge arises with outcomes-based measurement, requiring trillion-row joins of panel, purchase, and bid-stream data with low latency—exposing the same underlying infrastructure limitations.</li>
+<li>Beyond cost, the piece emphasizes the need for “auditability at machine speed” to reconstruct agent decision-making in case of errors or unexpected behavior, positioning this as a foundational infrastructure requirement, not an afterthought.</li>
 </ul></div>
     
   </div>
@@ -172,31 +206,6 @@
 <li>Emphasis was placed on the need for massive concurrency (thousands of agent-initiated queries/second), unified real-time and historical data views, and built-in governance for AI agents.</li>
 <li>Testing recommendations include stress-testing concurrency with 10x current query loads, evaluating analytics performance across hot and cold data, and embedding observability to track data lineage for agent actions.</li>
 </ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-08-10</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/from-complexity-to-clarity-take-a-tour-of-ocient/" target="_blank" rel="noopener">From Complexity to Clarity: Take a tour of OcientAIQ™</a></h2>
-    
-    <div class="summary"><p>The updated Ocient Management UI simplifies the operation of the platform's petabyte-scale analytics capabilities, powered by its Compute Adjacent Storage Architecture®.  Administrators can now execute advanced SQL queries, monitor workloads, and fine-tune configurations through an intuitive interface, reducing complexity.  Ocient integrates with common BI tools like Tableau, Metabase, and Superset, as well as DBeaver, to fit into existing workflows. The platform’s design, utilizing erasure coding and standard hardware, delivers energy efficiency and predictable costs without sacrificing performance.</p></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-08-10</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/coming-soon-beyond-big-data-volume-4/" target="_blank" rel="noopener">Coming Soon: Beyond Big Data volume 4</a></h2>
-    
-    <div class="summary"><p>Ocient’s upcoming fourth annual “Beyond Big Data: From Roadmap to Reality” report details the industry shift from discussing AI to actively implementing it. The report focuses on moving beyond AI experimentation to achieving measurable impact, addressing roadblocks like cost and infrastructure constraints. Key findings indicate 93% of organizations plan to pursue AI/ML within 18 months, with increasing concern for sustainability alongside performance. This year’s report builds on previous analyses from 2022 and 2023, charting the progression from initial data volume challenges to the current focus on AI execution. </p>
-<p>For more detailed insights, consult the full report upon its release.</p></div>
     
   </div>
   

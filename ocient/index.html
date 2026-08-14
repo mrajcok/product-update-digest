@@ -79,13 +79,46 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-13 06:02 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-14 06:03 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">August 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-13</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/the-question-nobody-could-stop-asking-at-dodiis-2026/" target="_blank" rel="noopener">The question nobody could stop asking at DODIIS 2026</a></h3>
+    
+    <div class="summary"><p>Ocient highlights a shift in focus within the intelligence community toward data infrastructure capable of supporting modern analytical needs.</p>
+<ul>
+<li>Discussions at DODIIS 2026 repeatedly centered on the challenge of managing and analyzing rapidly growing datasets, with organizations struggling to retain data long enough to uncover valuable connections.</li>
+<li>Ocient advocates for a “bring compute to the data” approach, emphasizing the need for foundational architecture that enables fast analysis of petabyte-scale datasets <em>within</em> existing security and compliance controls.</li>
+<li>The company introduced OcientAIQ™, positioned as a solution for handling the demands of real-time decision-making with trillions of rows of data, addressing both performance and cost concerns associated with AI-driven analytics.</li>
+<li>A core argument is that the value lies not just in data retention, but in enabling rapid analysis of <em>all</em> retained data to support timely intelligence delivery.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-13</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/the-infrastructure-tax-of-agentic-ai-in-adtech/" target="_blank" rel="noopener">The infrastructure tax of agentic AI in AdTech</a></h3>
+    
+    <div class="summary"><ul>
+<li>Ocient highlights a significant "infrastructure tax" incurred when deploying agentic AI systems in AdTech, stemming from the intensive, iterative querying required by agents – replacing a single human query with 30-50 sequential, dependent queries.</li>
+<li>The article claims that existing consumption-priced data systems (like Snowflake and BigQuery) are not optimized for this agent-driven query load, as they were designed for a lower, human-paced query cadence, leading to unexpectedly high bills.</li>
+<li>A parallel challenge arises with outcomes-based measurement, requiring trillion-row joins of panel, purchase, and bid-stream data with low latency—exposing the same underlying infrastructure limitations.</li>
+<li>Beyond cost, the piece emphasizes the need for “auditability at machine speed” to reconstruct agent decision-making in case of errors or unexpected behavior, positioning this as a foundational infrastructure requirement, not an afterthought.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -516,43 +549,6 @@
 <li>The partnership aims to enable agencies to investigate petabyte-scale datasets with full fidelity, sovereignty, and control.</li>
 <li>OcientAIQ supports various deployment models including on-premises, hybrid-cloud, air-gapped, and classified environments, ranging from 50 terabytes to multi-petabyte scale.</li>
 <li>Siren's investigative AI, search and visualization capabilities are combined with OcientAIQ’s data foundation to accelerate trusted intelligence gathering.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>release notes</span>
-      
-    </div>
-    <h3><a href="https://docs.ocient.com/ocientaiq-unified-data-platform-release-notes.md?release=27.1" target="_blank" rel="noopener">OcientAIQ Unified Data Platform Release Notes — 27.1</a></h3>
-    
-    <div class="summary"><p>OcientAIQ Unified Data Platform version 27.1 introduces new data loading options, transactional support, and enhancements to system observability.</p>
-<ul>
-<li>Added support for extracting Apache® Parquet™ files with the Data Extract Tool.</li>
-<li>Introduced the <code>CREATE TRANSACTIONAL PIPELINE</code> SQL statement, with an optional <code>START FOREGROUND</code> clause, enabling transactional pipelines with automatic rollback on failure.</li>
-<li>JDBC Bulk Loading now supports S3-compatible object stores via the <code>bulkLoadMode = s3</code> connection parameter.</li>
-<li>Implemented full transaction support within the database and across JDBC and pyocient drivers, including <code>BEGIN TRANSACTION</code>, <code>COMMIT</code>, and <code>ROLLBACK</code> statements.</li>
-<li>Added the <code>DROP TASK</code> SQL statement for managing distributed tasks.</li>
-<li>Expanded system catalog tables with historical data views: <code>sys.pipeline_errors_historical</code>, <code>sys.pipeline_events_historical</code>, <code>sys.pipeline_files_historical</code>, and <code>sys.pipeline_metrics_historical</code>.</li>
-<li>Added <code>transaction_id</code> and <code>transaction_prefix_len</code> columns to <code>sys.queries</code> and <code>sys.completed_queries</code>, and the <code>transaction_id</code> column to <code>sys.pipelines</code>. Added <code>information_schema.pipeline_status_historical</code>, <code>information_schema.pipelines_historical</code>, and <code>information_schema.transactional_pipeline_status</code> views.</li>
-<li>The <code>array_to_string</code> SQL function now outputs VARCHAR array values without surrounding quotes.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-02</span>
-    </div>
-    <h3><a href="https://ocient.com/blog/building-the-data-foundation-for-autonomous-networks/" target="_blank" rel="noopener">Building the data foundation for autonomous networks</a></h3>
-    
-    <div class="summary"><ul>
-<li>OcientAIQ™ is positioned as a solution for enabling AI directly on petabyte-scale enterprise data without data movement, specifically addressing challenges in autonomous networks.</li>
-<li>The core claim focuses on overcoming the "hidden barrier" of fragmented data in telecom environments by providing a unified, real-time, and trusted data foundation for agentic AI.</li>
-<li>Ocient emphasizes its ability to handle full-resolution data at scale, enabling real-time and historical analytics within a single platform, avoiding traditional tradeoffs between cost, performance, and completeness.</li>
-<li>Ocient is participating in the TM Forum Catalyst program, specifically project “E2E multi-agent smart network CapEx – Phase III”, to demonstrate the benefits of a strong data foundation for autonomous networks.</li>
 </ul></div>
     
   </div>

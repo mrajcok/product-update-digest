@@ -79,13 +79,46 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-13 06:02 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-14 06:03 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">August 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-13</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/no-rest-for-the-weary/" target="_blank" rel="noopener">No REST for the weary | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>The Cribl REST sandbox has been updated to connect directly to a Cribl Cloud instance, providing access to the latest features and enabling testing with publicly available REST APIs like dummyjson.com and haveibeenpwned.com.</li>
+<li>The sandbox includes lessons demonstrating the use of <code>curl</code> and <code>jq</code> for API interaction, emphasizing the command line as a troubleshooting tool.</li>
+<li>Cribl's REST collector benefits from parameterization, allowing dynamic values from other system components to be used for sorting, filtering, and sampling data.</li>
+<li>The updated sandbox demonstrates the use of Event Breakers, configurable rules to split JSON array data into individual events within Cribl, using a new ruleset creation workflow (Stream &gt; Manage &gt; Processing &gt; Knowledge).</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-12</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/high-enough-to-read-it-low-enough-to-see-it/" target="_blank" rel="noopener">High enough to read it, low enough to see it | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl introduces a strategy for improved OT (Operational Technology) security visibility by focusing on data pipeline placement.</p>
+<ul>
+<li>The core concept is to position a telemetry layer “high enough to read, low enough to see” within the Purdue model – specifically Levels 2-3 for lightweight collection and Level 3.5 (the DMZ) for a vendor-neutral pipeline.</li>
+<li>Data transport utilizes chained worker groups with unidirectional forwarding to preserve network segmentation and avoid violating security boundaries.</li>
+<li>Enrichment within the pipeline adds critical context (asset inventory, engineering registers) to low-fidelity OT logs, transforming them into actionable events. Enrichment transforms a basic log event into a detailed JSON event including asset information and severity.</li>
+<li>The approach avoids touching Levels 0-1 (PLCs and field devices) and emphasizes intent-based monitoring to prevent blind spots, brownouts, and blackouts in telemetry data.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -100,23 +133,6 @@
 <li>Centralized lookups (using Redis) are utilized to enrich data with real-time infrastructure state information.</li>
 <li>Control fields, like <code>ignoreAlerts</code>, can be implemented to suppress alerting noise during planned maintenance.</li>
 <li>Replayability in Cribl Stream allows for reshaping of historical telemetry when requirements change without re-deploying collectors.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-08-12</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/high-enough-to-read-it-low-enough-to-see-it/" target="_blank" rel="noopener">High enough to read it, low enough to see it | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl introduces a strategy for improved Operational Technology (OT) security visibility by focusing on data pipeline placement.</p>
-<ul>
-<li>The core concept is to position a telemetry layer “high enough to read” data (avoiding proprietary protocols) but “low enough to see” all relevant OT telemetry, typically Levels 2-3 of the Purdue Model.</li>
-<li>Lightweight collection is recommended on Levels 2-3 (SCADA, HMIs) using edge agents, with no direct interaction with Levels 0-1 (PLCs, sensors).</li>
-<li>A vendor-neutral pipeline is placed in the DMZ (Level 3.5) to enrich data with asset context from CMDBs or engineering registers <em>before</em> it reaches analytics tools. This transforms basic events (like logons) into actionable alerts.</li>
-<li>Data transport relies on chained worker groups forwarding telemetry unidirectionally to maintain segmentation and avoid breaching security boundaries, employing a “forward only” architecture.</li>
 </ul></div>
     
   </div>
@@ -578,22 +594,6 @@
 <li>The platform intelligently “shapes” data by transforming it to match destination-specific schemas (e.g., mapping SaaS JSON to Microsoft Sentinel Log Analytics tables) and improving event fidelity by unrolling large payloads into individual events with correct timestamps.</li>
 <li>Cribl offers safe “routing and adaptation” capabilities, allowing teams to deliver tailored data to different destinations, retain full-fidelity copies for compliance, and facilitate seamless migrations (e.g., dual-forwarding during SIEM transitions).</li>
 <li>Features like HEC with TLS compression, heartbeat logs, persistent queues, and internal metrics assist in operational guardrails during data migration and ensure reliable data delivery.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-15</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/the-app-was-the-easy-part/" target="_blank" rel="noopener">The app was the easy part | Cribl</a></h3>
-    
-    <div class="summary"><ul>
-<li>Cribl positions itself as a telemetry platform designed to provide a governed infrastructure for applications and AI agents needing access to IT and Security data, avoiding the need for each tool to duplicate data collection and governance.</li>
-<li>The core claim is that Cribl separates the telemetry infrastructure from the applications consuming it, offering centralized collection, routing, transformation, enrichment, governance, storage, federation, search, and access control.</li>
-<li>The article highlights a parallel between building a simple application and the complexities of enterprise IT telemetry: AI simplifies application development, but a robust, governed platform is still essential for security and access control.</li>
-<li>Cribl is described not as another security <em>solution</em>, but as a foundational platform enabling other tools by providing secure, governed access to telemetry data, similar to how AWS enables Netflix.</li>
 </ul></div>
     
   </div>
