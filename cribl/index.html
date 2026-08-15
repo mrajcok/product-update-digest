@@ -79,13 +79,45 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-14 06:03 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-15 06:02 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">August 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-14</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/cribl-apps-do-the-fun-part-of-development/" target="_blank" rel="noopener">Cribl Apps: Do the fun part of development | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>Cribl has released “Apps”, a platform allowing users to build custom tools and workflows on top of their existing data, using an AI-driven conversational interface.</li>
+<li>Apps aim to address the “99% perspiration” of software development – the infrastructure concerns like data access, governance, and hosting – allowing developers to focus on the core application logic.</li>
+<li>The platform provides pre-built tools, but also enables users to create custom applications without submitting feature requests to vendors or migrating to new solutions.</li>
+<li>Apps leverage Cribl’s existing telemetry management capabilities, enabling users to rapidly prototype and iterate on solutions tailored to their specific needs, without needing to rebuild foundational infrastructure.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-14</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/cribl-privacy-2-1-more-telemetry-scanned-per-unit-of-compute/" target="_blank" rel="noopener">Cribl Privacy 2.1: More telemetry scanned per unit of compute | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>Cribl Privacy 2.1 models achieve a 64%-163% increase in throughput (data processed per second) while reducing average memory usage by 13%-24%, without increasing CPU utilization.</li>
+<li>The performance gains are achieved through model pruning and distillation techniques: reducing model size by removing less impactful neurons and then retraining a "student" model to match the original’s accuracy.</li>
+<li>Cribl Privacy 2.1 incorporates customer feedback to improve detection of common log types and telemetry patterns.</li>
+<li>The Cribl Privacy family offers different models (Fast, Base, and upcoming Pro) optimized for varying priorities between speed, accuracy, and resource consumption.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -108,14 +140,15 @@
       <span>blog</span>
       <span> · 2026-08-12</span>
     </div>
-    <h3><a href="https://cribl.io/blog/high-enough-to-read-it-low-enough-to-see-it/" target="_blank" rel="noopener">High enough to read it, low enough to see it | Cribl</a></h3>
+    <h3><a href="https://cribl.io/blog/when-your-metrics-dont-tell-the-full-story-how-cribls-sre-team-reshapes-telemetry-for-incidents/" target="_blank" rel="noopener">When your metrics don’t tell the full story: How Cribl’s SRE team reshapes telemetry for incidents | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl introduces a strategy for improved OT (Operational Technology) security visibility by focusing on data pipeline placement.</p>
+    <div class="summary"><p>Cribl’s SRE team uses Cribl Stream and Cribl Edge to reshape telemetry data</p>
 <ul>
-<li>The core concept is to position a telemetry layer “high enough to read, low enough to see” within the Purdue model – specifically Levels 2-3 for lightweight collection and Level 3.5 (the DMZ) for a vendor-neutral pipeline.</li>
-<li>Data transport utilizes chained worker groups with unidirectional forwarding to preserve network segmentation and avoid violating security boundaries.</li>
-<li>Enrichment within the pipeline adds critical context (asset inventory, engineering registers) to low-fidelity OT logs, transforming them into actionable events. Enrichment transforms a basic log event into a detailed JSON event including asset information and severity.</li>
-<li>The approach avoids touching Levels 0-1 (PLCs and field devices) and emphasizes intent-based monitoring to prevent blind spots, brownouts, and blackouts in telemetry data.</li>
+<li>Data is standardized at the Edge or in Stream to simplify downstream queries.</li>
+<li>Centralized lookups to Redis enrich data with real-time infrastructure state (e.g., organization &amp; workspace details, infrastructure versions).</li>
+<li>Control fields, such as <code>ignoreAlerts</code>, are implemented to reduce alert noise during maintenance.</li>
+<li>Replayability allows for reshaping of historical telemetry without redeploying agents.</li>
+<li>Dynamic enrichment adds context like canary deployment status and infrastructure version directly into events.</li>
 </ul></div>
     
   </div>
@@ -125,14 +158,14 @@
       <span>blog</span>
       <span> · 2026-08-12</span>
     </div>
-    <h3><a href="https://cribl.io/blog/when-your-metrics-dont-tell-the-full-story-how-cribls-sre-team-reshapes-telemetry-for-incidents/" target="_blank" rel="noopener">When your metrics don’t tell the full story: How Cribl’s SRE team reshapes telemetry for incidents | Cribl</a></h3>
+    <h3><a href="https://cribl.io/blog/high-enough-to-read-it-low-enough-to-see-it/" target="_blank" rel="noopener">High enough to read it, low enough to see it | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl’s SRE team uses Cribl Stream and Cribl Edge to reshape telemetry data for improved incident response.</p>
+    <div class="summary"><p>Cribl introduces a strategy for improved OT (Operational Technology) security visibility by focusing on data pipeline placement.</p>
 <ul>
-<li>Data is standardized at the Edge or in Stream to simplify downstream queries and reduce complexity.</li>
-<li>Centralized lookups (using Redis) are utilized to enrich data with real-time infrastructure state information.</li>
-<li>Control fields, like <code>ignoreAlerts</code>, can be implemented to suppress alerting noise during planned maintenance.</li>
-<li>Replayability in Cribl Stream allows for reshaping of historical telemetry when requirements change without re-deploying collectors.</li>
+<li>The core concept is to position a telemetry layer “high enough to read, low enough to see” within the Purdue model – specifically Levels 2-3 for lightweight collection and Level 3.5 (the DMZ) for a vendor-neutral pipeline.</li>
+<li>Data transport utilizes chained worker groups with unidirectional forwarding to preserve network segmentation and avoid violating security boundaries.</li>
+<li>Enrichment within the pipeline adds critical context (asset inventory, engineering registers) to low-fidelity OT logs, transforming them into actionable events. Enrichment transforms a basic log event into a detailed JSON event including asset information and severity.</li>
+<li>The approach avoids touching Levels 0-1 (PLCs and field devices) and emphasizes intent-based monitoring to prevent blind spots, brownouts, and blackouts in telemetry data.</li>
 </ul></div>
     
   </div>
@@ -560,40 +593,6 @@
 <li>It leverages the open standard Model Context Protocol (MCP) to allow AI clients to retrieve Cribl resources like Sources, Destinations, Pipelines, and metrics.</li>
 <li>The feature allows users to inspect Cribl configurations, troubleshoot deployments, investigate telemetry, and build AI-powered workflows directly from existing AI tools.</li>
 <li>Access is controlled through existing Cribl permissions and RBAC, ensuring security and auditability; the embedded server is the recommended approach for new deployments, though a standalone Docker option remains supported.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-20</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/ai-governance-requires-evidence-building-trust-and-accountability-in-public-sector-ai/" target="_blank" rel="noopener">AI governance requires evidence: Building trust and accountability in public sector AI | Cribl</a></h3>
-    
-    <div class="summary"><p>AI governance requires demonstrable evidence of effectiveness, particularly as AI systems rapidly evolve and are integrated into critical public sector workflows.</p>
-<ul>
-<li>Cribl advocates for moving beyond periodic governance assessments to a model of <em>continuous assurance</em>, encompassing continuous monitoring of AI activity and automated policy validation.</li>
-<li>Key components of this approach include real-time risk detection, AI usage analytics, agent activity monitoring, and governance dashboards for evidence collection.</li>
-<li>The discussion highlights the need for visibility into not only security risks but also <em>mission risks</em> stemming from inaccurate recommendations, biased outputs, and data quality issues.</li>
-<li>The blog emphasizes that effective AI governance requires the ability to demonstrate control functionality, exception handling, and risk mitigation through operational evidence, not just policy documentation.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-17</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/how-cribl-helps-teams-get-more-from-their-telemetry-pipeline/" target="_blank" rel="noopener">How Cribl helps teams get more from their telemetry pipeline | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl is evolving beyond a simple telemetry optimization tool to provide a flexible control layer for data pipelines.</p>
-<ul>
-<li>Cribl enables a “collect once” approach by acting as a central collection point for data from sources like Azure Event Hubs, SaaS platforms (Salesforce, SAP HANA, Wiz), and legacy collectors (syslog, Logstash), decoupling collection from analytics destinations.</li>
-<li>The platform intelligently “shapes” data by transforming it to match destination-specific schemas (e.g., mapping SaaS JSON to Microsoft Sentinel Log Analytics tables) and improving event fidelity by unrolling large payloads into individual events with correct timestamps.</li>
-<li>Cribl offers safe “routing and adaptation” capabilities, allowing teams to deliver tailored data to different destinations, retain full-fidelity copies for compliance, and facilitate seamless migrations (e.g., dual-forwarding during SIEM transitions).</li>
-<li>Features like HEC with TLS compression, heartbeat logs, persistent queues, and internal metrics assist in operational guardrails during data migration and ensure reliable data delivery.</li>
 </ul></div>
     
   </div>
