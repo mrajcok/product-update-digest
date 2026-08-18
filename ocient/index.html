@@ -79,7 +79,7 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-15 06:02 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-18 06:00 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
@@ -90,16 +90,32 @@
   <div class="card">
     <div class="meta">
       <span>blog</span>
-      <span> · 2026-08-13</span>
+      <span> · 2026-08-17</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/retention-math-what-published-data-says-about-dwell-time-log-retention/" target="_blank" rel="noopener">Retention Math: What published data says about dwell time and log retention</a></h3>
+    
+    <div class="summary"><ul>
+<li>The blog post analyzes the widening gap between increasing attacker dwell time (median of 14 days in 2026, according to Mandiant) and decreasing attacker breakout time (29 minutes in 2026, according to CrowdStrike), highlighting that investigations are often hampered by telemetry expiring before it's needed.</li>
+<li>Current compliance standards, like PCI DSS v4.0, typically require only 12 months of log retention, with only the recent 3 months readily accessible — insufficient given average breach lifecycles (241 days, according to IBM).</li>
+<li>OcientAIQ Unified Data Platform is positioned as a solution to this problem, enabling full-resolution telemetry retention for years, with interactive query performance at network-telemetry volumes, while scaling ingest, storage, and query workload independently.</li>
+<li>OcientAIQ utilizes multi-column indexing at load time to maintain interactive query speeds even as data scales to petabytes, overcoming the limitations of traditional filtering/sampling approaches and consumption-priced cloud analytics solutions.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-17</span>
     </div>
     <h3><a href="https://ocient.com/blog/the-question-nobody-could-stop-asking-at-dodiis-2026/" target="_blank" rel="noopener">The question nobody could stop asking at DODIIS 2026</a></h3>
     
-    <div class="summary"><p>Ocient highlights a shift in focus within the intelligence community toward data infrastructure capable of supporting modern analytical needs.</p>
+    <div class="summary"><p>Ocient focuses on enabling fast analysis of large, full-fidelity datasets for national security applications.</p>
 <ul>
-<li>Discussions at DODIIS 2026 repeatedly centered on the challenge of managing and analyzing rapidly growing datasets, with organizations struggling to retain data long enough to uncover valuable connections.</li>
-<li>Ocient advocates for a “bring compute to the data” approach, emphasizing the need for foundational architecture that enables fast analysis of petabyte-scale datasets <em>within</em> existing security and compliance controls.</li>
-<li>The company introduced OcientAIQ™, positioned as a solution for handling the demands of real-time decision-making with trillions of rows of data, addressing both performance and cost concerns associated with AI-driven analytics.</li>
-<li>A core argument is that the value lies not just in data retention, but in enabling rapid analysis of <em>all</em> retained data to support timely intelligence delivery.</li>
+<li>Attendees at DODIIS 2026 repeatedly questioned whether current data infrastructure could support increasingly demanding analytical needs.</li>
+<li>OcientAIQ™ is positioned as a solution for analyzing data at scale and speed, enabling “mission speed” decision-making.</li>
+<li>A key challenge identified is the need to bring compute to the data, rather than moving data to compute, to support AI queries within existing security and compliance controls.</li>
+<li>The company emphasizes the importance of retaining all generated data, as seemingly insignificant data points can become crucial connections later in analysis.</li>
 </ul></div>
     
   </div>
@@ -532,23 +548,6 @@
 <li>Ocient stores tuples as either virtual columns (separate columns logically related) or materialized (single binary blob), with tuples inside arrays always being materialized.</li>
 <li>Tuple comparisons are performed lexicographically, meaning elements are compared in order, enabling specific sorting behavior (e.g., <code>(1, "Z")</code> comes before <code>(2, "A")</code>).</li>
 <li>A "Tuple Max" trick can be used for point-in-time queries by packaging a timestamp and value in a tuple and utilizing the <code>MAX()</code> function's lexicographical sorting to efficiently retrieve the latest value, avoiding self-joins.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>press release</span>
-      <span> · 2026-07-14</span>
-    </div>
-    <h3><a href="https://ocient.com/newsroom/press-releases/ocient-and-siren-announce-strategic-partnership-to-deliver-trusted-investigative-intelligence-for-sovereign-national-security-missions/" target="_blank" rel="noopener">Ocient and Siren Announce Strategic Partnership to Deliver Trusted Investigative Intelligence for Sovereign National Security Missions</a></h3>
-    
-    <div class="summary"><p>Ocient and Siren have partnered to offer investigative intelligence capabilities for national security agencies.</p>
-<ul>
-<li>Siren’s investigative platform can now be deployed directly on the OcientAIQ™ Unified Data Platform, delivered by Ocient National Security Solutions (ONSS).</li>
-<li>The partnership aims to enable agencies to investigate petabyte-scale datasets with full fidelity, sovereignty, and control.</li>
-<li>OcientAIQ supports various deployment models including on-premises, hybrid-cloud, air-gapped, and classified environments, ranging from 50 terabytes to multi-petabyte scale.</li>
-<li>Siren's investigative AI, search and visualization capabilities are combined with OcientAIQ’s data foundation to accelerate trusted intelligence gathering.</li>
 </ul></div>
     
   </div>

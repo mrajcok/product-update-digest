@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-15 06:02 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-18 06:00 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -158,16 +158,33 @@
     <div class="meta">
       <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-08-13</span>
+      <span> · 2026-08-17</span>
+    </div>
+    <h2><a href="https://ocient.com/blog/retention-math-what-published-data-says-about-dwell-time-log-retention/" target="_blank" rel="noopener">Retention Math: What published data says about dwell time and log retention</a></h2>
+    
+    <div class="summary"><ul>
+<li>The blog post analyzes the widening gap between increasing attacker dwell time (median of 14 days in 2026, according to Mandiant) and decreasing attacker breakout time (29 minutes in 2026, according to CrowdStrike), highlighting that investigations are often hampered by telemetry expiring before it's needed.</li>
+<li>Current compliance standards, like PCI DSS v4.0, typically require only 12 months of log retention, with only the recent 3 months readily accessible — insufficient given average breach lifecycles (241 days, according to IBM).</li>
+<li>OcientAIQ Unified Data Platform is positioned as a solution to this problem, enabling full-resolution telemetry retention for years, with interactive query performance at network-telemetry volumes, while scaling ingest, storage, and query workload independently.</li>
+<li>OcientAIQ utilizes multi-column indexing at load time to maintain interactive query speeds even as data scales to petabytes, overcoming the limitations of traditional filtering/sampling approaches and consumption-priced cloud analytics solutions.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>blog</span>
+      <span> · 2026-08-17</span>
     </div>
     <h2><a href="https://ocient.com/blog/the-question-nobody-could-stop-asking-at-dodiis-2026/" target="_blank" rel="noopener">The question nobody could stop asking at DODIIS 2026</a></h2>
     
-    <div class="summary"><p>Ocient highlights a shift in focus within the intelligence community toward data infrastructure capable of supporting modern analytical needs.</p>
+    <div class="summary"><p>Ocient focuses on enabling fast analysis of large, full-fidelity datasets for national security applications.</p>
 <ul>
-<li>Discussions at DODIIS 2026 repeatedly centered on the challenge of managing and analyzing rapidly growing datasets, with organizations struggling to retain data long enough to uncover valuable connections.</li>
-<li>Ocient advocates for a “bring compute to the data” approach, emphasizing the need for foundational architecture that enables fast analysis of petabyte-scale datasets <em>within</em> existing security and compliance controls.</li>
-<li>The company introduced OcientAIQ™, positioned as a solution for handling the demands of real-time decision-making with trillions of rows of data, addressing both performance and cost concerns associated with AI-driven analytics.</li>
-<li>A core argument is that the value lies not just in data retention, but in enabling rapid analysis of <em>all</em> retained data to support timely intelligence delivery.</li>
+<li>Attendees at DODIIS 2026 repeatedly questioned whether current data infrastructure could support increasingly demanding analytical needs.</li>
+<li>OcientAIQ™ is positioned as a solution for analyzing data at scale and speed, enabling “mission speed” decision-making.</li>
+<li>A key challenge identified is the need to bring compute to the data, rather than moving data to compute, to support AI queries within existing security and compliance controls.</li>
+<li>The company emphasizes the importance of retaining all generated data, as seemingly insignificant data points can become crucial connections later in analysis.</li>
 </ul></div>
     
   </div>
@@ -185,24 +202,6 @@
 <li>The article claims that existing consumption-priced data systems (like Snowflake and BigQuery) are not optimized for this agent-driven query load, as they were designed for a lower, human-paced query cadence, leading to unexpectedly high bills.</li>
 <li>A parallel challenge arises with outcomes-based measurement, requiring trillion-row joins of panel, purchase, and bid-stream data with low latency—exposing the same underlying infrastructure limitations.</li>
 <li>Beyond cost, the piece emphasizes the need for “auditability at machine speed” to reconstruct agent decision-making in case of errors or unexpected behavior, positioning this as a foundational infrastructure requirement, not an afterthought.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-08-10</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/dtw-ignite-2025-recap-pathways-to-growth-in-the-era-of-ai-agents/" target="_blank" rel="noopener">DTW Ignite 2025 Recap: Pathways to growth in the era of AI agents</a></h2>
-    
-    <div class="summary"><p>DTW Ignite 2025 highlighted the increasing importance of data platforms built for agentic AI, demanding substantial performance and governance capabilities.</p>
-<ul>
-<li>The event showcased production deployments of agentic AI for use cases like fraud detection and network healing, with a focus on the need for data platforms to support them.</li>
-<li>Ocient’s Compute Adjacent Storage Architecture (CASA) was presented as enabling sub-second SLAs on petabyte-scale data by co-locating compute and storage to minimize latency and preserve data lineage.</li>
-<li>Emphasis was placed on the need for massive concurrency (thousands of agent-initiated queries/second), unified real-time and historical data views, and built-in governance for AI agents.</li>
-<li>Testing recommendations include stress-testing concurrency with 10x current query loads, evaluating analytics performance across hot and cold data, and embedding observability to track data lineage for agent actions.</li>
 </ul></div>
     
   </div>
