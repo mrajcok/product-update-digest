@@ -79,13 +79,63 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-18 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-19 06:00 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">August 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-18</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/introducing-aws-cloud-connections-automated-aws-log-discovery-for-cribl-stream/" target="_blank" rel="noopener">Introducing AWS Cloud Connections: Automated AWS log discovery for Cribl Stream | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl Stream’s new AWS Cloud Connections feature automates the discovery and onboarding of AWS logs.</p>
+<ul>
+<li>Cloud Connections enumerates log destinations across AWS organizations or accounts and generates CloudFormation templates for streamlined onboarding to Cribl.</li>
+<li>The feature addresses challenges with logs scattered across multiple AWS services (CloudWatch, S3, Firehose) and regions.</li>
+<li>It operates by generating a CloudFormation template to create a read-only STS role, enabling access to AWS services for log discovery via APIs.</li>
+<li>Discovered logging information identifies previously onboarded sources and generates configurations for new sources, reducing manual effort and time-to-value.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-17</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/introducing-secit-bench-cribls-ai-telemetry-benchmark-a-new-standard-for-evaluating-ai-models-in-it-and-security-workflows/" target="_blank" rel="noopener">Introducing SecIT-bench, Cribl’s AI telemetry benchmark: A new standard for evaluating AI models in IT and security workflows | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl has introduced SecIT-bench, a benchmark for evaluating AI agents used in IT and security workflows, assessing accuracy, cost, and runtime across 30 realistic incident scenarios.</p>
+<ul>
+<li>The benchmark tested 14 AI models (including Grok-4.6 and Claude Opus 5) across four incident categories: intrusion/breach, covert data egress, service errors, and performance degradation.</li>
+<li>Testing was performed in two “weight classes” to isolate model capabilities from the surrounding environment (“harness”), revealing that the harness can impact cost efficiency by up to 23%.</li>
+<li>Results indicate a narrow accuracy spread (17%) despite a 20x difference in investigation spend, emphasizing the importance of cost considerations alongside performance.</li>
+<li>SecIT-bench uses a committee of LLM judges to evaluate investigations based on diagnostic conditions, providing a more nuanced assessment than simple pass/fail metrics and a publicly available leaderboard is available for tracking results.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-14</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/cribl-privacy-2-1-more-telemetry-scanned-per-unit-of-compute/" target="_blank" rel="noopener">Cribl Privacy 2.1: More telemetry scanned per unit of compute | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>Cribl Privacy 2.1 delivers a 64%-163% increase in throughput for sensitive data detection compared to version 2.0.</li>
+<li>The models utilize a new pruning and distillation process to reduce model size by up to 75% while largely maintaining or improving detection accuracy.</li>
+<li>Average memory usage decreased by 13%-24% across the Cribl Privacy 2.1 model family, with CPU utilization remaining consistent.</li>
+<li>The Cribl Privacy family offers different models (Fast, Base, and upcoming Pro) optimized for varying priorities of speed, accuracy, and resource consumption within telemetry pipelines.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -99,22 +149,6 @@
 <li>Apps aim to address the “99% perspiration” of software development – the infrastructure concerns like data access, governance, and hosting – allowing developers to focus on the core application logic.</li>
 <li>The platform provides pre-built tools, but also enables users to create custom applications without submitting feature requests to vendors or migrating to new solutions.</li>
 <li>Apps leverage Cribl’s existing telemetry management capabilities, enabling users to rapidly prototype and iterate on solutions tailored to their specific needs, without needing to rebuild foundational infrastructure.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-08-14</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/cribl-privacy-2-1-more-telemetry-scanned-per-unit-of-compute/" target="_blank" rel="noopener">Cribl Privacy 2.1: More telemetry scanned per unit of compute | Cribl</a></h3>
-    
-    <div class="summary"><ul>
-<li>Cribl Privacy 2.1 models achieve a 64%-163% increase in throughput (data processed per second) while reducing average memory usage by 13%-24%, without increasing CPU utilization.</li>
-<li>The performance gains are achieved through model pruning and distillation techniques: reducing model size by removing less impactful neurons and then retraining a "student" model to match the original’s accuracy.</li>
-<li>Cribl Privacy 2.1 incorporates customer feedback to improve detection of common log types and telemetry patterns.</li>
-<li>The Cribl Privacy family offers different models (Fast, Base, and upcoming Pro) optimized for varying priorities between speed, accuracy, and resource consumption.</li>
 </ul></div>
     
   </div>
@@ -556,43 +590,6 @@
 <li>The tool excels at helping analysts avoid false positives by focusing on proving impact rather than simply flagging potentially malicious activity.</li>
 <li>Effective prompting involves specifying a scope, time window, behavior of interest, and the desired decision, prompting for leads instead of immediate findings.</li>
 <li>The MCP encourages a disciplined investigation process, including establishing a baseline of normal activity and forcing a pause to summarize findings before proceeding with the next search.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-22</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/whats-new-4-19/" target="_blank" rel="noopener">What’s New! We heard you like AI. | Cribl</a></h3>
-    
-    <div class="summary"><ul>
-<li>Cribl 4.19 introduces an app framework allowing custom apps to be built and installed within Cribl using Cribl APIs and AI-assisted tools like Cursor, enabling tailored user experiences.</li>
-<li>The MCP server is now embedded directly into Cribl Leader as a managed capability, simplifying integration with AI tools via existing authentication and access controls.</li>
-<li>Workspaces can now be provisioned in any supported region independently of the Organization region, enhancing data residency and compliance.</li>
-<li>Centralized credential management is available via HashiCorp Vault or Cribl's built-in secret store for use across Stream and Edge, improving security and reducing credential sprawl.</li>
-<li>New native Destinations are available for Snowflake and Google BigQuery, allowing streamlined direct data streaming without relying on Kafka or S3.</li>
-<li>A native Amazon Bedrock Source tile and IBM Cloud Object Storage destination have also been added in Cribl Stream.</li>
-<li>Cribl Search now includes “Schedule Jitter,” a feature that spreads out scheduled search execution times to prevent performance spikes.</li>
-<li>Expanded public APIs now allow programmatic management of Cribl Edge Nodes.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-22</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/cribl-mcp-server-interact-with-cribl-using-the-ai-tools-you-already-use/" target="_blank" rel="noopener">Cribl MCP Server: Interact with Cribl using the AI tools you already use | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl 4.19 introduces a native Cribl MCP Server, enabling secure connections between AI clients (like Claude Code, Cursor, and OpenAI Codex CLI) and Cribl environments.</p>
-<ul>
-<li>Cribl MCP Server is embedded directly within the Cribl Leader, eliminating the need for separate service or container deployment.</li>
-<li>It leverages the open standard Model Context Protocol (MCP) to allow AI clients to retrieve Cribl resources like Sources, Destinations, Pipelines, and metrics.</li>
-<li>The feature allows users to inspect Cribl configurations, troubleshoot deployments, investigate telemetry, and build AI-powered workflows directly from existing AI tools.</li>
-<li>Access is controlled through existing Cribl permissions and RBAC, ensuring security and auditability; the embedded server is the recommended approach for new deployments, though a standalone Docker option remains supported.</li>
 </ul></div>
     
   </div>

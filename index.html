@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-18 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-19 06:00 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -107,15 +107,34 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-08-14</span>
+      <span> · 2026-08-18</span>
     </div>
-    <h2><a href="https://cribl.io/blog/cribl-apps-do-the-fun-part-of-development/" target="_blank" rel="noopener">Cribl Apps: Do the fun part of development | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/introducing-aws-cloud-connections-automated-aws-log-discovery-for-cribl-stream/" target="_blank" rel="noopener">Introducing AWS Cloud Connections: Automated AWS log discovery for Cribl Stream | Cribl</a></h2>
     
-    <div class="summary"><ul>
-<li>Cribl has released “Apps”, a platform allowing users to build custom tools and workflows on top of their existing data, using an AI-driven conversational interface.</li>
-<li>Apps aim to address the “99% perspiration” of software development – the infrastructure concerns like data access, governance, and hosting – allowing developers to focus on the core application logic.</li>
-<li>The platform provides pre-built tools, but also enables users to create custom applications without submitting feature requests to vendors or migrating to new solutions.</li>
-<li>Apps leverage Cribl’s existing telemetry management capabilities, enabling users to rapidly prototype and iterate on solutions tailored to their specific needs, without needing to rebuild foundational infrastructure.</li>
+    <div class="summary"><p>Cribl Stream’s new AWS Cloud Connections feature automates the discovery and onboarding of AWS logs.</p>
+<ul>
+<li>Cloud Connections enumerates log destinations across AWS organizations or accounts and generates CloudFormation templates for streamlined onboarding to Cribl.</li>
+<li>The feature addresses challenges with logs scattered across multiple AWS services (CloudWatch, S3, Firehose) and regions.</li>
+<li>It operates by generating a CloudFormation template to create a read-only STS role, enabling access to AWS services for log discovery via APIs.</li>
+<li>Discovered logging information identifies previously onboarded sources and generates configurations for new sources, reducing manual effort and time-to-value.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-08-17</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/introducing-secit-bench-cribls-ai-telemetry-benchmark-a-new-standard-for-evaluating-ai-models-in-it-and-security-workflows/" target="_blank" rel="noopener">Introducing SecIT-bench, Cribl’s AI telemetry benchmark: A new standard for evaluating AI models in IT and security workflows | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl has introduced SecIT-bench, a benchmark for evaluating AI agents used in IT and security workflows, assessing accuracy, cost, and runtime across 30 realistic incident scenarios.</p>
+<ul>
+<li>The benchmark tested 14 AI models (including Grok-4.6 and Claude Opus 5) across four incident categories: intrusion/breach, covert data egress, service errors, and performance degradation.</li>
+<li>Testing was performed in two “weight classes” to isolate model capabilities from the surrounding environment (“harness”), revealing that the harness can impact cost efficiency by up to 23%.</li>
+<li>Results indicate a narrow accuracy spread (17%) despite a 20x difference in investigation spend, emphasizing the importance of cost considerations alongside performance.</li>
+<li>SecIT-bench uses a committee of LLM judges to evaluate investigations based on diagnostic conditions, providing a more nuanced assessment than simple pass/fail metrics and a publicly available leaderboard is available for tracking results.</li>
 </ul></div>
     
   </div>
@@ -129,27 +148,10 @@
     <h2><a href="https://cribl.io/blog/cribl-privacy-2-1-more-telemetry-scanned-per-unit-of-compute/" target="_blank" rel="noopener">Cribl Privacy 2.1: More telemetry scanned per unit of compute | Cribl</a></h2>
     
     <div class="summary"><ul>
-<li>Cribl Privacy 2.1 models achieve a 64%-163% increase in throughput (data processed per second) while reducing average memory usage by 13%-24%, without increasing CPU utilization.</li>
-<li>The performance gains are achieved through model pruning and distillation techniques: reducing model size by removing less impactful neurons and then retraining a "student" model to match the original’s accuracy.</li>
-<li>Cribl Privacy 2.1 incorporates customer feedback to improve detection of common log types and telemetry patterns.</li>
-<li>The Cribl Privacy family offers different models (Fast, Base, and upcoming Pro) optimized for varying priorities between speed, accuracy, and resource consumption.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-08-13</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/no-rest-for-the-weary/" target="_blank" rel="noopener">No REST for the weary | Cribl</a></h2>
-    
-    <div class="summary"><ul>
-<li>The Cribl REST sandbox has been updated to connect directly to a Cribl Cloud instance, providing access to the latest features and enabling testing with publicly available REST APIs like dummyjson.com and haveibeenpwned.com.</li>
-<li>The sandbox includes lessons demonstrating the use of <code>curl</code> and <code>jq</code> for API interaction, emphasizing the command line as a troubleshooting tool.</li>
-<li>Cribl's REST collector benefits from parameterization, allowing dynamic values from other system components to be used for sorting, filtering, and sampling data.</li>
-<li>The updated sandbox demonstrates the use of Event Breakers, configurable rules to split JSON array data into individual events within Cribl, using a new ruleset creation workflow (Stream &gt; Manage &gt; Processing &gt; Knowledge).</li>
+<li>Cribl Privacy 2.1 delivers a 64%-163% increase in throughput for sensitive data detection compared to version 2.0.</li>
+<li>The models utilize a new pruning and distillation process to reduce model size by up to 75% while largely maintaining or improving detection accuracy.</li>
+<li>Average memory usage decreased by 13%-24% across the Cribl Privacy 2.1 model family, with CPU utilization remaining consistent.</li>
+<li>The Cribl Privacy family offers different models (Fast, Base, and upcoming Pro) optimized for varying priorities of speed, accuracy, and resource consumption within telemetry pipelines.</li>
 </ul></div>
     
   </div>
