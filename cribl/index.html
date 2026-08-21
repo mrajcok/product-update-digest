@@ -79,13 +79,58 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-20 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-21 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">August 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>press release</span>
+      <span> · 2026-08-19</span>
+    </div>
+    <h3><a href="https://cribl.io/news/cribl-advances-ai-powered-security-operations-with-new-ai-soc-acquisition/" target="_blank" rel="noopener">Cribl Advances AI-Powered Security Operations with New AI SOC Acquisition | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl has acquired technology assets from Radiant Security to enhance its security operations capabilities.</p>
+<ul>
+<li>The acquisition includes intellectual property for AI-driven autonomous triage, investigation, and resolution of security alerts.</li>
+<li>This AI SOC technology will be integrated as an application within Cribl’s telemetry data platform, allowing AI-powered security decisions to be made on comprehensive data.</li>
+<li>The new capabilities generate custom triage logic dynamically, rather than relying on pre-defined playbooks, improving threat detection and reducing false positives.</li>
+<li>This builds upon Cribl's earlier acquisition of CardinalOps, signaling a strategic move towards integrated AI-powered security features within its platform.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>press release</span>
+      <span> · 2026-08-19</span>
+    </div>
+    <h3><a href="https://cribl.io/news/cribl-denies-splunk-allegations/" target="_blank" rel="noopener">PR Newswire: Cribl Denies Splunk Allegations | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl publicly refuted allegations made in a lawsuit filed by Splunk, asserting their interoperability is based on independent development and open-source implementations like Eventgen. The company emphasized its commitment to providing customers with choice and control over their telemetry data, positioning itself as a vendor-agnostic alternative. Cribl will be defending against Splunk's claims and maintaining focus on customer needs.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-19</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/introducing-cribl-marketplace-a-central-place-to-discover-and-deploy-apps/" target="_blank" rel="noopener">Introducing Cribl Marketplace: A central place to discover and deploy apps | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl has launched the Cribl Marketplace, a central location for discovering and deploying applications within the Cribl platform.</p>
+<ul>
+<li>The Marketplace is initially available within Cribl.Cloud for cloud and hybrid deployments and will eventually have a public URL.</li>
+<li>It offers prebuilt apps to accelerate workflows, extend Cribl’s capabilities, and connect to existing systems, reducing custom development effort.</li>
+<li>Apps are sourced from Cribl, partners, and the community, and can be filtered by type, publisher, support model, and certification status.</li>
+<li>The Marketplace supports a unified discovery experience for both Apps and Packs and emphasizes transparency through detailed app information like permissions and version history.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -539,57 +584,6 @@
 <li>The system utilizes Style Dictionary to manage design tokens as a single source of truth for both Figma and code.</li>
 <li>Documentation is provided through Storybook and a custom rendering pipeline that converts content to Markdown, making it accessible for both humans and LLMs via an <code>/llms.txt</code> route.</li>
 <li>Capra is now published on NPM, allowing customers to build Cribl Apps with consistent design aesthetics and behavior.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-23</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/i-built-a-full-featured-app-on-the-cribl-platform-and-im-not-a-developer/" target="_blank" rel="noopener">I built a full-featured app on the Cribl Platform and I&#39;m not a developer | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl Platform allows users to build full-featured applications without extensive software development experience.</p>
-<ul>
-<li>The platform simplifies app development by handling infrastructure concerns like hosting, authentication (using a fetch proxy), RBAC, and API gateway configuration.</li>
-<li>Applications run as sandboxed iframes within Cribl Search, eliminating server provisioning, container management, DNS configuration, and TLS certificate rotation.</li>
-<li>A single <code>npm run deploy</code> command builds, packages, uploads, and installs the app, enabling rapid deployment to a Cribl Cloud environment.</li>
-<li>The described app provides a catalog of 43 data sources with field matrices, security/observability detections (over 600 with KQL queries), enrichment recommendations, and one-click deployment to Cribl Search.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-23</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/architecting-for-the-speed-of-vibe-coding-introducing-apps/" target="_blank" rel="noopener">Architecting for the speed of &#34;vibe coding&#34;: Introducing Apps | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl has introduced “Apps” to enable faster, AI-assisted development within their telemetry platform, balancing platform stability with customer customization.</p>
-<ul>
-<li>Apps provide a secure, sandboxed environment for customers to build custom functionality using standard web technologies, interacting with the Cribl platform via public APIs.</li>
-<li>The architecture is based on three core principles: a strict trust boundary (Apps never have platform privileges), sandboxed execution (customer code runs in a zero-privilege environment), and managed backend primitives (built-in state persistence and API proxies).</li>
-<li>Apps avoid the issues of both "free-for-all" (security risks of arbitrary code execution) and "walled garden" (restrictive pre-built widgets) approaches to platform customization.</li>
-<li>The initial implementation utilizes sandboxed iframes, with a foundational design geared toward supporting future execution environments, enabling rapid iteration without compromising platform stability.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-22</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/threat-hunting-with-the-cribl-mcp/" target="_blank" rel="noopener">Threat hunting with the Cribl MCP | Cribl</a></h3>
-    
-    <div class="summary"><p>Threat hunting can be accelerated with the Cribl MCP by shortening the loop between asking a question and obtaining supporting evidence.</p>
-<ul>
-<li>The Cribl MCP (Model Context Protocol) allows an AI assistant to interact with Cribl Search, translating natural language questions into searches and summarizing results.</li>
-<li>The tool excels at helping analysts avoid false positives by focusing on proving impact rather than simply flagging potentially malicious activity.</li>
-<li>Effective prompting involves specifying a scope, time window, behavior of interest, and the desired decision, prompting for leads instead of immediate findings.</li>
-<li>The MCP encourages a disciplined investigation process, including establishing a baseline of normal activity and forcing a pause to summarize findings before proceeding with the next search.</li>
 </ul></div>
     
   </div>
