@@ -79,13 +79,47 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-25 06:02 AM EDT</p>
+  <p class="generated-at">Generated 2026-08-26 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">August 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-25</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/building-an-effective-root-cause-analysis-practice/" target="_blank" rel="noopener">Building an Effective Root Cause Analysis Practice: Strategies for Continuous Improvement in IT and Security Incidents | Cribl</a></h3>
+    
+    <div class="summary"><p>Building an Effective Root Cause Analysis Practice: This blog post details strategies for improving IT and security incident response through robust root cause analysis (RCA).</p>
+<ul>
+<li>The post outlines an 8-step RCA process, emphasizing the importance of collecting evidence, building timelines, and creating measurable corrective actions.</li>
+<li>It recommends assembling cross-functional teams with clear roles and a blameless approach to focus on system conditions, not individual blame.</li>
+<li>The article highlights the value of automation for evidence collection and correlation, while stressing that human review is crucial for impactful conclusions.</li>
+<li>Cribl’s capabilities are presented as assisting with telemetry collection, normalization, search, and replay to support investigation-ready data for RCA, including integration with CardinalOps for AI-powered detection engineering.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-25</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/your-security-data-lake-is-stuck-in-someone-elses-backlog/" target="_blank" rel="noopener">Your security data lake is stuck in someone else&#39;s backlog | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl introduces Cribl Lake, a purpose-built security data lake designed to address the challenges of using general-purpose data warehouses like Snowflake or Databricks for security telemetry.</p>
+<ul>
+<li>Cribl Lake offers automated schema handling for Parquet data, eliminating the need for upfront schema planning.</li>
+<li>It natively supports logs, metrics, and traces, treating security telemetry as a primary focus.</li>
+<li>Users maintain full data ownership in open formats, supporting both Cribl-managed storage and a Bring Your Own Storage (BYOS) approach.</li>
+<li>The platform aims to reduce costs associated with long-term retention and querying by landing data in low-cost storage with immediate access for search and replay.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -551,39 +585,6 @@
 <li>The “Drop” function in Cribl Edge can eliminate low-value logs (like debug logs) at the source, reducing data transfer and storage costs, with the ability to re-enable collection if needed.</li>
 <li>Cribl Edge and Stream support log sampling (e.g., 1/1000 or 1/100) to reduce data volume while preserving visibility for troubleshooting high-volume logs.</li>
 <li>Aggregations and metric rollups within Cribl Edge or Stream reduce dimensionality and frequency, lowering storage footprint and query computation time.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-28</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/why-full-text-search-matters-for-modern-log-analytics/" target="_blank" rel="noopener">Why full-text search matters for modern log analytics | Cribl</a></h3>
-    
-    <div class="summary"><ul>
-<li>Cribl Search 4.19 (July 2026) now defaults to using a full-text search capability built on an inverted index of the <code>_raw</code> event message.</li>
-<li>This full-text search allows for significantly faster alphanumeric token searches across log data without requiring users to know specific field locations.</li>
-<li>Internal testing on a 1 billion row dataset showed 150x to 350x acceleration for “needle in the haystack” searches using the indexed approach, with greater acceleration for rarer search terms.</li>
-<li>Full-text search complements existing indexed fields, narrowing the search space before applying structured predicates, and currently supports simple string matching via the <code>where</code> operator with the <code>has string</code> operator, but not wildcards or substring matching.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-23</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/introducing-capra-cribls-design-system/" target="_blank" rel="noopener">Introducing Capra, Cribl’s design system | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl has released Capra, a new in-house design system intended to improve consistency, accessibility, and code health across their platform and for Cribl Apps.</p>
-<ul>
-<li>Capra includes design standards (encoded as design tokens) and a frontend component library built on React Aria Components, chosen for its accessibility features and style customization options.</li>
-<li>The system utilizes Style Dictionary to manage design tokens as a single source of truth for both Figma and code.</li>
-<li>Documentation is provided through Storybook and a custom rendering pipeline that converts content to Markdown, making it accessible for both humans and LLMs via an <code>/llms.txt</code> route.</li>
-<li>Capra is now published on NPM, allowing customers to build Cribl Apps with consistent design aesthetics and behavior.</li>
 </ul></div>
     
   </div>
