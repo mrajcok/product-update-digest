@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-28 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-01 06:00 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -161,6 +161,25 @@
     <div class="meta">
       <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
+      <span> · 2026-08-31</span>
+    </div>
+    <h2><a href="https://ocient.com/blog/detecting-low-and-slow-beaconing-with-sql-over-multi-year-flow-history/" target="_blank" rel="noopener">Detecting low-and-slow beaconing with SQL over multi-year flow history</a></h2>
+    
+    <div class="summary"><p>Ocient enables detection of low-and-slow command-and-control beaconing by leveraging long-term flow data analysis with SQL.</p>
+<ul>
+<li>The detection method focuses on identifying consistent source/destination pairings, low byte counts, and regular intervals in network flow data over extended periods, even when traffic appears benign due to use of legitimate cloud services.</li>
+<li>The core query groups flow records by source/destination IP, calculates the average and standard deviation of time gaps between connections, and flags pairs with regular intervals (gap_stddev &lt; 0.1</li>
+<li>avg_gap) and a sufficient number of contacts (contacts &gt;= 20).</li>
+<li>Performance relies on full-resolution (unsampled) flow capture combined with TimeKey® indexing, which builds multiple indexes across table columns at load time, enabling fast interactive queries over multi-year data sets.</li>
+<li>OcientAIQ™’s architecture is designed for independent scaling of ingest, storage, and query concurrency, allowing efficient analysis of petabyte-to-exabyte scale data without performance bottlenecks or excessive costs.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>blog</span>
       <span> · 2026-08-24</span>
     </div>
     <h2><a href="https://ocient.com/blog/what-petabyte-scale-actually-unlocks/" target="_blank" rel="noopener">What petabyte scale actually unlocks</a></h2>
@@ -187,24 +206,6 @@
 <li>Current compliance standards, like PCI DSS v4.0, typically require only 12 months of log retention, with only the recent 3 months readily accessible — insufficient given average breach lifecycles (241 days, according to IBM).</li>
 <li>OcientAIQ Unified Data Platform is positioned as a solution to this problem, enabling full-resolution telemetry retention for years, with interactive query performance at network-telemetry volumes, while scaling ingest, storage, and query workload independently.</li>
 <li>OcientAIQ utilizes multi-column indexing at load time to maintain interactive query speeds even as data scales to petabytes, overcoming the limitations of traditional filtering/sampling approaches and consumption-priced cloud analytics solutions.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-08-17</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/the-question-nobody-could-stop-asking-at-dodiis-2026/" target="_blank" rel="noopener">The question nobody could stop asking at DODIIS 2026</a></h2>
-    
-    <div class="summary"><p>Ocient focuses on enabling fast analysis of large, full-fidelity datasets for national security applications.</p>
-<ul>
-<li>Attendees at DODIIS 2026 repeatedly questioned whether current data infrastructure could support increasingly demanding analytical needs.</li>
-<li>OcientAIQ™ is positioned as a solution for analyzing data at scale and speed, enabling “mission speed” decision-making.</li>
-<li>A key challenge identified is the need to bring compute to the data, rather than moving data to compute, to support AI queries within existing security and compliance controls.</li>
-<li>The company emphasizes the importance of retaining all generated data, as seemingly insignificant data points can become crucial connections later in analysis.</li>
 </ul></div>
     
   </div>

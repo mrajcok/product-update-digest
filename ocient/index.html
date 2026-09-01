@@ -79,13 +79,31 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-08-28 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-01 06:00 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">August 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-08-31</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/detecting-low-and-slow-beaconing-with-sql-over-multi-year-flow-history/" target="_blank" rel="noopener">Detecting low-and-slow beaconing with SQL over multi-year flow history</a></h3>
+    
+    <div class="summary"><p>Ocient enables detection of low-and-slow command-and-control beaconing by leveraging long-term flow data analysis with SQL.</p>
+<ul>
+<li>The detection method focuses on identifying consistent source/destination pairings, low byte counts, and regular intervals in network flow data over extended periods, even when traffic appears benign due to use of legitimate cloud services.</li>
+<li>The core query groups flow records by source/destination IP, calculates the average and standard deviation of time gaps between connections, and flags pairs with regular intervals (gap_stddev &lt; 0.1</li>
+<li>avg_gap) and a sufficient number of contacts (contacts &gt;= 20).</li>
+<li>Performance relies on full-resolution (unsampled) flow capture combined with TimeKey® indexing, which builds multiple indexes across table columns at load time, enabling fast interactive queries over multi-year data sets.</li>
+<li>OcientAIQ™’s architecture is designed for independent scaling of ingest, storage, and query concurrency, allowing efficient analysis of petabyte-to-exabyte scale data without performance bottlenecks or excessive costs.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -530,23 +548,6 @@
 <li>OcientAIQ utilizes Compute Adjacent Storage Architecture (CASA), placing data on local NVMe via PCIe, avoiding network I/O bottlenecks common in cloud architectures that separate compute and storage.</li>
 <li>It supports all six core analytical modalities (relational, geospatial, ML via OcientML™, graph, vector search, and real-time rollups) within a single engine and data copy, improving performance for cross-modal queries.</li>
 <li>OcientAIQ features per-core pricing which contrasts with per-query or per-byte pricing models, providing more predictable costs for the continuous and exploratory behavior of AI agents.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-27</span>
-    </div>
-    <h3><a href="https://ocient.com/blog/inside-the-ocientaiq-engine-dataflows-are-the-stored-procedures-you-never-have-to-create/" target="_blank" rel="noopener">Inside OcientAIQ™: Dataflows are the stored procedures you never have to create</a></h3>
-    
-    <div class="summary"><p>Dataflows in OcientAIQ bring imperative programming capabilities—loops, variables, conditionals, and exception handling—directly to SQL, allowing complex processing within the database without creating stored procedures.</p>
-<ul>
-<li>Dataflows are anonymous, ad-hoc SQL scripts submitted like queries, eliminating the need for pre-defined stored procedures or specialized protocols.</li>
-<li>They support variables with strong typing and three expansion modes (@ for values, @@ for identifiers, and @! for raw text) for dynamic SQL generation.</li>
-<li>Control flow constructs like <code>WHILE</code> loops, <code>FOR</code> loops, <code>IF/ELSEIF</code> statements, and <code>TRY/EXCEPTION/FINALLY</code> blocks are now available within SQL.</li>
-<li>The platform optimizes execution by dynamically adjusting query plans between loop iterations and managing temporary data (scratch tables) automatically, with automatic cleanup upon completion or cancellation.</li>
 </ul></div>
     
   </div>
