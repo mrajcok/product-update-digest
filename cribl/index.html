@@ -79,11 +79,31 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-02 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-03 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
+  
+  <h2 class="month">September 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-01</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/how-cribls-security-team-solved-their-threat-intelligence-problem/" target="_blank" rel="noopener">How Cribl&#39;s security team solved their threat intelligence problem | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl’s security team built a threat intelligence platform (TIP) directly within Cribl to address challenges with operationalizing threat intelligence.</p>
+<ul>
+<li>The solution leverages Cribl Stream and Cribl Search, using a STIX 2.1 knowledge graph to store and relate threat data (actors, malware, campaigns, IOCs).</li>
+<li>The application ingests threat feeds (abuse.ch, CISA KEV, etc.) and internal research, with a workflow for curation and syncing indicators to Cribl lookup tables.</li>
+<li>A “hunt workbench” enables enrichment of indicators with data from VirusTotal, Shodan, and GreyNoise, and direct querying within Cribl Search for investigation.</li>
+<li>Automated TTLs (Time-To-Live) manage indicator expiration and maintain lookup table hygiene, with a posture view reporting on coverage gaps against priority intelligence requirements (PIRs).</li>
+</ul></div>
+    
+  </div>
+  
   
   <h2 class="month">August 2026</h2>
   
@@ -569,22 +589,6 @@
 <li>Providing the AI with detailed product context, including documentation and threat models, improved research quality by reducing false positives and accelerating validation.</li>
 <li>The primary strengths of the AI model were call-path tracing, building quick test harnesses, and draft writing for vulnerability reports.</li>
 <li>Human oversight remained critical for validating findings, assessing impact, and ensuring the accuracy of the AI-generated results; the AI accelerated but did not replace human security expertise.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-28</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/optimizing-observability-spend-practical-strategies-for-sres/" target="_blank" rel="noopener">Optimizing observability spend: Practical strategies for SREs | Cribl</a></h3>
-    
-    <div class="summary"><ul>
-<li>Cribl details strategies for reducing observability costs by efficiently processing telemetry data using Cribl Stream, Edge, and Lake.</li>
-<li>The “Drop” function in Cribl Edge can eliminate low-value logs (like debug logs) at the source, reducing data transfer and storage costs, with the ability to re-enable collection if needed.</li>
-<li>Cribl Edge and Stream support log sampling (e.g., 1/1000 or 1/100) to reduce data volume while preserving visibility for troubleshooting high-volume logs.</li>
-<li>Aggregations and metric rollups within Cribl Edge or Stream reduce dimensionality and frequency, lowering storage footprint and query computation time.</li>
 </ul></div>
     
   </div>
