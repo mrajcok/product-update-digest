@@ -79,7 +79,7 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-03 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-05 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
@@ -90,16 +90,50 @@
   <div class="card">
     <div class="meta">
       <span>blog</span>
+      <span> · 2026-09-03</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/how-i-think-about-detection-in-the-pipeline/" target="_blank" rel="noopener">How I think about detection in the pipeline | Cribl</a></h3>
+    
+    <div class="summary"><ul>
+<li>Cribl argues that while detecting events <em>in the pipeline</em> is valuable for speed and cost-efficiency, it's insufficient for producing trustworthy alerts without correlation.</li>
+<li>The piece highlights the importance of <em>stateful</em> detection logic (windows, thresholds, joins) which is often necessary for high-fidelity alerts, contrasting this with the <em>stateless</em> architecture common in high-throughput systems like those acquired by CrowdStrike (Onum).</li>
+<li>Cribl advocates for a tiered architecture: in-pipeline processing for initial signal generation (parsing, enrichment, basic IOC matching) and a separate, persistent data store for correlation, backtesting, and investigation.</li>
+<li>The author stresses the importance of customer control over the data layer, advocating for an architecture that avoids vendor lock-in and allows flexibility to change detection engines or search across multiple data stores using <em>federated search</em>.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-02</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/mastering-capacity-analytics/" target="_blank" rel="noopener">Mastering Capacity Analytics: How to Grow Infrastructure Without Guesswork | Cribl</a></h3>
+    
+    <div class="summary"><h2>Mastering Capacity Analytics with Cribl</h2>
+<p>Cribl enables infrastructure growth by leveraging telemetry to understand demand, forecast requirements, and proactively identify risks.</p>
+<ul>
+<li>Cribl’s platform collects, processes, governs, routes, stores, searches, and investigates telemetry for both humans and AI agents.</li>
+<li>The platform facilitates a continuous feedback loop: gathering telemetry, establishing baselines, forecasting demand, aligning capacity with business outcomes, and automating governance.</li>
+<li>Cribl Stream and Edge can collect, reduce, enrich, transform, and route telemetry from 80+ sources, while Cribl Lake and Search provide options for cost-effective storage and querying.</li>
+<li>The "Cribl App for AI Observability" provides a centralized location for searching, investigating, and reporting AI telemetry across different environments.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
       <span> · 2026-09-01</span>
     </div>
     <h3><a href="https://cribl.io/blog/how-cribls-security-team-solved-their-threat-intelligence-problem/" target="_blank" rel="noopener">How Cribl&#39;s security team solved their threat intelligence problem | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl’s security team built a threat intelligence platform (TIP) directly within Cribl to address challenges with operationalizing threat intelligence.</p>
+    <div class="summary"><p>Cribl's security team developed an internal threat intelligence platform (TIP) built directly on top of Cribl Stream and Cribl Search to address challenges with operationalizing threat intelligence.</p>
 <ul>
-<li>The solution leverages Cribl Stream and Cribl Search, using a STIX 2.1 knowledge graph to store and relate threat data (actors, malware, campaigns, IOCs).</li>
-<li>The application ingests threat feeds (abuse.ch, CISA KEV, etc.) and internal research, with a workflow for curation and syncing indicators to Cribl lookup tables.</li>
-<li>A “hunt workbench” enables enrichment of indicators with data from VirusTotal, Shodan, and GreyNoise, and direct querying within Cribl Search for investigation.</li>
-<li>Automated TTLs (Time-To-Live) manage indicator expiration and maintain lookup table hygiene, with a posture view reporting on coverage gaps against priority intelligence requirements (PIRs).</li>
+<li>The solution leverages a STIX 2.1 knowledge graph to store and relate threat intelligence data, including threat actors, malware, and indicators of compromise (IOCs).</li>
+<li>Intelligence feeds (e.g., abuse.ch, CISA KEV) and internal research are ingested, with a focus on curation workflow to prioritize relevant indicators and manage their lifecycle (freshness, expiration).</li>
+<li>A “hunt workbench” enables enrichment of indicators with data from VirusTotal, Shodan, and GreyNoise, and directly launches KQL queries in Cribl Search for investigation.</li>
+<li>Curated indicators are synced directly to Cribl lookup tables, immediately impacting real-time event enrichment within Cribl pipelines, eliminating the need for export/import processes and ensuring timely action based on threat intelligence.</li>
 </ul></div>
     
   </div>
@@ -555,40 +589,6 @@
 <li>The new “Expert” track drops users into broken, high-pressure environments to diagnose and fix issues, followed by peer discussion guided by Cribl experts.</li>
 <li>Each track awards a “Practical Data Skills” badge (Core, Advanced, or Expert) upon completion.</li>
 <li>The training costs $250 per person (in addition to CriblCon registration) and has limited capacity (50 people per track).</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-28</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/what-is-agentic-telemetry/" target="_blank" rel="noopener">What is agentic telemetry? | Cribl</a></h3>
-    
-    <div class="summary"><p>Agentic telemetry manages telemetry for both system operators and AI agents, requiring a shift in data architecture away from centralized systems.</p>
-<ul>
-<li>The core concept is enabling any authorized agent (human or AI) to ask questions of all available data, wherever it resides, without vendor lock-in.</li>
-<li>An “AI Platform for Telemetry” architecture is proposed, emphasizing modular, integrated components for collection, routing, shaping, storage, and analysis – none of which are mandatory from a single vendor.</li>
-<li>The blog identifies three core problems hindering agentic telemetry: agent fatigue (proliferation of AI assistants in silos), context starvation (lack of complete data and relationships), and token economics (the cost of querying massive datasets).</li>
-<li>Key capabilities in the proposed architecture include open access for agents, full-fidelity data retention, in-place search/federation, fused context, and robust governance/audit controls.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-28</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/ai-assisted-vulnerability-research-at-cribl/" target="_blank" rel="noopener">AI-assisted vulnerability research at Cribl | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl leveraged OpenAI’s GPT-5.5 to assist in vulnerability research, resulting in the discovery and remediation of multiple vulnerabilities, including CVE-2026-56747 and CVE-2026-56748.</p>
-<ul>
-<li>The AI assistant was integrated into the vulnerability research workflow to trace code paths, connect product behavior, generate proofs of concept, and challenge assumptions.</li>
-<li>Providing the AI with detailed product context, including documentation and threat models, improved research quality by reducing false positives and accelerating validation.</li>
-<li>The primary strengths of the AI model were call-path tracing, building quick test harnesses, and draft writing for vulnerability reports.</li>
-<li>Human oversight remained critical for validating findings, assessing impact, and ensuring the accuracy of the AI-generated results; the AI accelerated but did not replace human security expertise.</li>
 </ul></div>
     
   </div>
