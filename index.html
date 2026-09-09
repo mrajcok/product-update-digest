@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-05 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-09 06:00 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -161,6 +161,24 @@
     <div class="meta">
       <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
+      <span> · 2026-09-08</span>
+    </div>
+    <h2><a href="https://ocient.com/blog/prevention-is-a-data-problem-too/" target="_blank" rel="noopener">Prevention is a data problem too</a></h2>
+    
+    <div class="summary"><p>Ocient argues that cybersecurity is currently over-invested in detection and under-invested in prevention, which shares the same underlying data challenges.</p>
+<ul>
+<li>Preventing breaches requires analyzing multiple disparate data sources – vulnerability scans, asset inventory, network topology, and patch history – to prioritize risks effectively.</li>
+<li>Continuous correlation of credential exposure against historical identity and authentication data is needed, as point-in-time checks are insufficient.</li>
+<li>Detecting misconfiguration drift requires retaining configuration state history to establish a baseline of “normal” behavior.</li>
+<li>Effective attack surface management necessitates retaining and querying long-term historical scan data to identify trends, rather than relying on infrequent snapshots; the OcientAIQ Unified Data Platform is positioned as a solution for these challenges.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>blog</span>
       <span> · 2026-09-02</span>
     </div>
     <h2><a href="https://ocient.com/blog/what-conecta-latam-2026-told-us-about-building-networks-that-run-themselves/" target="_blank" rel="noopener">What Conecta LATAM 2026 told us about building networks that run themselves</a></h2>
@@ -189,25 +207,6 @@
 <li>Six models are presented, categorized by whether the matching values are literals within the query or sourced from a second table, and whether the query returns only keys, keys plus matched attributes, or rows containing all values.</li>
 <li>Key variables driving the models include N (number of rows), A (array element count), L (number of values to match), M (number of matching rows), and F (number of foundation nodes). Formulas are provided to estimate query time (T) based on these variables.</li>
 <li>The models demonstrate that matching against values read from a table (versus literals) incurs a parsing cost, but can be more efficient for large value sets, and that selectivity impacts performance more significantly when payload is returned versus just keys.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-08-31</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/detecting-low-and-slow-beaconing-with-sql-over-multi-year-flow-history/" target="_blank" rel="noopener">Detecting low-and-slow beaconing with SQL over multi-year flow history</a></h2>
-    
-    <div class="summary"><p>Ocient enables detection of low-and-slow command-and-control beaconing by leveraging long-term flow data analysis with SQL.</p>
-<ul>
-<li>The detection method focuses on identifying consistent source/destination pairings, low byte counts, and regular intervals in network flow data over extended periods, even when traffic appears benign due to use of legitimate cloud services.</li>
-<li>The core query groups flow records by source/destination IP, calculates the average and standard deviation of time gaps between connections, and flags pairs with regular intervals (gap_stddev &lt; 0.1</li>
-<li>avg_gap) and a sufficient number of contacts (contacts &gt;= 20).</li>
-<li>Performance relies on full-resolution (unsampled) flow capture combined with TimeKey® indexing, which builds multiple indexes across table columns at load time, enabling fast interactive queries over multi-year data sets.</li>
-<li>OcientAIQ™’s architecture is designed for independent scaling of ingest, storage, and query concurrency, allowing efficient analysis of petabyte-to-exabyte scale data without performance bottlenecks or excessive costs.</li>
 </ul></div>
     
   </div>
