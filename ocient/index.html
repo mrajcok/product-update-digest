@@ -79,13 +79,30 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-09 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-15 06:00 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">September 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/retrospective-ioc-sweeps-establishing-whether-you-were-ever-exposed/" target="_blank" rel="noopener">Retrospective IOC Sweeps: Establishing whether you were ever exposed</a></h3>
+    
+    <div class="summary"><p>Ocient enables retrospective threat hunting by allowing organizations to efficiently search years of historical data against new threat intelligence.</p>
+<ul>
+<li>OcientAIQ™ allows for retrospective IOC sweeps by joining new threat intelligence indicators with full-resolution flow and DNS history data, performing the analysis as a query rather than a data project.</li>
+<li>The solution utilizes ANSI SQL for querying, allowing integration with existing SIEM/SOAR tools without requiring changes to workflows.</li>
+<li>Ocient’s architecture keeps all historical data indexed and queryable in a single tier, avoiding the performance bottlenecks and costs associated with tiered storage and data rehydration common in other systems.</li>
+<li>The system supports multi-column indexing (e.g., on destination IP and flow start time) to maintain lookup speeds as data volumes grow to trillions of rows, enabling interactive analysis at scale.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -547,17 +564,6 @@
 <li>Intervals are internally represented as integer or bigint values with assigned units, meaning <code>INTERVAL</code> is not a distinct data type and <code>CAST(... AS INTERVAL)</code> is not supported; date math is performed using constructors.</li>
 <li>Timestamp components can be extracted using standard <code>EXTRACT</code> and <code>date_part</code> functions (returning doubles) or Ocient's shorthand functions like <code>year()</code> and <code>minute()</code> (returning integers/bigints), with subtraction resulting in nanosecond (bigint) or day (int) values.</li>
 </ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-31</span>
-    </div>
-    <h3><a href="https://ocient.com/blog/hdd-or-ssd-an-opposing-look-at-lowering-carbon-emissions-for-real-time-analytics/" target="_blank" rel="noopener">HDD vs SSD for Lowering Carbon Emissions</a></h3>
-    
-    <div class="summary"><p>Ocient’s white paper, “Meeting the Challenges of Modern Big Data,” argues that while SSDs have a higher manufacturing carbon footprint, they are more energy-efficient over their lifespan–especially in enterprise analytics environments. The paper demonstrates that a single NVMe SSD can replace hundreds of HDDs, reducing overall power consumption and operational emissions for high IOPS workloads like real-time data streaming and AI. The analysis suggests SSDs are the more sustainable choice for large-scale data centers, contrasting with consumer applications where HDDs may be preferable.</p></div>
     
   </div>
   
