@@ -79,13 +79,48 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-15 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-16 06:00 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">September 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-15</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/building-a-continuous-security-testing-harness/" target="_blank" rel="noopener">Building a continuous security testing harness | Cribl</a></h3>
+    
+    <div class="summary"><h2>Building a Continuous Security Testing Harness</h2>
+<p>Cribl developed a continuous security testing harness leveraging agentic reasoning and deterministic validation to automate vulnerability research and improve recall.</p>
+<ul>
+<li>The harness operates through five lanes: Intake (structuring reports/goals), Hunt (prioritizing testing areas), Validate (building and running proofs of concept locally), Cloud (validating in a dedicated environment), and Release (re-testing against new versions).</li>
+<li>The system uses an agent for context-aware research (code analysis, trace building) and a deterministic runner to validate findings with controlled inputs, positive/negative controls, and evidence tied to unique nonces.</li>
+<li>Coverage gaps (untested code, outdated reviews, known vulnerabilities) are used as inputs to prioritize research tasks, going beyond simple code changes as triggers.</li>
+<li>A blind historical recall suite, using known vulnerabilities, is used to measure the system's effectiveness and identify areas for improvement in the research workflow.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-11</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/gpt-6-astra-vs-glm-5-3-why-performance-scores-arent-the-whole-story/" target="_blank" rel="noopener">GPT 6 Astra vs. GLM 5.3: Why performance scores aren’t the whole story | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl’s SecIT Bench reveals that while GPT 6 Astra and GLM 5.3 achieve statistically similar performance scores (81.0% and 81.4% respectively), their approaches and resulting tradeoffs differ significantly.</p>
+<ul>
+<li>Astra demonstrated greater token efficiency, completing investigations with 21 turns and 749,000 input tokens compared to GLM 5.3’s 45 turns and 2.2 million input tokens.</li>
+<li>Despite Astra’s efficiency, GLM 5.3 was approximately 3.5x less expensive to run.</li>
+<li>Astra was faster, averaging just over 8 minutes per trial vs. 14 minutes for GLM 5.3.</li>
+<li>As dataset size increased, Astra’s performance held relatively consistent, while GLM 5.3’s accuracy declined.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -556,39 +591,6 @@
 <li>It includes security and compliance features to detect sensitive data exposure (PII, credentials, API keys) through dashboards, traces, and time-based analysis.</li>
 <li>The app facilitates AI-driven investigation with session/trace visibility, a conversational AI agent (AI Insights) for querying data, and AI-generated briefs highlighting important issues.</li>
 <li>It requires Cribl.Cloud to be running and is available for installation via the GitHub repository, with a setup wizard to connect telemetry services and configure data storage.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-30</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/the-night-before-dora-one-ciso-five-timelines-zero-confidence/" target="_blank" rel="noopener">The night before DORA: One CISO. Five timelines. Zero confidence. | Cribl</a></h3>
-    
-    <div class="summary"><ul>
-<li>Cribl addresses challenges presented by the Digital Operational Resilience Act (DORA), which demands verifiable evidence of an organization’s ability to withstand, respond to, and recover from disruptions.</li>
-<li>The article highlights the difficulty of creating a unified timeline during major incidents due to fragmented data sources (SIEMs, XDRs, observability tools, data lakes) with differing contexts and identifiers.</li>
-<li>Cribl advocates for treating telemetry as an "evidence layer" for DORA compliance, prioritizing data quality and consistency over simply logging more data to address budget constraints.</li>
-<li>The company positions itself as providing a platform to overcome telemetry fragmentation, improve AI-driven security analysis, and establish a strong basis for defense against audits and regulatory scrutiny, specifically referencing their "DORA telemetry guide" for detailed architectures and roadmaps.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-29</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/campus-experience-at-criblcon-26-learn-it-break-it-fix-it-brag-about-it/" target="_blank" rel="noopener">Campus experience at CriblCon 26: Learn it, break it, fix it, brag about it | Cribl</a></h3>
-    
-    <div class="summary"><p>CriblCon 26 will feature a hands-on “Campus Experience” training day on September 28, 2026, in Chicago.</p>
-<ul>
-<li>Three training tracks are available: Core (fundamentals), Advanced (complex data manipulation), and Expert (real-world troubleshooting with minimal guidance).</li>
-<li>The new “Expert” track drops users into broken, high-pressure environments to diagnose and fix issues, followed by peer discussion guided by Cribl experts.</li>
-<li>Each track awards a “Practical Data Skills” badge (Core, Advanced, or Expert) upon completion.</li>
-<li>The training costs $250 per person (in addition to CriblCon registration) and has limited capacity (50 people per track).</li>
 </ul></div>
     
   </div>

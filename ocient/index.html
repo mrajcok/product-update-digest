@@ -79,7 +79,7 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-15 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-16 06:00 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
@@ -90,16 +90,16 @@
   <div class="card">
     <div class="meta">
       <span>blog</span>
-      <span> · 2026-09-14</span>
+      <span> · 2026-09-15</span>
     </div>
     <h3><a href="https://ocient.com/blog/retrospective-ioc-sweeps-establishing-whether-you-were-ever-exposed/" target="_blank" rel="noopener">Retrospective IOC Sweeps: Establishing whether you were ever exposed</a></h3>
     
-    <div class="summary"><p>Ocient enables retrospective threat hunting by allowing organizations to efficiently search years of historical data against new threat intelligence.</p>
+    <div class="summary"><p>Ocient introduces a capability for retrospective threat intelligence sweeps, allowing organizations to determine if they were previously compromised by newly discovered indicators.</p>
 <ul>
-<li>OcientAIQ™ allows for retrospective IOC sweeps by joining new threat intelligence indicators with full-resolution flow and DNS history data, performing the analysis as a query rather than a data project.</li>
-<li>The solution utilizes ANSI SQL for querying, allowing integration with existing SIEM/SOAR tools without requiring changes to workflows.</li>
-<li>Ocient’s architecture keeps all historical data indexed and queryable in a single tier, avoiding the performance bottlenecks and costs associated with tiered storage and data rehydration common in other systems.</li>
-<li>The system supports multi-column indexing (e.g., on destination IP and flow start time) to maintain lookup speeds as data volumes grow to trillions of rows, enabling interactive analysis at scale.</li>
+<li>The solution frames retrospective analysis as a query – specifically a join between flow/DNS/TLS data and threat intelligence indicators – rather than a costly data project.</li>
+<li>OcientAIQ™ maintains full-resolution historical data indexed and queryable in ANSI SQL, enabling rapid sweeps across years of data without requiring data rehydration or tiered storage.</li>
+<li>The architecture supports efficient two-column indexing (e.g., on destination IP and time) to optimize query performance as data scales to trillions of rows.</li>
+<li>A key claim is that under Ocient’s fixed-capacity economics, the cost of each sweep remains consistent, facilitating scheduled, automated retrospective analysis.</li>
 </ul></div>
     
   </div>
