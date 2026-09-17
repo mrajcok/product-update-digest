@@ -79,13 +79,65 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-16 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-17 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">September 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-16</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/cribl-guard-privacy-models-3-0-less-noise-more-signal/" target="_blank" rel="noopener">Cribl Guard Privacy Models 3.0: Less noise, more signal | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl Guard Privacy Models 3.0 delivers improved sensitive data detection with fewer false alarms.</p>
+<ul>
+<li>Introduces per-entity thresholds, allowing tailored sensitivity settings for different data types (e.g., credit card numbers, API keys) instead of a single global threshold.</li>
+<li>Adds a new “Pro” model tier, optimized for deeper detection accuracy, alongside existing “Fast” and “Base” models, providing a choice based on workload needs.</li>
+<li>Benchmarking shows precision improvements of up to 17.69 percentage points across model tiers (Base, Fast, and Pro) compared to Privacy 2.0.</li>
+<li>Privacy 3.0 models emphasize precision over recall, designed to reduce noise and improve the actionability of findings; throughput improvements are also noted for specific batch sizes.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-16</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/backend-functions-arrive-in-cribl-apps/" target="_blank" rel="noopener">Backend functions arrive in Cribl Apps | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl Apps now support backend functions with the 4.20 release, extending workflows beyond the UI.</p>
+<ul>
+<li>Backend functions enable Apps to expose HTTP endpoints and run jobs on a schedule, allowing for continuous operation without active UI usage.</li>
+<li>These functions use a unified handler model, accepting both user-invoked and scheduled requests via the same <code>onRequest</code> function.</li>
+<li>Backend functions run in a platform-managed Node.js environment with security features including manifest validation, installation-scoped state, and restricted external access.</li>
+<li>This capability allows developers to build automation, respond to requests, and extend Cribl without requiring separate service infrastructure—Apps are now generally available.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-16</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/the-impact-of-ai-and-machine-learning-on-cybersecurity/" target="_blank" rel="noopener">The Impact of AI and Machine Learning on Cybersecurity | Cribl</a></h3>
+    
+    <div class="summary"><h2>Cribl Blog: The Impact of AI and Machine Learning on Cybersecurity</h2>
+<p>AI and machine learning are transforming cybersecurity by enabling adaptive, data-driven threat detection and automated responses.</p>
+<ul>
+<li>AI/ML shift detection from static signatures to pattern recognition in logs and network telemetry, improving threat detection rates (reported up to 98%) and reducing incident response times (up to 70%).</li>
+<li>Unsupervised machine learning excels at anomaly detection, identifying threats in environments where rule-based tools generate high false-positive rates.</li>
+<li>“Agentic SecOps” utilizes autonomous AI agents for triage, investigation, and remediation, minimizing human intervention but requiring careful governance.</li>
+<li>Successful AI deployment necessitates human oversight, explainable models, adversarial testing, and a robust, vendor-agnostic data pipeline to ensure model accuracy and effectiveness.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -538,59 +590,6 @@
 <li>Declarative permission elevation allows App authors to request elevated API access needed by the App, reviewed and approved by administrators during installation and upgrades.</li>
 <li>Apps can now directly access the signed-in member's identity (ID, name, and profile details) for personalization and internal authorization.</li>
 <li>These features enhance app governance, security, and personalization capabilities within the Cribl platform.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-08-04</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/from-prompt-to-action-why-agent-workflows-need-observability/" target="_blank" rel="noopener">From prompt to action: Why agent workflows need observability | Cribl</a></h3>
-    
-    <div class="summary"><ul>
-<li>Cribl emphasizes the need to move beyond simply observing AI model prompts and responses to observing the entire "agent workflow" – the sequence of actions an AI takes, including information retrieval, tool calls, and decisions.</li>
-<li>The article details five layers of observable agent workflows: Request, Context, Tool, Decision, and Action, outlining the specific telemetry needed for each layer to understand <em>why</em> an AI agent took a particular action.</li>
-<li>Cribl’s telemetry pipeline architecture is positioned as a solution to collect, normalize, govern, and correlate workflow signals across multiple systems, providing a single operational view of AI agent activity.</li>
-<li>The core claim is that true AI observability requires visibility into the complete path from request to action, enabling trust, explainability, and governance – going beyond isolated event logging to understand the entire workflow execution.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>press release</span>
-      <span> · 2026-08-03</span>
-    </div>
-    <h3><a href="https://cribl.io/news/cribls-ai-platform-debuts-powerful-new-security-capabilities/" target="_blank" rel="noopener">Cribl’s AI Platform Debuts Powerful New Security Capabilities | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl announced new AI-era security capabilities within its AI Platform for Telemetry, focusing on AI observability, detection engineering, and stream-native detections.</p>
-<ul>
-<li>The new AI Observability app provides unified visibility into AI usage across an enterprise, tracking token consumption, spend, model adoption, and potential sensitive data exposure without requiring additional data duplication.</li>
-<li>Expanded detection engineering capabilities, building on the CardinalOps acquisition, map detections to the MITRE ATT&amp;CK framework, identify coverage gaps, and allow for AI-assisted maintenance of detection content.</li>
-<li>Stream-native detections within Cribl Stream enable the identification of high-confidence security signals in real-time, reducing the load on premium analysis tiers.</li>
-<li>These capabilities are designed to work with existing telemetry and tools, avoiding vendor lock-in and the need to rebuild infrastructure with each new security challenge.</li>
-</ul></div>
-    
-  </div>
-  
-  
-  <h2 class="month">July 2026</h2>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-07-31</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/what-is-your-ai-actually-doing-introducing-the-cribl-app-for-ai-observability/" target="_blank" rel="noopener">What is your AI actually doing? Introducing the Cribl app for AI Observability  | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl has released the Cribl App for AI Observability, built on the Cribl AI Platform for Telemetry, to provide a unified view of AI telemetry data.</p>
-<ul>
-<li>The app offers visibility into AI usage and cost, including spending trends, token consumption, and LLM efficiency analysis, with features like Org View and goal-based monitoring.</li>
-<li>It includes security and compliance features to detect sensitive data exposure (PII, credentials, API keys) through dashboards, traces, and time-based analysis.</li>
-<li>The app facilitates AI-driven investigation with session/trace visibility, a conversational AI agent (AI Insights) for querying data, and AI-generated briefs highlighting important issues.</li>
-<li>It requires Cribl.Cloud to be running and is available for installation via the GitHub repository, with a setup wizard to connect telemetry services and configure data storage.</li>
 </ul></div>
     
   </div>

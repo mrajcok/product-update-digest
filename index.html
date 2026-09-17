@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-16 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-17 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -107,17 +107,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-09-15</span>
+      <span> · 2026-09-16</span>
     </div>
-    <h2><a href="https://cribl.io/blog/building-a-continuous-security-testing-harness/" target="_blank" rel="noopener">Building a continuous security testing harness | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/cribl-guard-privacy-models-3-0-less-noise-more-signal/" target="_blank" rel="noopener">Cribl Guard Privacy Models 3.0: Less noise, more signal | Cribl</a></h2>
     
-    <div class="summary"><h2>Building a Continuous Security Testing Harness</h2>
-<p>Cribl developed a continuous security testing harness leveraging agentic reasoning and deterministic validation to automate vulnerability research and improve recall.</p>
+    <div class="summary"><p>Cribl Guard Privacy Models 3.0 delivers improved sensitive data detection with fewer false alarms.</p>
 <ul>
-<li>The harness operates through five lanes: Intake (structuring reports/goals), Hunt (prioritizing testing areas), Validate (building and running proofs of concept locally), Cloud (validating in a dedicated environment), and Release (re-testing against new versions).</li>
-<li>The system uses an agent for context-aware research (code analysis, trace building) and a deterministic runner to validate findings with controlled inputs, positive/negative controls, and evidence tied to unique nonces.</li>
-<li>Coverage gaps (untested code, outdated reviews, known vulnerabilities) are used as inputs to prioritize research tasks, going beyond simple code changes as triggers.</li>
-<li>A blind historical recall suite, using known vulnerabilities, is used to measure the system's effectiveness and identify areas for improvement in the research workflow.</li>
+<li>Introduces per-entity thresholds, allowing tailored sensitivity settings for different data types (e.g., credit card numbers, API keys) instead of a single global threshold.</li>
+<li>Adds a new “Pro” model tier, optimized for deeper detection accuracy, alongside existing “Fast” and “Base” models, providing a choice based on workload needs.</li>
+<li>Benchmarking shows precision improvements of up to 17.69 percentage points across model tiers (Base, Fast, and Pro) compared to Privacy 2.0.</li>
+<li>Privacy 3.0 models emphasize precision over recall, designed to reduce noise and improve the actionability of findings; throughput improvements are also noted for specific batch sizes.</li>
 </ul></div>
     
   </div>
@@ -126,16 +125,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-09-11</span>
+      <span> · 2026-09-16</span>
     </div>
-    <h2><a href="https://cribl.io/blog/gpt-6-astra-vs-glm-5-3-why-performance-scores-arent-the-whole-story/" target="_blank" rel="noopener">GPT 6 Astra vs. GLM 5.3: Why performance scores aren’t the whole story | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/backend-functions-arrive-in-cribl-apps/" target="_blank" rel="noopener">Backend functions arrive in Cribl Apps | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl’s SecIT Bench reveals that while GPT 6 Astra and GLM 5.3 achieve statistically similar performance scores (81.0% and 81.4% respectively), their approaches and resulting tradeoffs differ significantly.</p>
+    <div class="summary"><p>Cribl Apps now support backend functions with the 4.20 release, extending workflows beyond the UI.</p>
 <ul>
-<li>Astra demonstrated greater token efficiency, completing investigations with 21 turns and 749,000 input tokens compared to GLM 5.3’s 45 turns and 2.2 million input tokens.</li>
-<li>Despite Astra’s efficiency, GLM 5.3 was approximately 3.5x less expensive to run.</li>
-<li>Astra was faster, averaging just over 8 minutes per trial vs. 14 minutes for GLM 5.3.</li>
-<li>As dataset size increased, Astra’s performance held relatively consistent, while GLM 5.3’s accuracy declined.</li>
+<li>Backend functions enable Apps to expose HTTP endpoints and run jobs on a schedule, allowing for continuous operation without active UI usage.</li>
+<li>These functions use a unified handler model, accepting both user-invoked and scheduled requests via the same <code>onRequest</code> function.</li>
+<li>Backend functions run in a platform-managed Node.js environment with security features including manifest validation, installation-scoped state, and restricted external access.</li>
+<li>This capability allows developers to build automation, respond to requests, and extend Cribl without requiring separate service infrastructure—Apps are now generally available.</li>
 </ul></div>
     
   </div>
@@ -144,15 +143,17 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-09-03</span>
+      <span> · 2026-09-16</span>
     </div>
-    <h2><a href="https://cribl.io/blog/how-i-think-about-detection-in-the-pipeline/" target="_blank" rel="noopener">How I think about detection in the pipeline | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/the-impact-of-ai-and-machine-learning-on-cybersecurity/" target="_blank" rel="noopener">The Impact of AI and Machine Learning on Cybersecurity | Cribl</a></h2>
     
-    <div class="summary"><ul>
-<li>Cribl argues that while detecting events <em>in the pipeline</em> is valuable for speed and cost-efficiency, it's insufficient for producing trustworthy alerts without correlation.</li>
-<li>The piece highlights the importance of <em>stateful</em> detection logic (windows, thresholds, joins) which is often necessary for high-fidelity alerts, contrasting this with the <em>stateless</em> architecture common in high-throughput systems like those acquired by CrowdStrike (Onum).</li>
-<li>Cribl advocates for a tiered architecture: in-pipeline processing for initial signal generation (parsing, enrichment, basic IOC matching) and a separate, persistent data store for correlation, backtesting, and investigation.</li>
-<li>The author stresses the importance of customer control over the data layer, advocating for an architecture that avoids vendor lock-in and allows flexibility to change detection engines or search across multiple data stores using <em>federated search</em>.</li>
+    <div class="summary"><h2>Cribl Blog: The Impact of AI and Machine Learning on Cybersecurity</h2>
+<p>AI and machine learning are transforming cybersecurity by enabling adaptive, data-driven threat detection and automated responses.</p>
+<ul>
+<li>AI/ML shift detection from static signatures to pattern recognition in logs and network telemetry, improving threat detection rates (reported up to 98%) and reducing incident response times (up to 70%).</li>
+<li>Unsupervised machine learning excels at anomaly detection, identifying threats in environments where rule-based tools generate high false-positive rates.</li>
+<li>“Agentic SecOps” utilizes autonomous AI agents for triage, investigation, and remediation, minimizing human intervention but requiring careful governance.</li>
+<li>Successful AI deployment necessitates human oversight, explainable models, adversarial testing, and a robust, vendor-agnostic data pipeline to ensure model accuracy and effectiveness.</li>
 </ul></div>
     
   </div>
