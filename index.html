@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-17 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-18 06:04 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,42 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-09-17</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/building-an-ai-agent-for-smarter-less-painful-alert-triage/" target="_blank" rel="noopener">Building an AI agent for smarter, less painful alert triage | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl developed an internal AI agent to automate alert triage and reduce alert fatigue for on-call engineers.</p>
+<ul>
+<li>The agent gathers context from various sources – metrics, logs, incidents, runbooks, and chat tools – to analyze alerts and recommend mitigation steps or escalation.</li>
+<li>Key to success is managing <em>input context</em>; measuring context size, tool calls, and cost per investigation is vital beyond just evaluating answer quality.</li>
+<li>Cribl products like Cribl Stream, Cribl Search, and Cribl Lake support this integration via the Model Context Protocol (MCP), but careful consideration of API key management and scoped permissions is essential.</li>
+<li>Tool curation is crucial – limiting the number of connected tools reduces context noise, exploratory calls, and potential failure modes to improve agent efficiency and cost-effectiveness.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-09-17</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/manage-multiple-environments-with-cribl-as-code/" target="_blank" rel="noopener">Manage multiple environments with Cribl as Code | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl has introduced Cribl as Code for managing multiple environments with a code-centric approach.</p>
+<ul>
+<li>Cribl as Code treats Cribl configuration as code, enabling version control, peer review, and automated deployment via CI/CD pipelines.</li>
+<li>The workflow involves branching, pull requests, and merging between development and production environments, eliminating manual configuration changes in production.</li>
+<li>This approach reduces the risk of misconfiguration, data loss, and unpredictable behavior by ensuring only tested and approved changes reach production.</li>
+<li>A detailed guide and code samples are available to assist with setting up a dev-to-prod workflow using Terraform and GitHub Actions.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -123,37 +159,18 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-09-16</span>
+      <span> · 2026-09-17</span>
     </div>
-    <h2><a href="https://cribl.io/blog/backend-functions-arrive-in-cribl-apps/" target="_blank" rel="noopener">Backend functions arrive in Cribl Apps | Cribl</a></h2>
+    <h2><a href="https://ocient.com/blog/what-adtech-ctos-are-learning-about-agentic-ai-infrastructure/" target="_blank" rel="noopener">What AdTech CTOs are learning about agentic AI infrastructure</a></h2>
     
-    <div class="summary"><p>Cribl Apps now support backend functions with the 4.20 release, extending workflows beyond the UI.</p>
+    <div class="summary"><p>OcientAIQ offers a new approach to agentic AI infrastructure for AdTech workloads.</p>
 <ul>
-<li>Backend functions enable Apps to expose HTTP endpoints and run jobs on a schedule, allowing for continuous operation without active UI usage.</li>
-<li>These functions use a unified handler model, accepting both user-invoked and scheduled requests via the same <code>onRequest</code> function.</li>
-<li>Backend functions run in a platform-managed Node.js environment with security features including manifest validation, installation-scoped state, and restricted external access.</li>
-<li>This capability allows developers to build automation, respond to requests, and extend Cribl without requiring separate service infrastructure—Apps are now generally available.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-09-16</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/the-impact-of-ai-and-machine-learning-on-cybersecurity/" target="_blank" rel="noopener">The Impact of AI and Machine Learning on Cybersecurity | Cribl</a></h2>
-    
-    <div class="summary"><h2>Cribl Blog: The Impact of AI and Machine Learning on Cybersecurity</h2>
-<p>AI and machine learning are transforming cybersecurity by enabling adaptive, data-driven threat detection and automated responses.</p>
-<ul>
-<li>AI/ML shift detection from static signatures to pattern recognition in logs and network telemetry, improving threat detection rates (reported up to 98%) and reducing incident response times (up to 70%).</li>
-<li>Unsupervised machine learning excels at anomaly detection, identifying threats in environments where rule-based tools generate high false-positive rates.</li>
-<li>“Agentic SecOps” utilizes autonomous AI agents for triage, investigation, and remediation, minimizing human intervention but requiring careful governance.</li>
-<li>Successful AI deployment necessitates human oversight, explainable models, adversarial testing, and a robust, vendor-agnostic data pipeline to ensure model accuracy and effectiveness.</li>
+<li>OcientAIQ enables faster and cheaper data processing, with one customer reportedly redirecting cloud spend after migrating file &amp; data delivery processing.</li>
+<li>The platform automatically infers schema and natively types data (e.g., IP addresses) for improved compression and query speed, while a "Data Advisor" agent suggests schema changes.</li>
+<li>A live demo showcased 117 millisecond query response times on 50.6 billion records across 4.41 petabytes, along with real-time enrichment and fully traceable agent actions via SQL query logging.</li>
+<li>OcientAIQ aims to reduce costs associated with agentic AI by minimizing LLM token usage, achieving up to 100x lower costs than competitors in benchmarks and also offering potential savings of 60-70% compared to platforms like Databricks or Snowflake.</li>
 </ul></div>
     
   </div>
@@ -190,24 +207,6 @@
 <li>Continuous correlation of credential exposure against historical identity and authentication data is needed, as point-in-time checks are insufficient.</li>
 <li>Detecting misconfiguration drift requires retaining configuration state history to establish a baseline of “normal” behavior.</li>
 <li>Effective attack surface management necessitates retaining and querying long-term historical scan data to identify trends, rather than relying on infrequent snapshots; the OcientAIQ Unified Data Platform is positioned as a solution for these challenges.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-09-02</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/what-conecta-latam-2026-told-us-about-building-networks-that-run-themselves/" target="_blank" rel="noopener">What Conecta LATAM 2026 told us about building networks that run themselves</a></h2>
-    
-    <div class="summary"><p>Ocient detailed the requirements for building "AI-native" networks, emphasizing the need for a robust data foundation.</p>
-<ul>
-<li>“AI-native” networks require being autonomous, predictive, self-optimizing, sovereign, and accountable.</li>
-<li>OcientAIQ™ aims to support these networks by enabling full data retention across all domains and layers, supporting multi-year historical reach, and single-query cross-domain joining.</li>
-<li>The company claims OcientAIQ™ reduces the total cost of ownership by roughly 80% at petabyte scale and accelerates queries – a tower-dump query decreased from 41 minutes to 16 seconds.</li>
-<li>The discussion highlighted regulatory retention requirements in Latin American countries (Brazil, Colombia, Peru, Mexico, Chile, and Argentina) and the increasing need for long-term data retention for cybersecurity threat detection.</li>
 </ul></div>
     
   </div>

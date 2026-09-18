@@ -79,13 +79,47 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-17 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-18 06:04 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">September 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-17</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/building-an-ai-agent-for-smarter-less-painful-alert-triage/" target="_blank" rel="noopener">Building an AI agent for smarter, less painful alert triage | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl developed an internal AI agent to automate alert triage and reduce alert fatigue for on-call engineers.</p>
+<ul>
+<li>The agent gathers context from various sources – metrics, logs, incidents, runbooks, and chat tools – to analyze alerts and recommend mitigation steps or escalation.</li>
+<li>Key to success is managing <em>input context</em>; measuring context size, tool calls, and cost per investigation is vital beyond just evaluating answer quality.</li>
+<li>Cribl products like Cribl Stream, Cribl Search, and Cribl Lake support this integration via the Model Context Protocol (MCP), but careful consideration of API key management and scoped permissions is essential.</li>
+<li>Tool curation is crucial – limiting the number of connected tools reduces context noise, exploratory calls, and potential failure modes to improve agent efficiency and cost-effectiveness.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-17</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/manage-multiple-environments-with-cribl-as-code/" target="_blank" rel="noopener">Manage multiple environments with Cribl as Code | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl has introduced Cribl as Code for managing multiple environments with a code-centric approach.</p>
+<ul>
+<li>Cribl as Code treats Cribl configuration as code, enabling version control, peer review, and automated deployment via CI/CD pipelines.</li>
+<li>The workflow involves branching, pull requests, and merging between development and production environments, eliminating manual configuration changes in production.</li>
+<li>This approach reduces the risk of misconfiguration, data loss, and unpredictable behavior by ensuring only tested and approved changes reach production.</li>
+<li>A detailed guide and code samples are available to assist with setting up a dev-to-prod workflow using Terraform and GitHub Actions.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -556,40 +590,6 @@
 <li>Configuration Composability allows packaging Sources, Destinations, Routes, and Pipelines into reusable “Packs” for consistent deployment and reduced configuration drift.</li>
 <li>Copilot Editor uses AI to map raw telemetry data to industry schemas (OCSF, UDM, ASIM, ECS) without requiring schema expertise.</li>
 <li>Seamless Dev–Stage–Prod Portability facilitates CI/CD for configuration Packs, accelerating delivery and protecting production environments, alongside Workspaces &amp; financial tracking for multi-tenant environments and cost optimization.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>press release</span>
-      <span> · 2026-08-11</span>
-    </div>
-    <h3><a href="https://cribl.io/news/anomali-and-cribl-announce-strategic-partnership-to-supercharge-cybersecurity-and-significantly-reduce-costs-to-enterprises/" target="_blank" rel="noopener">Anomali and Cribl Announce Strategic Partnership to Supercharge Cybersecurity And Significantly Reduce Costs to Enterprises | Cribl</a></h3>
-    
-    <div class="summary"><p>Anomali and Cribl have partnered to deliver a cybersecurity solution focused on cost reduction and improved threat response.</p>
-<ul>
-<li>The integration aims to accelerate access to Anomali Copilot, potentially saving analysts up to 50% on threat investigation time.</li>
-<li>Cribl will enrich security data with context before it’s sent to Anomali, improving threat detection accuracy.</li>
-<li>Cribl optimizes data flow to Anomali, reducing processing overhead and improving performance.</li>
-<li>Real-time data processing by Cribl enables faster, context-rich insights for incident response within the Anomali platform.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-08-05</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/locking-down-apps-at-cribl-rbac-elevated-permissions-and-user-identity/" target="_blank" rel="noopener">Locking Down Apps at Cribl: RBAC, Elevated Permissions, and User Identity | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl’s June release introduces enhanced security and functionality for Cribl Apps.</p>
-<ul>
-<li>Role-Based Access Control (RBAC) for Apps is now available, allowing administrators to share installed Apps with specific Members or Teams, limiting access based on user roles.</li>
-<li>Declarative permission elevation allows App authors to request elevated API access needed by the App, reviewed and approved by administrators during installation and upgrades.</li>
-<li>Apps can now directly access the signed-in member's identity (ID, name, and profile details) for personalization and internal authorization.</li>
-<li>These features enhance app governance, security, and personalization capabilities within the Cribl platform.</li>
 </ul></div>
     
   </div>
