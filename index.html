@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-18 06:04 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-19 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -111,12 +111,11 @@
     </div>
     <h2><a href="https://cribl.io/blog/building-an-ai-agent-for-smarter-less-painful-alert-triage/" target="_blank" rel="noopener">Building an AI agent for smarter, less painful alert triage | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl developed an internal AI agent to automate alert triage and reduce alert fatigue for on-call engineers.</p>
-<ul>
-<li>The agent gathers context from various sources – metrics, logs, incidents, runbooks, and chat tools – to analyze alerts and recommend mitigation steps or escalation.</li>
-<li>Key to success is managing <em>input context</em>; measuring context size, tool calls, and cost per investigation is vital beyond just evaluating answer quality.</li>
-<li>Cribl products like Cribl Stream, Cribl Search, and Cribl Lake support this integration via the Model Context Protocol (MCP), but careful consideration of API key management and scoped permissions is essential.</li>
-<li>Tool curation is crucial – limiting the number of connected tools reduces context noise, exploratory calls, and potential failure modes to improve agent efficiency and cost-effectiveness.</li>
+    <div class="summary"><ul>
+<li>Cribl built an internal AI agent to automate alert triage, reducing alert fatigue by gathering context from multiple data sources (metrics, logs, incidents, runbooks, chat) before escalating to on-call engineers.</li>
+<li>The key technical challenge is managing input context size – the agent's performance is heavily influenced by how much relevant data it receives, measured by context size, tool calls, and investigation cost.</li>
+<li>Cribl utilizes the Model Context Protocol (MCP) to connect the AI agent to data sources like Cribl Stream, Cribl Search, and Cribl Lake, emphasizing the importance of careful API key and permission management.</li>
+<li>The architecture prioritizes tool curation (limiting available tools) and potentially using middleware MCP servers to reduce irrelevant context and improve agent efficiency, rather than simply maximizing tool integration.</li>
 </ul></div>
     
   </div>
@@ -129,12 +128,12 @@
     </div>
     <h2><a href="https://cribl.io/blog/manage-multiple-environments-with-cribl-as-code/" target="_blank" rel="noopener">Manage multiple environments with Cribl as Code | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl has introduced Cribl as Code for managing multiple environments with a code-centric approach.</p>
+    <div class="summary"><p>Cribl as Code enables multi-environment change management to reduce risk when deploying to production.</p>
 <ul>
-<li>Cribl as Code treats Cribl configuration as code, enabling version control, peer review, and automated deployment via CI/CD pipelines.</li>
-<li>The workflow involves branching, pull requests, and merging between development and production environments, eliminating manual configuration changes in production.</li>
-<li>This approach reduces the risk of misconfiguration, data loss, and unpredictable behavior by ensuring only tested and approved changes reach production.</li>
-<li>A detailed guide and code samples are available to assist with setting up a dev-to-prod workflow using Terraform and GitHub Actions.</li>
+<li>Configuration is managed as code, allowing changes to be version controlled and peer-reviewed via pull requests.</li>
+<li>The workflow supports a development-to-production pipeline, with changes validated in a development environment before deployment to production.</li>
+<li>It integrates with CI/CD pipelines (example uses Terraform and GitHub Actions) to automate deployments and ensure consistency.</li>
+<li>Manual changes to production environments are eliminated, reducing the potential for misconfiguration and data loss.</li>
 </ul></div>
     
   </div>
@@ -143,16 +142,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-09-16</span>
+      <span> · 2026-09-17</span>
     </div>
-    <h2><a href="https://cribl.io/blog/cribl-guard-privacy-models-3-0-less-noise-more-signal/" target="_blank" rel="noopener">Cribl Guard Privacy Models 3.0: Less noise, more signal | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/what-typesafes-jev-means-for-telemetry/" target="_blank" rel="noopener">What TypeSafe’s Jev means for telemetry | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl Guard Privacy Models 3.0 delivers improved sensitive data detection with fewer false alarms.</p>
+    <div class="summary"><p>Cribl is evaluating TypeSafe’s Jev, a System One model designed for fast, cost-effective typed decision-making, relevant to high-volume telemetry use cases.</p>
 <ul>
-<li>Introduces per-entity thresholds, allowing tailored sensitivity settings for different data types (e.g., credit card numbers, API keys) instead of a single global threshold.</li>
-<li>Adds a new “Pro” model tier, optimized for deeper detection accuracy, alongside existing “Fast” and “Base” models, providing a choice based on workload needs.</li>
-<li>Benchmarking shows precision improvements of up to 17.69 percentage points across model tiers (Base, Fast, and Pro) compared to Privacy 2.0.</li>
-<li>Privacy 3.0 models emphasize precision over recall, designed to reduce noise and improve the actionability of findings; throughput improvements are also noted for specific batch sizes.</li>
+<li>Jev skips sequential token generation common in LLMs, instead emitting calibrated decisions, which could be useful for routing, enrichment, and triage in telemetry pipelines.</li>
+<li>Initial testing classifying logs into 28 types showed Jev’s accuracy lagged behind purpose-built classifiers and GPT-5.6 Terra, misclassifying events 2-3x more often, but it was 18x faster and 20x cheaper.</li>
+<li>Jev excelled at LLM-as-judge tasks (evaluating AI agent responses) achieving &gt;92% agreement with human judges at ~1% the cost.</li>
+<li>Cribl believes System One models like Jev are most effective for bounded, high-volume decisions where intelligence isn't the limiting factor, but cost is – opening possibilities for applications like parser selection and PII detection.</li>
 </ul></div>
     
   </div>
