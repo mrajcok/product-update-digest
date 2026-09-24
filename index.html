@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-22 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-24 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,25 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-09-23</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/the-people-who-help-shape-cribl-celebrating-some-of-our-early-employees/" target="_blank" rel="noopener">The people who help shape Cribl: Celebrating some of our early employees | Cribl</a></h2>
+    
+    <div class="summary"><p>This blog post celebrates early Cribl employees and their contributions to the company’s growth.</p>
+<ul>
+<li>Brandon McCombs (Engineering) joined in June 2020 when Cribl was using LogStream 2.2.0 and receiving approximately 2 support cases every two days (now 30/day).</li>
+<li>Jenn Kabler (Revenue Enablement) led the rollout of Force Management across GTM teams.</li>
+<li>Joel Vincent (Marketing) highlights the company’s “irreverent but serious” culture and the evolution of Cribl over the past five years.</li>
+<li>Kyle McCririe (Support) notes the high level of talent at Cribl and the opportunity for professional growth through exposure to diverse technologies.</li>
+<li>Danny Ansell (Revenue/Sales) joined as employee #76 and is impressed by the company’s continued innovation and growth to over 1,100 employees.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -140,18 +159,18 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-09-17</span>
+      <span> · 2026-09-24</span>
     </div>
-    <h2><a href="https://cribl.io/blog/manage-multiple-environments-with-cribl-as-code/" target="_blank" rel="noopener">Manage multiple environments with Cribl as Code | Cribl</a></h2>
+    <h2><a href="https://ocient.com/blog/one-engine-many-questions-what-data-fusion-actually-unlocks/" target="_blank" rel="noopener">One Engine, Many Questions: What data fusion actually unlocks</a></h2>
     
-    <div class="summary"><p>Cribl as Code enables multi-environment change management to reduce risk when deploying to production.</p>
+    <div class="summary"><p>Ocient provides a data fusion engine enabling organizations to query across disparate data sources.</p>
 <ul>
-<li>Configuration is managed as code, allowing changes to be version controlled and peer-reviewed via pull requests.</li>
-<li>The workflow supports a development-to-production pipeline, with changes validated in a development environment before deployment to production.</li>
-<li>It integrates with CI/CD pipelines (example uses Terraform and GitHub Actions) to automate deployments and ensure consistency.</li>
-<li>Manual changes to production environments are eliminated, reducing the potential for misconfiguration and data loss.</li>
+<li>The platform ingests data at its native rate without data loss, retains data at full resolution for long durations, and allows fast querying across joined datasets.</li>
+<li>Ocient’s architecture allows joining data sources that traditionally reside in separate systems (e.g., security telemetry, transaction ledgers, network flow).</li>
+<li>Customers are discovering use cases beyond initial expectations by joining data in new ways, such as correlating authentication logs with transaction data for fraud detection.</li>
+<li>The platform is deployable on-premises, in private clouds, or air-gapped environments, giving organizations control over their sensitive data and addressing data sovereignty concerns.</li>
 </ul></div>
     
   </div>
@@ -160,16 +179,17 @@
     <div class="meta">
       <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-09-21</span>
+      <span> · 2026-09-24</span>
     </div>
-    <h2><a href="https://ocient.com/blog/one-engine-many-questions-what-data-fusion-actually-unlocks/" target="_blank" rel="noopener">One Engine, Many Questions: What data fusion actually unlocks</a></h2>
+    <h2><a href="https://ocient.com/blog/inside-the-ocientaiq-engine-dataflows-are-the-stored-procedures-you-never-have-to-create/" target="_blank" rel="noopener">Inside OcientAIQ™: Dataflows in a unified data platform</a></h2>
     
-    <div class="summary"><p>Ocient enables organizations to unify diverse data sources for comprehensive analysis, overcoming the traditional limitations of siloed data.</p>
+    <div class="summary"><h2>OcientAIQ Dataflows: Imperative Programming in SQL</h2>
+<p>OcientAIQ introduces dataflows, enabling imperative programming directly within SQL. This allows for executing loops, variables, conditionals, and exception handling as a single SQL statement, eliminating the need for application round-trips and simplifying complex analytics.</p>
 <ul>
-<li>Ocient’s platform ingests, retains, and queries data from sources like network telemetry, logs, financial transactions, and cloud activity simultaneously.</li>
-<li>The core capability is joining data across disparate systems—without pre-defined schemas—using established keys like IP addresses or account IDs to answer complex questions.</li>
-<li>The platform is designed for full-history retention and interactive querying at scale, enabling retrospective analysis and rapid follow-up investigations.</li>
-<li>Ocient offers a deployment model – on-premises, private cloud, or air-gapped – providing full control over data location and security, addressing data sovereignty and compliance concerns (like GDPR and DORA).</li>
+<li>Dataflows are anonymous, ad-hoc SQL scripts submitted like queries, differing from traditional stored procedures by not requiring prior creation or residing in a catalog.</li>
+<li>Two dataflow types exist: "query" dataflows return a result set (using <code>RETURN SELECT</code>), while "void" dataflows perform actions like inserts or deletes without returning data.</li>
+<li>Dataflows support variables declared with a <code>@</code> prefix, encompassing all OcientAIQ data types, and offer three expansion modes: <code>@</code> for values, <code>@@</code> for identifiers, and <code>@!</code> for raw text.</li>
+<li>Control flow structures like <code>IF/ELSEIF</code>, <code>WHILE</code>, <code>FOR</code> loops (including iterator-style loops), and exception handling (<code>TRY...EXCEPTION WHEN...THEN</code>) are now available within dataflows, with optional <code>MAX ITERATIONS</code> for loop control.</li>
 </ul></div>
     
   </div>
@@ -188,24 +208,6 @@
 <li>The platform automatically infers schema and natively types data (e.g., IP addresses) for improved compression and query speed, while a "Data Advisor" agent suggests schema changes.</li>
 <li>A live demo showcased 117 millisecond query response times on 50.6 billion records across 4.41 petabytes, along with real-time enrichment and fully traceable agent actions via SQL query logging.</li>
 <li>OcientAIQ aims to reduce costs associated with agentic AI by minimizing LLM token usage, achieving up to 100x lower costs than competitors in benchmarks and also offering potential savings of 60-70% compared to platforms like Databricks or Snowflake.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-09-15</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/retrospective-ioc-sweeps-establishing-whether-you-were-ever-exposed/" target="_blank" rel="noopener">Retrospective IOC Sweeps: Establishing whether you were ever exposed</a></h2>
-    
-    <div class="summary"><p>Ocient introduces a capability for retrospective threat intelligence sweeps, allowing organizations to determine if they were previously compromised by newly discovered indicators.</p>
-<ul>
-<li>The solution frames retrospective analysis as a query – specifically a join between flow/DNS/TLS data and threat intelligence indicators – rather than a costly data project.</li>
-<li>OcientAIQ™ maintains full-resolution historical data indexed and queryable in ANSI SQL, enabling rapid sweeps across years of data without requiring data rehydration or tiered storage.</li>
-<li>The architecture supports efficient two-column indexing (e.g., on destination IP and time) to optimize query performance as data scales to trillions of rows.</li>
-<li>A key claim is that under Ocient’s fixed-capacity economics, the cost of each sweep remains consistent, facilitating scheduled, automated retrospective analysis.</li>
 </ul></div>
     
   </div>

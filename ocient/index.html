@@ -79,7 +79,7 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-22 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-24 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
@@ -90,16 +90,34 @@
   <div class="card">
     <div class="meta">
       <span>blog</span>
-      <span> · 2026-09-21</span>
+      <span> · 2026-09-24</span>
     </div>
     <h3><a href="https://ocient.com/blog/one-engine-many-questions-what-data-fusion-actually-unlocks/" target="_blank" rel="noopener">One Engine, Many Questions: What data fusion actually unlocks</a></h3>
     
-    <div class="summary"><p>Ocient enables organizations to unify diverse data sources for comprehensive analysis, overcoming the traditional limitations of siloed data.</p>
+    <div class="summary"><p>Ocient provides a data fusion engine enabling organizations to query across disparate data sources.</p>
 <ul>
-<li>Ocient’s platform ingests, retains, and queries data from sources like network telemetry, logs, financial transactions, and cloud activity simultaneously.</li>
-<li>The core capability is joining data across disparate systems—without pre-defined schemas—using established keys like IP addresses or account IDs to answer complex questions.</li>
-<li>The platform is designed for full-history retention and interactive querying at scale, enabling retrospective analysis and rapid follow-up investigations.</li>
-<li>Ocient offers a deployment model – on-premises, private cloud, or air-gapped – providing full control over data location and security, addressing data sovereignty and compliance concerns (like GDPR and DORA).</li>
+<li>The platform ingests data at its native rate without data loss, retains data at full resolution for long durations, and allows fast querying across joined datasets.</li>
+<li>Ocient’s architecture allows joining data sources that traditionally reside in separate systems (e.g., security telemetry, transaction ledgers, network flow).</li>
+<li>Customers are discovering use cases beyond initial expectations by joining data in new ways, such as correlating authentication logs with transaction data for fraud detection.</li>
+<li>The platform is deployable on-premises, in private clouds, or air-gapped environments, giving organizations control over their sensitive data and addressing data sovereignty concerns.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-24</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/inside-the-ocientaiq-engine-dataflows-are-the-stored-procedures-you-never-have-to-create/" target="_blank" rel="noopener">Inside OcientAIQ™: Dataflows in a unified data platform</a></h3>
+    
+    <div class="summary"><h2>OcientAIQ Dataflows: Imperative Programming in SQL</h2>
+<p>OcientAIQ introduces dataflows, enabling imperative programming directly within SQL. This allows for executing loops, variables, conditionals, and exception handling as a single SQL statement, eliminating the need for application round-trips and simplifying complex analytics.</p>
+<ul>
+<li>Dataflows are anonymous, ad-hoc SQL scripts submitted like queries, differing from traditional stored procedures by not requiring prior creation or residing in a catalog.</li>
+<li>Two dataflow types exist: "query" dataflows return a result set (using <code>RETURN SELECT</code>), while "void" dataflows perform actions like inserts or deletes without returning data.</li>
+<li>Dataflows support variables declared with a <code>@</code> prefix, encompassing all OcientAIQ data types, and offer three expansion modes: <code>@</code> for values, <code>@@</code> for identifiers, and <code>@!</code> for raw text.</li>
+<li>Control flow structures like <code>IF/ELSEIF</code>, <code>WHILE</code>, <code>FOR</code> loops (including iterator-style loops), and exception handling (<code>TRY...EXCEPTION WHEN...THEN</code>) are now available within dataflows, with optional <code>MAX ITERATIONS</code> for loop control.</li>
 </ul></div>
     
   </div>
@@ -544,23 +562,6 @@
     <h3><a href="https://ocient.com/blog/ocient-joins-uks-ministry-of-defence-commercial-x-innovation-procurement-pathway/" target="_blank" rel="noopener">Ocient joins UK Ministry of Defence Commercial X pathway</a></h3>
     
     <div class="summary"><p>Ocient has joined the UK Ministry of Defence’s Commercial X-enabled Neutral Vendor Framework for Innovation (NVFI) marketplace, operated by Constellia, to streamline access for UK defence organizations. This enables easier engagement with Ocient’s large-scale data, analytics, and AI capabilities, specifically the OcientAIQ™ platform. OcientAIQ™ is designed for mission-critical environments requiring full-fidelity data retention and querying at scale, supporting both secure cloud and on-premises deployments.</p></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-08-03</span>
-    </div>
-    <h3><a href="https://ocient.com/blog/agentic-ai-and-the-intelligent-data-layer-behind-responsible-autonomy/" target="_blank" rel="noopener">Building responsible agentic AI on an intelligent data layer</a></h3>
-    
-    <div class="summary"><p>Ocient positions its platform as foundational infrastructure for responsible “agentic AI,” highlighting the need for governance as AI systems become more autonomous.</p>
-<ul>
-<li>Ocient emphasizes its capacity for real-time data validation, immutable audit structures, and compliance-aligned design to support agentic AI workflows.</li>
-<li>The platform offers interactive analytics on trillions of records with ingest rates up to 15 million records per second, scaling to hundreds of petabytes of data.</li>
-<li>Ocient focuses on “explainable autonomy” through granular lineage tracking, role-based access control, and immutable audit structures to ensure traceability of agentic actions.</li>
-<li>The company is proactively addressing emerging AI regulations (EU AI Act, evolving US state laws) with flexible guardrail configuration and continuous compliance feature updates.</li>
-</ul></div>
     
   </div>
   
