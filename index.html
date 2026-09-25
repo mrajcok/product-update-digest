@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-24 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-25 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,42 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-09-24</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/ai-is-compressing-attack-timelines-cyber-resilience-needs-proof/" target="_blank" rel="noopener">AI is compressing attack timelines. Cyber resilience needs proof. | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl helps banks address the European Central Bank’s (ECB) AI-cybersecurity expectations by providing a data foundation for improved visibility, response, and operational resilience.</p>
+<ul>
+<li>Cribl acts as a vendor-neutral telemetry layer, collecting, refining, and routing security data across diverse environments (legacy platforms, cloud services, etc.) without vendor lock-in.</li>
+<li>Key products include Cribl Edge (data collection), Cribl Stream (data routing &amp; shaping), Cribl Lake (full-fidelity data retention), and Cribl Search (federated investigation).</li>
+<li>The platform supports the ECB’s six focus areas, including protecting the attack surface, accelerating vulnerability management, strengthening monitoring, improving governance, reinforcing defense-in-depth, and enabling testable resilience.</li>
+<li>Cribl Lake provides cost-effective, long-term retention for incident timeline reconstruction and resilience testing, and delivers governed, AI-ready data to security analytics tools.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-09-24</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/cribl-stream-and-databricks-a-faster-path-to-analytics-ready-telemetry/" target="_blank" rel="noopener">Cribl Stream and Databricks: A faster path to analytics-ready telemetry | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl Stream now integrates directly with Databricks through the new Databricks Zerobus Destination, offering a faster path for analytics-ready telemetry.</p>
+<ul>
+<li>The integration allows routing events from Cribl Stream directly into Databricks Delta Tables via Databricks Zerobus Ingest, bypassing the need for intermediate object storage like S3.</li>
+<li>It utilizes Databricks service-principal authentication and targets a specific Unity Catalog table, aligning with existing Databricks governance.</li>
+<li>The destination supports high-throughput streaming via gRPC with JSON records, offering controls for batching and delivery tuning.</li>
+<li>Cribl Stream continues to serve as the control point for data preparation – filtering, transforming, enriching, and routing data <em>before</em> it writes to Delta.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -124,35 +160,18 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-09-18</span>
+      <span> · 2026-09-24</span>
     </div>
-    <h2><a href="https://cribl.io/blog/criblcon-26-cant-miss-sessions-if-you-want-to-be-a-superstar-analyst/" target="_blank" rel="noopener">CriblCon 26: Can’t-miss sessions if you want to be a superstar analyst | Cribl</a></h2>
+    <h2><a href="https://ocient.com/blog/inside-ocientaiq-the-spark-connector-that-pushes-work-down-instead-of-pulling-data-up/" target="_blank" rel="noopener">Inside OcientAIQ™: The Spark connector that pushes work down instead of pulling data up</a></h2>
     
-    <div class="summary"><p>CriblCon 26 sessions offer technical deep-dives for data analysts focused on faster investigation, reduced complexity, and improved AI utilization.</p>
+    <div class="summary"><p>The OcientAIQ Spark connector aims to minimize data movement between Spark and OcientAIQ by pushing down computation.</p>
 <ul>
-<li>Cribl’s security team’s workflows using the Run Investigation capability in Cribl Search will be presented, focusing on AI-powered threat hunting, anomaly detection, and the importance of data quality for effective AI results.</li>
-<li>Cribl Search’s federated and lakehouse engines, combined with Cribl Lake, provide a unified search experience, cost-effective storage, and faster investigations, potentially reducing SIEM dependency.</li>
-<li>A new metrics capability within Cribl Search’s lakehouse engine (currently in preview) allows for easy ingestion, storage, visualization, analysis, and alerting on high-volume metrics data.</li>
-<li>A benchmark (SecIT-bench) evaluating AI models for security and IT investigations provides guidance on selecting the right models based on specific workflows and budgets.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-09-17</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/building-an-ai-agent-for-smarter-less-painful-alert-triage/" target="_blank" rel="noopener">Building an AI agent for smarter, less painful alert triage | Cribl</a></h2>
-    
-    <div class="summary"><ul>
-<li>Cribl built an internal AI agent to automate alert triage, reducing alert fatigue by gathering context from multiple data sources (metrics, logs, incidents, runbooks, chat) before escalating to on-call engineers.</li>
-<li>The key technical challenge is managing input context size – the agent's performance is heavily influenced by how much relevant data it receives, measured by context size, tool calls, and investigation cost.</li>
-<li>Cribl utilizes the Model Context Protocol (MCP) to connect the AI agent to data sources like Cribl Stream, Cribl Search, and Cribl Lake, emphasizing the importance of careful API key and permission management.</li>
-<li>The architecture prioritizes tool curation (limiting available tools) and potentially using middleware MCP servers to reduce irrelevant context and improve agent efficiency, rather than simply maximizing tool integration.</li>
+<li>The connector is available for Spark 3.5+ (Scala 2.12) and Spark 4.x (Scala 2.13) as separate artifacts to maintain compatibility.</li>
+<li>It functions as a full Spark V2 CatalogPlugin, enabling DDL operations (CREATE, ALTER, DROP TABLE) directly within Spark SQL against OcientAIQ.</li>
+<li>Read operations support pushdown of column pruning, filters, aggregates, limits, and TopN, reducing the data transferred to Spark.</li>
+<li>Write operations distribute writers across OcientAIQ SQL nodes and offer atomic transactions, ensuring data consistency with either multi-row INSERTs or a bulk load path utilizing loader nodes or S3-compatible object storage.</li>
 </ul></div>
     
   </div>
@@ -190,24 +209,6 @@
 <li>Two dataflow types exist: "query" dataflows return a result set (using <code>RETURN SELECT</code>), while "void" dataflows perform actions like inserts or deletes without returning data.</li>
 <li>Dataflows support variables declared with a <code>@</code> prefix, encompassing all OcientAIQ data types, and offer three expansion modes: <code>@</code> for values, <code>@@</code> for identifiers, and <code>@!</code> for raw text.</li>
 <li>Control flow structures like <code>IF/ELSEIF</code>, <code>WHILE</code>, <code>FOR</code> loops (including iterator-style loops), and exception handling (<code>TRY...EXCEPTION WHEN...THEN</code>) are now available within dataflows, with optional <code>MAX ITERATIONS</code> for loop control.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-09-17</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/what-adtech-ctos-are-learning-about-agentic-ai-infrastructure/" target="_blank" rel="noopener">What AdTech CTOs are learning about agentic AI infrastructure</a></h2>
-    
-    <div class="summary"><p>OcientAIQ offers a new approach to agentic AI infrastructure for AdTech workloads.</p>
-<ul>
-<li>OcientAIQ enables faster and cheaper data processing, with one customer reportedly redirecting cloud spend after migrating file &amp; data delivery processing.</li>
-<li>The platform automatically infers schema and natively types data (e.g., IP addresses) for improved compression and query speed, while a "Data Advisor" agent suggests schema changes.</li>
-<li>A live demo showcased 117 millisecond query response times on 50.6 billion records across 4.41 petabytes, along with real-time enrichment and fully traceable agent actions via SQL query logging.</li>
-<li>OcientAIQ aims to reduce costs associated with agentic AI by minimizing LLM token usage, achieving up to 100x lower costs than competitors in benchmarks and also offering potential savings of 60-70% compared to platforms like Databricks or Snowflake.</li>
 </ul></div>
     
   </div>

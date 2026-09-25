@@ -79,13 +79,30 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-24 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-25 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">September 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-09-24</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/inside-ocientaiq-the-spark-connector-that-pushes-work-down-instead-of-pulling-data-up/" target="_blank" rel="noopener">Inside OcientAIQ™: The Spark connector that pushes work down instead of pulling data up</a></h3>
+    
+    <div class="summary"><p>The OcientAIQ Spark connector aims to minimize data movement between Spark and OcientAIQ by pushing down computation.</p>
+<ul>
+<li>The connector is available for Spark 3.5+ (Scala 2.12) and Spark 4.x (Scala 2.13) as separate artifacts to maintain compatibility.</li>
+<li>It functions as a full Spark V2 CatalogPlugin, enabling DDL operations (CREATE, ALTER, DROP TABLE) directly within Spark SQL against OcientAIQ.</li>
+<li>Read operations support pushdown of column pruning, filters, aggregates, limits, and TopN, reducing the data transferred to Spark.</li>
+<li>Write operations distribute writers across OcientAIQ SQL nodes and offer atomic transactions, ensuring data consistency with either multi-row INSERTs or a bulk load path utilizing loader nodes or S3-compatible object storage.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -551,17 +568,6 @@
 <li>The mandate distinguishes between “searchable” data (immediately available for analytics) and “retrievable” data (requiring preparation), pushing agencies towards maintaining a minimum of six months of searchable logs and one year of retrievable logs.</li>
 <li>OcientAIQ Unified Data Platform is designed to meet these requirements by offering pre-SIEM enrichment for CEM, immediately queryable long-term retention for THIRF via ANSI SQL, and AI-powered threat hunting capabilities via a Model Context Protocol (MCP) compatible interface.</li>
 </ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-08-03</span>
-    </div>
-    <h3><a href="https://ocient.com/blog/ocient-joins-uks-ministry-of-defence-commercial-x-innovation-procurement-pathway/" target="_blank" rel="noopener">Ocient joins UK Ministry of Defence Commercial X pathway</a></h3>
-    
-    <div class="summary"><p>Ocient has joined the UK Ministry of Defence’s Commercial X-enabled Neutral Vendor Framework for Innovation (NVFI) marketplace, operated by Constellia, to streamline access for UK defence organizations. This enables easier engagement with Ocient’s large-scale data, analytics, and AI capabilities, specifically the OcientAIQ™ platform. OcientAIQ™ is designed for mission-critical environments requiring full-fidelity data retention and querying at scale, supporting both secure cloud and on-premises deployments.</p></div>
     
   </div>
   
