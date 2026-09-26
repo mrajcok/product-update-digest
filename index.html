@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-25 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-26 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -109,14 +109,14 @@
       <span>blog</span>
       <span> · 2026-09-24</span>
     </div>
-    <h2><a href="https://cribl.io/blog/ai-is-compressing-attack-timelines-cyber-resilience-needs-proof/" target="_blank" rel="noopener">AI is compressing attack timelines. Cyber resilience needs proof. | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/cribl-stream-and-databricks-a-faster-path-to-analytics-ready-telemetry/" target="_blank" rel="noopener">Cribl Stream and Databricks: A faster path to analytics-ready telemetry | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl helps banks address the European Central Bank’s (ECB) AI-cybersecurity expectations by providing a data foundation for improved visibility, response, and operational resilience.</p>
+    <div class="summary"><p>Cribl Stream now integrates directly with Databricks via the new Databricks Zerobus Destination, providing a faster path for analytics-ready telemetry.</p>
 <ul>
-<li>Cribl acts as a vendor-neutral telemetry layer, collecting, refining, and routing security data across diverse environments (legacy platforms, cloud services, etc.) without vendor lock-in.</li>
-<li>Key products include Cribl Edge (data collection), Cribl Stream (data routing &amp; shaping), Cribl Lake (full-fidelity data retention), and Cribl Search (federated investigation).</li>
-<li>The platform supports the ECB’s six focus areas, including protecting the attack surface, accelerating vulnerability management, strengthening monitoring, improving governance, reinforcing defense-in-depth, and enabling testable resilience.</li>
-<li>Cribl Lake provides cost-effective, long-term retention for incident timeline reconstruction and resilience testing, and delivers governed, AI-ready data to security analytics tools.</li>
+<li>The integration allows routing events from Cribl Stream directly into Databricks Delta Tables via Databricks Zerobus Ingest, bypassing intermediate object storage.</li>
+<li>It utilizes Databricks service-principal authentication and targets a specific Unity Catalog table, enforcing governed access.</li>
+<li>The destination supports high-throughput streaming via gRPC with JSON records, offering batching and flush controls for workload tuning.</li>
+<li>Cribl Stream continues to handle data preparation, enabling filtering, transformation, enrichment, and schema normalization before delivery to Delta Tables.</li>
 </ul></div>
     
   </div>
@@ -127,14 +127,14 @@
       <span>blog</span>
       <span> · 2026-09-24</span>
     </div>
-    <h2><a href="https://cribl.io/blog/cribl-stream-and-databricks-a-faster-path-to-analytics-ready-telemetry/" target="_blank" rel="noopener">Cribl Stream and Databricks: A faster path to analytics-ready telemetry | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/ai-is-compressing-attack-timelines-cyber-resilience-needs-proof/" target="_blank" rel="noopener">AI is compressing attack timelines. Cyber resilience needs proof. | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl Stream now integrates directly with Databricks through the new Databricks Zerobus Destination, offering a faster path for analytics-ready telemetry.</p>
+    <div class="summary"><p>Cribl provides a telemetry layer designed to help organizations meet the European Central Bank’s (ECB) requirements for cybersecurity resilience in the face of rapidly evolving AI-powered threats.</p>
 <ul>
-<li>The integration allows routing events from Cribl Stream directly into Databricks Delta Tables via Databricks Zerobus Ingest, bypassing the need for intermediate object storage like S3.</li>
-<li>It utilizes Databricks service-principal authentication and targets a specific Unity Catalog table, aligning with existing Databricks governance.</li>
-<li>The destination supports high-throughput streaming via gRPC with JSON records, offering controls for batching and delivery tuning.</li>
-<li>Cribl Stream continues to serve as the control point for data preparation – filtering, transforming, enriching, and routing data <em>before</em> it writes to Delta.</li>
+<li>Cribl Edge, Stream, Lake, and Search work together to collect, refine, route, retain, and investigate security data across hybrid environments without vendor lock-in.</li>
+<li>The platform supports the ECB’s six key focus areas – protecting the attack surface, accelerating vulnerability management, strengthening monitoring, improving governance, reinforcing defense-in-depth, and testing operational resilience – by providing a data foundation for observability and evidence.</li>
+<li>Cribl Lake allows for cost-effective, long-term retention of full-fidelity telemetry data which is crucial for incident reconstruction and resilience testing.</li>
+<li>Cribl Search enables federated investigations across disparate data sources without requiring data re-ingestion, improving retrospective analysis and threat hunting capabilities.</li>
 </ul></div>
     
   </div>
@@ -162,16 +162,16 @@
     <div class="meta">
       <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-09-24</span>
+      <span> · 2026-09-25</span>
     </div>
     <h2><a href="https://ocient.com/blog/inside-ocientaiq-the-spark-connector-that-pushes-work-down-instead-of-pulling-data-up/" target="_blank" rel="noopener">Inside OcientAIQ™: The Spark connector that pushes work down instead of pulling data up</a></h2>
     
-    <div class="summary"><p>The OcientAIQ Spark connector aims to minimize data movement between Spark and OcientAIQ by pushing down computation.</p>
+    <div class="summary"><p>OcientAIQ Spark connector enables pushing down work to the data layer instead of pulling data to Spark.</p>
 <ul>
-<li>The connector is available for Spark 3.5+ (Scala 2.12) and Spark 4.x (Scala 2.13) as separate artifacts to maintain compatibility.</li>
-<li>It functions as a full Spark V2 CatalogPlugin, enabling DDL operations (CREATE, ALTER, DROP TABLE) directly within Spark SQL against OcientAIQ.</li>
-<li>Read operations support pushdown of column pruning, filters, aggregates, limits, and TopN, reducing the data transferred to Spark.</li>
-<li>Write operations distribute writers across OcientAIQ SQL nodes and offer atomic transactions, ensuring data consistency with either multi-row INSERTs or a bulk load path utilizing loader nodes or S3-compatible object storage.</li>
+<li>The connector is available as separate artifacts for Spark 3 (Scala 2.12) and Spark 4 (Scala 2.13), supporting features like ANSI year-month intervals and TIMESTAMP_NTZ.</li>
+<li>It functions as a full catalog plugin (DataSource V2 CatalogPlugin) allowing Spark SQL DDL commands (CREATE, ALTER, DROP TABLE) to be directly executed against OcientAIQ.</li>
+<li>The connector supports pushdown of column pruning, filter, aggregate, limit, and TopN operations, minimizing data transfer from OcientAIQ to Spark.</li>
+<li>Reads can be parallelized by discovering partition bounds and distributing queries across OcientAIQ SQL nodes, with tunable parallelism controlled by the <code>ocient.parallelism</code> option.</li>
 </ul></div>
     
   </div>

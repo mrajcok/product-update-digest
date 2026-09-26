@@ -79,7 +79,7 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-25 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-26 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
@@ -90,16 +90,16 @@
   <div class="card">
     <div class="meta">
       <span>blog</span>
-      <span> · 2026-09-24</span>
+      <span> · 2026-09-25</span>
     </div>
     <h3><a href="https://ocient.com/blog/inside-ocientaiq-the-spark-connector-that-pushes-work-down-instead-of-pulling-data-up/" target="_blank" rel="noopener">Inside OcientAIQ™: The Spark connector that pushes work down instead of pulling data up</a></h3>
     
-    <div class="summary"><p>The OcientAIQ Spark connector aims to minimize data movement between Spark and OcientAIQ by pushing down computation.</p>
+    <div class="summary"><p>OcientAIQ Spark connector enables pushing down work to the data layer instead of pulling data to Spark.</p>
 <ul>
-<li>The connector is available for Spark 3.5+ (Scala 2.12) and Spark 4.x (Scala 2.13) as separate artifacts to maintain compatibility.</li>
-<li>It functions as a full Spark V2 CatalogPlugin, enabling DDL operations (CREATE, ALTER, DROP TABLE) directly within Spark SQL against OcientAIQ.</li>
-<li>Read operations support pushdown of column pruning, filters, aggregates, limits, and TopN, reducing the data transferred to Spark.</li>
-<li>Write operations distribute writers across OcientAIQ SQL nodes and offer atomic transactions, ensuring data consistency with either multi-row INSERTs or a bulk load path utilizing loader nodes or S3-compatible object storage.</li>
+<li>The connector is available as separate artifacts for Spark 3 (Scala 2.12) and Spark 4 (Scala 2.13), supporting features like ANSI year-month intervals and TIMESTAMP_NTZ.</li>
+<li>It functions as a full catalog plugin (DataSource V2 CatalogPlugin) allowing Spark SQL DDL commands (CREATE, ALTER, DROP TABLE) to be directly executed against OcientAIQ.</li>
+<li>The connector supports pushdown of column pruning, filter, aggregate, limit, and TopN operations, minimizing data transfer from OcientAIQ to Spark.</li>
+<li>Reads can be parallelized by discovering partition bounds and distributing queries across OcientAIQ SQL nodes, with tunable parallelism controlled by the <code>ocient.parallelism</code> option.</li>
 </ul></div>
     
   </div>
