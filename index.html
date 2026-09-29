@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-26 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-29 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -107,16 +107,32 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
+      <span> · 2026-09-27</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/cribl-privacy-model-lost-20-heads-and-got-2-8x-faster/" target="_blank" rel="noopener">Cribl Privacy Model lost 20 heads and got 2.8x faster | Cribl</a></h2>
+    
+    <div class="summary"><ul>
+<li>Cribl has released updates to its Privacy Model (versions starting with <code>cribl-privacy-2.1</code>) that significantly improve performance while maintaining accuracy.</li>
+<li>The updated model achieves a 2.8x increase in throughput and a 63% reduction in median latency with only a 0.06 percentage point change in F1 score, a key metric for prediction quality.</li>
+<li>Improvements were achieved through techniques including attention head pruning, feed-forward neuron pruning, layer pruning, and knowledge distillation, focusing on removing unnecessary computation for the specific task of sensitive data detection.</li>
+<li>The Pro model was reduced from 32 attention heads and an FFN width of 1,024 to 12 attention heads and a width of 256, demonstrating the success of the compression techniques.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
       <span> · 2026-09-24</span>
     </div>
     <h2><a href="https://cribl.io/blog/cribl-stream-and-databricks-a-faster-path-to-analytics-ready-telemetry/" target="_blank" rel="noopener">Cribl Stream and Databricks: A faster path to analytics-ready telemetry | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl Stream now integrates directly with Databricks via the new Databricks Zerobus Destination, providing a faster path for analytics-ready telemetry.</p>
-<ul>
-<li>The integration allows routing events from Cribl Stream directly into Databricks Delta Tables via Databricks Zerobus Ingest, bypassing intermediate object storage.</li>
-<li>It utilizes Databricks service-principal authentication and targets a specific Unity Catalog table, enforcing governed access.</li>
-<li>The destination supports high-throughput streaming via gRPC with JSON records, offering batching and flush controls for workload tuning.</li>
-<li>Cribl Stream continues to handle data preparation, enabling filtering, transformation, enrichment, and schema normalization before delivery to Delta Tables.</li>
+    <div class="summary"><ul>
+<li>The new Databricks Zerobus Destination for Cribl Stream allows organizations to route analytics-ready telemetry directly into Databricks Delta Tables via Databricks Zerobus Ingest, bypassing intermediate object storage.</li>
+<li>This integration reduces operational overhead by eliminating the need for separate ingestion jobs, lowers latency from event collection to analysis, and provides improved visibility into data delivery health within the Cribl interface.</li>
+<li>Cribl Stream remains the control point for data preparation, enabling filtering, transformation, enrichment, and schema normalization <em>before</em> data is written to Delta Tables, supporting data governance and cost management.</li>
+<li>The integration utilizes Databricks service principal authentication and Unity Catalog for governed access, requiring customers to define a schema and grant appropriate permissions to the service principal, with a rescue-column pattern available for handling schema mismatches.</li>
 </ul></div>
     
   </div>
@@ -129,31 +145,30 @@
     </div>
     <h2><a href="https://cribl.io/blog/ai-is-compressing-attack-timelines-cyber-resilience-needs-proof/" target="_blank" rel="noopener">AI is compressing attack timelines. Cyber resilience needs proof. | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl provides a telemetry layer designed to help organizations meet the European Central Bank’s (ECB) requirements for cybersecurity resilience in the face of rapidly evolving AI-powered threats.</p>
+    <div class="summary"><p>Cribl helps organizations meet the European Central Bank’s (ECB) new AI-cybersecurity expectations by providing a data foundation for improved security and resilience.</p>
 <ul>
-<li>Cribl Edge, Stream, Lake, and Search work together to collect, refine, route, retain, and investigate security data across hybrid environments without vendor lock-in.</li>
-<li>The platform supports the ECB’s six key focus areas – protecting the attack surface, accelerating vulnerability management, strengthening monitoring, improving governance, reinforcing defense-in-depth, and testing operational resilience – by providing a data foundation for observability and evidence.</li>
-<li>Cribl Lake allows for cost-effective, long-term retention of full-fidelity telemetry data which is crucial for incident reconstruction and resilience testing.</li>
-<li>Cribl Search enables federated investigations across disparate data sources without requiring data re-ingestion, improving retrospective analysis and threat hunting capabilities.</li>
+<li>Cribl offers a vendor-neutral telemetry layer – comprised of Cribl Edge, Cribl Stream, Cribl Lake, and Cribl Search – that collects, refines, and routes security data across diverse environments without vendor lock-in.</li>
+<li>The platform supports the ECB’s six focus areas, including protecting the attack surface, accelerating vulnerability management, strengthening monitoring, improving governance, reinforcing defense-in-depth, and enabling testable operational resilience.</li>
+<li>Cribl Lake provides cost-effective, long-term storage of full-fidelity telemetry for incident reconstruction, resilience testing, and historical analysis.</li>
+<li>Cribl Search enables federated investigations across disparate data locations and time horizons, improving threat visibility and response capabilities.</li>
 </ul></div>
     
   </div>
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
-      <span> · 2026-09-23</span>
+      <span> · 2026-09-28</span>
     </div>
-    <h2><a href="https://cribl.io/blog/the-people-who-help-shape-cribl-celebrating-some-of-our-early-employees/" target="_blank" rel="noopener">The people who help shape Cribl: Celebrating some of our early employees | Cribl</a></h2>
+    <h2><a href="https://ocient.com/blog/fusing-security-telemetry-with-business-data-in-ansi-sql/" target="_blank" rel="noopener">Fusing security telemetry with business data in ANSI SQL</a></h2>
     
-    <div class="summary"><p>This blog post celebrates early Cribl employees and their contributions to the company’s growth.</p>
+    <div class="summary"><p>Ocient enables fusing security telemetry with business data using ANSI SQL, rather than replacing existing SIEM tools.</p>
 <ul>
-<li>Brandon McCombs (Engineering) joined in June 2020 when Cribl was using LogStream 2.2.0 and receiving approximately 2 support cases every two days (now 30/day).</li>
-<li>Jenn Kabler (Revenue Enablement) led the rollout of Force Management across GTM teams.</li>
-<li>Joel Vincent (Marketing) highlights the company’s “irreverent but serious” culture and the evolution of Cribl over the past five years.</li>
-<li>Kyle McCririe (Support) notes the high level of talent at Cribl and the opportunity for professional growth through exposure to diverse technologies.</li>
-<li>Danny Ansell (Revenue/Sales) joined as employee #76 and is impressed by the company’s continued innovation and growth to over 1,100 employees.</li>
+<li>The platform supports joining security data (logs, alerts, telemetry) with business or operational data (fraud ledgers, HR context) using standard SQL queries.</li>
+<li>OcientAIQ is designed to hold telemetry at full resolution, allowing for interactive queries across large datasets without separate warehousing.</li>
+<li>The solution provides a general-purpose analytics platform that can be deployed on-premises, in a private cloud, or in air-gapped environments to address data sovereignty and security concerns.</li>
+<li>The platform's pricing is based on fixed capacity, and not per-query, and provides a unified platform for security, fraud, and network operations teams, using a single copy of the data.</li>
 </ul></div>
     
   </div>
@@ -190,25 +205,6 @@
 <li>Ocient’s architecture allows joining data sources that traditionally reside in separate systems (e.g., security telemetry, transaction ledgers, network flow).</li>
 <li>Customers are discovering use cases beyond initial expectations by joining data in new ways, such as correlating authentication logs with transaction data for fraud detection.</li>
 <li>The platform is deployable on-premises, in private clouds, or air-gapped environments, giving organizations control over their sensitive data and addressing data sovereignty concerns.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-09-24</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/inside-the-ocientaiq-engine-dataflows-are-the-stored-procedures-you-never-have-to-create/" target="_blank" rel="noopener">Inside OcientAIQ™: Dataflows in a unified data platform</a></h2>
-    
-    <div class="summary"><h2>OcientAIQ Dataflows: Imperative Programming in SQL</h2>
-<p>OcientAIQ introduces dataflows, enabling imperative programming directly within SQL. This allows for executing loops, variables, conditionals, and exception handling as a single SQL statement, eliminating the need for application round-trips and simplifying complex analytics.</p>
-<ul>
-<li>Dataflows are anonymous, ad-hoc SQL scripts submitted like queries, differing from traditional stored procedures by not requiring prior creation or residing in a catalog.</li>
-<li>Two dataflow types exist: "query" dataflows return a result set (using <code>RETURN SELECT</code>), while "void" dataflows perform actions like inserts or deletes without returning data.</li>
-<li>Dataflows support variables declared with a <code>@</code> prefix, encompassing all OcientAIQ data types, and offer three expansion modes: <code>@</code> for values, <code>@@</code> for identifiers, and <code>@!</code> for raw text.</li>
-<li>Control flow structures like <code>IF/ELSEIF</code>, <code>WHILE</code>, <code>FOR</code> loops (including iterator-style loops), and exception handling (<code>TRY...EXCEPTION WHEN...THEN</code>) are now available within dataflows, with optional <code>MAX ITERATIONS</code> for loop control.</li>
 </ul></div>
     
   </div>
