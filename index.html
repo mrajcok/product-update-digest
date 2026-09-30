@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-29 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-09-30 06:02 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -106,52 +106,65 @@
   <div class="card">
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-09-27</span>
+      <span>press release</span>
+      <span> · 2026-09-29</span>
     </div>
-    <h2><a href="https://cribl.io/blog/cribl-privacy-model-lost-20-heads-and-got-2-8x-faster/" target="_blank" rel="noopener">Cribl Privacy Model lost 20 heads and got 2.8x faster | Cribl</a></h2>
+    <h2><a href="https://cribl.io/news/cribl-launches-streamai-with-free-inference-giving-enterprises-control-over-ai-costs/" target="_blank" rel="noopener">Cribl Launches StreamAI with Free Inference, Giving Enterprises Control over AI Costs | Cribl</a></h2>
     
-    <div class="summary"><ul>
-<li>Cribl has released updates to its Privacy Model (versions starting with <code>cribl-privacy-2.1</code>) that significantly improve performance while maintaining accuracy.</li>
-<li>The updated model achieves a 2.8x increase in throughput and a 63% reduction in median latency with only a 0.06 percentage point change in F1 score, a key metric for prediction quality.</li>
-<li>Improvements were achieved through techniques including attention head pruning, feed-forward neuron pruning, layer pruning, and knowledge distillation, focusing on removing unnecessary computation for the specific task of sensitive data detection.</li>
-<li>The Pro model was reduced from 32 attention heads and an FFN width of 1,024 to 12 attention heads and a width of 256, demonstrating the success of the compression techniques.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-09-24</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/cribl-stream-and-databricks-a-faster-path-to-analytics-ready-telemetry/" target="_blank" rel="noopener">Cribl Stream and Databricks: A faster path to analytics-ready telemetry | Cribl</a></h2>
-    
-    <div class="summary"><ul>
-<li>The new Databricks Zerobus Destination for Cribl Stream allows organizations to route analytics-ready telemetry directly into Databricks Delta Tables via Databricks Zerobus Ingest, bypassing intermediate object storage.</li>
-<li>This integration reduces operational overhead by eliminating the need for separate ingestion jobs, lowers latency from event collection to analysis, and provides improved visibility into data delivery health within the Cribl interface.</li>
-<li>Cribl Stream remains the control point for data preparation, enabling filtering, transformation, enrichment, and schema normalization <em>before</em> data is written to Delta Tables, supporting data governance and cost management.</li>
-<li>The integration utilizes Databricks service principal authentication and Unity Catalog for governed access, requiring customers to define a schema and grant appropriate permissions to the service principal, with a rescue-column pattern available for handling schema mismatches.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-09-24</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/ai-is-compressing-attack-timelines-cyber-resilience-needs-proof/" target="_blank" rel="noopener">AI is compressing attack timelines. Cyber resilience needs proof. | Cribl</a></h2>
-    
-    <div class="summary"><p>Cribl helps organizations meet the European Central Bank’s (ECB) new AI-cybersecurity expectations by providing a data foundation for improved security and resilience.</p>
+    <div class="summary"><p>Cribl launched StreamAI, an enterprise AI gateway designed to control AI costs and improve model efficiency.</p>
 <ul>
-<li>Cribl offers a vendor-neutral telemetry layer – comprised of Cribl Edge, Cribl Stream, Cribl Lake, and Cribl Search – that collects, refines, and routes security data across diverse environments without vendor lock-in.</li>
-<li>The platform supports the ECB’s six focus areas, including protecting the attack surface, accelerating vulnerability management, strengthening monitoring, improving governance, reinforcing defense-in-depth, and enabling testable operational resilience.</li>
-<li>Cribl Lake provides cost-effective, long-term storage of full-fidelity telemetry for incident reconstruction, resilience testing, and historical analysis.</li>
-<li>Cribl Search enables federated investigations across disparate data locations and time horizons, improving threat visibility and response capabilities.</li>
+<li>StreamAI includes a model router that automatically directs AI prompts to the most appropriate model based on cost and performance, leveraging insights from Cribl’s SecIT Bench research (showing up to a 20x cost range with only a 17% accuracy difference between models).</li>
+<li>The platform offers free inference when using automatic data routing to benchmarked AI models, aiming to eliminate unexpected token expenses.</li>
+<li>StreamAI incorporates built-in budget controls, circuit breakers, and security features (including bidirectional sensitive data redaction) to manage AI spend and protect sensitive data.</li>
+<li>It records all AI interactions as audit-ready telemetry for governance and visibility, and is designed to work with both proprietary and open-source models.</li>
 </ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>press release</span>
+      <span> · 2026-09-29</span>
+    </div>
+    <h2><a href="https://cribl.io/news/introducing-cribl-detect-delivering-a-new-way-to-siem/" target="_blank" rel="noopener">Introducing Cribl Detect, Delivering a New Way to SIEM | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl announced Cribl Detect, a new SIEM built on its existing telemetry platform, aiming to provide a complete SIEM solution at up to 50% less cost than competitors.</p>
+<ul>
+<li>Cribl Detect offers detection, investigation, and response capabilities without vendor lock-in, leveraging Cribl’s open data platform.</li>
+<li>The SIEM incorporates AI-powered detection and investigation, utilizing intelligence from Cribl’s AI SOC to automate workflows and prioritize threats.</li>
+<li>Key features include built-in Detection Posture Management (DPM) for identifying coverage gaps and AI-driven triage for faster incident response.</li>
+<li>Cribl Detect is now available for Cribl.Cloud customers and is priced based on infrastructure, avoiding per-gigabyte analysis costs.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-09-29</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/a-new-way-to-siem-starts-with-a-new-foundation/" target="_blank" rel="noopener">A new way to SIEM starts with a new foundation | Cribl</a></h2>
+    
+    <div class="summary"><ul>
+<li>Cribl launched <strong>Cribl Detect</strong>, a new SIEM solution built on their <strong>AI Platform for Telemetry</strong>, aiming to address limitations of traditional and “SIEM-less” approaches.</li>
+<li>Cribl Detect emphasizes high-fidelity detections generated in the data pipeline, correlation for identifying complex attacks, and a catalog of over 8,000 detection rules with an AI-assisted interface (<strong>Detection Lab</strong>) for rule building and tuning.</li>
+<li>The platform includes detection coverage and posture management using <strong>MITRE ATT&amp;CK</strong> mapping, and AI-guided investigation features to correlate evidence from multiple systems into a unified view.</li>
+<li>Cribl Detect integrates with existing <strong>SOAR</strong> investments and offers threat intelligence and enrichment to provide context during detection, investigation, and response workflows, while allowing organizations control over their telemetry data and storage.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>blog</span>
+      <span> · 2026-09-29</span>
+    </div>
+    <h2><a href="https://ocient.com/blog/growing-ocients-global-team/" target="_blank" rel="noopener">Growing Ocient&#39;s global team</a></h2>
+    
+    <div class="summary"><p>Ocient has formally integrated its India-based team as Ocient Technologies Private Limited, recognizing their significant contributions to the company's growth over the past four years. The India team’s expertise spans Big Data systems, full-stack design, quality engineering, and platform modernization, driving innovation and delivery for major customer engagements. Recent initiatives focus on developing capabilities for autonomous data platforms, agentic solutions, and next-generation analytics. They also contribute to areas like architecture governance, performance optimization, and security, ensuring scalable and supportable enterprise solutions.</p></div>
     
   </div>
   
@@ -187,24 +200,6 @@
 <li>It functions as a full catalog plugin (DataSource V2 CatalogPlugin) allowing Spark SQL DDL commands (CREATE, ALTER, DROP TABLE) to be directly executed against OcientAIQ.</li>
 <li>The connector supports pushdown of column pruning, filter, aggregate, limit, and TopN operations, minimizing data transfer from OcientAIQ to Spark.</li>
 <li>Reads can be parallelized by discovering partition bounds and distributing queries across OcientAIQ SQL nodes, with tunable parallelism controlled by the <code>ocient.parallelism</code> option.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-09-24</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/one-engine-many-questions-what-data-fusion-actually-unlocks/" target="_blank" rel="noopener">One Engine, Many Questions: What data fusion actually unlocks</a></h2>
-    
-    <div class="summary"><p>Ocient provides a data fusion engine enabling organizations to query across disparate data sources.</p>
-<ul>
-<li>The platform ingests data at its native rate without data loss, retains data at full resolution for long durations, and allows fast querying across joined datasets.</li>
-<li>Ocient’s architecture allows joining data sources that traditionally reside in separate systems (e.g., security telemetry, transaction ledgers, network flow).</li>
-<li>Customers are discovering use cases beyond initial expectations by joining data in new ways, such as correlating authentication logs with transaction data for fraud detection.</li>
-<li>The platform is deployable on-premises, in private clouds, or air-gapped environments, giving organizations control over their sensitive data and addressing data sovereignty concerns.</li>
 </ul></div>
     
   </div>
