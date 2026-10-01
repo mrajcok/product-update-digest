@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-09-30 06:02 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-01 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,23 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-09-29</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/a-new-way-to-siem-a-smarter-way-to-ai-one-platform-to-power-it-all/" target="_blank" rel="noopener">A new way to SIEM, a smarter way to AI, one platform to power it all  | Cribl</a></h2>
+    
+    <div class="summary"><ul>
+<li>Cribl announced <strong>StreamAI</strong>, an enterprise AI gateway with a built-in model router that optimizes AI inference costs by directing prompts to the most appropriate model, offering free inference for automatic routing to benchmarked models.</li>
+<li><strong>Cribl Detect</strong> was launched as a complete SIEM solution built on the Cribl platform designed to reduce costs by up to 50% compared to traditional SIEMs, focusing on infrastructure-based pricing and data ownership.</li>
+<li>The <strong>Cribl App Framework</strong> now supports over 150 apps created by Cribl, partners, and customers, accessible via the Cribl Marketplace, enabling custom development and extensions.</li>
+<li>The platform expands support for agentic workflows, allowing users to build apps, workflows, and agents using natural language and leveraging a shared agentic runtime for compute, scheduling, and permissions.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -141,17 +158,18 @@
   
   <div class="card">
     <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-09-29</span>
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>press release</span>
+      <span> · 2026-09-30</span>
     </div>
-    <h2><a href="https://cribl.io/blog/a-new-way-to-siem-starts-with-a-new-foundation/" target="_blank" rel="noopener">A new way to SIEM starts with a new foundation | Cribl</a></h2>
+    <h2><a href="https://ocient.com/newsroom/press-releases/ocient-shadow-nexus-advance-full-fidelity-osint-analysis/" target="_blank" rel="noopener">Ocient and Shadow Nexus Partner to Advance Full-Fidelity Analysis of OSINT Data for Defense and National Security Missions</a></h2>
     
-    <div class="summary"><ul>
-<li>Cribl launched <strong>Cribl Detect</strong>, a new SIEM solution built on their <strong>AI Platform for Telemetry</strong>, aiming to address limitations of traditional and “SIEM-less” approaches.</li>
-<li>Cribl Detect emphasizes high-fidelity detections generated in the data pipeline, correlation for identifying complex attacks, and a catalog of over 8,000 detection rules with an AI-assisted interface (<strong>Detection Lab</strong>) for rule building and tuning.</li>
-<li>The platform includes detection coverage and posture management using <strong>MITRE ATT&amp;CK</strong> mapping, and AI-guided investigation features to correlate evidence from multiple systems into a unified view.</li>
-<li>Cribl Detect integrates with existing <strong>SOAR</strong> investments and offers threat intelligence and enrichment to provide context during detection, investigation, and response workflows, while allowing organizations control over their telemetry data and storage.</li>
+    <div class="summary"><p>Ocient and Shadow Nexus have partnered to integrate curated OSINT and PAI data into the OcientAIQ platform for national security organizations.</p>
+<ul>
+<li>Shadow Nexus’s hacked, breached, and leaked (HBL) datasets can now be ingested directly into OcientAIQ without requiring additional engineering.</li>
+<li>The integration enables faster analysis of open-source intelligence alongside existing mission data, supporting special operations, defense, and intelligence missions.</li>
+<li>OcientAIQ maintains data sovereignty and security across cloud, on-premises, and air-gapped environments.</li>
+<li>The partnership aims to address the challenge of analyzing rapidly growing OSINT volumes by providing a governed data foundation for petabyte-scale workloads using OcientAIQ’s Unified Data Platform.</li>
 </ul></div>
     
   </div>
@@ -182,24 +200,6 @@
 <li>OcientAIQ is designed to hold telemetry at full resolution, allowing for interactive queries across large datasets without separate warehousing.</li>
 <li>The solution provides a general-purpose analytics platform that can be deployed on-premises, in a private cloud, or in air-gapped environments to address data sovereignty and security concerns.</li>
 <li>The platform's pricing is based on fixed capacity, and not per-query, and provides a unified platform for security, fraud, and network operations teams, using a single copy of the data.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-09-25</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/inside-ocientaiq-the-spark-connector-that-pushes-work-down-instead-of-pulling-data-up/" target="_blank" rel="noopener">Inside OcientAIQ™: The Spark connector that pushes work down instead of pulling data up</a></h2>
-    
-    <div class="summary"><p>OcientAIQ Spark connector enables pushing down work to the data layer instead of pulling data to Spark.</p>
-<ul>
-<li>The connector is available as separate artifacts for Spark 3 (Scala 2.12) and Spark 4 (Scala 2.13), supporting features like ANSI year-month intervals and TIMESTAMP_NTZ.</li>
-<li>It functions as a full catalog plugin (DataSource V2 CatalogPlugin) allowing Spark SQL DDL commands (CREATE, ALTER, DROP TABLE) to be directly executed against OcientAIQ.</li>
-<li>The connector supports pushdown of column pruning, filter, aggregate, limit, and TopN operations, minimizing data transfer from OcientAIQ to Spark.</li>
-<li>Reads can be parallelized by discovering partition bounds and distributing queries across OcientAIQ SQL nodes, with tunable parallelism controlled by the <code>ocient.parallelism</code> option.</li>
 </ul></div>
     
   </div>
