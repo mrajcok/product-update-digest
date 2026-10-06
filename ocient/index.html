@@ -79,11 +79,30 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-03 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-06 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
+  
+  <h2 class="month">October 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-10-05</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/casa-why-where-your-data-sits-matters-more-than-ever-in-the-age-of-ai-agents/" target="_blank" rel="noopener">CASA: Why where your data sits matters more than ever in the age of AI agents</a></h3>
+    
+    <div class="summary"><ul>
+<li>Ocient introduces Compute Adjacent Storage Architecture (CASA), an approach to data platform design that prioritizes locating storage physically close to compute resources to overcome network bottlenecks, particularly for AI agent workloads.</li>
+<li>CASA differs from the recent industry trend of decoupling compute and storage, which trades query speed for flexibility; it’s designed for workloads requiring access to large fractions of datasets, and especially benefits AI agents issuing numerous queries.</li>
+<li>Technically, CASA utilizes NVMe SSDs directly connected via PCIe lanes to the same nodes performing computation, delivering roughly one-fifteenth the latency of decoupled systems, and bypasses standard Linux file systems for faster I/O operations.</li>
+<li>Ocient AIQ uses a tunable erasure coding scheme for data protection, requiring approximately 1.2 PB of storage to survive two node failures for 1 PB of data – a more efficient approach than 3x replication and reducing overall hardware footprint.</li>
+</ul></div>
+    
+  </div>
+  
   
   <h2 class="month">September 2026</h2>
   
@@ -545,23 +564,6 @@
 <li>In a Data Fabric, Ocient acts as a central repository for integrated and transformed data, ensuring consistency and a unified view.</li>
 <li>The platform supports data as a product, allowing for well-defined interfaces and SLAs, crucial for both architectures.</li>
 <li>Ocient’s predictable pricing model aims to reduce costs associated with scale in both Data Mesh (potential cost tracking issues) and Data Fabric (potential cloud cost increases) deployments.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-08-03</span>
-    </div>
-    <h3><a href="https://ocient.com/blog/the-modal-tax-why-agentic-analytics-breaks-the-best-of-breed-stack/" target="_blank" rel="noopener">The Modal Tax: rethinking the best-of-breed stack</a></h3>
-    
-    <div class="summary"><p>OcientAIQ™ is a unified data platform designed to address the performance and cost challenges introduced by agentic analytics workflows.</p>
-<ul>
-<li>Agentic analytics creates a “modal tax” due to the cost of frequent data transfers between best-of-breed systems – specifically, a token tax (context window costs), an accuracy tax (loss of information across systems), and a latency tax (serialization/deserialization overhead).</li>
-<li>OcientAIQ™ aims to eliminate this tax by providing a single engine that natively supports relational, geospatial, ML (via OcientML™), graph, vector search, and real-time rollups – enabling composable operations over one data copy.</li>
-<li>The platform utilizes Compute Adjacent Storage Architecture™ (CASA) on local NVMe to serve both reads and writes efficiently, eliminating data movement and associated costs.</li>
-<li>OcientAIQ’s pricing is fixed (per-core, capacity-based), removing cost friction for exploratory agentic workloads and enabling iterative data analysis without usage-based metering.</li>
 </ul></div>
     
   </div>

@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-03 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-06 06:01 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -153,6 +153,23 @@
   <div class="card">
     <div class="meta">
       <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>blog</span>
+      <span> · 2026-10-05</span>
+    </div>
+    <h2><a href="https://ocient.com/blog/casa-why-where-your-data-sits-matters-more-than-ever-in-the-age-of-ai-agents/" target="_blank" rel="noopener">CASA: Why where your data sits matters more than ever in the age of AI agents</a></h2>
+    
+    <div class="summary"><ul>
+<li>Ocient introduces Compute Adjacent Storage Architecture (CASA), an approach to data platform design that prioritizes locating storage physically close to compute resources to overcome network bottlenecks, particularly for AI agent workloads.</li>
+<li>CASA differs from the recent industry trend of decoupling compute and storage, which trades query speed for flexibility; it’s designed for workloads requiring access to large fractions of datasets, and especially benefits AI agents issuing numerous queries.</li>
+<li>Technically, CASA utilizes NVMe SSDs directly connected via PCIe lanes to the same nodes performing computation, delivering roughly one-fifteenth the latency of decoupled systems, and bypasses standard Linux file systems for faster I/O operations.</li>
+<li>Ocient AIQ uses a tunable erasure coding scheme for data protection, requiring approximately 1.2 PB of storage to survive two node failures for 1 PB of data – a more efficient approach than 3x replication and reducing overall hardware footprint.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>press release</span>
       <span> · 2026-09-30</span>
     </div>
@@ -177,24 +194,6 @@
     <h2><a href="https://ocient.com/blog/growing-ocients-global-team/" target="_blank" rel="noopener">Growing Ocient&#39;s global team</a></h2>
     
     <div class="summary"><p>Ocient has formally integrated its India-based team as Ocient Technologies Private Limited, recognizing their significant contributions to the company's growth over the past four years. The India team’s expertise spans Big Data systems, full-stack design, quality engineering, and platform modernization, driving innovation and delivery for major customer engagements. Recent initiatives focus on developing capabilities for autonomous data platforms, agentic solutions, and next-generation analytics. They also contribute to areas like architecture governance, performance optimization, and security, ensuring scalable and supportable enterprise solutions.</p></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>blog</span>
-      <span> · 2026-09-28</span>
-    </div>
-    <h2><a href="https://ocient.com/blog/fusing-security-telemetry-with-business-data-in-ansi-sql/" target="_blank" rel="noopener">Fusing security telemetry with business data in ANSI SQL</a></h2>
-    
-    <div class="summary"><p>Ocient enables fusing security telemetry with business data using ANSI SQL, rather than replacing existing SIEM tools.</p>
-<ul>
-<li>The platform supports joining security data (logs, alerts, telemetry) with business or operational data (fraud ledgers, HR context) using standard SQL queries.</li>
-<li>OcientAIQ is designed to hold telemetry at full resolution, allowing for interactive queries across large datasets without separate warehousing.</li>
-<li>The solution provides a general-purpose analytics platform that can be deployed on-premises, in a private cloud, or in air-gapped environments to address data sovereignty and security concerns.</li>
-<li>The platform's pricing is based on fixed capacity, and not per-query, and provides a unified platform for security, fraud, and network operations teams, using a single copy of the data.</li>
-</ul></div>
     
   </div>
   
