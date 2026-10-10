@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-09 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-10 06:00 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,24 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-10-09</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/cribl-decision-1-0-a-foundation-for-telemetry-decision-models/" target="_blank" rel="noopener">Cribl-decision-1.0: A foundation for telemetry decision models | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl released cribl-decision-1.0, a 4 billion parameter, open-weight general-purpose classification model for telemetry data.</p>
+<ul>
+<li>It’s designed for tasks like routing, enrichment, and triage by providing probability scores for a predefined set of options, rather than generating free-form text.</li>
+<li>The model is a LoRA fine-tune of Qwen3.5-4B-Base, trained on 1.5 million records across various decision tasks including text classification and intent routing.</li>
+<li>It achieves 77.3% overall accuracy on a 26-task benchmark and outperforms other open source models tested, tracking closely with TypeSafe's Jev.</li>
+<li>Cribl plans to release smaller, faster versions (800 million parameters), a dedicated benchmark for IT/security telemetry, and a domain-tuned version of the model in the future.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -134,24 +152,6 @@
 <li>AMI uses deep packet inspection (Layers 4-7) to extract metadata like DNS activity, TLS sessions, and HTTP transactions, offering insight into devices often difficult to instrument (IoT, OT).</li>
 <li>The app allows organizations to retain detailed AMI data within Cribl Lake while selectively routing specific telemetry to SIEM, observability platforms, and other analytics tools based on team/use case needs.</li>
 <li>Cribl Search is enhanced with access to AMI data, including prebuilt parsing, normalization, dashboards, and AI-guided investigation workflows for improved security investigations and operational analysis.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-09-30</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/how-to-implement-full-stack-observability/" target="_blank" rel="noopener">How to Implement Full-Stack Observability | Cribl</a></h2>
-    
-    <div class="summary"><p>Full-stack observability enables comprehensive system understanding by examining telemetry across all layers – applications, infrastructure, and user experience.</p>
-<ul>
-<li>The guide recommends a nine-step process, starting with assessing the current state and defining measurable outcomes (SLOs/SLIs) before instrumenting systems.</li>
-<li>OpenTelemetry (OTel) is presented as a key technology for consistent instrumentation, offering vendor-neutral APIs and the OpenTelemetry Protocol (OTLP) for logs, metrics, and traces.</li>
-<li>A telemetry pipeline is crucial for unifying data – collecting, normalizing, enriching, filtering, and routing it to various destinations – decoupling collection from analysis.</li>
-<li>Cost optimization is emphasized through techniques like data tiering, reduction before storage, and tracking costs by team/service, along with governing access and securing sensitive data.</li>
 </ul></div>
     
   </div>
