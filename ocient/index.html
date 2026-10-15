@@ -79,13 +79,30 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-13 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-15 06:00 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">October 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-10-14</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/retrospective-ioc-sweeps-establishing-whether-you-were-ever-exposed/" target="_blank" rel="noopener">Retrospective IOC sweeps: Establishing whether you were ever exposed</a></h3>
+    
+    <div class="summary"><p>Ocient introduces retrospective IOC sweeps enabling organizations to determine if they were previously compromised by newly discovered threat indicators.</p>
+<ul>
+<li>OcientAIQ™ allows users to perform retrospective threat hunts by joining newly received threat intelligence indicators with years of historical, full-resolution flow and DNS data.</li>
+<li>The solution utilizes ANSI SQL queries, specifically indexed joins on fields like destination IP address and timestamps, to quickly identify past exposures without requiring data rehydration or costly scans.</li>
+<li>The system supports automated, standing jobs that run sweeps against all new intelligence batches, surfacing matches as alerts within existing SIEM/SOAR tools.</li>
+<li>Ocient’s architecture keeps all historical data indexed and queryable in a single tier, avoiding the performance limitations and costs associated with tiered storage and federated search common in other security platforms.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -277,23 +294,6 @@
 <li>The platform automatically infers schema and natively types data (e.g., IP addresses) for improved compression and query speed, while a "Data Advisor" agent suggests schema changes.</li>
 <li>A live demo showcased 117 millisecond query response times on 50.6 billion records across 4.41 petabytes, along with real-time enrichment and fully traceable agent actions via SQL query logging.</li>
 <li>OcientAIQ aims to reduce costs associated with agentic AI by minimizing LLM token usage, achieving up to 100x lower costs than competitors in benchmarks and also offering potential savings of 60-70% compared to platforms like Databricks or Snowflake.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-15</span>
-    </div>
-    <h3><a href="https://ocient.com/blog/retrospective-ioc-sweeps-establishing-whether-you-were-ever-exposed/" target="_blank" rel="noopener">Retrospective IOC Sweeps: Establishing whether you were ever exposed</a></h3>
-    
-    <div class="summary"><p>Ocient introduces a capability for retrospective threat intelligence sweeps, allowing organizations to determine if they were previously compromised by newly discovered indicators.</p>
-<ul>
-<li>The solution frames retrospective analysis as a query – specifically a join between flow/DNS/TLS data and threat intelligence indicators – rather than a costly data project.</li>
-<li>OcientAIQ™ maintains full-resolution historical data indexed and queryable in ANSI SQL, enabling rapid sweeps across years of data without requiring data rehydration or tiered storage.</li>
-<li>The architecture supports efficient two-column indexing (e.g., on destination IP and time) to optimize query performance as data scales to trillions of rows.</li>
-<li>A key claim is that under Ocient’s fixed-capacity economics, the cost of each sweep remains consistent, facilitating scheduled, automated retrospective analysis.</li>
 </ul></div>
     
   </div>
