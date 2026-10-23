@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-22 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-23 06:00 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -160,6 +160,24 @@
     <div class="meta">
       <a href="ocient/" class="badge badge-ocient">Ocient</a>
       <span>blog</span>
+      <span> · 2026-10-22</span>
+    </div>
+    <h2><a href="https://ocient.com/blog/ai-agents-are-coming-for-adtech-is-the-data-ready/" target="_blank" rel="noopener">AI agents are coming for AdTech. Is the data ready?</a></h2>
+    
+    <div class="summary"><p>OcientAIQ introduces capabilities for managing data requirements for AI agents in AdTech.</p>
+<ul>
+<li>OcientAIQ brings AI agents and analytics directly to full-resolution, petabyte-scale AdTech data.</li>
+<li>It addresses the need for complete data access, enabling agents to work with actual bid, impression, and targeting signals rather than sampled approximations.</li>
+<li>The product emphasizes speed at scale, recognizing that real-time decisions require fast query performance.</li>
+<li>OcientAIQ provides a unified view of data (bidder logs, audience information, etc.) and maintains a traceable record of agent actions and reasoning.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="ocient/" class="badge badge-ocient">Ocient</a>
+      <span>blog</span>
       <span> · 2026-10-14</span>
     </div>
     <h2><a href="https://ocient.com/blog/retrospective-ioc-sweeps-establishing-whether-you-were-ever-exposed/" target="_blank" rel="noopener">Retrospective IOC sweeps: Establishing whether you were ever exposed</a></h2>
@@ -188,34 +206,6 @@
 <li>OcientAIQ supports correlation of network, DNS, endpoint, identity, and cloud audit records to identify malicious patterns across multiple data sources and over extended timelines.</li>
 <li>It allows for retrospective investigation, rapidly searching years of retained data to determine the scope and timeline of exposure after an indicator of compromise is published.</li>
 <li>The platform is designed for high-volume data ingestion without sampling and can be deployed on-premises or air-gapped for organizations with strict data residency requirements.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="ocient/" class="badge badge-ocient">Ocient</a>
-      <span>release notes</span>
-      
-    </div>
-    <h2><a href="https://docs.ocient.com/ocientaiq-unified-data-platform-release-notes.md?release=28.0" target="_blank" rel="noopener">OcientAIQ Unified Data Platform Release Notes — 28.0</a></h2>
-    
-    <div class="summary"><ul>
-<li>Ocient has released the Ocient Management UI, a web-based interface for system health monitoring, query activity, data ingestion, storage, node status, an interactive SQL Console, and a Pipeline Builder.</li>
-<li>Data Pipeline loading now includes accurate metrics for ingest, fan-out, and filtering; pipelines can be quiesced with <code>QUIESCE</code>, and restarted at a specific file offset with <code>ALTER PIPELINE</code>.</li>
-<li>The Ocient MCP Server (<code>ocientmcp</code> Python package) is now available, enabling AI agents and code editors to interact with Ocient systems via the Model Context Protocol (MCP).</li>
-<li>Data Flows have been added, allowing sequential execution of multiple SQL statements with support for variables, loops, conditional branching, and error handling.</li>
-<li>New SQL syntax features include <code>FETCH FIRST</code>/<code>FETCH NEXT</code>, the <code>ROW()</code> constructor (alias for <code>tuple()</code>), hexadecimal/octal/binary integer literals, underscore digit separators, and <code>WITH RECURSIVE</code> for recursive CTEs.</li>
-<li>Data Pipeline metrics have been enhanced to show throughput details (including fan-out) with new views for rows and bytes processed; <code>ALTER PIPELINE SQL</code> is enhanced to update pipeline configurations in place.</li>
-<li>Kerberos authentication is now supported for loading data from HDFS sources, along with Parquet data loading from HDFS.</li>
-<li>New array functions have been added: <code>ARRAY_INTERSECT_DISTINCT_COUNT</code>, <code>ARRAY_TRANSFORM_WITH_ORD</code>, <code>JACCARD_SIMILARITY</code>, and <code>ZIP_WITH_ORD</code>.</li>
-<li>Workload management now includes <code>GRANT</code> and <code>REVOKE</code> support for <code>USE</code> and <code>VIEW</code> privileges on service classes.</li>
-<li>Machine learning model updates include the <code>UNDERSAMPLING</code> model, expanded training metrics (accuracy, confusion matrix, R², RMSE, etc.), the <code>ROOT_MEAN_SQUARED_ERROR</code> aggregate function, standardized model options, and new <code>predict</code> and <code>predict_probabilities</code> meta functions.</li>
-<li>DDL statements have been extended with <code>ALTER TABLE SET COMMENT</code>, <code>GET NODE TOKEN</code>/<code>REVOKE NODE TOKEN</code>, and new parameters for <code>CREATE/ALTER CONNECTIVITY_POOL</code> (related to SSO and OpenAPI settings).</li>
-<li>New scalar functions <code>MAP_PUT</code>, <code>MAP_GET</code>, and <code>MAP_DELETE</code> provide map functionality within SQL.</li>
-<li>The HTTP Query API now correctly terminates queries exceeding service class limits, resolving a previous indefinite <code>FINALIZING</code> state issue.</li>
-<li>Several new system catalog tables (<code>sys.mcp_tools</code>, <code>sys.pipeline_metrics_current</code>, <code>sys.pipeline_metrics_historical</code>) and column additions have been implemented for improved monitoring and reporting.</li>
-<li>Data Pipelines are now the preferred method for loading data; the LAT functionality is deprecated and will be removed in a future release.</li>
 </ul></div>
     
   </div>
