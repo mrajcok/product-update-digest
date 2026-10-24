@@ -79,13 +79,30 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-23 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-24 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">October 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-10-22</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/your-azure-storage-your-network-outpost-and-private-endpoint-support-for-cribl-lake/" target="_blank" rel="noopener">Your Azure Storage, your network: Outpost and Private Endpoint support for Cribl Lake | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl v4.20 introduces Outpost and Private Endpoint support for Azure Storage Locations, enhancing security and control over data access.</p>
+<ul>
+<li>Cribl Outpost moves Azure management operations (container creation, lifecycle policies, validation) into the customer’s Azure network via a lightweight relay.</li>
+<li>Azure Private Endpoint allows Cribl Search to read data over a private connection, avoiding the public internet and requiring customer approval via a pending connection request.</li>
+<li>Both features are opt-in per storage location and do not require migration of existing configurations.</li>
+<li>These capabilities maintain existing identity and credential management practices, leveraging the same service principal and short-lived tokens as Azure BYOS.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -570,26 +587,6 @@
 <li>Intelligence feeds (e.g., abuse.ch, CISA KEV) and internal research are ingested, with a focus on curation workflow to prioritize relevant indicators and manage their lifecycle (freshness, expiration).</li>
 <li>A “hunt workbench” enables enrichment of indicators with data from VirusTotal, Shodan, and GreyNoise, and directly launches KQL queries in Cribl Search for investigation.</li>
 <li>Curated indicators are synced directly to Cribl lookup tables, immediately impacting real-time event enrichment within Cribl pipelines, eliminating the need for export/import processes and ensuring timely action based on threat intelligence.</li>
-</ul></div>
-    
-  </div>
-  
-  
-  <h2 class="month">August 2026</h2>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-08-25</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/building-an-effective-root-cause-analysis-practice/" target="_blank" rel="noopener">Building an Effective Root Cause Analysis Practice: Strategies for Continuous Improvement in IT and Security Incidents | Cribl</a></h3>
-    
-    <div class="summary"><p>Building an Effective Root Cause Analysis Practice: This blog post details strategies for improving IT and security incident response through robust root cause analysis (RCA).</p>
-<ul>
-<li>The post outlines an 8-step RCA process, emphasizing the importance of collecting evidence, building timelines, and creating measurable corrective actions.</li>
-<li>It recommends assembling cross-functional teams with clear roles and a blameless approach to focus on system conditions, not individual blame.</li>
-<li>The article highlights the value of automation for evidence collection and correlation, while stressing that human review is crucial for impactful conclusions.</li>
-<li>Cribl’s capabilities are presented as assisting with telemetry collection, normalization, search, and replay to support investigation-ready data for RCA, including integration with CardinalOps for AI-powered detection engineering.</li>
 </ul></div>
     
   </div>
