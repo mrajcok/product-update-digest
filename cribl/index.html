@@ -79,13 +79,30 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-24 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-27 06:00 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">October 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-10-24</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/from-cve-to-correlation-in-a-few-minutes-hunting-php2shell-with-cribl-detect/" target="_blank" rel="noopener">From CVE to Correlation in a Few Minutes: Hunting PHP2Shell with Cribl Detect | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl Detect rapidly responded to the PHP2Shell vulnerabilities (CVE-2026-109618 &amp; CVE-2026-109619) by leveraging Detection Lab to create detection packs.</p>
+<ul>
+<li>Detection Lab used Cribl AI and CVE metadata to build ATT&amp;CK-aligned detections for both CVEs.</li>
+<li>The resulting packs include eight draft detection rules per CVE, mapped to ATT&amp;CK techniques and covering 16 data sources.</li>
+<li>Four correlation searches were created to chain the rules together into higher-confidence attack stories, focusing on PHP workers spawning shells.</li>
+<li>Recommendations for next steps (validation, scoping, containment) and KQL pivot examples are provided to aid investigation.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -570,23 +587,6 @@
 <li>The platform facilitates a continuous feedback loop: gathering telemetry, establishing baselines, forecasting demand, aligning capacity with business outcomes, and automating governance.</li>
 <li>Cribl Stream and Edge can collect, reduce, enrich, transform, and route telemetry from 80+ sources, while Cribl Lake and Search provide options for cost-effective storage and querying.</li>
 <li>The "Cribl App for AI Observability" provides a centralized location for searching, investigating, and reporting AI telemetry across different environments.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-01</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/how-cribls-security-team-solved-their-threat-intelligence-problem/" target="_blank" rel="noopener">How Cribl&#39;s security team solved their threat intelligence problem | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl's security team developed an internal threat intelligence platform (TIP) built directly on top of Cribl Stream and Cribl Search to address challenges with operationalizing threat intelligence.</p>
-<ul>
-<li>The solution leverages a STIX 2.1 knowledge graph to store and relate threat intelligence data, including threat actors, malware, and indicators of compromise (IOCs).</li>
-<li>Intelligence feeds (e.g., abuse.ch, CISA KEV) and internal research are ingested, with a focus on curation workflow to prioritize relevant indicators and manage their lifecycle (freshness, expiration).</li>
-<li>A “hunt workbench” enables enrichment of indicators with data from VirusTotal, Shodan, and GreyNoise, and directly launches KQL queries in Cribl Search for investigation.</li>
-<li>Curated indicators are synced directly to Cribl lookup tables, immediately impacting real-time event enrichment within Cribl pipelines, eliminating the need for export/import processes and ensuring timely action based on threat intelligence.</li>
 </ul></div>
     
   </div>

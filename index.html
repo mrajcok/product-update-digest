@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-24 06:01 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-27 06:00 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,24 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-10-24</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/from-cve-to-correlation-in-a-few-minutes-hunting-php2shell-with-cribl-detect/" target="_blank" rel="noopener">From CVE to Correlation in a Few Minutes: Hunting PHP2Shell with Cribl Detect | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl Detect rapidly responded to the PHP2Shell vulnerabilities (CVE-2026-109618 &amp; CVE-2026-109619) by leveraging Detection Lab to create detection packs.</p>
+<ul>
+<li>Detection Lab used Cribl AI and CVE metadata to build ATT&amp;CK-aligned detections for both CVEs.</li>
+<li>The resulting packs include eight draft detection rules per CVE, mapped to ATT&amp;CK techniques and covering 16 data sources.</li>
+<li>Four correlation searches were created to chain the rules together into higher-confidence attack stories, focusing on PHP workers spawning shells.</li>
+<li>Recommendations for next steps (validation, scoping, containment) and KQL pivot examples are provided to aid investigation.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -134,24 +152,6 @@
 <li>Key recommendations include discovering and classifying sensitive data, minimizing and redacting it <em>before</em> it reaches AI systems, enforcing Data Loss Prevention (DLP) policies across all AI workflows (training data, prompts, RAG repositories, outputs), and continuously monitoring for leakage.</li>
 <li>Cribl Stream, combined with Cribl Guard, is presented as a solution for discovering sensitive data, understanding its flow, and taking action—masking, redacting, filtering—within the data pipeline <em>before</em> it reaches AI destinations.</li>
 <li>Integration with third-party DLP tools like Nightfall and the Claude Compliance API, alongside features like Cribl StreamAI (an enterprise AI gateway) are highlighted to extend existing security processes to AI environments and improve visibility into AI activity.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-10-21</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/cribl-search-adds-ocsf-mapping-for-more-consistent-searches/" target="_blank" rel="noopener">Cribl Search adds OCSF mapping for more consistent searches | Cribl</a></h2>
-    
-    <div class="summary"><p>Cribl Search now supports mapping fields to the Open Cybersecurity Schema Framework (OCSF) v1.8 for more consistent searching across disparate security data sources.</p>
-<ul>
-<li>The feature, implemented via dataset rules (GDI Step 3) in Cribl Search’s Lakehouse Engine, standardizes field names based on OCSF definitions.</li>
-<li>Users can choose to add OCSF mapped fields alongside original fields or replace the original fields, allowing flexibility in data presentation.</li>
-<li>Mappings are associated with datatypes to ensure appropriate field relationships are applied during event matching.</li>
-<li>Custom datatypes can be created or built-in types cloned to enable users to extend and tailor schema mappings beyond the initial OCSF v1.8 implementation.</li>
 </ul></div>
     
   </div>
