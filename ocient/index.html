@@ -79,13 +79,30 @@
     </label>
   </div>
   <h1>Ocient News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-27 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-28 06:01 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">October 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-10-27</span>
+    </div>
+    <h3><a href="https://ocient.com/blog/why-the-next-intelligence-advantage-is-a-data-advantage-4-takeaways-from-iss-world-middle-east-and-africa-2026/" target="_blank" rel="noopener">Why the Next Intelligence Advantage is a Data Advantage: 4 takeaways from ISS World Middle East and Africa 2026</a></h3>
+    
+    <div class="summary"><p>Ocient highlights a shift in intelligence gathering where data foundations are becoming strategically important due to emerging threats and new technologies.</p>
+<ul>
+<li>Investigators are increasingly focusing on metadata analysis (CDRs, ICRs, location data, financial transactions) as encryption becomes more prevalent, requiring platforms capable of handling high data volumes.</li>
+<li>The performance of AI-powered investigative tools is limited by the speed and scale of the underlying data layer; AI agents demand faster query performance than traditional analytical methods.</li>
+<li>Long-term data retention is critical for identifying patterns in complex threats like trafficking and influence campaigns, but traditional data management practices often result in data loss.</li>
+<li>Demand for data sovereignty is growing, requiring analytical solutions that can be deployed on-premises or in hybrid environments with full governmental control, and OcientAIQ is positioned as a platform to address these needs, handling data from 100TB to exabyte scale with sub-second query performance.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -563,23 +580,6 @@
 <li>Graphs are represented as two relational tables – a vertices table with an 'id' column and an edges table with 'srcid' and 'destid' columns, leveraging existing OcientAIQ table functionality.</li>
 <li>The library includes algorithms like Connected Components, PageRank, Triangle Count, Weighted Shortest Paths, and Label Propagation, which are translated into Dataflow blocks for execution.</li>
 <li>Benchmarking against GraphFrames/GraphX on a 1.96-billion-edge dataset showed OcientAIQ achieving up to 55x faster performance for certain algorithms, and successfully completing tasks (like Triangle Count) where Spark failed.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-08-10</span>
-    </div>
-    <h3><a href="https://ocient.com/blog/inside-the-ocient-engine-a-deep-dive-into-arrays/" target="_blank" rel="noopener">Inside OcientAIQ™: A deep dive into arrays</a></h3>
-    
-    <div class="summary"><p>OcientAIQ treats arrays as a core data model component, supporting features beyond standard Postgres implementations.</p>
-<ul>
-<li>OcientAIQ supports array literals with type inference and explicit casting, even handling arrays consisting entirely of NULL values by defaulting to <code>CHAR</code> but allowing type overrides.</li>
-<li>The platform enables complex array structures including nested and jagged arrays (arrays with varying lengths at the same depth).</li>
-<li>OcientAIQ introduces unique predicate syntax with the <code>for_some</code> and <code>for_all</code> quantifiers to filter array elements without unnesting, alongside standard array operators like <code>@&gt;</code> (Contains) and <code>&amp;&amp;</code> (Overlap).</li>
-<li>Indexing is supported on array columns, including N-gram indexes for text arrays, and the <code>array_agg</code> function allows for ordered array construction during aggregation, with flexible unnesting options including "Zip Unnest" for aligned data.</li>
 </ul></div>
     
   </div>
