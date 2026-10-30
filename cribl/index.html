@@ -79,13 +79,30 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-29 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-30 06:00 AM EDT</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">October 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-10-29</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/taming-the-ai-data-deluge-governing-telemetry-with-cribl-and-microsoft/" target="_blank" rel="noopener">Taming the AI data deluge: Governing telemetry with Cribl and Microsoft | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl Stream now collects Microsoft 365 Copilot interaction data, including user prompts and responses, via the Microsoft 365 Copilot Interaction Export API.</p>
+<ul>
+<li>Cribl Stream acts as an intelligent data control plane, reducing unnecessary data and enriching events before sending them to downstream platforms like Microsoft Sentinel and Azure services.</li>
+<li>The Microsoft Copilot Source in Cribl Stream runs scheduled collection jobs, discovers users, retrieves interaction history, and emits each interaction as an event.</li>
+<li>Cribl handles API rate limiting and unlicensed users, and can backfill historical Copilot interactions (subject to Microsoft API limitations).</li>
+<li>Cribl Stream integrates broadly with the Microsoft ecosystem, supporting data ingestion from Microsoft 365, Azure, and security services like Microsoft Sentinel and the new Microsoft Fabric Real-Time Intelligence destination.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -569,24 +586,6 @@
 <li>The piece highlights the importance of <em>stateful</em> detection logic (windows, thresholds, joins) which is often necessary for high-fidelity alerts, contrasting this with the <em>stateless</em> architecture common in high-throughput systems like those acquired by CrowdStrike (Onum).</li>
 <li>Cribl advocates for a tiered architecture: in-pipeline processing for initial signal generation (parsing, enrichment, basic IOC matching) and a separate, persistent data store for correlation, backtesting, and investigation.</li>
 <li>The author stresses the importance of customer control over the data layer, advocating for an architecture that avoids vendor lock-in and allows flexibility to change detection engines or search across multiple data stores using <em>federated search</em>.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-02</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/mastering-capacity-analytics/" target="_blank" rel="noopener">Mastering Capacity Analytics: How to Grow Infrastructure Without Guesswork | Cribl</a></h3>
-    
-    <div class="summary"><h2>Mastering Capacity Analytics with Cribl</h2>
-<p>Cribl enables infrastructure growth by leveraging telemetry to understand demand, forecast requirements, and proactively identify risks.</p>
-<ul>
-<li>Cribl’s platform collects, processes, governs, routes, stores, searches, and investigates telemetry for both humans and AI agents.</li>
-<li>The platform facilitates a continuous feedback loop: gathering telemetry, establishing baselines, forecasting demand, aligning capacity with business outcomes, and automating governance.</li>
-<li>Cribl Stream and Edge can collect, reduce, enrich, transform, and route telemetry from 80+ sources, while Cribl Lake and Search provide options for cost-effective storage and querying.</li>
-<li>The "Cribl App for AI Observability" provides a centralized location for searching, investigating, and reporting AI telemetry across different environments.</li>
 </ul></div>
     
   </div>

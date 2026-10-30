@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-29 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-10-30 06:00 AM EDT</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -102,6 +102,24 @@
     </label>
   </div>
 
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-10-29</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/taming-the-ai-data-deluge-governing-telemetry-with-cribl-and-microsoft/" target="_blank" rel="noopener">Taming the AI data deluge: Governing telemetry with Cribl and Microsoft | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl Stream now collects Microsoft 365 Copilot interaction data, including user prompts and responses, via the Microsoft 365 Copilot Interaction Export API.</p>
+<ul>
+<li>Cribl Stream acts as an intelligent data control plane, reducing unnecessary data and enriching events before sending them to downstream platforms like Microsoft Sentinel and Azure services.</li>
+<li>The Microsoft Copilot Source in Cribl Stream runs scheduled collection jobs, discovers users, retrieves interaction history, and emits each interaction as an event.</li>
+<li>Cribl handles API rate limiting and unlicensed users, and can backfill historical Copilot interactions (subject to Microsoft API limitations).</li>
+<li>Cribl Stream integrates broadly with the Microsoft ecosystem, supporting data ingestion from Microsoft 365, Azure, and security services like Microsoft Sentinel and the new Microsoft Fabric Real-Time Intelligence destination.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -135,24 +153,6 @@
 <li>The resulting packs include eight draft detection rules per CVE, mapped to ATT&amp;CK techniques and covering 16 data sources.</li>
 <li>Four correlation searches were created to chain the rules together into higher-confidence attack stories, focusing on PHP workers spawning shells.</li>
 <li>Recommendations for next steps (validation, scoping, containment) and KQL pivot examples are provided to aid investigation.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-10-22</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/your-azure-storage-your-network-outpost-and-private-endpoint-support-for-cribl-lake/" target="_blank" rel="noopener">Your Azure Storage, your network: Outpost and Private Endpoint support for Cribl Lake | Cribl</a></h2>
-    
-    <div class="summary"><p>Cribl v4.20 introduces Outpost and Private Endpoint support for Azure Storage Locations, enhancing security and control over data access.</p>
-<ul>
-<li>Cribl Outpost moves Azure management operations (container creation, lifecycle policies, validation) into the customer’s Azure network via a lightweight relay.</li>
-<li>Azure Private Endpoint allows Cribl Search to read data over a private connection, avoiding the public internet and requiring customer approval via a pending connection request.</li>
-<li>Both features are opt-in per storage location and do not require migration of existing configurations.</li>
-<li>These capabilities maintain existing identity and credential management practices, leveraging the same service principal and short-lived tokens as Azure BYOS.</li>
 </ul></div>
     
   </div>
