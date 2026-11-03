@@ -79,13 +79,50 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-10-31 06:00 AM EDT</p>
+  <p class="generated-at">Generated 2026-11-03 06:01 AM EST</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
+  <h2 class="month">November 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-11-02</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/announcing-telemetry-decision-bench-and-cribl-decision-2/" target="_blank" rel="noopener">Announcing Telemetry Decision Bench and cribl-decision-2 | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl has released Telemetry Decisions Bench, a public benchmark for evaluating decision models on IT, security, and telemetry tasks, alongside cribl-decision-2, a new family of open-weight decision models optimized for telemetry data.</p>
+<ul>
+<li>Telemetry Decisions Bench includes 4,806 tasks across 10 families, measuring accuracy, negative log-likelihood (NLL), expected calibration error (ECE), latency, and cost.</li>
+<li>cribl-decision-2-4B achieved 86.5% accuracy, outperforming cribl-decision-1.0 (76.4%) and most models under 10B parameters tested, achieving comparable performance to a 27B model.</li>
+<li>cribl-decision-2 employs a modified Qwen base with full or partial layer-wise fine-tuning, bidirectional attention, and a refined output head, trained on a large corpus of domain-specific data.</li>
+<li>The models emphasize confidence calibration, with cribl-decision-2-4B achieving a lower ECE (0.036) than gpt-5.6-luna (0.102), and exhibit improved speed, with cribl-decision-2-4B taking 78ms per decision.</li>
+</ul></div>
+    
+  </div>
+  
+  
   <h2 class="month">October 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-10-30</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/detection-posture-management/" target="_blank" rel="noopener">Detection posture management: How to manage detection coverage and posture | Cribl</a></h3>
+    
+    <div class="summary"><p>Detection posture management (DPM) evaluates and continuously optimizes threat detection effectiveness, moving beyond ad hoc responses to a measurable program.</p>
+<ul>
+<li>SIEMs typically detect only 22% of MITRE ATT&amp;CK techniques despite having telemetry to potentially cover 90%, highlighting a significant operational gap.</li>
+<li>DPM relies on five core capabilities: detection mapping (to MITRE ATT&amp;CK and adversaries), telemetry mapping, coverage scoring, rule health monitoring, and gap analysis/prioritization.</li>
+<li>Cribl Detect streamlines DPM by providing visibility into detection readiness, offering methods to expand coverage, and enabling continuous improvement.</li>
+<li>Key components of DPM include validating rule functionality (identifying false negatives and positives) and prioritizing remediation efforts based on threat relevance, prevalence, asset exposure, and effort.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -553,39 +590,6 @@
 <li>The system uses an agent for context-aware research (code analysis, trace building) and a deterministic runner to validate findings with controlled inputs, positive/negative controls, and evidence tied to unique nonces.</li>
 <li>Coverage gaps (untested code, outdated reviews, known vulnerabilities) are used as inputs to prioritize research tasks, going beyond simple code changes as triggers.</li>
 <li>A blind historical recall suite, using known vulnerabilities, is used to measure the system's effectiveness and identify areas for improvement in the research workflow.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-11</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/gpt-6-astra-vs-glm-5-3-why-performance-scores-arent-the-whole-story/" target="_blank" rel="noopener">GPT 6 Astra vs. GLM 5.3: Why performance scores aren’t the whole story | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl’s SecIT Bench reveals that while GPT 6 Astra and GLM 5.3 achieve statistically similar performance scores (81.0% and 81.4% respectively), their approaches and resulting tradeoffs differ significantly.</p>
-<ul>
-<li>Astra demonstrated greater token efficiency, completing investigations with 21 turns and 749,000 input tokens compared to GLM 5.3’s 45 turns and 2.2 million input tokens.</li>
-<li>Despite Astra’s efficiency, GLM 5.3 was approximately 3.5x less expensive to run.</li>
-<li>Astra was faster, averaging just over 8 minutes per trial vs. 14 minutes for GLM 5.3.</li>
-<li>As dataset size increased, Astra’s performance held relatively consistent, while GLM 5.3’s accuracy declined.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-03</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/how-i-think-about-detection-in-the-pipeline/" target="_blank" rel="noopener">How I think about detection in the pipeline | Cribl</a></h3>
-    
-    <div class="summary"><ul>
-<li>Cribl argues that while detecting events <em>in the pipeline</em> is valuable for speed and cost-efficiency, it's insufficient for producing trustworthy alerts without correlation.</li>
-<li>The piece highlights the importance of <em>stateful</em> detection logic (windows, thresholds, joins) which is often necessary for high-fidelity alerts, contrasting this with the <em>stateless</em> architecture common in high-throughput systems like those acquired by CrowdStrike (Onum).</li>
-<li>Cribl advocates for a tiered architecture: in-pipeline processing for initial signal generation (parsing, enrichment, basic IOC matching) and a separate, persistent data store for correlation, backtesting, and investigation.</li>
-<li>The author stresses the importance of customer control over the data layer, advocating for an architecture that avoids vendor lock-in and allows flexibility to change detection engines or search across multiple data stores using <em>federated search</em>.</li>
 </ul></div>
     
   </div>
