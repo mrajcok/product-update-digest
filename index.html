@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-11-03 06:01 AM EST</p>
+  <p class="generated-at">Generated 2026-11-04 06:01 AM EST</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -111,12 +111,12 @@
     </div>
     <h2><a href="https://cribl.io/blog/announcing-telemetry-decision-bench-and-cribl-decision-2/" target="_blank" rel="noopener">Announcing Telemetry Decision Bench and cribl-decision-2 | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl has released Telemetry Decisions Bench, a public benchmark for evaluating decision models on IT, security, and telemetry tasks, alongside cribl-decision-2, a new family of open-weight decision models optimized for telemetry data.</p>
+    <div class="summary"><p>Cribl has released Telemetry Decisions Bench, a benchmark for evaluating decision models on IT, security, and telemetry tasks, alongside cribl-decision-2, a new series of open-weight decision models tailored for telemetry data.</p>
 <ul>
-<li>Telemetry Decisions Bench includes 4,806 tasks across 10 families, measuring accuracy, negative log-likelihood (NLL), expected calibration error (ECE), latency, and cost.</li>
-<li>cribl-decision-2-4B achieved 86.5% accuracy, outperforming cribl-decision-1.0 (76.4%) and most models under 10B parameters tested, achieving comparable performance to a 27B model.</li>
-<li>cribl-decision-2 employs a modified Qwen base with full or partial layer-wise fine-tuning, bidirectional attention, and a refined output head, trained on a large corpus of domain-specific data.</li>
-<li>The models emphasize confidence calibration, with cribl-decision-2-4B achieving a lower ECE (0.036) than gpt-5.6-luna (0.102), and exhibit improved speed, with cribl-decision-2-4B taking 78ms per decision.</li>
+<li>The Telemetry Decisions Bench includes 4,806 tasks across 10 families, measuring accuracy, negative log-likelihood (NLL), expected calibration error (ECE), latency, and cost.</li>
+<li>cribl-decision-2-4B achieved 86.5% accuracy, a 10.1-percentage-point improvement over cribl-decision-1.0 at the same size, and nearing the performance of larger models with significantly fewer parameters.</li>
+<li>cribl-decision-2 utilizes a layer-wise fine-tune, bidirectional attention, reverse scans, and improved output head on a Qwen base, trained on domain-specific data while maintaining general skills.</li>
+<li>cribl-decision-2-4B demonstrated a latency of 78ms per decision, significantly faster than comparable models like elephant-1 (265ms) and Microsoft Decision-1 (316ms).</li>
 </ul></div>
     
   </div>
@@ -129,12 +129,12 @@
     </div>
     <h2><a href="https://cribl.io/blog/detection-posture-management/" target="_blank" rel="noopener">Detection posture management: How to manage detection coverage and posture | Cribl</a></h2>
     
-    <div class="summary"><p>Detection posture management (DPM) evaluates and continuously optimizes threat detection effectiveness, moving beyond ad hoc responses to a measurable program.</p>
+    <div class="summary"><p>Cribl Detect streamlines detection posture management, offering a clear picture of current security readiness and methods for improving it.</p>
 <ul>
-<li>SIEMs typically detect only 22% of MITRE ATT&amp;CK techniques despite having telemetry to potentially cover 90%, highlighting a significant operational gap.</li>
-<li>DPM relies on five core capabilities: detection mapping (to MITRE ATT&amp;CK and adversaries), telemetry mapping, coverage scoring, rule health monitoring, and gap analysis/prioritization.</li>
-<li>Cribl Detect streamlines DPM by providing visibility into detection readiness, offering methods to expand coverage, and enabling continuous improvement.</li>
-<li>Key components of DPM include validating rule functionality (identifying false negatives and positives) and prioritizing remediation efforts based on threat relevance, prevalence, asset exposure, and effort.</li>
+<li>Cribl Detect maps detections to MITRE ATT&amp;CK tactics, techniques, and sub-techniques, automating updates and providing current coverage views.</li>
+<li>The platform identifies telemetry dependencies for each detection, confirming data availability and highlighting missing or malformed sources.</li>
+<li>Coverage scoring measures detection effectiveness as a percentage of covered adversary techniques with working telemetry, tracking improvements over time.</li>
+<li>Rule health monitoring validates detection logic, identifying false negatives and positives to improve accuracy and reduce analyst fatigue.</li>
 </ul></div>
     
   </div>
