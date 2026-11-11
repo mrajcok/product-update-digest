@@ -79,13 +79,64 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-11-06 06:02 AM EST</p>
+  <p class="generated-at">Generated 2026-11-11 06:01 AM EST</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">November 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>press release</span>
+      <span> · 2026-11-10</span>
+    </div>
+    <h3><a href="https://cribl.io/news/cribl-acquires-tero-to-lead-observability-into-the-ai-era/" target="_blank" rel="noopener">Vector co-creator Ben Johnson and team join to build host monitoring, APM, federated observability, and AI-native observability on the platform half of the Fortune 100 already trust | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl has acquired Tero to expand its observability capabilities and enter the AI-driven observability market.</p>
+<ul>
+<li>The acquisition brings in the team behind Vector, an open-source observability pipeline, led by co-creator Ben Johnson (now VP of Observability at Cribl).</li>
+<li>Tero’s technology focuses on identifying and reducing low-value telemetry data, improving observability efficiency.</li>
+<li>The combined teams will focus on developing host monitoring, APM, federated observability, and AI-native observability features within the Cribl platform.</li>
+<li>Cribl aims to provide a unified, open platform for telemetry data, supporting both existing tools and AI-powered applications.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-11-10</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/why-tero-is-joining-cribl/" target="_blank" rel="noopener">Why Tero is joining Cribl | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl has acquired Tero to enhance observability for the AI era.</p>
+<ul>
+<li>The acquisition brings Tero’s technology for identifying and eliminating wasted telemetry data to Cribl.</li>
+<li>Tero previously built Vector, an open-source observability pipeline, and focused on pinpointing low-value data across observability tools.</li>
+<li>The core claim is to provide a shared foundation for telemetry data accessible to both human engineers and AI agents, independent of specific observability products.</li>
+<li>This integration aims to address the limitations of current observability solutions when used by AI agents needing context and understanding of production systems.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-11-10</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/building-a-cybersecurity-threat-hunting-practice/" target="_blank" rel="noopener">Building a cybersecurity threat hunting practice: best practices and strategies | Cribl</a></h3>
+    
+    <div class="summary"><p>Building a cybersecurity threat hunting practice requires a proactive, hypothesis-driven approach, but often stalls due to limited telemetry access.</p>
+<ul>
+<li>A repeatable hunting practice consists of six phases: hypothesis development, telemetry collection, tooling/automation, detection/validation, incident response integration, and maturity measurement.</li>
+<li>Cribl offers a vendor-neutral telemetry layer comprised of Cribl Edge for collection, Cribl Stream for routing, Cribl Lake for retention, and Cribl Search for retroactive search capabilities.</li>
+<li>Successful threat hunting focuses on indicators of attack (IoAs) – behavioral patterns – rather than solely on indicators of compromise (IOCs), and utilizes a tiered retention strategy for logs based on cost and access needs.</li>
+<li>Tools should automate repetitive tasks while retaining human judgment, enabling retroactive search and lateral pivoting across data sources, and leveraging AI to augment – not replace – the analytical process.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -537,59 +588,6 @@
 <li>Adds a new “Pro” model tier, optimized for deeper detection accuracy, alongside existing “Fast” and “Base” models, providing a choice based on workload needs.</li>
 <li>Benchmarking shows precision improvements of up to 17.69 percentage points across model tiers (Base, Fast, and Pro) compared to Privacy 2.0.</li>
 <li>Privacy 3.0 models emphasize precision over recall, designed to reduce noise and improve the actionability of findings; throughput improvements are also noted for specific batch sizes.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-16</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/backend-functions-arrive-in-cribl-apps/" target="_blank" rel="noopener">Backend functions arrive in Cribl Apps | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl Apps now support backend functions with the 4.20 release, extending workflows beyond the UI.</p>
-<ul>
-<li>Backend functions enable Apps to expose HTTP endpoints and run jobs on a schedule, allowing for continuous operation without active UI usage.</li>
-<li>These functions use a unified handler model, accepting both user-invoked and scheduled requests via the same <code>onRequest</code> function.</li>
-<li>Backend functions run in a platform-managed Node.js environment with security features including manifest validation, installation-scoped state, and restricted external access.</li>
-<li>This capability allows developers to build automation, respond to requests, and extend Cribl without requiring separate service infrastructure—Apps are now generally available.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-16</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/the-impact-of-ai-and-machine-learning-on-cybersecurity/" target="_blank" rel="noopener">The Impact of AI and Machine Learning on Cybersecurity | Cribl</a></h3>
-    
-    <div class="summary"><h2>Cribl Blog: The Impact of AI and Machine Learning on Cybersecurity</h2>
-<p>AI and machine learning are transforming cybersecurity by enabling adaptive, data-driven threat detection and automated responses.</p>
-<ul>
-<li>AI/ML shift detection from static signatures to pattern recognition in logs and network telemetry, improving threat detection rates (reported up to 98%) and reducing incident response times (up to 70%).</li>
-<li>Unsupervised machine learning excels at anomaly detection, identifying threats in environments where rule-based tools generate high false-positive rates.</li>
-<li>“Agentic SecOps” utilizes autonomous AI agents for triage, investigation, and remediation, minimizing human intervention but requiring careful governance.</li>
-<li>Successful AI deployment necessitates human oversight, explainable models, adversarial testing, and a robust, vendor-agnostic data pipeline to ensure model accuracy and effectiveness.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-15</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/building-a-continuous-security-testing-harness/" target="_blank" rel="noopener">Building a continuous security testing harness | Cribl</a></h3>
-    
-    <div class="summary"><h2>Building a Continuous Security Testing Harness</h2>
-<p>Cribl developed a continuous security testing harness leveraging agentic reasoning and deterministic validation to automate vulnerability research and improve recall.</p>
-<ul>
-<li>The harness operates through five lanes: Intake (structuring reports/goals), Hunt (prioritizing testing areas), Validate (building and running proofs of concept locally), Cloud (validating in a dedicated environment), and Release (re-testing against new versions).</li>
-<li>The system uses an agent for context-aware research (code analysis, trace building) and a deterministic runner to validate findings with controlled inputs, positive/negative controls, and evidence tied to unique nonces.</li>
-<li>Coverage gaps (untested code, outdated reviews, known vulnerabilities) are used as inputs to prioritize research tasks, going beyond simple code changes as triggers.</li>
-<li>A blind historical recall suite, using known vulnerabilities, is used to measure the system's effectiveness and identify areas for improvement in the research workflow.</li>
 </ul></div>
     
   </div>
