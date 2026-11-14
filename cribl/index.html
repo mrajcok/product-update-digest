@@ -79,7 +79,7 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-11-13 06:00 AM EST</p>
+  <p class="generated-at">Generated 2026-11-14 06:00 AM EST</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
@@ -90,16 +90,50 @@
   <div class="card">
     <div class="meta">
       <span>blog</span>
+      <span> · 2026-11-13</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/can-you-or-will-you-the-real-cost-of-running-telemetry-on-a-business-data-platform/" target="_blank" rel="noopener">Can you, or will you? The real cost of running telemetry on a business data platform | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl argues that using general-purpose data platforms like Databricks or Snowflake for IT and security telemetry can be costly and inefficient due to the unique characteristics of this data – high volume, many formats, and frequent changes.</p>
+<ul>
+<li>The article contrasts business data (stable, curated) with telemetry data (dynamic, unstructured), highlighting the increased effort required to process telemetry within a general-purpose platform.</li>
+<li>Using Databricks as an example, the author estimates that building and maintaining the necessary data transformation layers (medallion architecture) adds 15-20% to the total platform cost.</li>
+<li>Cribl offers two solutions: using Cribl Stream and Edge to land data directly in Cribl Search and Lake, or normalizing data to a single format with Stream and Edge <em>before</em> it lands in a lakehouse like Databricks/Snowflake.</li>
+<li>Cribl Stream is licensed on data ingestion, not egress, reducing costs when forwarding normalized data to other platforms, and allowing users to selectively send data where it is needed.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>press release</span>
+      <span> · 2026-11-12</span>
+    </div>
+    <h3><a href="https://cribl.io/news/cribl-named-to-2026-ai-100-list/" target="_blank" rel="noopener">Cribl Named to Inaugural 2026 AI 100 List | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl was recognized as a top 100 private AI company in the inaugural AI 100 list by Newcomer and Bessemer Venture Partners.</p>
+<ul>
+<li>The ranking considered market leadership, valuation, operating metrics, and people &amp; culture.</li>
+<li>Cribl’s platform supports both observability and security, with products including Cribl Detect (open SIEM) and Cribl StreamAI (AI gateway).</li>
+<li>Recent acquisitions of CardinalOps, Radiant Security, and Tero are expanding Cribl’s capabilities in security operations and observability.</li>
+<li>The Cribl AI Research Lab is developing custom AI models like <code>cribl-decision</code> and benchmarking AI performance with SecIT Bench.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
       <span> · 2026-11-12</span>
     </div>
     <h3><a href="https://cribl.io/blog/master-your-data-not-the-platform/" target="_blank" rel="noopener">Master your data, not the platform | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl Stream enables teams to master their data independently of the platform, addressing skills gaps often experienced during SIEM migrations.</p>
+    <div class="summary"><p>Cribl discusses the importance of separating platform-specific skills from core data analysis skills during SIEM migrations to avoid expertise loss and vendor lock-in.</p>
 <ul>
-<li>The core claim is a shift in focus from platform-specific expertise to data fluency, ensuring analysts’ skills remain transferable across tools.</li>
-<li>Cribl advocates for using portable query languages like SQL and KQL (which Cribl supports) over proprietary languages like SPL to avoid skills lock-in.</li>
-<li>A data lake built on open formats (like Parquet) and queryable with SQL provides a foundation for building portable analytical skills, enabling deeper investigations and threat hunting.</li>
-<li>Teams should split roles—platform operations versus data work—to concentrate vendor-specific skills while empowering all team members with portable data skills, including data quality practices and version control for detection logic.</li>
+<li>The core issue isn't learning a new platform, but losing the accumulated expertise of analysts when switching platforms, as their specialized knowledge of the old system doesn't transfer.</li>
+<li>Focus should shift to building "platform fluency" in the <em>data</em> itself, rather than specific platform interfaces, which enables portability and reduces dependency on vendor-specific training.</li>
+<li>Skills lock-in is more insidious than data lock-in, as it’s not visible in architecture diagrams and relies on certifications that incentivize teams to stay with a single vendor. Utilizing widely supported languages like SQL or KQL, rather than proprietary query languages like SPL, promotes transferable skills.</li>
+<li>Teams should split roles between platform operations (managing the SIEM) and data work (analysis, detection), and build analytics capabilities within a data lake using open formats like Parquet and query engines like Athena or Trino, to maximize skill portability and data accessibility.</li>
 </ul></div>
     
   </div>
@@ -555,39 +589,6 @@
 <li>Cribl Search’s federated and lakehouse engines, combined with Cribl Lake, provide a unified search experience, cost-effective storage, and faster investigations, potentially reducing SIEM dependency.</li>
 <li>A new metrics capability within Cribl Search’s lakehouse engine (currently in preview) allows for easy ingestion, storage, visualization, analysis, and alerting on high-volume metrics data.</li>
 <li>A benchmark (SecIT-bench) evaluating AI models for security and IT investigations provides guidance on selecting the right models based on specific workflows and budgets.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-17</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/building-an-ai-agent-for-smarter-less-painful-alert-triage/" target="_blank" rel="noopener">Building an AI agent for smarter, less painful alert triage | Cribl</a></h3>
-    
-    <div class="summary"><ul>
-<li>Cribl built an internal AI agent to automate alert triage, reducing alert fatigue by gathering context from multiple data sources (metrics, logs, incidents, runbooks, chat) before escalating to on-call engineers.</li>
-<li>The key technical challenge is managing input context size – the agent's performance is heavily influenced by how much relevant data it receives, measured by context size, tool calls, and investigation cost.</li>
-<li>Cribl utilizes the Model Context Protocol (MCP) to connect the AI agent to data sources like Cribl Stream, Cribl Search, and Cribl Lake, emphasizing the importance of careful API key and permission management.</li>
-<li>The architecture prioritizes tool curation (limiting available tools) and potentially using middleware MCP servers to reduce irrelevant context and improve agent efficiency, rather than simply maximizing tool integration.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-17</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/manage-multiple-environments-with-cribl-as-code/" target="_blank" rel="noopener">Manage multiple environments with Cribl as Code | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl as Code enables multi-environment change management to reduce risk when deploying to production.</p>
-<ul>
-<li>Configuration is managed as code, allowing changes to be version controlled and peer-reviewed via pull requests.</li>
-<li>The workflow supports a development-to-production pipeline, with changes validated in a development environment before deployment to production.</li>
-<li>It integrates with CI/CD pipelines (example uses Terraform and GitHub Actions) to automate deployments and ensure consistency.</li>
-<li>Manual changes to production environments are eliminated, reducing the potential for misconfiguration and data loss.</li>
 </ul></div>
     
   </div>

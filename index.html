@@ -92,7 +92,7 @@
 </head>
 <body>
   <h1>Cribl, Ocient & XSIAM News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-11-13 06:00 AM EST</p>
+  <p class="generated-at">Generated 2026-11-14 06:00 AM EST</p>
   <div class="top-bar">
     <p class="index-hint">Showing the 3 most recent from each company — see <a href="cribl/">Cribl</a>, <a href="ocient/">Ocient</a>, and <a href="xsiam/">XSIAM</a> for more.</p>
     <label class="theme-toggle" title="Toggle light/dark theme">
@@ -107,34 +107,16 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>blog</span>
-      <span> · 2026-11-12</span>
+      <span> · 2026-11-13</span>
     </div>
-    <h2><a href="https://cribl.io/blog/master-your-data-not-the-platform/" target="_blank" rel="noopener">Master your data, not the platform | Cribl</a></h2>
+    <h2><a href="https://cribl.io/blog/can-you-or-will-you-the-real-cost-of-running-telemetry-on-a-business-data-platform/" target="_blank" rel="noopener">Can you, or will you? The real cost of running telemetry on a business data platform | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl Stream enables teams to master their data independently of the platform, addressing skills gaps often experienced during SIEM migrations.</p>
+    <div class="summary"><p>Cribl argues that using general-purpose data platforms like Databricks or Snowflake for IT and security telemetry can be costly and inefficient due to the unique characteristics of this data – high volume, many formats, and frequent changes.</p>
 <ul>
-<li>The core claim is a shift in focus from platform-specific expertise to data fluency, ensuring analysts’ skills remain transferable across tools.</li>
-<li>Cribl advocates for using portable query languages like SQL and KQL (which Cribl supports) over proprietary languages like SPL to avoid skills lock-in.</li>
-<li>A data lake built on open formats (like Parquet) and queryable with SQL provides a foundation for building portable analytical skills, enabling deeper investigations and threat hunting.</li>
-<li>Teams should split roles—platform operations versus data work—to concentrate vendor-specific skills while empowering all team members with portable data skills, including data quality practices and version control for detection logic.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <a href="cribl/" class="badge badge-cribl">Cribl</a>
-      <span>blog</span>
-      <span> · 2026-11-11</span>
-    </div>
-    <h2><a href="https://cribl.io/blog/implementing-traces-observability-without-vendor-lock-in/" target="_blank" rel="noopener">Implementing Traces Observability Without Vendor Lock-In | Cribl</a></h2>
-    
-    <div class="summary"><p>Implementing Traces Observability Without Vendor Lock-In details a strategy for collecting and analyzing distributed traces using open standards to avoid being locked into a specific vendor.</p>
-<ul>
-<li>The approach centers around instrumenting applications with OpenTelemetry (OTel) and exporting spans over the OpenTelemetry Protocol (OTLP).</li>
-<li>A three-tier observability pipeline is recommended: node collectors, a central gateway for enrichment and sampling, and exporters to various backends.</li>
-<li>Tail-based sampling is suggested to reduce costs while preserving critical traces, and enrichment/masking capabilities within the pipeline improve data utility and security.</li>
-<li>The article emphasizes validating portability by dual-shipping traces to a candidate backend and verifying existing dashboards, alerts, and queries function correctly.</li>
+<li>The article contrasts business data (stable, curated) with telemetry data (dynamic, unstructured), highlighting the increased effort required to process telemetry within a general-purpose platform.</li>
+<li>Using Databricks as an example, the author estimates that building and maintaining the necessary data transformation layers (medallion architecture) adds 15-20% to the total platform cost.</li>
+<li>Cribl offers two solutions: using Cribl Stream and Edge to land data directly in Cribl Search and Lake, or normalizing data to a single format with Stream and Edge <em>before</em> it lands in a lakehouse like Databricks/Snowflake.</li>
+<li>Cribl Stream is licensed on data ingestion, not egress, reducing costs when forwarding normalized data to other platforms, and allowing users to selectively send data where it is needed.</li>
 </ul></div>
     
   </div>
@@ -143,16 +125,34 @@
     <div class="meta">
       <a href="cribl/" class="badge badge-cribl">Cribl</a>
       <span>press release</span>
-      <span> · 2026-11-10</span>
+      <span> · 2026-11-12</span>
     </div>
-    <h2><a href="https://cribl.io/news/cribl-acquires-tero-to-lead-observability-into-the-ai-era/" target="_blank" rel="noopener">Vector co-creator Ben Johnson and team join to build host monitoring, APM, federated observability, and AI-native observability on the platform half of the Fortune 100 already trust | Cribl</a></h2>
+    <h2><a href="https://cribl.io/news/cribl-named-to-2026-ai-100-list/" target="_blank" rel="noopener">Cribl Named to Inaugural 2026 AI 100 List | Cribl</a></h2>
     
-    <div class="summary"><p>Cribl has acquired Tero to expand its observability capabilities and enter the AI-driven observability market.</p>
+    <div class="summary"><p>Cribl was recognized as a top 100 private AI company in the inaugural AI 100 list by Newcomer and Bessemer Venture Partners.</p>
 <ul>
-<li>The acquisition brings in the team behind Vector, an open-source observability pipeline, led by co-creator Ben Johnson (now VP of Observability at Cribl).</li>
-<li>Tero’s technology focuses on identifying and reducing low-value telemetry data, improving observability efficiency.</li>
-<li>The combined teams will focus on developing host monitoring, APM, federated observability, and AI-native observability features within the Cribl platform.</li>
-<li>Cribl aims to provide a unified, open platform for telemetry data, supporting both existing tools and AI-powered applications.</li>
+<li>The ranking considered market leadership, valuation, operating metrics, and people &amp; culture.</li>
+<li>Cribl’s platform supports both observability and security, with products including Cribl Detect (open SIEM) and Cribl StreamAI (AI gateway).</li>
+<li>Recent acquisitions of CardinalOps, Radiant Security, and Tero are expanding Cribl’s capabilities in security operations and observability.</li>
+<li>The Cribl AI Research Lab is developing custom AI models like <code>cribl-decision</code> and benchmarking AI performance with SecIT Bench.</li>
+</ul></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <a href="cribl/" class="badge badge-cribl">Cribl</a>
+      <span>blog</span>
+      <span> · 2026-11-12</span>
+    </div>
+    <h2><a href="https://cribl.io/blog/master-your-data-not-the-platform/" target="_blank" rel="noopener">Master your data, not the platform | Cribl</a></h2>
+    
+    <div class="summary"><p>Cribl discusses the importance of separating platform-specific skills from core data analysis skills during SIEM migrations to avoid expertise loss and vendor lock-in.</p>
+<ul>
+<li>The core issue isn't learning a new platform, but losing the accumulated expertise of analysts when switching platforms, as their specialized knowledge of the old system doesn't transfer.</li>
+<li>Focus should shift to building "platform fluency" in the <em>data</em> itself, rather than specific platform interfaces, which enables portability and reduces dependency on vendor-specific training.</li>
+<li>Skills lock-in is more insidious than data lock-in, as it’s not visible in architecture diagrams and relies on certifications that incentivize teams to stay with a single vendor. Utilizing widely supported languages like SQL or KQL, rather than proprietary query languages like SPL, promotes transferable skills.</li>
+<li>Teams should split roles between platform operations (managing the SIEM) and data work (analysis, detection), and build analytics capabilities within a data lake using open formats like Parquet and query engines like Athena or Trino, to maximize skill portability and data accessibility.</li>
 </ul></div>
     
   </div>
