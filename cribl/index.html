@@ -79,13 +79,41 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-11-18 06:00 AM EST</p>
+  <p class="generated-at">Generated 2026-11-20 06:07 AM EST</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
 
   
   <h2 class="month">November 2026</h2>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-11-19</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/podcasts/" target="_blank" rel="noopener">Living the Stream - The Cribl Blog for all things telemetry data management | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl announced a new approach to SIEM, decoupling analysis from storage to improve cost efficiency and reduce blind spots. This new SIEM capability, highlighted alongside existing products Cribl Stream, Cribl Edge, and Cribl Search, aims to provide more flexible and cost-effective security analysis. Further details on the technical implementation can be found in the original article.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-11-19</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/cribl-guard-privacy-models-3-1-trained-on-telemetry-that-looks-like-yours/" target="_blank" rel="noopener">Cribl Guard Privacy Models 3.1: Trained on telemetry that looks like yours | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl Guard Privacy Models 3.1 improves sensitive data detection by training on more realistic telemetry.</p>
+<ul>
+<li>The models are now trained on over 240,000 events, incorporating real-world logs from open-source datasets alongside events modeled on sources like AWS CloudTrail and Okta.</li>
+<li>A new benchmark dataset with outlier scenarios has been implemented to better evaluate model performance, testing how well the models generalize to unseen telemetry.</li>
+<li>Privacy 3.1 maintains the Fast, Default, and Pro tiers, demonstrating up to a 5.59 percentage point gain in precision and a 13.85 percentage point gain in recall compared to Privacy 3.0, without impacting throughput.</li>
+<li>The improvements focus on reducing false alarms and increasing detection quality by learning from both the presence <em>and</em> absence of sensitive data in routine telemetry.</li>
+</ul></div>
+    
+  </div>
   
   <div class="card">
     <div class="meta">
@@ -554,41 +582,6 @@
 <li>This integration reduces operational overhead by eliminating the need for separate ingestion jobs, lowers latency from event collection to analysis, and provides improved visibility into data delivery health within the Cribl interface.</li>
 <li>Cribl Stream remains the control point for data preparation, enabling filtering, transformation, enrichment, and schema normalization <em>before</em> data is written to Delta Tables, supporting data governance and cost management.</li>
 <li>The integration utilizes Databricks service principal authentication and Unity Catalog for governed access, requiring customers to define a schema and grant appropriate permissions to the service principal, with a rescue-column pattern available for handling schema mismatches.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-24</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/ai-is-compressing-attack-timelines-cyber-resilience-needs-proof/" target="_blank" rel="noopener">AI is compressing attack timelines. Cyber resilience needs proof. | Cribl</a></h3>
-    
-    <div class="summary"><p>Cribl helps organizations meet the European Central Bank’s (ECB) new AI-cybersecurity expectations by providing a data foundation for improved security and resilience.</p>
-<ul>
-<li>Cribl offers a vendor-neutral telemetry layer – comprised of Cribl Edge, Cribl Stream, Cribl Lake, and Cribl Search – that collects, refines, and routes security data across diverse environments without vendor lock-in.</li>
-<li>The platform supports the ECB’s six focus areas, including protecting the attack surface, accelerating vulnerability management, strengthening monitoring, improving governance, reinforcing defense-in-depth, and enabling testable operational resilience.</li>
-<li>Cribl Lake provides cost-effective, long-term storage of full-fidelity telemetry for incident reconstruction, resilience testing, and historical analysis.</li>
-<li>Cribl Search enables federated investigations across disparate data locations and time horizons, improving threat visibility and response capabilities.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-23</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/the-people-who-help-shape-cribl-celebrating-some-of-our-early-employees/" target="_blank" rel="noopener">The people who help shape Cribl: Celebrating some of our early employees | Cribl</a></h3>
-    
-    <div class="summary"><p>This blog post celebrates early Cribl employees and their contributions to the company’s growth.</p>
-<ul>
-<li>Brandon McCombs (Engineering) joined in June 2020 when Cribl was using LogStream 2.2.0 and receiving approximately 2 support cases every two days (now 30/day).</li>
-<li>Jenn Kabler (Revenue Enablement) led the rollout of Force Management across GTM teams.</li>
-<li>Joel Vincent (Marketing) highlights the company’s “irreverent but serious” culture and the evolution of Cribl over the past five years.</li>
-<li>Kyle McCririe (Support) notes the high level of talent at Cribl and the opportunity for professional growth through exposure to diverse technologies.</li>
-<li>Danny Ansell (Revenue/Sales) joined as employee #76 and is impressed by the company’s continued innovation and growth to over 1,100 employees.</li>
 </ul></div>
     
   </div>
