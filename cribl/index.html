@@ -79,7 +79,7 @@
     </label>
   </div>
   <h1>Cribl News & Blog Posts</h1>
-  <p class="generated-at">Generated 2026-11-25 06:01 AM EST</p>
+  <p class="generated-at">Generated 2026-11-28 10:51 AM EST</p>
   
   <p class="index-hint">Showing the most recent 30 articles — older articles are searchable in the vector database.</p>
   
@@ -90,22 +90,39 @@
   <div class="card">
     <div class="meta">
       <span>blog</span>
-      <span> · 2026-11-20</span>
+      <span> · 2026-11-24</span>
     </div>
-    <h3><a href="https://cribl.io/blog/cribl-named-to-the-2026-deloitte-technology-fast-500-tm-for-the-third-straight-year/" target="_blank" rel="noopener">Cribl named to the 2026 Deloitte Technology Fast 500™ for the third straight year | Cribl</a></h3>
+    <h3><a href="https://cribl.io/blog/from-diagnose-to-dispatch-the-governance-layer-under-agentic-ops/" target="_blank" rel="noopener">From diagnose to dispatch: The governance layer under agentic ops | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl was recognized on the 2026 Deloitte Technology Fast 500 list, achieving a 1,015% revenue growth from 2022 to 2025 and ranking #71 overall. The company also placed #9 in the AI sector and #1 among Bay Area AI companies. Recent investments in the Cribl Research Lab have produced benchmarks like SecIT Bench and Telemetry Decision Bench for evaluating AI model performance with telemetry data. This is Cribl's third consecutive year being named to the Fast 500.</p></div>
+    <div class="summary"><p>Cribl’s governance capabilities, via Cribl Stream, demonstrably improve the effectiveness of an AI-powered operations agent (NeuBird) by controlling the data it accesses.</p>
+<ul>
+<li>Testing with NeuBird’s Production Ops Agent showed that governing telemetry with Cribl Stream—redacting sensitive data (like CVV numbers) and enriching events with ownership keys—resulted in faster, more accurate root cause analysis and automated dispatch to the correct team.</li>
+<li>Without governance, the agent accessed sensitive cardholder data and lacked context on service ownership, hindering remediation. With governance, the agent dropped the CVV, identified the owning team, and initiated a page within four minutes.</li>
+<li>Cribl Stream enriches events with metadata from sources like service catalogs, deployment feeds, and node topology, providing the agent with necessary context, rather than requiring it to perform these lookups independently.</li>
+<li>The testing leveraged Cribl Lake and Cribl Search to observe the differences between raw and governed telemetry, demonstrating the value of normalization and enrichment for AI-driven operations, specifically around service identification and incident ownership.</li>
+</ul></div>
     
   </div>
   
   <div class="card">
     <div class="meta">
       <span>blog</span>
-      <span> · 2026-11-19</span>
+      <span> · 2026-11-23</span>
     </div>
     <h3><a href="https://cribl.io/blog/podcasts/" target="_blank" rel="noopener">Living the Stream - The Cribl Blog for all things telemetry data management | Cribl</a></h3>
     
-    <div class="summary"><p>Cribl announced a new approach to SIEM, decoupling analysis from storage to improve cost efficiency and reduce blind spots. This new SIEM capability, highlighted alongside existing products Cribl Stream, Cribl Edge, and Cribl Search, aims to provide more flexible and cost-effective security analysis. Further details on the technical implementation can be found in the original article.</p></div>
+    <div class="summary"><p>Cribl announced a new approach to SIEM, decoupling analysis from storage to improve cost efficiency and reduce blind spots. This allows for independent scaling of compute and storage resources. Further details on this 'new way to SIEM' are available for review.</p></div>
+    
+  </div>
+  
+  <div class="card">
+    <div class="meta">
+      <span>blog</span>
+      <span> · 2026-11-20</span>
+    </div>
+    <h3><a href="https://cribl.io/blog/cribl-named-to-the-2026-deloitte-technology-fast-500-tm-for-the-third-straight-year/" target="_blank" rel="noopener">Cribl named to the 2026 Deloitte Technology Fast 500™ for the third straight year | Cribl</a></h3>
+    
+    <div class="summary"><p>Cribl was recognized on the 2026 Deloitte Technology Fast 500 list, achieving a 1,015% revenue growth from 2022 to 2025 and ranking #71 overall. The company also placed #9 in the AI sector and #1 among Bay Area AI companies. Recent investments in the Cribl Research Lab have produced benchmarks like SecIT Bench and Telemetry Decision Bench for evaluating AI model performance with telemetry data. This is Cribl's third consecutive year being named to the Fast 500.</p></div>
     
   </div>
   
@@ -561,22 +578,6 @@
 <li>Breakout sessions included topics like using AI as a “Chief of Staff” (led by Business Operations SVP Farrah Bui and Software Engineering Director Rachel Prisock) to reclaim manager time.</li>
 <li>A key format innovation was a “World Café” style series of small group discussions, rotating managers across themes like “Troubleshooting AI” and “AI Org Design."</li>
 <li>Cribl’s CEO, Clint, highlighted the company’s traction in the AI-native telemetry market, emphasizing the importance of managers understanding the company's strategic direction.</li>
-</ul></div>
-    
-  </div>
-  
-  <div class="card">
-    <div class="meta">
-      <span>blog</span>
-      <span> · 2026-09-27</span>
-    </div>
-    <h3><a href="https://cribl.io/blog/cribl-privacy-model-lost-20-heads-and-got-2-8x-faster/" target="_blank" rel="noopener">Cribl Privacy Model lost 20 heads and got 2.8x faster | Cribl</a></h3>
-    
-    <div class="summary"><ul>
-<li>Cribl has released updates to its Privacy Model (version 2.1) that significantly improve performance while maintaining accuracy in sensitive data detection.</li>
-<li>The updated model achieves a 2.8x increase in throughput and a 63% reduction in median latency, with a minimal impact on F1 score (change of only 0.06 percentage points).</li>
-<li>Improvements were achieved through techniques like attention head pruning, feed-forward neuron pruning, layer pruning, and knowledge distillation, reducing model size and computational load.</li>
-<li>The compressed Pro model reduced attention heads from 32 to 12 and FFN width from 1,024 to 256, demonstrating substantial gains without significant accuracy loss.</li>
 </ul></div>
     
   </div>
